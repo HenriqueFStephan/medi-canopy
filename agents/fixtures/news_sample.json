@@ -1,0 +1,20 @@
+[
+  {
+    "title": "[Agent] Projeto de lei sobre cânhamo industrial avança no Congresso",
+    "summary": "Placeholder descoberto pelo agente de notícias — aguardando aprovação do autor.",
+    "content": "Texto completo placeholder. Substituir por saída do LLM quando LLM_PROVIDER estiver ativo.",
+    "source_url": "https://example.com/pl-cannabis",
+    "source_name": "Agent Search (placeholder)",
+    "region": "BR",
+    "tags": ["policy", "brazil"]
+  },
+  {
+    "title": "[Agent] União Europeia revisa limites de THC em alimentos de cânhamo",
+    "summary": "Notícia internacional para curadoria — foco em impacto regulatório.",
+    "content": "Conteúdo placeholder do agente diário.",
+    "source_url": "https://example.com/eu-hemp",
+    "source_name": "Agent Search (placeholder)",
+    "region": "global",
+    "tags": ["policy", "textile"]
+  }
+]

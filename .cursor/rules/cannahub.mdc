@@ -1,0 +1,26 @@
+# CanaHub — Cursor Rules
+
+## Project
+
+Cannabis information hub: Angular frontend + FastAPI backend + Python agents.
+
+## Code style
+
+- Python: type hints, module docstrings
+- TypeScript: strict mode, standalone Angular components
+- Minimal diffs; match existing patterns
+
+## Secrets
+
+- Never commit real credentials
+- Use `debt.txt` locally (gitignored)
+- Agents use `LLM_PROVIDER=placeholder` until keys are set
+
+## Content policy
+
+- Agents do NOT auto-publish
+- All agent output goes to review queue or email digest
+
+## Navigation
+
+See `docs/AGENT_NAVIGATION.md` for file locations.

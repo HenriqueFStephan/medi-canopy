@@ -1,0 +1,21 @@
+# Render Blueprint — https://dashboard.render.com
+# After connect: set FRONTEND_URL to your Netlify URL, then redeploy.
+
+services:
+  - type: web
+    name: cannahub-api
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.0"
+      - key: APP_ENV
+        value: production
+      - key: LLM_PROVIDER
+        value: placeholder
+      - key: FRONTEND_URL
+        value: https://REPLACE-WITH-NETLIFY-URL.netlify.app

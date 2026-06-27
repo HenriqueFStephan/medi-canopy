@@ -1,0 +1,90 @@
+@import '../../../styles/variables';
+
+.hero {
+  background: linear-gradient(135deg, $color-bg-dark 0%, $color-primary 100%);
+  color: #fff;
+  padding: 5rem 0 6rem;
+
+  h1 {
+    color: #fff;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    max-width: 16ch;
+    margin: 0 0 1rem;
+
+    em {
+      font-style: normal;
+      color: $color-secondary;
+    }
+  }
+
+  &__eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.8rem;
+    color: $color-secondary;
+    margin: 0 0 1rem;
+  }
+
+  &__lead {
+    font-size: 1.15rem;
+    max-width: 52ch;
+    color: rgba(#fff, 0.85);
+    margin: 0 0 2rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
+.section__title {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+
+  h3 {
+    margin: 0.5rem 0;
+  }
+
+  p {
+    color: $color-text-muted;
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  &__num {
+    font-family: $font-mono;
+    font-size: 0.75rem;
+    color: $color-accent;
+  }
+}
+
+.section--dark {
+  background: $color-earth;
+  color: #fff;
+
+  h2 { color: #fff; }
+}
+
+.cta {
+  text-align: center;
+
+  p {
+    color: rgba(#fff, 0.8);
+    max-width: 50ch;
+    margin: 0 auto 1.5rem;
+  }
+}

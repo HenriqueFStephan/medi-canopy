@@ -1,0 +1,27 @@
+# PubMed / scholarly query templates for Research Agent
+
+queries:
+  - name: cannabis_medical_br
+    terms: "(cannabis OR cannabidiol) AND (Brazil OR Brazilian)"
+    max_results: 10
+  - name: hemp_textile
+    terms: "industrial hemp AND (textile OR fiber)"
+    max_results: 5
+  - name: cultivation_tech
+    terms: "cannabis cultivation indoor environment control"
+    max_results: 5
+
+apis:
+  semantic_scholar:
+    enabled: false
+    base_url: https://api.semanticscholar.org/graph/v1
+  pubmed:
+    enabled: false
+    base_url: https://eutils.ncbi.nlm.nih.gov/entrez/eutils
+  openalex:
+    enabled: false
+    base_url: https://api.openalex.org
+
+email_digest:
+  subject_template: "[CanaHub] Pesquisas para revisão — {date}"
+  max_papers_per_email: 15

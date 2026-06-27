@@ -1,0 +1,49 @@
+@import '../../../styles/variables';
+
+.contact {
+  max-width: 560px;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+  p { color: $color-text-muted; }
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  label {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  input, textarea {
+    padding: 0.75rem 1rem;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    font-family: $font-body;
+    font-size: 1rem;
+
+    &:focus {
+      outline: 2px solid rgba($color-primary, 0.3);
+      border-color: $color-primary;
+    }
+  }
+}
+
+.success {
+  color: $color-primary;
+  font-weight: 600;
+}
+
+.error {
+  color: #c0392b;
+}

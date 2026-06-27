@@ -1,0 +1,1 @@
+"""CanaHub FastAPI application package."""

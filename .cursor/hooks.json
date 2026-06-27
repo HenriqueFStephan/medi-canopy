@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeSubmitPrompt": [
+      {
+        "command": ".cursor/hooks/check-secrets.py",
+        "matcher": "UserPromptSubmit"
+      }
+    ],
+    "afterFileEdit": [
+      {
+        "command": ".cursor/hooks/notify-agent-docs.py",
+        "matcher": "Write|StrReplace"
+      }
+    ]
+  }
+}

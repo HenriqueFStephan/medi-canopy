@@ -1,0 +1,42 @@
+@import '../../../styles/variables';
+
+.page-header {
+  max-width: 640px;
+  margin-bottom: 2.5rem;
+
+  p { color: $color-text-muted; }
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.blog-card {
+  h2 {
+    font-size: 1.25rem;
+    margin: 0.75rem 0 0.5rem;
+
+    a {
+      color: $color-primary;
+      text-decoration: none;
+      &:hover { color: $color-accent; }
+    }
+  }
+
+  p { color: $color-text-muted; font-size: 0.95rem; }
+
+  &__meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: $color-text-muted;
+    margin: 1rem 0;
+  }
+}
+
+.read-more {
+  font-weight: 600;
+  font-size: 0.9rem;
+}

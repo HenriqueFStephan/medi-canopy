@@ -1,0 +1,31 @@
+{
+  "name": "CanaHub",
+  "colors": {
+    "primary": "#1B4332",
+    "primaryLight": "#2D6A4F",
+    "secondary": "#95D5B2",
+    "accent": "#D4A574",
+    "earth": "#5C4033",
+    "background": "#F8FAF7",
+    "backgroundDark": "#0D1F17",
+    "surface": "#FFFFFF",
+    "text": "#1A1A1A",
+    "textMuted": "#5A6B62",
+    "border": "#E2E8E4"
+  },
+  "typography": {
+    "heading": "DM Serif Display",
+    "body": "Source Sans 3",
+    "mono": "JetBrains Mono"
+  },
+  "spacing": {
+    "unit": 8,
+    "sectionY": "4rem",
+    "containerMax": "1200px"
+  },
+  "borderRadius": {
+    "sm": "4px",
+    "md": "8px",
+    "lg": "16px"
+  }
+}

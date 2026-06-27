@@ -1,0 +1,33 @@
+"""Contact form API — stores messages locally; webhook placeholder for CRM."""
+
+from datetime import datetime
+
+from fastapi import APIRouter
+
+from app.core.config import get_settings
+from app.models.schemas import ContactMessageCreate, ContactMessageResponse
+from app.repositories.json_store import contact_store, new_id
+
+router = APIRouter(prefix="/contact", tags=["contact"])
+
+
+@router.post("", response_model=ContactMessageResponse)
+def submit_contact(payload: ContactMessageCreate) -> ContactMessageResponse:
+    """
+  Persist contact message and optionally forward to webhook (future).
+
+  CONTACT_WEBHOOK_URL in debt.txt — not wired in demo.
+  """
+    settings = get_settings()
+    record = {
+        "id": new_id(),
+        "received_at": datetime.utcnow().isoformat(),
+        "notified_to": settings.author_email,
+        **payload.model_dump(mode="json"),
+    }
+    contact_store.append(record)
+
+    return ContactMessageResponse(
+        success=True,
+        message="Mensagem recebida. Retornaremos em breve.",
+    )

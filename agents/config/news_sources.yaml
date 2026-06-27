@@ -1,0 +1,37 @@
+# Trusted domains and search topics for the News Agent.
+# The LLM uses this list to focus searches (placeholder mode uses fixtures).
+
+regions:
+  - code: BR
+    label: Brasil
+    priority: 1
+  - code: global
+    label: Internacional
+    priority: 2
+
+topics:
+  - id: policy_br
+    label: Política e regulamentação (Brasil)
+    keywords: [ANVISA, legislação, cânhamo, cannabis medicinal, Brasil]
+  - id: medical
+    label: Estudos médicos e benefícios
+    keywords: [CBD, THC, clinical trial, epilepsy, chronic pain]
+  - id: market
+    label: Mercado e investimentos
+    keywords: [cannabis market, M&A, licensing]
+  - id: textile
+    label: Cânhamo industrial e têxteis
+    keywords: [hemp fiber, sustainable textiles, industrial hemp]
+  - id: tech
+    label: Tecnologia de cultivo
+    keywords: [indoor cultivation, LED, automation, HVAC]
+
+trusted_source_patterns:
+  - gov.br
+  - anvisa.gov.br
+  - ncbi.nlm.nih.gov
+  - who.int
+  - reuters.com
+  - bloomberg.com
+
+max_items_per_run: 20

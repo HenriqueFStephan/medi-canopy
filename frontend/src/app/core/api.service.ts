@@ -1,0 +1,50 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import { environment } from '../../environments/environment';
+import {
+  BlogPost,
+  ContactPayload,
+  ContactResponse,
+  Course,
+  NewsArticle,
+  ServiceOffering,
+} from './models';
+
+/**
+ * HTTP client for CanaHub FastAPI backend.
+ * All endpoints are versioned under /api/v1.
+ */
+@Injectable({ providedIn: 'root' })
+export class ApiService {
+  private readonly base = environment.apiUrl;
+
+  constructor(private http: HttpClient) {}
+
+  getNews(region?: string): Observable<NewsArticle[]> {
+    const params = region ? `?region=${region}` : '';
+    return this.http.get<NewsArticle[]>(`${this.base}/news${params}`);
+  }
+
+  getBlogPosts(tag?: string): Observable<BlogPost[]> {
+    const params = tag ? `?tag=${tag}` : '';
+    return this.http.get<BlogPost[]>(`${this.base}/blog${params}`);
+  }
+
+  getBlogBySlug(slug: string): Observable<BlogPost> {
+    return this.http.get<BlogPost>(`${this.base}/blog/slug/${slug}`);
+  }
+
+  getCourses(): Observable<Course[]> {
+    return this.http.get<Course[]>(`${this.base}/courses`);
+  }
+
+  getServices(): Observable<ServiceOffering[]> {
+    return this.http.get<ServiceOffering[]>(`${this.base}/services`);
+  }
+
+  submitContact(payload: ContactPayload): Observable<ContactResponse> {
+    return this.http.post<ContactResponse>(`${this.base}/contact`, payload);
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Cannabidiol for Treatment-Resistant Epilepsy: A Systematic Review",
+    "authors": ["Silva, M.", "Costa, R.", "Oliveira, P."],
+    "abstract": "Background: Cannabidiol (CBD) has been studied for treatment-resistant epilepsy. Methods: We systematically reviewed randomized controlled trials. Results: CBD showed reduction in seizure frequency compared to placebo in selected populations. Conclusions: Further standardized dosing studies are needed, especially in diverse healthcare settings including Brazil.",
+    "doi": "10.1000/example.cbd.epilepsy",
+    "journal": "Journal of Cannabis Research (placeholder)",
+    "published_date": "2026-03-15",
+    "url": "https://example.com/paper-cbd-epilepsy",
+    "keywords": ["CBD", "epilepsy", "clinical trial"]
+  },
+  {
+    "title": "Industrial Hemp Fibers in Sustainable Textile Supply Chains",
+    "authors": ["Weber, J.", "Chen, L."],
+    "abstract": "Hemp fibers offer low water footprint and high tensile strength for blended textiles. This review covers processing, quality grading, and market adoption in Europe and emerging markets.",
+    "doi": "10.1000/example.hemp.textile",
+    "journal": "Textile Sustainability Review (placeholder)",
+    "published_date": "2026-01-20",
+    "url": "https://example.com/paper-hemp-textile",
+    "keywords": ["hemp", "textile", "sustainability"]
+  }
+]

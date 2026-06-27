@@ -1,0 +1,47 @@
+@import '../../../styles/variables';
+
+.article {
+  max-width: 720px;
+
+  .back {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin: 0.5rem 0 1rem;
+  }
+
+  &__meta {
+    color: $color-text-muted;
+    font-size: 0.95rem;
+  }
+
+  &__body {
+    margin-top: 2rem;
+    line-height: 1.75;
+
+    :deep(h2) {
+      margin-top: 2rem;
+      font-size: 1.5rem;
+    }
+
+    :deep(p) {
+      margin: 1rem 0;
+    }
+
+    :deep(hr) {
+      border: none;
+      border-top: 1px solid $color-border;
+      margin: 2rem 0;
+    }
+  }
+
+  &__footer {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid $color-border;
+  }
+}

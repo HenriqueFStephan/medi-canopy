@@ -1,0 +1,37 @@
+"""Tests for ScientificPaperNormalizer."""
+
+from app.models.schemas import ScientificPaperRaw
+from app.services.paper_normalizer import ScientificPaperNormalizer
+
+
+def test_normalize_creates_slug_and_tags():
+    raw = ScientificPaperRaw(
+        title="CBD for Epilepsy in Brazil",
+        authors=["Silva, M."],
+        abstract="Clinical trial of cannabidiol for epilepsy patients in Brazil.",
+        doi="10.1000/test",
+        journal="Test Journal",
+        published_date="2026-01-01",
+    )
+    normalizer = ScientificPaperNormalizer()
+    result = normalizer.normalize(raw)
+
+    assert result.slug == "cbd-for-epilepsy-in-brazil"
+    assert "medical" in result.tags or "brazil" in result.tags
+    assert result.citation_block
+
+
+def test_to_blog_post_markdown():
+    raw = ScientificPaperRaw(
+        title="Hemp Textiles Review",
+        authors=["Weber, J."],
+        abstract="Industrial hemp fibers in sustainable textiles.",
+        journal="Textile Journal",
+    )
+    normalizer = ScientificPaperNormalizer()
+    norm = normalizer.normalize(raw)
+    blog = normalizer.to_blog_post(norm)
+
+    assert blog.slug == norm.slug
+    assert "Hemp Textiles Review" in blog.content_markdown
+    assert blog.source_type.value == "agent_research"

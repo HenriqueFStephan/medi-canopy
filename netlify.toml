@@ -1,0 +1,15 @@
+# Netlify — https://app.netlify.com
+# Set env var NG_APP_API_URL before first build (see docs/DEPLOY.md)
+
+[build]
+  base = "frontend"
+  command = "npm ci && npm run build:ci"
+  publish = "dist/cannahub"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

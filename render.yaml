@@ -1,5 +1,7 @@
 # Render Blueprint — https://dashboard.render.com
-# After connect: set FRONTEND_URL to your Netlify URL, then redeploy.
+# Option A: New + → Blueprint → select Site_Biel repo
+# Option B: New + → Web Service → Root Directory: backend, Runtime: Python 3
+# After deploy: set FRONTEND_URL to your Netlify URL, then redeploy.
 
 services:
   - type: web

@@ -1,0 +1,111 @@
+name: Daily Cannabis Research
+
+run-name: Daily Cannabis research${{ inputs.date && format(' ({0})', inputs.date) || '' }}
+
+on:
+  schedule:
+    - cron: "30 6 * * *"
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Report date override (YYYY-MM-DD)"
+        required: false
+        default: ""
+      model:
+        description: "Cursor model ID"
+        required: false
+        default: "composer-2.5"
+      max_papers:
+        description: "Maximum papers to request"
+        required: false
+        default: "12"
+      min_confidence:
+        description: "Minimum reliability confidence (0-1)"
+        required: false
+        default: "0.7"
+      dry_run:
+        description: "If true, print the prompt without calling Cursor"
+        required: false
+        default: "false"
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: daily-cannabis-research
+  cancel-in-progress: false
+
+jobs:
+  gather-research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      PYTHONUNBUFFERED: "1"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Resolve parameters
+        id: params
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            DATE="${{ inputs.date }}"
+            MODEL="${{ inputs.model }}"
+            MAX_PAPERS="${{ inputs.max_papers }}"
+            MIN_CONFIDENCE="${{ inputs.min_confidence }}"
+            DRY_RUN="${{ inputs.dry_run }}"
+          else
+            DATE=""
+            MODEL="composer-2.5"
+            MAX_PAPERS="12"
+            MIN_CONFIDENCE="0.7"
+            DRY_RUN="false"
+          fi
+
+          if [ -z "$DATE" ]; then
+            DATE="$(date -u +%F)"
+          fi
+
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+          echo "model=$MODEL" >> "$GITHUB_OUTPUT"
+          echo "max_papers=$MAX_PAPERS" >> "$GITHUB_OUTPUT"
+          echo "min_confidence=$MIN_CONFIDENCE" >> "$GITHUB_OUTPUT"
+          echo "dry_run=$DRY_RUN" >> "$GITHUB_OUTPUT"
+
+      - name: Gather peer-reviewed cannabis research
+        env:
+          CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          EXTRA_FLAGS=""
+          if [ "${{ steps.params.outputs.dry_run }}" = "true" ]; then
+            EXTRA_FLAGS="--dry-run"
+          fi
+
+          python scripts/run_daily_cannabis_research.py \
+            --repo "$REPO" \
+            --repo-url "https://github.com/$REPO" \
+            --base-ref "${{ github.event.repository.default_branch }}" \
+            --date "${{ steps.params.outputs.date }}" \
+            --model "${{ steps.params.outputs.model }}" \
+            --max-papers "${{ steps.params.outputs.max_papers }}" \
+            --min-confidence "${{ steps.params.outputs.min_confidence }}" \
+            --output-dir "agents/output/daily_cannabis" \
+            $EXTRA_FLAGS
+
+      - name: Upload report
+        if: always() && steps.params.outputs.dry_run != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-cannabis-${{ steps.params.outputs.date }}
+          path: agents/output/daily_cannabis/
+          if-no-files-found: warn
+          retention-days: 90

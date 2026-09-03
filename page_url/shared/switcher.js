@@ -28,6 +28,18 @@ const PALETTES = [
   {
     id: 5, name: "Terracotta Hemp", mood: "Craft · Organic",
     dots: ["#5c3d2e","#e8c9a0","#4a7c59","#fdf6ee","#2a1a12"]
+  },
+  {
+    id: 6, name: "Emerald Leaf", mood: "Fresh · Vibrant",
+    dots: ["#065f46","#6ee7b7","#fbbf24","#f0fdf4","#022c22"]
+  },
+  {
+    id: 7, name: "Lavender Fields", mood: "Calm · Therapeutic",
+    dots: ["#4c1d95","#c4b5fd","#14b8a6","#faf5ff","#2e1065"]
+  },
+  {
+    id: 8, name: "Citrus Grove", mood: "Bright · Zesty",
+    dots: ["#3f6212","#fde047","#f97316","#fefce8","#1a2e05"]
   }
 ];
 
@@ -61,10 +73,28 @@ const PALETTE_TOKENS = {
     "--color-secondary":"#e8c9a0","--color-accent":"#4a7c59","--color-bg":"#fdf6ee",
     "--color-bg-dark":"#2a1a12","--color-surface":"#fff9f2","--color-text":"#2a1a12",
     "--color-text-muted":"#8b7260","--color-border":"#eaddd0"
+  },
+  6: {
+    "--color-primary-dark":"#065f46","--color-primary-mid":"#059669","--color-primary-light":"#34d399",
+    "--color-secondary":"#6ee7b7","--color-accent":"#fbbf24","--color-bg":"#f0fdf4",
+    "--color-bg-dark":"#022c22","--color-surface":"#ffffff","--color-text":"#052e16",
+    "--color-text-muted":"#4b7a6a","--color-border":"#bbf7d0"
+  },
+  7: {
+    "--color-primary-dark":"#4c1d95","--color-primary-mid":"#6d28d9","--color-primary-light":"#8b5cf6",
+    "--color-secondary":"#c4b5fd","--color-accent":"#14b8a6","--color-bg":"#faf5ff",
+    "--color-bg-dark":"#2e1065","--color-surface":"#ffffff","--color-text":"#1e1b4b",
+    "--color-text-muted":"#6b6580","--color-border":"#e9d5ff"
+  },
+  8: {
+    "--color-primary-dark":"#3f6212","--color-primary-mid":"#65a30d","--color-primary-light":"#a3e635",
+    "--color-secondary":"#fde047","--color-accent":"#f97316","--color-bg":"#fefce8",
+    "--color-bg-dark":"#1a2e05","--color-surface":"#ffffff","--color-text":"#1a2e05",
+    "--color-text-muted":"#656d4a","--color-border":"#ecfccb"
   }
 };
 
-/** Apply a palette by id (1–5) to the :root element */
+/** Apply a palette by id (1–8) to the :root element */
 function applyPalette(id) {
   const tokens = PALETTE_TOKENS[id];
   if (!tokens) return;

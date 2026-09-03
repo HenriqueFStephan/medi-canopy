@@ -1,7 +1,7 @@
 {
   "meta": {
     "project": "CanaHub",
-    "note": "5 palettes × 5 layout variations. Tell the agent: 'Apply variation 3, palette 2' to update the site.",
+    "note": "8 palettes × 5 layout variations. Tell the agent: 'Apply variation 3, palette 2' to update the site.",
     "token_roles": {
       "--color-primary-dark":  "Main brand colour – headers, hero, CTA backgrounds",
       "--color-primary-mid":   "Hover / interactive shade of primary",
@@ -105,6 +105,60 @@
         "--color-text":          "#2a1a12",
         "--color-text-muted":    "#8b7260",
         "--color-border":        "#eaddd0"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Emerald Leaf",
+      "mood": "Fresh, vibrant, spring growth – bright cannabis green",
+      "tokens": {
+        "--color-primary-dark":  "#065f46",
+        "--color-primary-mid":   "#059669",
+        "--color-primary-light": "#34d399",
+        "--color-secondary":     "#6ee7b7",
+        "--color-accent":        "#fbbf24",
+        "--color-bg":            "#f0fdf4",
+        "--color-bg-dark":       "#022c22",
+        "--color-surface":       "#ffffff",
+        "--color-text":          "#052e16",
+        "--color-text-muted":    "#4b7a6a",
+        "--color-border":        "#bbf7d0"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Lavender Fields",
+      "mood": "Calm, therapeutic, refined – soft violet wellness tones",
+      "tokens": {
+        "--color-primary-dark":  "#4c1d95",
+        "--color-primary-mid":   "#6d28d9",
+        "--color-primary-light": "#8b5cf6",
+        "--color-secondary":     "#c4b5fd",
+        "--color-accent":        "#14b8a6",
+        "--color-bg":            "#faf5ff",
+        "--color-bg-dark":       "#2e1065",
+        "--color-surface":       "#ffffff",
+        "--color-text":          "#1e1b4b",
+        "--color-text-muted":    "#6b6580",
+        "--color-border":        "#e9d5ff"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Citrus Grove",
+      "mood": "Bright, zesty, approachable – lime green with citrus pop",
+      "tokens": {
+        "--color-primary-dark":  "#3f6212",
+        "--color-primary-mid":   "#65a30d",
+        "--color-primary-light": "#a3e635",
+        "--color-secondary":     "#fde047",
+        "--color-accent":        "#f97316",
+        "--color-bg":            "#fefce8",
+        "--color-bg-dark":       "#1a2e05",
+        "--color-surface":       "#ffffff",
+        "--color-text":          "#1a2e05",
+        "--color-text-muted":    "#656d4a",
+        "--color-border":        "#ecfccb"
       }
     }
   ]

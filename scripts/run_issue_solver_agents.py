@@ -16,6 +16,7 @@ import json
 import os
 import sys
 import textwrap
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -25,6 +26,10 @@ from typing import Any
 
 GITHUB_API_BASE = "https://api.github.com"
 CURSOR_API_BASE = "https://api.cursor.com/v1"
+MAX_LAUNCH_ATTEMPTS = 5
+MAX_RETRY_WAIT_SECONDS = 180
+DEFAULT_RETRY_WAIT_SECONDS = 60
+LAUNCH_SPACING_SECONDS = 60
 
 
 @dataclass
@@ -36,12 +41,76 @@ class Issue:
     labels: list[str]
 
 
+class ApiError(RuntimeError):
+    def __init__(
+        self,
+        message: str,
+        *,
+        status: int | None = None,
+        retryable: bool = False,
+        retry_after: int | None = None,
+        body: str = "",
+    ) -> None:
+        super().__init__(message)
+        self.status = status
+        self.retryable = retryable
+        self.retry_after = retry_after
+        self.body = body
+
+
+def log(message: str, *, error: bool = False) -> None:
+    stream = sys.stderr if error else sys.stdout
+    print(message, file=stream, flush=True)
+
+
+def _walk_values(value: Any) -> Any:
+    if isinstance(value, dict):
+        yield value
+        for nested in value.values():
+            yield from _walk_values(nested)
+    elif isinstance(value, list):
+        for item in value:
+            yield from _walk_values(item)
+
+
+def _parse_retry_after(raw: str | None) -> int | None:
+    if not raw:
+        return None
+    try:
+        seconds = int(float(raw.strip()))
+    except ValueError:
+        return None
+    return max(1, seconds)
+
+
+def _error_hints(payload: Any) -> tuple[bool, int | None]:
+    retryable = False
+    retry_after: int | None = None
+    for node in _walk_values(payload):
+        if node.get("isRetryable") is True or node.get("is_retryable") is True:
+            retryable = True
+        extra = node.get("additionalInfo") or node.get("additional_info") or {}
+        if isinstance(extra, dict):
+            parsed = _parse_retry_after(str(extra.get("retryAfter") or extra.get("retry_after") or ""))
+            if parsed is not None:
+                retry_after = parsed
+        parsed = _parse_retry_after(str(node.get("retryAfter") or node.get("retry_after") or ""))
+        if parsed is not None:
+            retry_after = parsed
+        if str(node.get("error") or "") == "ERROR_RATE_LIMITED":
+            retryable = True
+        if str(node.get("code") or "") in {"resource_exhausted", "rate_limited"}:
+            retryable = True
+    return retryable, retry_after
+
+
 def _http_json(
     method: str,
     url: str,
     *,
     headers: dict[str, str] | None = None,
     payload: dict[str, Any] | None = None,
+    debug: bool = False,
 ) -> dict[str, Any] | list[Any]:
     data = None
     request_headers = headers.copy() if headers else {}
@@ -53,12 +122,33 @@ def _http_json(
     try:
         with urllib.request.urlopen(req, timeout=60) as resp:
             raw = resp.read().decode("utf-8")
+            if debug:
+                log(f"{method} {url} -> HTTP {resp.status}")
+                log(f"Cursor response body:\n{raw[:8000] if raw else '(empty)'}")
             return json.loads(raw) if raw else {}
     except urllib.error.HTTPError as exc:
         body = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"{method} {url} failed ({exc.code}): {body}") from exc
+        parsed: Any = None
+        try:
+            parsed = json.loads(body) if body else None
+        except json.JSONDecodeError:
+            parsed = None
+        retryable, retry_after = _error_hints(parsed)
+        header_retry = _parse_retry_after(exc.headers.get("Retry-After") if exc.headers else None)
+        if header_retry is not None:
+            retry_after = header_retry
+        if exc.code in {429, 503}:
+            retryable = True
+            retry_after = retry_after or DEFAULT_RETRY_WAIT_SECONDS
+        raise ApiError(
+            f"{method} {url} failed ({exc.code}): {body}",
+            status=exc.code,
+            retryable=retryable,
+            retry_after=retry_after,
+            body=body,
+        ) from exc
     except urllib.error.URLError as exc:
-        raise RuntimeError(f"{method} {url} failed: {exc.reason}") from exc
+        raise ApiError(f"{method} {url} failed: {exc.reason}", retryable=True) from exc
 
 
 def fetch_open_issues(repo: str, github_token: str, limit: int) -> list[Issue]:
@@ -71,7 +161,7 @@ def fetch_open_issues(repo: str, github_token: str, limit: int) -> list[Issue]:
     }
     result = _http_json("GET", url, headers=headers)
     if not isinstance(result, list):
-        raise RuntimeError(f"Unexpected GitHub response for issues: {type(result)}")
+        raise ApiError(f"Unexpected GitHub response for issues: {type(result)}")
 
     issues: list[Issue] = []
     for item in result:
@@ -155,11 +245,80 @@ def create_cursor_agent(
         "autoCreatePR": True,
         "skipReviewerRequest": skip_reviewer_request,
     }
-    return _http_json("POST", f"{CURSOR_API_BASE}/agents", headers=headers, payload=payload)
+    return _http_json(
+        "POST",
+        f"{CURSOR_API_BASE}/agents",
+        headers=headers,
+        payload=payload,
+        debug=True,
+    )
 
 
-def _to_bool(value: str) -> bool:
-    return value.strip().lower() in {"1", "true", "yes", "y", "on"}
+def _first_text(*values: Any) -> str | None:
+    for value in values:
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+        if value is not None and not isinstance(value, (dict, list)):
+            text = str(value).strip()
+            if text:
+                return text
+    return None
+
+
+def agent_identity(response: dict[str, Any]) -> tuple[str | None, str | None]:
+    agent = response.get("agent") if isinstance(response.get("agent"), dict) else {}
+    run = response.get("run") if isinstance(response.get("run"), dict) else {}
+    target = agent.get("target") if isinstance(agent.get("target"), dict) else response.get("target")
+    if not isinstance(target, dict):
+        target = {}
+
+    agent_id = _first_text(
+        agent.get("id"),
+        response.get("id"),
+        response.get("agentId"),
+        response.get("agent_id"),
+        run.get("agentId"),
+        run.get("agent_id"),
+    )
+    agent_url = _first_text(
+        agent.get("url"),
+        target.get("url"),
+        response.get("url"),
+        target.get("prUrl"),
+        run.get("url"),
+    )
+    if agent_id and not agent_url:
+        agent_url = f"https://cursor.com/agents/{agent_id}"
+    return agent_id, agent_url
+
+
+def _sleep(seconds: int, reason: str) -> None:
+    wait = min(max(seconds, 1), MAX_RETRY_WAIT_SECONDS)
+    log(f"Waiting {wait}s ({reason})")
+    time.sleep(wait)
+
+
+def create_cursor_agent_with_retry(**kwargs: Any) -> dict[str, Any]:
+    last_error: ApiError | None = None
+    for attempt in range(1, MAX_LAUNCH_ATTEMPTS + 1):
+        try:
+            response = create_cursor_agent(**kwargs)
+            if not isinstance(response, dict):
+                raise ApiError(f"Unexpected Cursor response: {type(response)}")
+            return response
+        except ApiError as exc:
+            last_error = exc
+            if not exc.retryable or attempt == MAX_LAUNCH_ATTEMPTS:
+                raise
+            wait = exc.retry_after or min(DEFAULT_RETRY_WAIT_SECONDS * attempt, MAX_RETRY_WAIT_SECONDS)
+            log(
+                f"Retryable Cursor error on attempt {attempt}/{MAX_LAUNCH_ATTEMPTS} "
+                f"(status={exc.status}): {exc}",
+                error=True,
+            )
+            _sleep(wait, "Cursor asked us to retry")
+    assert last_error is not None
+    raise last_error
 
 
 def main() -> int:
@@ -180,37 +339,48 @@ def main() -> int:
     github_token = os.environ.get("GITHUB_TOKEN")
     cursor_api_key = os.environ.get("CURSOR_API_KEY")
     if not github_token:
-        print("Missing required env var: GITHUB_TOKEN", file=sys.stderr)
+        log("Missing required env var: GITHUB_TOKEN", error=True)
         return 2
     if not cursor_api_key and not args.dry_run:
-        print("Missing required env var: CURSOR_API_KEY", file=sys.stderr)
+        log("Missing required env var: CURSOR_API_KEY", error=True)
         return 2
 
     if args.max_issues < 1:
-        print("--max-issues must be >= 1", file=sys.stderr)
+        log("--max-issues must be >= 1", error=True)
         return 2
 
     try:
         issues = fetch_open_issues(args.repo, github_token, args.max_issues)
-    except RuntimeError as exc:
-        print(f"Failed fetching issues: {exc}", file=sys.stderr)
+    except ApiError as exc:
+        log(f"Failed fetching issues: {exc}", error=True)
         return 1
 
     if not issues:
-        print("No open issues found.")
+        log("No open issues found.")
         return 0
 
-    print(f"Found {len(issues)} open issue(s) to process.")
+    log(f"Found {len(issues)} open issue(s) to process.")
+    launched = 0
+    failed: list[int] = []
+    last_launch_at: float | None = None
+
     for issue in issues:
         prompt = build_prompt(issue, args.repo, args.base_ref)
         run_name = f"Issue #{issue.number}: {issue.title[:80]}"
 
         if args.dry_run:
-            print(f"[DRY RUN] Would launch agent for issue #{issue.number}: {issue.title}")
+            log(f"[DRY RUN] Would launch agent for issue #{issue.number}: {issue.title}")
+            launched += 1
             continue
 
+        if last_launch_at is not None:
+            elapsed = time.monotonic() - last_launch_at
+            remaining = LAUNCH_SPACING_SECONDS - int(elapsed)
+            if remaining > 0:
+                _sleep(remaining, "avoid Cursor GitHub App rate limit between launches")
+
         try:
-            response = create_cursor_agent(
+            response = create_cursor_agent_with_retry(
                 cursor_api_key=cursor_api_key or "",
                 model=args.model,
                 repo_url=args.repo_url,
@@ -219,16 +389,36 @@ def main() -> int:
                 run_name=run_name,
                 skip_reviewer_request=args.skip_reviewer_request,
             )
-        except RuntimeError as exc:
-            print(f"Issue #{issue.number} launch failed: {exc}", file=sys.stderr)
+        except ApiError as exc:
+            log(f"Issue #{issue.number} launch failed: {exc}", error=True)
+            failed.append(issue.number)
+            last_launch_at = time.monotonic()
             continue
 
-        agent_id = response.get("id")
-        agent_url = response.get("url")
-        print(f"Issue #{issue.number} -> agent {agent_id or '(unknown id)'}")
-        if agent_url:
-            print(f"  URL: {agent_url}")
+        last_launch_at = time.monotonic()
+        log(f"Issue #{issue.number} Cursor payload keys: {sorted(response.keys())}")
+        agent_id, agent_url = agent_identity(response)
+        if not agent_id:
+            log(
+                f"Issue #{issue.number} launch returned no agent id:\n{json.dumps(response, indent=2)[:8000]}",
+                error=True,
+            )
+            failed.append(issue.number)
+            continue
 
+        launched += 1
+        log(f"Issue #{issue.number} -> agent {agent_id}")
+        if agent_url:
+            log(f"  URL: {agent_url}")
+        run = response.get("run") if isinstance(response.get("run"), dict) else {}
+        if run.get("id"):
+            log(f"  Run: {run.get('id')} ({run.get('status') or 'unknown status'})")
+
+    log(f"Launched {launched}/{len(issues)} agent(s).")
+    if failed:
+        failed_list = ", ".join(f"#{n}" for n in failed)
+        log(f"Failed to launch agents for issues: {failed_list}", error=True)
+        return 1
     return 0
 
 

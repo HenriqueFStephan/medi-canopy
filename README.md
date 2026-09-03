@@ -56,6 +56,8 @@ python -m agents.run --agent research
 - Purpose: daily run that reads open GitHub issues and starts one Cursor cloud agent per issue (each agent works in its own branch and opens a PR).
 - Manual test: run from Actions tab with `workflow_dispatch` (`dry_run=true` by default).
 - Required repository secret: `CURSOR_API_KEY`.
+- A failed Cursor launch now fails the GitHub job. Retryable `429` / GitHub App rate limits are retried automatically (Cursor often asks for ~60s).
+- Cloud Agents also need the [Cursor GitHub App](https://cursor.com/dashboard?tab=integrations) installed on this repository. If retries still fail with `get_installation_for_org`, reconnect GitHub there and confirm the repo is selected.
 
 ## Key Documents
 

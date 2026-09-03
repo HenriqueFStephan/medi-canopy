@@ -50,6 +50,13 @@ python -m agents.run --agent news
 python -m agents.run --agent research
 ```
 
+### Issue-solving GitHub Action
+
+- Workflow: `.github/workflows/cursor-issue-solver.yml`
+- Purpose: daily run that reads open GitHub issues and starts one Cursor cloud agent per issue (each agent works in its own branch and opens a PR).
+- Manual test: run from Actions tab with `workflow_dispatch` (`dry_run=true` by default).
+- Required repository secret: `CURSOR_API_KEY`.
+
 ## Key Documents
 
 | Document | Purpose |

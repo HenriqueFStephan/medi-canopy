@@ -1,0 +1,83 @@
+name: Cursor Issue Solver
+
+on:
+  schedule:
+    - cron: "15 3 * * *"
+  workflow_dispatch:
+    inputs:
+      max_issues:
+        description: "How many open issues to process"
+        required: false
+        default: "1"
+      dry_run:
+        description: "If true, do not call Cursor API"
+        required: false
+        default: "true"
+      base_ref:
+        description: "Base branch for generated fix branches"
+        required: false
+        default: ""
+      model:
+        description: "Cursor model ID"
+        required: false
+        default: "composer-2.5"
+
+permissions:
+  contents: read
+  issues: read
+
+jobs:
+  launch-issue-agents:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Resolve parameters
+        id: params
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            MAX_ISSUES="${{ inputs.max_issues }}"
+            DRY_RUN="${{ inputs.dry_run }}"
+            MODEL="${{ inputs.model }}"
+            BASE_REF="${{ inputs.base_ref }}"
+          else
+            MAX_ISSUES="20"
+            DRY_RUN="false"
+            MODEL="composer-2.5"
+            BASE_REF=""
+          fi
+
+          if [ -z "$BASE_REF" ]; then
+            BASE_REF="${{ github.event.repository.default_branch }}"
+          fi
+
+          echo "max_issues=$MAX_ISSUES" >> "$GITHUB_OUTPUT"
+          echo "dry_run=$DRY_RUN" >> "$GITHUB_OUTPUT"
+          echo "model=$MODEL" >> "$GITHUB_OUTPUT"
+          echo "base_ref=$BASE_REF" >> "$GITHUB_OUTPUT"
+
+      - name: Launch Cursor agents for open issues
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
+          REPO: ${{ github.repository }}
+        run: |
+          EXTRA_FLAGS=""
+          if [ "${{ steps.params.outputs.dry_run }}" = "true" ]; then
+            EXTRA_FLAGS="$EXTRA_FLAGS --dry-run"
+          fi
+
+          python scripts/run_issue_solver_agents.py \
+            --repo "$REPO" \
+            --repo-url "https://github.com/$REPO" \
+            --base-ref "${{ steps.params.outputs.base_ref }}" \
+            --max-issues "${{ steps.params.outputs.max_issues }}" \
+            --model "${{ steps.params.outputs.model }}" \
+            $EXTRA_FLAGS

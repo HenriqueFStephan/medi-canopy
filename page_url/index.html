@@ -189,7 +189,7 @@
   <!-- ── Hero ────────────────────────────────────── -->
   <div class="hero">
     <p class="hero__kicker">CanaHub · Design Preview</p>
-    <h1>5 layouts × 5 paletas = <em>25 opções</em></h1>
+    <h1>5 layouts × 8 paletas = <em>40 opções</em></h1>
     <p>Escolhe o layout e a paleta de cores que preferes. Usa os links abaixo para navegar entre as variações com qualquer paleta activa.</p>
     <div class="hero__note">
       <strong>Para o dev:</strong> diga ao agente <code>"aplica variação 3, paleta 2"</code> e o site é actualizado automaticamente.
@@ -244,6 +244,33 @@
         </div>
         <span class="palette-pill__id">P5</span>
         <span class="palette-pill__name">Terracotta Hemp</span>
+      </button>
+      <button class="palette-pill" data-pid="6" onclick="selectPalette(6)">
+        <div class="palette-swatch">
+          <div class="swatch-dot" style="background:#065f46"></div>
+          <div class="swatch-dot" style="background:#6ee7b7"></div>
+          <div class="swatch-dot" style="background:#fbbf24"></div>
+        </div>
+        <span class="palette-pill__id">P6</span>
+        <span class="palette-pill__name">Emerald Leaf</span>
+      </button>
+      <button class="palette-pill" data-pid="7" onclick="selectPalette(7)">
+        <div class="palette-swatch">
+          <div class="swatch-dot" style="background:#4c1d95"></div>
+          <div class="swatch-dot" style="background:#c4b5fd"></div>
+          <div class="swatch-dot" style="background:#14b8a6"></div>
+        </div>
+        <span class="palette-pill__id">P7</span>
+        <span class="palette-pill__name">Lavender Fields</span>
+      </button>
+      <button class="palette-pill" data-pid="8" onclick="selectPalette(8)">
+        <div class="palette-swatch">
+          <div class="swatch-dot" style="background:#3f6212"></div>
+          <div class="swatch-dot" style="background:#fde047"></div>
+          <div class="swatch-dot" style="background:#f97316"></div>
+        </div>
+        <span class="palette-pill__id">P8</span>
+        <span class="palette-pill__name">Citrus Grove</span>
       </button>
     </div>
   </div>
@@ -346,7 +373,7 @@
       <h2>⚡ Como escolher e aplicar</h2>
       <ol>
         <li>Carrega em cada variação e muda a paleta com o painel flutuante no canto inferior direito.</li>
-        <li>Anota o número do layout (<code>V1</code>–<code>V5</code>) e da paleta (<code>P1</code>–<code>P5</code>) que gostares.</li>
+        <li>Anota o número do layout (<code>V1</code>–<code>V5</code>) e da paleta (<code>P1</code>–<code>P8</code>) que gostares.</li>
         <li>Diz ao agente: <code>"aplica variação 3, paleta 2"</code> — o site será actualizado.</li>
         <li>Podes combinar livremente qualquer layout com qualquer paleta.</li>
         <li>Todas as definições de cores estão em <code>color_identity/palettes.json</code> e <code>palettes.css</code>.</li>
@@ -356,7 +383,7 @@
   </div>
 
   <script>
-    const PALETTE_NAMES = {1:'Forest Canopy (1)',2:'Midnight Bloom (2)',3:'Golden Hour (3)',4:'Slate & Sage (4)',5:'Terracotta Hemp (5)'};
+    const PALETTE_NAMES = {1:'Forest Canopy (1)',2:'Midnight Bloom (2)',3:'Golden Hour (3)',4:'Slate & Sage (4)',5:'Terracotta Hemp (5)',6:'Emerald Leaf (6)',7:'Lavender Fields (7)',8:'Citrus Grove (8)'};
     let activePalette = 1;
 
     function selectPalette(id) {

@@ -80,6 +80,34 @@ On approval, `PaperNormalizer.to_blog_post()` produces:
 | Hooks | `.cursor/hooks.json` | Protect secrets, format Python |
 | MCP design | `.cursor/mcp/README.md` | Future MCP servers for news/research |
 
+## Daily Cannabis Research (GitHub Action)
+
+**Workflow:** `.github/workflows/daily-cannabis-research.yml` (daily 06:30 UTC)
+**Script:** `scripts/run_daily_cannabis_research.py`
+
+Launches a Cursor cloud agent that searches for recent peer-reviewed literature on
+medical cannabis, hemp fibre in fashion/textiles, hemp construction materials,
+agronomy, and policy. The workflow waits for the run, parses the agent's JSON reply,
+and opens a GitHub issue titled `Daily Cannabis {YYYY-MM-DD}` with the surviving links.
+
+**Reliability filter** — a paper reaches the issue only if it is flagged peer-reviewed,
+names a journal, is not a preprint/blog/thesis/patent, has a valid DOI or a link on a
+recognised publisher domain, and reports confidence at or above `--min-confidence`
+(default `0.7`). Discarded candidates are reduced to a count in the issue; their
+details stay in the job summary and the uploaded artifact.
+
+When nothing clears the filter, **no issue is created** — an empty digest is noise.
+
+Issues are labelled `daily-cannabis`, which `run_issue_solver_agents.py` excludes from
+dispatch so the issue solver never tries to "fix" a research digest.
+
+**Manual run:**
+
+```bash
+python scripts/run_daily_cannabis_research.py \
+  --repo owner/repo --repo-url https://github.com/owner/repo --dry-run
+```
+
 ## DevOps Scheduling (future)
 
 **GitHub Actions example** (`.github/workflows/agents-daily.yml` — placeholder):

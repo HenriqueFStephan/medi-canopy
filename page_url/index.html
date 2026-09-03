@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-palette="1">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CanaHub · Design Preview Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../color_identity/palettes.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      line-height: 1.6;
+    }
+    h1,h2,h3 { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; }
+
+    .hero {
+      text-align: center;
+      padding: 5rem 1.5rem 3rem;
+      border-bottom: 1px solid #21262d;
+    }
+    .hero__kicker {
+      font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      color: #58a6ff; margin-bottom: 1rem;
+    }
+    .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin: 0 0 1rem; color: #f0f6fc; }
+    .hero h1 em { font-style: italic; color: #3fb950; }
+    .hero p { color: #8b949e; max-width: 54ch; margin: 0 auto 2rem; }
+    .hero__note {
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 8px;
+      padding: .75rem 1.25rem;
+      font-size: .85rem;
+      color: #8b949e;
+      display: inline-block;
+    }
+    .hero__note strong { color: #f0f6fc; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    .section { padding: 3rem 0; }
+
+    /* Palette strip */
+    .palette-strip {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding: 2rem 1.5rem;
+      background: #161b22;
+      border-bottom: 1px solid #21262d;
+      justify-content: center;
+    }
+    .palette-pill {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .5rem 1rem .5rem .5rem;
+      background: #0d1117;
+      border: 1px solid #21262d;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: border-color .2s;
+      text-decoration: none;
+      color: #e6edf3;
+    }
+    .palette-pill:hover { border-color: #58a6ff; }
+    .palette-pill.active { border-color: #3fb950; }
+    .palette-swatch {
+      display: flex;
+      gap: 2px;
+    }
+    .swatch-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+    }
+    .palette-pill__name { font-size: .8rem; font-weight: 600; }
+    .palette-pill__id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      color: #58a6ff;
+      min-width: 1rem;
+    }
+
+    /* Variation cards */
+    .var-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .var-card {
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color .2s, transform .2s;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+    }
+    .var-card:hover { border-color: #58a6ff; transform: translateY(-3px); }
+    .var-card__preview {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .var-card__badge {
+      position: absolute;
+      top: .75rem; left: .75rem;
+      background: rgba(0,0,0,.6);
+      color: #fff;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .2rem .6rem;
+      border-radius: 10px;
+      backdrop-filter: blur(4px);
+    }
+    .var-card__body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+    .var-card__body h3 { margin: 0 0 .3rem; font-size: 1.05rem; color: #f0f6fc; }
+    .var-card__body p  { margin: 0 0 1rem; font-size: .85rem; color: #8b949e; flex: 1; }
+    .var-card__tags { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .var-tag {
+      font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+      padding: .2rem .5rem; border-radius: 4px; background: #21262d; color: #8b949e;
+    }
+    .var-card__link {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-size: .8rem; font-weight: 600; color: #58a6ff;
+    }
+
+    /* Section heading */
+    .section-heading {
+      font-size: 1.25rem;
+      color: #f0f6fc;
+      margin: 0 0 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .section-heading::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #21262d;
+    }
+
+    /* How to use */
+    .howto {
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+    .howto h2 { margin: 0 0 1rem; font-size: 1.25rem; color: #f0f6fc; }
+    .howto ol { margin: 0; padding-left: 1.25rem; color: #8b949e; font-size: .9rem; }
+    .howto ol li { margin-bottom: .6rem; }
+    .howto code {
+      background: #0d1117;
+      border: 1px solid #21262d;
+      border-radius: 4px;
+      padding: .1rem .4rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .85em;
+      color: #79c0ff;
+    }
+
+    /* active palette selector */
+    #active-palette-label {
+      text-align: center;
+      font-size: .8rem;
+      color: #8b949e;
+      padding: .5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Hero ────────────────────────────────────── -->
+  <div class="hero">
+    <p class="hero__kicker">CanaHub · Design Preview</p>
+    <h1>5 layouts × 5 paletas = <em>25 opções</em></h1>
+    <p>Escolhe o layout e a paleta de cores que preferes. Usa os links abaixo para navegar entre as variações com qualquer paleta activa.</p>
+    <div class="hero__note">
+      <strong>Para o dev:</strong> diga ao agente <code>"aplica variação 3, paleta 2"</code> e o site é actualizado automaticamente.
+    </div>
+  </div>
+
+  <!-- ── Palette picker ───────────────────────────── -->
+  <div class="palette-strip" id="palette-strip">
+    <div id="active-palette-label">Paleta activa: <strong id="active-name">Forest Canopy (1)</strong></div>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;width:100%">
+      <button class="palette-pill active" data-pid="1" onclick="selectPalette(1)">
+        <div class="palette-swatch">
+          <div class="swatch-dot" style="background:#1b4332"></div>
+          <div class="swatch-dot" style="background:#95d5b2"></div>
+          <div class="swatch-dot" style="background:#d4a574"></div>
+        </div>
+        <span class="palette-pill__id">P1</span>
+        <span class="palette-pill__name">Forest Canopy</span>
+      </button>
+      <button class="palette-pill" data-pid="2" onclick="selectPalette(2)">
+        <div class="palette-swatch">
+          <div class="swatch-dot" style="background:#0d1b2a"></div>
+          <div class="swatch-dot" style="background:#a8c8ff"></div>
+          <div class="swatch-dot" style="background:#e8a87c"></div>
+        </div>
+        <span class="palette-pill__id">P2</span>
+        <span class="palette-pill__name">Midnight Bloom</span>
+      </button>
+      <button class="palette-pill" data-pid="3" onclick="selectPalette(3)">
+        <div class="palette-swatch">
+          <div class="swatch-dot" style="background:#7c3d12"></div>
+          <div class="swatch-dot" style="background:#fcd34d"></div>
+          <div class="swatch-dot" style="background:#34d399"></div>
+        </div>
+        <span class="palette-pill__id">P3</span>
+        <span class="palette-pill__name">Golden Hour</span>
+      </button>
+      <button class="palette-pill" data-pid="4" onclick="selectPalette(4)">
+        <div class="palette-swatch">
+          <div class="swatch-dot" style="background:#1e293b"></div>
+          <div class="swatch-dot" style="background:#86efac"></div>
+          <div class="swatch-dot" style="background:#f472b6"></div>
+        </div>
+        <span class="palette-pill__id">P4</span>
+        <span class="palette-pill__name">Slate &amp; Sage</span>
+      </button>
+      <button class="palette-pill" data-pid="5" onclick="selectPalette(5)">
+        <div class="palette-swatch">
+          <div class="swatch-dot" style="background:#5c3d2e"></div>
+          <div class="swatch-dot" style="background:#e8c9a0"></div>
+          <div class="swatch-dot" style="background:#4a7c59"></div>
+        </div>
+        <span class="palette-pill__id">P5</span>
+        <span class="palette-pill__name">Terracotta Hemp</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Variation cards ─────────────────────────── -->
+  <div class="container section">
+    <div class="section-heading">📐 Variações de Layout</div>
+    <div class="var-grid">
+
+      <a class="var-card" id="var1-link" href="var1/index.html?palette=1">
+        <div class="var-card__preview" style="background:linear-gradient(135deg,#1b4332,#2d6a4f)">
+          <span>📰</span>
+          <span class="var-card__badge">V1</span>
+        </div>
+        <div class="var-card__body">
+          <h3>V1 · Classic Editorial</h3>
+          <div class="var-card__tags">
+            <span class="var-tag">Hero centrado</span>
+            <span class="var-tag">Grid de cards</span>
+            <span class="var-tag">Lista de artigos</span>
+          </div>
+          <p>Layout editorial clássico. Hero full-width centrado, secções bem definidas com divisores, grid de artigos em duas colunas.</p>
+          <span class="var-card__link">Ver variação →</span>
+        </div>
+      </a>
+
+      <a class="var-card" id="var2-link" href="var2/index.html?palette=1">
+        <div class="var-card__preview" style="background:linear-gradient(135deg,#0d1b2a,#3a7bd5)">
+          <span>🪟</span>
+          <span class="var-card__badge">V2</span>
+        </div>
+        <div class="var-card__body">
+          <h3>V2 · Split Hero</h3>
+          <div class="var-card__tags">
+            <span class="var-tag">2 colunas</span>
+            <span class="var-tag">Stat pills</span>
+            <span class="var-tag">Artigo destaque</span>
+          </div>
+          <p>Hero dividido: texto à esquerda, painel visual à direita com estatísticas. Estilo revista premium.</p>
+          <span class="var-card__link">Ver variação →</span>
+        </div>
+      </a>
+
+      <a class="var-card" id="var3-link" href="var3/index.html?palette=1">
+        <div class="var-card__preview" style="background:linear-gradient(135deg,#7c3d12,#d97706)">
+          <span>🔠</span>
+          <span class="var-card__badge">V3</span>
+        </div>
+        <div class="var-card__body">
+          <h3>V3 · Bold Magazine</h3>
+          <div class="var-tag-row"></div>
+          <div class="var-card__tags">
+            <span class="var-tag">Tipografia XL</span>
+            <span class="var-tag">Texto outline</span>
+            <span class="var-tag">Barra de stats</span>
+          </div>
+          <p>Tipografia oversized, títulos com efeito outline, alto contraste. Estilo editorial contemporâneo e arrojado.</p>
+          <span class="var-card__link">Ver variação →</span>
+        </div>
+      </a>
+
+      <a class="var-card" id="var4-link" href="var4/index.html?palette=1">
+        <div class="var-card__preview" style="background:linear-gradient(135deg,#f8fafc,#e2e8f0)">
+          <span style="color:#1e293b">✦</span>
+          <span class="var-card__badge">V4</span>
+        </div>
+        <div class="var-card__body">
+          <h3>V4 · Minimal Clean</h3>
+          <div class="var-card__tags">
+            <span class="var-tag">Whitespace</span>
+            <span class="var-tag">Lista numerada</span>
+            <span class="var-tag">Tabela notícias</span>
+          </div>
+          <p>Máximo espaço em branco, tipografia fina e restrita, lista numerada de serviços, notícias em tabela. Elegante e limpo.</p>
+          <span class="var-card__link">Ver variação →</span>
+        </div>
+      </a>
+
+      <a class="var-card" id="var5-link" href="var5/index.html?palette=1">
+        <div class="var-card__preview" style="background:linear-gradient(135deg,#0f172a,#334155)">
+          <span>📊</span>
+          <span class="var-card__badge">V5</span>
+        </div>
+        <div class="var-card__body">
+          <h3>V5 · Dashboard Grid</h3>
+          <div class="var-card__tags">
+            <span class="var-tag">Sidebar nav</span>
+            <span class="var-tag">Widget row</span>
+            <span class="var-tag">Card masonry</span>
+          </div>
+          <p>Sidebar de navegação fixa, topbar, widgets de estatísticas e grid denso de cards. Estilo SaaS/dashboard moderno.</p>
+          <span class="var-card__link">Ver variação →</span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- How to use -->
+    <div class="howto">
+      <h2>⚡ Como escolher e aplicar</h2>
+      <ol>
+        <li>Carrega em cada variação e muda a paleta com o painel flutuante no canto inferior direito.</li>
+        <li>Anota o número do layout (<code>V1</code>–<code>V5</code>) e da paleta (<code>P1</code>–<code>P5</code>) que gostares.</li>
+        <li>Diz ao agente: <code>"aplica variação 3, paleta 2"</code> — o site será actualizado.</li>
+        <li>Podes combinar livremente qualquer layout com qualquer paleta.</li>
+        <li>Todas as definições de cores estão em <code>color_identity/palettes.json</code> e <code>palettes.css</code>.</li>
+      </ol>
+    </div>
+
+  </div>
+
+  <script>
+    const PALETTE_NAMES = {1:'Forest Canopy (1)',2:'Midnight Bloom (2)',3:'Golden Hour (3)',4:'Slate & Sage (4)',5:'Terracotta Hemp (5)'};
+    let activePalette = 1;
+
+    function selectPalette(id) {
+      activePalette = id;
+      document.querySelectorAll('.palette-pill').forEach(p => p.classList.toggle('active', Number(p.dataset.pid) === id));
+      document.getElementById('active-name').textContent = PALETTE_NAMES[id];
+      // Update all variation links
+      [1,2,3,4,5].forEach(v => {
+        const el = document.getElementById(`var${v}-link`);
+        if (el) el.href = `var${v}/index.html?palette=${id}`;
+      });
+    }
+  </script>
+</body>
+</html>

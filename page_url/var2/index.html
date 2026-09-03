@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-palette="1">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CanaHub · V2 Split Hero</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../color_identity/palettes.css">
+  <link rel="stylesheet" href="../shared/preview.css">
+  <style>
+    /* ── V2: Split Hero ────────────────────────────────────────────────── */
+    /* Left text / right graphic — magazine-style two-column layout        */
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+    @media (max-width: 768px) { .hero { grid-template-columns: 1fr; } }
+
+    .hero__text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 3rem 5rem 0;
+      background: var(--color-bg);
+    }
+    .hero__text .container { padding: 0 1.5rem 0 calc((100vw - 1200px)/2 + 1.5rem); }
+    @media (max-width: 1200px) { .hero__text .container { padding: 0 2rem; } }
+
+    .hero__eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-size: .7rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin: 0 0 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .hero__eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 2rem;
+      height: 2px;
+      background: var(--color-accent);
+    }
+
+    .hero__title {
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      color: var(--color-primary-dark);
+      margin: 0 0 1.25rem;
+      max-width: 14ch;
+    }
+    .hero__title em { font-style: italic; color: var(--color-primary-mid); }
+
+    .hero__lead {
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+      max-width: 46ch;
+      margin: 0 0 2rem;
+    }
+    .hero__actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .hero__visual {
+      background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-mid) 60%, var(--color-primary-light) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero__visual-inner {
+      color: rgba(255,255,255,.15);
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(6rem, 14vw, 12rem);
+      line-height: 1;
+      user-select: none;
+      transform: rotate(-8deg);
+    }
+    .hero__stat-pills {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+    .hero__stat {
+      background: rgba(255,255,255,.12);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 8px;
+      padding: .6rem 1rem;
+      color: #fff;
+    }
+    .hero__stat strong { display: block; font-size: 1.5rem; line-height: 1; }
+    .hero__stat span   { font-size: .7rem; opacity: .8; text-transform: uppercase; letter-spacing: .08em; }
+
+    /* ── Content rows ─────────────────────────────────────────────────── */
+    .section__title { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 2rem; }
+
+    /* Services – horizontal scroll cards on mobile, grid on desktop */
+    .services-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.25rem;
+    }
+    .service-card {
+      border-top: 3px solid var(--color-accent);
+      padding: 1.5rem;
+      background: var(--color-surface);
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    }
+    .service-card__icon { font-size: 1.75rem; margin-bottom: .75rem; }
+    .service-card h3    { margin: 0 0 .4rem; font-size: 1rem; }
+    .service-card p     { margin: 0; font-size: .875rem; color: var(--color-text-muted); }
+
+    /* Featured article – full-width banner */
+    .featured-article {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 680px) { .featured-article { grid-template-columns: 1fr; } }
+    .featured-article__img {
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary));
+      min-height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+    .featured-article__body {
+      padding: 2rem;
+      background: var(--color-surface);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .featured-article__body h3 { margin: .5rem 0 .75rem; font-size: 1.4rem; }
+    .featured-article__body p  { color: var(--color-text-muted); font-size: .95rem; margin: 0 0 1.25rem; }
+
+    /* Mini article list */
+    .mini-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .75rem; }
+    .mini-list li {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .75rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      font-size: .9rem;
+    }
+    .mini-list__tag { min-width: 60px; text-align: center; }
+
+    .cta-strip {
+      background: var(--color-bg-dark);
+      color: #fff;
+      text-align: center;
+      padding: 4rem 0;
+    }
+    .cta-strip h2 { color: #fff; }
+    .cta-strip p  { color: rgba(255,255,255,.7); max-width: 48ch; margin: .75rem auto 2rem; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="#" class="logo"><span class="logo__cana">Cana</span><span class="logo__hub">Hub</span></a>
+      <nav class="nav">
+        <a href="#servicos">Serviços</a>
+        <a href="#blog">Blog</a>
+        <a href="#noticias">Notícias</a>
+        <a href="#cursos">Cursos</a>
+        <a href="#contato" class="btn btn--primary" style="padding:.45rem 1rem">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── Split Hero ─────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero__text">
+      <div class="container">
+        <p class="hero__eyebrow">Cannabis medicinal · Portugal</p>
+        <h1 class="hero__title">Ciência. Notícias. <em>Comunidade.</em></h1>
+        <p class="hero__lead">O hub de referência da cannabis medicinal — informação curada para pacientes, clínicos e profissionais.</p>
+        <div class="hero__actions">
+          <a href="#servicos" class="btn btn--primary">Explorar</a>
+          <a href="#blog" class="btn btn--outline">Ver blog</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero__visual">
+      <div class="hero__visual-inner">🌿</div>
+      <div class="hero__stat-pills">
+        <div class="hero__stat"><strong>2.4k+</strong><span>Artigos curados</span></div>
+        <div class="hero__stat"><strong>120+</strong><span>Estudos científicos</span></div>
+        <div class="hero__stat"><strong>18</strong><span>Cursos disponíveis</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Services ───────────────────────────────────────── -->
+  <section class="section" id="servicos">
+    <div class="container">
+      <h2 class="section__title">O que oferecemos</h2>
+      <div class="services-row">
+        <div class="service-card">
+          <div class="service-card__icon">🔬</div>
+          <h3>Investigação Científica</h3>
+          <p>Resumos de estudos peer-reviewed em linguagem acessível.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">📰</div>
+          <h3>Notícias do Setor</h3>
+          <p>Regulação, mercado e clínica em Portugal e na Europa.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">🎓</div>
+          <h3>Formação Profissional</h3>
+          <p>Cursos para pacientes, cuidadores e clínicos.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">💬</div>
+          <h3>Comunidade</h3>
+          <p>Fórum de partilha de experiências e boas práticas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Featured + News ────────────────────────────────── -->
+  <section class="section" id="noticias" style="background:var(--color-bg)">
+    <div class="container">
+      <h2 class="section__title">Em Destaque</h2>
+      <div class="featured-article">
+        <div class="featured-article__img">🌱</div>
+        <div class="featured-article__body">
+          <span class="tag">Regulação</span>
+          <h3>Portugal alarga prescrição de cannabis medicinal</h3>
+          <p>Nova circular do Infarmed amplia as indicações terapêuticas aprovadas, abrindo caminho para mais doentes acederem ao tratamento.</p>
+          <a href="#" class="btn btn--primary" style="align-self:flex-start">Ler mais</a>
+        </div>
+      </div>
+      <ul class="mini-list">
+        <li><span class="tag mini-list__tag">Ciência</span> Meta-análise confirma eficácia em dor crónica — <em>NEJM, Jul 2025</em></li>
+        <li><span class="tag mini-list__tag">Mercado</span> Exportações portuguesas sobem 34% no 1.º semestre de 2025</li>
+        <li><span class="tag mini-list__tag">Clínica</span> Novas guidelines europeias para epilepsia pediátrica</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cta-strip">
+    <div class="container">
+      <h2>Fique sempre informado</h2>
+      <p>Newsletter semanal com os destaques de ciência, regulação e mercado.</p>
+      <a href="#" class="btn btn--accent">Subscrever newsletter</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 CanaHub · Cannabis Medicinal · Portugal</p>
+      <p><a href="#">Instagram</a> · <a href="#">Newsletter</a> · <a href="#">Privacidade</a></p>
+    </div>
+  </footer>
+
+  <script src="../shared/switcher.js"></script>
+</body>
+</html>

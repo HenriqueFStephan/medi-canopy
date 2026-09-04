@@ -2,7 +2,7 @@
 name: project-navigation
 description: >-
   Navigates the Medi Canopy monorepo (Angular frontend, FastAPI backend, agents).
-  Use when exploring Site_Biel, finding modules, or understanding architecture.
+  Use when exploring medi-canopy, finding modules, or understanding architecture.
 ---
 
 # Medi Canopy Project Navigation

@@ -9,7 +9,7 @@ I **cannot** log into GitHub, Render, or Netlify on your machine. Follow these s
 ### 0a. Create repo on GitHub
 
 1. Open **https://github.com/new**
-2. Repository name: `medi-canopy` (or `Site_Biel`)
+2. Repository name: `medi-canopy`
 3. **Private** or Public — your choice
 4. Do **not** add README (we already have one)
 5. Click **Create repository**
@@ -17,7 +17,7 @@ I **cannot** log into GitHub, Render, or Netlify on your machine. Follow these s
 ### 0b. Push from your PC (PowerShell)
 
 ```powershell
-cd "c:\Users\henri\OneDrive\Área de Trabalho\Leisure\VSC\Site_Biel"
+cd "c:\Users\henri\OneDrive\Área de Trabalho\Leisure\VSC\medi-canopy"
 
 git init
 git add .

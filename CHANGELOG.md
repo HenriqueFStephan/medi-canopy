@@ -9,6 +9,7 @@ and this project adheres to [Conventional Commits](https://www.conventionalcommi
 
 ### Changed
 - Official product name is now **Medi Canopy** across the frontend, API titles, and docs
+- GitHub repository and local folder renamed from `Site_Biel` to `medi-canopy`
 - Locked the live site to Forest Canopy palette and V4 minimal layout
 - Removed palette/layout preview pages and unused color-identity options
 

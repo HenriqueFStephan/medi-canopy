@@ -7,7 +7,7 @@ A scalable web platform for reliable cannabis market information, scientific res
 ## Architecture
 
 ```
-Site_Biel/
+medi-canopy/
 ├── frontend/          # Angular 16 + TypeScript SPA
 ├── backend/           # Python FastAPI REST API
 ├── agents/            # Scheduled & manual LLM agent runners

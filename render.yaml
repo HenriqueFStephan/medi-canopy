@@ -1,5 +1,5 @@
 # Render Blueprint — https://dashboard.render.com
-# Option A: New + → Blueprint → select Site_Biel repo
+# Option A: New + → Blueprint → select medi-canopy repo
 # Option B: New + → Web Service → Root Directory: backend, Runtime: Python 3
 # After deploy: set FRONTEND_URL to your Netlify URL, then redeploy.
 

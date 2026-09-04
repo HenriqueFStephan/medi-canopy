@@ -1,7 +1,7 @@
 # Deliverable Report — Medi Canopy Phase 1 Demo
 
 **Date:** 2026-06-27  
-**Project:** Site_Biel — Cannabis Information Hub
+**Project:** medi-canopy — Cannabis Information Hub
 
 ---
 

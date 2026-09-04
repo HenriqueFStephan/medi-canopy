@@ -16,6 +16,7 @@ from typing import Any
 GITHUB_API_BASE = "https://api.github.com"
 RESEARCH_LABEL = "research"
 RESEARCH_TITLE_MARKER = "[research]"
+DAILY_CANNABIS_TITLE_MARKER = "daily cannabis"
 LABEL_COLOR = "0E8A16"
 LABEL_DESCRIPTION = "Research note for the team — not a coding task for the issue solver"
 
@@ -56,7 +57,8 @@ def github_headers(token: str) -> dict[str, str]:
 
 
 def is_research_title(title: str) -> bool:
-    return RESEARCH_TITLE_MARKER in (title or "").lower()
+    lower = (title or "").lower()
+    return RESEARCH_TITLE_MARKER in lower or DAILY_CANNABIS_TITLE_MARKER in lower
 
 
 def ensure_research_label(repo: str, headers: dict[str, str]) -> None:

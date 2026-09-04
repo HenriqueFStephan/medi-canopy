@@ -58,7 +58,7 @@ python -m agents.run --agent research
 - Required repository secret: `CURSOR_API_KEY`.
 - A failed Cursor launch now fails the GitHub job. Retryable `429` / GitHub App rate limits are retried automatically (Cursor often asks for ~60s).
 - Cloud Agents also need the [Cursor GitHub App](https://cursor.com/dashboard?tab=integrations) installed on this repository. If retries still fail with `get_installation_for_org`, reconnect GitHub there and confirm the repo is selected.
-- Research notes are skipped: put `[RESEARCH]` in the issue title (research poster can keep its current flow). Workflow `auto-label-research-issues.yml` creates/applies the `research` label automatically; the solver also stamps that label when it sees the title marker, then skips those issues.
+- Research digests from `Daily Cannabis Research` are filed as `[RESEARCH] Daily Cannabis …` with labels `research` + `daily-cannabis` (labels are created automatically if missing). Workflow `auto-label-research-issues.yml` also stamps `research` on matching titles; the solver skips those issues.
 
 ## Key Documents
 

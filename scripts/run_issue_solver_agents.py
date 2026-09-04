@@ -30,9 +30,10 @@ MAX_LAUNCH_ATTEMPTS = 5
 MAX_RETRY_WAIT_SECONDS = 180
 DEFAULT_RETRY_WAIT_SECONDS = 60
 LAUNCH_SPACING_SECONDS = 60
-SKIP_LABELS = frozenset({"research", "[research]"})
+SKIP_LABELS = frozenset({"research", "[research]", "daily-cannabis"})
 RESEARCH_TITLE_MARKER = "[research]"
 RESEARCH_LABEL = "research"
+DAILY_CANNABIS_TITLE_MARKER = "daily cannabis"
 
 
 @dataclass
@@ -160,8 +161,11 @@ def skip_reason(issue: Issue) -> str | None:
     matched = labels & SKIP_LABELS
     if matched:
         return f"label {sorted(matched)[0]}"
-    if RESEARCH_TITLE_MARKER in issue.title.lower():
+    title_lower = issue.title.lower()
+    if RESEARCH_TITLE_MARKER in title_lower:
         return "title marker [RESEARCH]"
+    if DAILY_CANNABIS_TITLE_MARKER in title_lower:
+        return "title marker Daily Cannabis"
     return None
 
 
@@ -187,10 +191,11 @@ def ensure_research_label(repo: str, headers: dict[str, str]) -> None:
 
 
 def stamp_research_label(repo: str, issue: Issue, headers: dict[str, str]) -> None:
-    """Promote a [RESEARCH] title marker into the durable `research` label."""
+    """Promote research title markers into the durable `research` label."""
     if RESEARCH_LABEL in {label.strip().lower() for label in issue.labels}:
         return
-    if RESEARCH_TITLE_MARKER not in issue.title.lower():
+    title_lower = issue.title.lower()
+    if RESEARCH_TITLE_MARKER not in title_lower and DAILY_CANNABIS_TITLE_MARKER not in title_lower:
         return
     try:
         ensure_research_label(repo, headers)

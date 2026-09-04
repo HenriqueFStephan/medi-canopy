@@ -5,7 +5,7 @@ Launch a Cursor cloud agent that gathers the latest peer-reviewed cannabis resea
 Coverage spans medical use, hemp fibre in fashion/textiles, construction materials,
 agronomy, and policy. Only peer-reviewed, verifiable papers survive the reliability
 filter; the surviving links are published as a GitHub issue titled
-"Daily Cannabis {date}".
+"[RESEARCH] Daily Cannabis {date}".
 """
 
 from __future__ import annotations
@@ -496,7 +496,15 @@ def render_summary(date_str: str, outcome: FilterOutcome, *, agent_url: str = ""
 
 
 def issue_title(date_str: str) -> str:
-    return f"Daily Cannabis {date_str}"
+    return f"[RESEARCH] Daily Cannabis {date_str}"
+
+
+def issue_title_candidates(date_str: str) -> list[str]:
+    """Current and legacy titles so re-runs stay idempotent after the prefix change."""
+    return [
+        f"[RESEARCH] Daily Cannabis {date_str}",
+        f"Daily Cannabis {date_str}",
+    ]
 
 
 def _github_headers(github_token: str) -> dict[str, str]:
@@ -507,8 +515,43 @@ def _github_headers(github_token: str) -> dict[str, str]:
     }
 
 
-def find_issue_by_title(repo: str, github_token: str, title: str, *, max_pages: int = 2) -> dict[str, Any] | None:
-    """Return an existing issue with this exact title, so re-runs do not duplicate it."""
+def ensure_issue_labels(repo: str, github_token: str, labels: list[str]) -> None:
+    """Create missing labels so issue creation does not 422 on unknown names."""
+    headers = _github_headers(github_token)
+    for name in labels:
+        if not name.strip():
+            continue
+        url = f"{GITHUB_API_BASE}/repos/{repo}/labels/{urllib.parse.quote(name)}"
+        try:
+            _http_json("GET", url, headers=headers)
+            continue
+        except ApiError as exc:
+            if exc.status != 404:
+                raise
+        color = "0E8A16" if name.strip().lower() == "research" else "5319E7"
+        description = (
+            "Research note for the team — not a coding task for the issue solver"
+            if name.strip().lower() == "research"
+            else "Daily cannabis research digest"
+        )
+        _http_json(
+            "POST",
+            f"{GITHUB_API_BASE}/repos/{repo}/labels",
+            headers=headers,
+            payload={"name": name, "color": color, "description": description},
+        )
+        log(f"Created label `{name}`.")
+
+
+def find_issue_by_title(
+    repo: str,
+    github_token: str,
+    titles: list[str],
+    *,
+    max_pages: int = 2,
+) -> dict[str, Any] | None:
+    """Return an existing issue matching any known title for this digest."""
+    wanted = {title.strip() for title in titles if title.strip()}
     for page in range(1, max_pages + 1):
         query = urllib.parse.urlencode(
             {"state": "all", "per_page": "100", "page": str(page), "sort": "created", "direction": "desc"}
@@ -525,7 +568,7 @@ def find_issue_by_title(repo: str, github_token: str, title: str, *, max_pages: 
         for item in result:
             if not isinstance(item, dict) or "pull_request" in item:
                 continue
-            if (item.get("title") or "").strip() == title:
+            if (item.get("title") or "").strip() in wanted:
                 return item
         if len(result) < 100:
             return None
@@ -540,6 +583,7 @@ def create_github_issue(
     body: str,
     labels: list[str],
 ) -> dict[str, Any]:
+    ensure_issue_labels(repo, github_token, labels)
     payload: dict[str, Any] = {"title": title, "body": body}
     if labels:
         payload["labels"] = labels
@@ -563,12 +607,12 @@ def publish_issue(
     labels: list[str],
     agent_url: str = "",
 ) -> str:
-    """Create the 'Daily Cannabis {date}' issue and return its URL."""
+    """Create the daily research issue and return its URL."""
     title = issue_title(date_str)
-    existing = find_issue_by_title(repo, github_token, title)
+    existing = find_issue_by_title(repo, github_token, issue_title_candidates(date_str))
     if existing:
         url = str(existing.get("html_url") or "")
-        log(f"Issue '{title}' already exists; leaving it untouched ({url})")
+        log(f"Issue '{existing.get('title') or title}' already exists; leaving it untouched ({url})")
         return url
 
     issue = create_github_issue(

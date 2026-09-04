@@ -108,6 +108,19 @@ python scripts/run_daily_cannabis_research.py \
   --repo owner/repo --repo-url https://github.com/owner/repo --dry-run
 ```
 
+**Import a digest into the review queue:**
+
+After a `Daily Cannabis {date}` issue is opened, import its papers for author review:
+
+```bash
+python scripts/import_daily_cannabis_digest.py --date 2026-09-03
+python scripts/import_daily_cannabis_digest.py --date 2026-09-03 --dry-run
+```
+
+Fixtures live in `agents/fixtures/daily_cannabis/{date}.json` (same schema as the CI
+artifact). Imported items use `source_agent=daily_cannabis` and follow the same
+approve → blog flow as the research agent.
+
 ## DevOps Scheduling (future)
 
 **GitHub Actions example** (`.github/workflows/agents-daily.yml` — placeholder):

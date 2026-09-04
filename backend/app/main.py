@@ -10,6 +10,7 @@ from app.api.v1 import blog, contact, courses, news, review, services
 from app.core.config import get_settings
 from app.core.cors import configure_cors
 from app.models.schemas import HealthResponse
+from app.repositories.json_store import blog_store, courses_store, news_store, services_store
 
 settings = get_settings()
 
@@ -45,3 +46,13 @@ def root() -> dict:
         "docs": "/docs",
         "instagram": settings.instagram_url,
     }
+
+
+@app.post("/api/v1/admin/reseed", tags=["admin"], include_in_schema=False)
+def reseed_demo_stores() -> dict:
+    """Reload news/blog/courses/services from committed seed JSON (demo only)."""
+    news_store.load_seed()
+    blog_store.load_seed()
+    courses_store.load_seed()
+    services_store.load_seed()
+    return {"status": "reseeded"}

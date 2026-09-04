@@ -46,6 +46,12 @@ class JsonStore:
         except (json.JSONDecodeError, OSError):
             return True
 
+    def load_seed(self) -> None:
+        """Replace this store with its seed file (demo reset)."""
+        if not self.seed_path or not self.seed_path.exists():
+            raise FileNotFoundError(f"No seed file for {self.path.name}")
+        self.path.write_text(self.seed_path.read_text(encoding="utf-8"), encoding="utf-8")
+
     def read_all(self) -> list[dict[str, Any]]:
         return json.loads(self.path.read_text(encoding="utf-8"))
 

@@ -1,0 +1,45 @@
+name: Auto-label research issues
+
+# When a research note is filed (title contains [RESEARCH]), stamp the
+# `research` label so the Cursor issue solver skips it. Keeps the research
+# posting workflow unchanged aside from using that title marker.
+on:
+  issues:
+    types: [opened, edited, reopened]
+  workflow_dispatch:
+    inputs:
+      backfill:
+        description: "Also label all open issues whose titles contain [RESEARCH]"
+        required: false
+        default: "true"
+
+permissions:
+  issues: write
+
+jobs:
+  label-research:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Apply research label
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          BACKFILL: ${{ github.event_name == 'workflow_dispatch' && inputs.backfill || 'false' }}
+        run: |
+          python scripts/label_research_issues.py \
+            --repo "$REPO" \
+            --event-name "$EVENT_NAME" \
+            --issue-number "${ISSUE_NUMBER:-}" \
+            --issue-title "${ISSUE_TITLE:-}" \
+            --backfill "$BACKFILL"

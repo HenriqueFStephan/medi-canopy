@@ -30,6 +30,9 @@ MAX_LAUNCH_ATTEMPTS = 5
 MAX_RETRY_WAIT_SECONDS = 180
 DEFAULT_RETRY_WAIT_SECONDS = 60
 LAUNCH_SPACING_SECONDS = 60
+SKIP_LABELS = frozenset({"research", "[research]"})
+RESEARCH_TITLE_MARKER = "[research]"
+RESEARCH_LABEL = "research"
 
 
 @dataclass
@@ -151,34 +154,113 @@ def _http_json(
         raise ApiError(f"{method} {url} failed: {exc.reason}", retryable=True) from exc
 
 
+def skip_reason(issue: Issue) -> str | None:
+    """Research notes are tracked as issues for the team, not as coding work."""
+    labels = {label.strip().lower() for label in issue.labels}
+    matched = labels & SKIP_LABELS
+    if matched:
+        return f"label {sorted(matched)[0]}"
+    if RESEARCH_TITLE_MARKER in issue.title.lower():
+        return "title marker [RESEARCH]"
+    return None
+
+
+def ensure_research_label(repo: str, headers: dict[str, str]) -> None:
+    url = f"{GITHUB_API_BASE}/repos/{repo}/labels/{urllib.parse.quote(RESEARCH_LABEL)}"
+    try:
+        _http_json("GET", url, headers=headers)
+        return
+    except ApiError as exc:
+        if exc.status != 404:
+            raise
+    _http_json(
+        "POST",
+        f"{GITHUB_API_BASE}/repos/{repo}/labels",
+        headers=headers,
+        payload={
+            "name": RESEARCH_LABEL,
+            "color": "0E8A16",
+            "description": "Research note for the team — not a coding task for the issue solver",
+        },
+    )
+    log(f"Created label `{RESEARCH_LABEL}`.")
+
+
+def stamp_research_label(repo: str, issue: Issue, headers: dict[str, str]) -> None:
+    """Promote a [RESEARCH] title marker into the durable `research` label."""
+    if RESEARCH_LABEL in {label.strip().lower() for label in issue.labels}:
+        return
+    if RESEARCH_TITLE_MARKER not in issue.title.lower():
+        return
+    try:
+        ensure_research_label(repo, headers)
+        _http_json(
+            "POST",
+            f"{GITHUB_API_BASE}/repos/{repo}/issues/{issue.number}/labels",
+            headers=headers,
+            payload={"labels": [RESEARCH_LABEL]},
+        )
+        log(f"Stamped `{RESEARCH_LABEL}` on issue #{issue.number}.")
+    except ApiError as exc:
+        log(f"Could not stamp `{RESEARCH_LABEL}` on issue #{issue.number}: {exc}", error=True)
+
+
 def fetch_open_issues(repo: str, github_token: str, limit: int) -> list[Issue]:
-    query = urllib.parse.urlencode({"state": "open", "per_page": str(min(max(limit, 1), 100))})
-    url = f"{GITHUB_API_BASE}/repos/{repo}/issues?{query}"
     headers = {
         "Accept": "application/vnd.github+json",
         "Authorization": f"Bearer {github_token}",
         "X-GitHub-Api-Version": "2022-11-28",
     }
-    result = _http_json("GET", url, headers=headers)
-    if not isinstance(result, list):
-        raise ApiError(f"Unexpected GitHub response for issues: {type(result)}")
-
     issues: list[Issue] = []
-    for item in result:
-        # GitHub issues endpoint also returns PRs; skip those.
-        if "pull_request" in item:
-            continue
-        issues.append(
-            Issue(
+    skipped = 0
+    page = 1
+    while len(issues) < limit:
+        query = urllib.parse.urlencode(
+            {
+                "state": "open",
+                "per_page": "100",
+                "page": str(page),
+                "sort": "created",
+                "direction": "asc",
+            }
+        )
+        url = f"{GITHUB_API_BASE}/repos/{repo}/issues?{query}"
+        result = _http_json("GET", url, headers=headers)
+        if not isinstance(result, list):
+            raise ApiError(f"Unexpected GitHub response for issues: {type(result)}")
+        if not result:
+            break
+
+        page_items = 0
+        for item in result:
+            page_items += 1
+            # GitHub issues endpoint also returns PRs; skip those.
+            if "pull_request" in item:
+                continue
+            issue = Issue(
                 number=int(item["number"]),
                 title=item.get("title", "").strip(),
                 body=(item.get("body") or "").strip(),
                 html_url=item.get("html_url", ""),
                 labels=[label.get("name", "") for label in item.get("labels", []) if isinstance(label, dict)],
             )
-        )
-        if len(issues) >= limit:
+            reason = skip_reason(issue)
+            if reason:
+                skipped += 1
+                log(f"Skipping issue #{issue.number} ({reason}): {issue.title}")
+                if "title marker" in reason:
+                    stamp_research_label(repo, issue, headers)
+                continue
+            issues.append(issue)
+            if len(issues) >= limit:
+                break
+
+        if page_items < 100:
             break
+        page += 1
+
+    if skipped:
+        log(f"Skipped {skipped} research/note issue(s).")
     return issues
 
 

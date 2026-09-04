@@ -1,10 +1,11 @@
-name: Daily Cannabis Research
+name: Weekly Cannabis Research
 
-run-name: Daily Cannabis research${{ inputs.date && format(' ({0})', inputs.date) || '' }}
+run-name: Weekly Cannabis research${{ inputs.date && format(' ({0})', inputs.date) || '' }}
 
 on:
   schedule:
-    - cron: "30 6 * * *"
+    # Mondays 06:30 UTC
+    - cron: "30 6 * * 1"
   workflow_dispatch:
     inputs:
       date:
@@ -23,8 +24,16 @@ on:
         description: "Minimum reliability confidence (0-1)"
         required: false
         default: "0.7"
+      cleanup_older_than_days:
+        description: "Close research digests older than this many days (0 disables)"
+        required: false
+        default: "30"
+      cleanup_only:
+        description: "If true, only close stale research issues (no new digest)"
+        required: false
+        default: "false"
       dry_run:
-        description: "If true, print the prompt without calling Cursor"
+        description: "If true, print planned actions without calling Cursor / closing issues"
         required: false
         default: "false"
 
@@ -33,7 +42,7 @@ permissions:
   issues: write
 
 concurrency:
-  group: daily-cannabis-research
+  group: weekly-cannabis-research
   cancel-in-progress: false
 
 jobs:
@@ -60,12 +69,16 @@ jobs:
             MODEL="${{ inputs.model }}"
             MAX_PAPERS="${{ inputs.max_papers }}"
             MIN_CONFIDENCE="${{ inputs.min_confidence }}"
+            CLEANUP_DAYS="${{ inputs.cleanup_older_than_days }}"
+            CLEANUP_ONLY="${{ inputs.cleanup_only }}"
             DRY_RUN="${{ inputs.dry_run }}"
           else
             DATE=""
             MODEL="composer-2.5"
             MAX_PAPERS="12"
             MIN_CONFIDENCE="0.7"
+            CLEANUP_DAYS="30"
+            CLEANUP_ONLY="false"
             DRY_RUN="false"
           fi
 
@@ -77,6 +90,8 @@ jobs:
           echo "model=$MODEL" >> "$GITHUB_OUTPUT"
           echo "max_papers=$MAX_PAPERS" >> "$GITHUB_OUTPUT"
           echo "min_confidence=$MIN_CONFIDENCE" >> "$GITHUB_OUTPUT"
+          echo "cleanup_older_than_days=$CLEANUP_DAYS" >> "$GITHUB_OUTPUT"
+          echo "cleanup_only=$CLEANUP_ONLY" >> "$GITHUB_OUTPUT"
           echo "dry_run=$DRY_RUN" >> "$GITHUB_OUTPUT"
 
       - name: Gather peer-reviewed cannabis research
@@ -87,7 +102,10 @@ jobs:
         run: |
           EXTRA_FLAGS=""
           if [ "${{ steps.params.outputs.dry_run }}" = "true" ]; then
-            EXTRA_FLAGS="--dry-run"
+            EXTRA_FLAGS="$EXTRA_FLAGS --dry-run"
+          fi
+          if [ "${{ steps.params.outputs.cleanup_only }}" = "true" ]; then
+            EXTRA_FLAGS="$EXTRA_FLAGS --cleanup-only"
           fi
 
           python scripts/run_daily_cannabis_research.py \
@@ -98,14 +116,15 @@ jobs:
             --model "${{ steps.params.outputs.model }}" \
             --max-papers "${{ steps.params.outputs.max_papers }}" \
             --min-confidence "${{ steps.params.outputs.min_confidence }}" \
+            --cleanup-older-than-days "${{ steps.params.outputs.cleanup_older_than_days }}" \
             --output-dir "agents/output/daily_cannabis" \
             $EXTRA_FLAGS
 
       - name: Upload report
-        if: always() && steps.params.outputs.dry_run != 'true'
+        if: always() && steps.params.outputs.dry_run != 'true' && steps.params.outputs.cleanup_only != 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: daily-cannabis-${{ steps.params.outputs.date }}
+          name: weekly-cannabis-${{ steps.params.outputs.date }}
           path: agents/output/daily_cannabis/
           if-no-files-found: warn
           retention-days: 90

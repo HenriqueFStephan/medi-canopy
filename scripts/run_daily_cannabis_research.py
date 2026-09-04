@@ -20,7 +20,7 @@ import textwrap
 import time
 import urllib.parse
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -44,6 +44,9 @@ DEFAULT_MIN_CONFIDENCE = 0.7
 DEFAULT_MAX_PAPERS = 12
 DEFAULT_POLL_INTERVAL_SECONDS = 30
 DEFAULT_TIMEOUT_SECONDS = 3600
+DEFAULT_CLEANUP_OLDER_THAN_DAYS = 30
+RESEARCH_CLEANUP_LABELS = frozenset({"research", "daily-cannabis"})
+RESEARCH_CLEANUP_TITLE_MARKERS = ("[research]", "daily cannabis")
 
 TERMINAL_STATUSES = {"FINISHED", "ERROR", "CANCELLED", "EXPIRED"}
 
@@ -627,6 +630,107 @@ def publish_issue(
     return url
 
 
+def _parse_github_datetime(value: str) -> datetime | None:
+    raw = (value or "").strip()
+    if not raw:
+        return None
+    try:
+        return datetime.fromisoformat(raw.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def is_research_digest_issue(item: dict[str, Any]) -> bool:
+    labels = {
+        str(label.get("name") or "").strip().lower()
+        for label in item.get("labels", [])
+        if isinstance(label, dict)
+    }
+    if labels & RESEARCH_CLEANUP_LABELS:
+        return True
+    title = str(item.get("title") or "").lower()
+    return any(marker in title for marker in RESEARCH_CLEANUP_TITLE_MARKERS)
+
+
+def close_stale_research_issues(
+    *,
+    repo: str,
+    github_token: str,
+    older_than_days: int,
+    dry_run: bool = False,
+) -> int:
+    """Close open research digests older than the retention window. Returns closed count."""
+    if older_than_days < 1:
+        raise ValueError("older_than_days must be >= 1")
+
+    cutoff = datetime.now(timezone.utc) - timedelta(days=older_than_days)
+    headers = _github_headers(github_token)
+    closed = 0
+    page = 1
+
+    while True:
+        query = urllib.parse.urlencode(
+            {
+                "state": "open",
+                "per_page": "100",
+                "page": str(page),
+                "sort": "created",
+                "direction": "asc",
+            }
+        )
+        result = _http_json(
+            "GET",
+            f"{GITHUB_API_BASE}/repos/{repo}/issues?{query}",
+            headers=headers,
+        )
+        if not isinstance(result, list) or not result:
+            break
+
+        for item in result:
+            if not isinstance(item, dict) or "pull_request" in item:
+                continue
+            if not is_research_digest_issue(item):
+                continue
+            created = _parse_github_datetime(str(item.get("created_at") or ""))
+            if created is None or created > cutoff:
+                continue
+
+            number = int(item["number"])
+            title = str(item.get("title") or "").strip()
+            age_days = (datetime.now(timezone.utc) - created).days
+            if dry_run:
+                log(f"[DRY RUN] Would close stale research issue #{number} ({age_days}d): {title}")
+                closed += 1
+                continue
+
+            comment = (
+                f"Auto-closed: this research digest is older than {older_than_days} days "
+                f"(created {created.date().isoformat()}, ~{age_days} days ago). "
+                "Weekly research retention keeps the issue list focused on recent digests."
+            )
+            _http_json(
+                "POST",
+                f"{GITHUB_API_BASE}/repos/{repo}/issues/{number}/comments",
+                headers=headers,
+                payload={"body": comment},
+            )
+            _http_json(
+                "PATCH",
+                f"{GITHUB_API_BASE}/repos/{repo}/issues/{number}",
+                headers=headers,
+                payload={"state": "closed", "state_reason": "not_planned"},
+            )
+            log(f"Closed stale research issue #{number} ({age_days}d): {title}")
+            closed += 1
+
+        if len(result) < 100:
+            break
+        page += 1
+
+    log(f"Stale research cleanup: closed {closed} issue(s) older than {older_than_days} day(s).")
+    return closed
+
+
 def write_outputs(
     *,
     date_str: str,
@@ -732,6 +836,17 @@ def main() -> int:
         action="store_true",
         help="Skip GitHub issue creation and only write the report files",
     )
+    parser.add_argument(
+        "--cleanup-older-than-days",
+        type=int,
+        default=DEFAULT_CLEANUP_OLDER_THAN_DAYS,
+        help="Close open research digests older than this many days (0 disables cleanup)",
+    )
+    parser.add_argument(
+        "--cleanup-only",
+        action="store_true",
+        help="Only close stale research issues; skip research gathering",
+    )
     parser.add_argument("--dry-run", action="store_true", help="Print the prompt and exit")
     args = parser.parse_args()
 
@@ -739,6 +854,32 @@ def main() -> int:
 
     date_str = utc_date(args.date)
     output_dir = Path(args.output_dir) if args.output_dir else None
+
+    if args.cleanup_older_than_days < 0:
+        log("--cleanup-older-than-days must be >= 0", error=True)
+        return 2
+
+    github_token = os.environ.get("GITHUB_TOKEN")
+    if args.cleanup_older_than_days > 0:
+        if not args.repo:
+            log("--repo is required for research issue cleanup", error=True)
+            return 2
+        if not github_token:
+            log("Missing required env var: GITHUB_TOKEN (needed to close stale issues)", error=True)
+            return 2
+        try:
+            close_stale_research_issues(
+                repo=args.repo,
+                github_token=github_token,
+                older_than_days=args.cleanup_older_than_days,
+                dry_run=args.dry_run,
+            )
+        except (ApiError, ValueError) as exc:
+            log(f"Stale research cleanup failed: {exc}", error=True)
+            return 1
+
+    if args.cleanup_only:
+        return 0
 
     if args.dry_run:
         log(f"[DRY RUN] Would launch agent 'Daily Cannabis {date_str}' with prompt:\n")

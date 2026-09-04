@@ -13,8 +13,10 @@ dist/
 debt.txt
 *.local
 
-# Data & logs
-backend/data/
+# Data & logs — keep demo seed in git so deploys have content
+backend/data/*
+!backend/data/seed/
+!backend/data/seed/**
 *.db
 *.log
 agents/output/

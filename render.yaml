@@ -20,4 +20,4 @@ services:
       - key: LLM_PROVIDER
         value: placeholder
       - key: FRONTEND_URL
-        value: https://REPLACE-WITH-NETLIFY-URL.netlify.app
+        value: https://findaname.netlify.app

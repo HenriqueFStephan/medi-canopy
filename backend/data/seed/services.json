@@ -1,0 +1,46 @@
+[
+  {
+    "id": "svc-design",
+    "title": "Projeto de Instalação",
+    "description": "Layout de galpão, fluxos de trabalho, salas limpas e especificações para construtoras — do conceito à planta executiva.",
+    "icon": "blueprint",
+    "highlights": [
+      "Dimensionamento de áreas vegetativo/floração",
+      "Integração com arquitetura e engenharia civil",
+      "Documentação para licenciamento"
+    ]
+  },
+  {
+    "id": "svc-climate",
+    "title": "Engenharia de Climatização",
+    "description": "Sistemas autônomos de HVAC, dehumidificação e controle ambiental com redundância para operação 24/7.",
+    "icon": "climate",
+    "highlights": [
+      "Projeto de VPD e setpoints por fase",
+      "Automação e alarmes",
+      "Manutenção preventiva"
+    ]
+  },
+  {
+    "id": "svc-cultivation",
+    "title": "Cultivo e Manejo",
+    "description": "Do clone à colheita: protocolos de nutrição, IPM e treinamento de equipes em campo.",
+    "icon": "plant",
+    "highlights": [
+      "Padronização de lotes",
+      "Diário de cultivo digital",
+      "Otimização de yield e qualidade"
+    ]
+  },
+  {
+    "id": "svc-business",
+    "title": "Ciclo Completo do Negócio",
+    "description": "Consultoria ponta a ponta — inspirada em projetos como [4trees](https://4treesbuilding.ca/projects): da concepção à operação comercial.",
+    "icon": "cycle",
+    "highlights": [
+      "Planejamento financeiro e CapEx",
+      "Compliance e relacionamento regulatório",
+      "Treinamento de Master Grower"
+    ]
+  }
+]

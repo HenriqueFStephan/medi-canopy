@@ -1,0 +1,47 @@
+[
+  {
+    "id": "blog-ig-001",
+    "title": "Do projeto à colheita: o ciclo completo em uma instalação indoor",
+    "slug": "ciclo-completo-instalacao-indoor",
+    "excerpt": "Compartilhando aprendizados do planejamento do galpão ao primeiro harvest — climatização autônoma, VPD e fluxo de trabalho.",
+    "content_markdown": "# Do projeto à colheita\n\nNos últimos meses documentei no Instagram [@papiroebers](https://www.instagram.com/papiroebers) cada etapa de um projeto real: layout do galpão, engenharia do sistema climático, escolha de cultivares e rotina de manejo.\n\n## Planejamento\n\nAntes da primeira planta, definimos zonas de vegetação e floração, redundância em HVAC e monitoramento 24/7.\n\n## Operação\n\nManutenção preventiva e registros de ambiente (temperatura, UR, CO₂) foram decisivos para consistência entre lotes.\n\n---\n*Conteúdo originalmente publicado no Instagram — curadoria CanaHub.*",
+    "tags": ["cultivation", "consulting", "brazil"],
+    "source_type": "instagram",
+    "cover_image_url": null,
+    "instagram_url": "https://www.instagram.com/papiroebers",
+    "citation": null,
+    "author_name": "Papi Ro Ebers",
+    "published_at": "2026-06-10T16:00:00",
+    "updated_at": "2026-06-10T16:00:00"
+  },
+  {
+    "id": "blog-ig-002",
+    "title": "Regulamentação no Brasil: o que mudou para cultivadores em 2026",
+    "slug": "regulamentacao-brasil-2026",
+    "excerpt": "Panorama político e regulatório com foco prático para quem opera ou planeja entrar no mercado legal brasileiro.",
+    "content_markdown": "# Regulamentação no Brasil\n\nO cenário regulatório continua em evolução. Neste post reúno pontos que discuti com operadores e seguidores no Instagram.\n\n- Marco do cânhamo industrial vs. cannabis medicinal\n- Papel da ANVISA e exigências de rastreabilidade\n- Oportunidades para consultoria técnica de ponta a ponta\n\nAcompanhe também as notícias curadas na seção **News** deste hub.\n\n---\n*Siga [@papiroebers](https://www.instagram.com/papiroebers) para atualizações em tempo real.*",
+    "tags": ["policy", "brazil"],
+    "source_type": "instagram",
+    "cover_image_url": null,
+    "instagram_url": "https://www.instagram.com/papiroebers",
+    "citation": null,
+    "author_name": "Papi Ro Ebers",
+    "published_at": "2026-06-05T11:30:00",
+    "updated_at": "2026-06-05T11:30:00"
+  },
+  {
+    "id": "blog-ig-003",
+    "title": "Benefícios medicinais: separando evidência de moda",
+    "slug": "beneficios-medicinais-evidencia",
+    "excerpt": "Como avaliar estudos sobre CBD e THC sem cair em hype — guia rápido para leitores e pacientes.",
+    "content_markdown": "# Benefícios medicinais: evidência vs. moda\n\nCannabis medicinal merece rigor. Quando compartilho conteúdo no Instagram, priorizo:\n\n1. **Fonte primária** — artigo original, não só manchete\n2. **Desenho do estudo** — RCT vs. observacional\n3. **Conflito de interesse** — quem financiou?\n\nO agente de pesquisa deste site envia papers diariamente para minha revisão por e-mail. Só o que passa por essa triagem vira post formal aqui no blog.\n\n---\n*Curadoria humana é inegociável para saúde pública.*",
+    "tags": ["medical", "research"],
+    "source_type": "instagram",
+    "cover_image_url": null,
+    "instagram_url": "https://www.instagram.com/papiroebers",
+    "citation": null,
+    "author_name": "Papi Ro Ebers",
+    "published_at": "2026-05-28T09:15:00",
+    "updated_at": "2026-05-28T09:15:00"
+  }
+]

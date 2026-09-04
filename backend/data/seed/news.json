@@ -1,0 +1,41 @@
+[
+  {
+    "id": "news-001",
+    "title": "ANVISA atualiza orientações sobre produtos de cannabis medicinal",
+    "summary": "Novas diretrizes reforçam rastreabilidade e controle de qualidade para importadores e fabricantes no Brasil.",
+    "content": "A ANVISA publicou atualização nas normas de registro e fiscalização de produtos à base de cannabis para fins medicinais. O foco está em garantir cadeia de custódia documentada, laudos analíticos por lote e transparência para prescritores e pacientes.\n\nPara operadores, isso significa revisar procedimentos de importação, armazenamento e dispensação. Consultores com experiência em compliance podem apoiar a adequação sem interromper o atendimento.",
+    "source_url": "https://www.gov.br/anvisa",
+    "source_name": "ANVISA / Gov.br",
+    "region": "BR",
+    "tags": ["policy", "medical", "brazil"],
+    "status": "approved",
+    "published_at": "2026-06-20T10:00:00",
+    "created_at": "2026-06-20T10:00:00"
+  },
+  {
+    "id": "news-002",
+    "title": "Mercado global de cânhamo industrial projeta crescimento em têxteis sustentáveis",
+    "summary": "Fibras de cânhamo ganham espaço em moda e construção civil por baixa pegada hídrica e alta durabilidade.",
+    "content": "Relatórios de mercado apontam expansão do uso de cânhamo em têxteis técnicos e materiais compósitos. Empresas europeias e norte-americanas investem em cadeias locais de beneficiamento.\n\nNo Brasil, o marco regulatório do cânhamo industrial abre oportunidade para pilotos em cooperativas e indústria têxtil, desde que a rastreabilidade genética e o teor de THC estejam em conformidade.",
+    "source_url": "https://example.com/hemp-textiles",
+    "source_name": "Industry Report (placeholder)",
+    "region": "global",
+    "tags": ["textile", "market"],
+    "status": "approved",
+    "published_at": "2026-06-18T14:30:00",
+    "created_at": "2026-06-18T14:30:00"
+  },
+  {
+    "id": "news-003",
+    "title": "Estudo observacional reforça necessidade de padronização de doses em CBD",
+    "summary": "Pesquisa internacional destaca variabilidade entre formulações e a importância de acompanhamento médico.",
+    "content": "Um estudo observacional publicado em periódico indexado analisou coortes de pacientes em uso de CBD para condições neurológicas. Os autores enfatizam que concentrações declaradas nem sempre correspondem ao conteúdo real e pedem maior rigor analítico.\n\nO achado reforça a tese de que hubs de informação confiável — com curadoria humana — são essenciais para pacientes e profissionais no Brasil.",
+    "source_url": "https://example.com/cbd-study",
+    "source_name": "PubMed (placeholder)",
+    "region": "global",
+    "tags": ["medical", "research"],
+    "status": "approved",
+    "published_at": "2026-06-15T09:00:00",
+    "created_at": "2026-06-15T09:00:00"
+  }
+]

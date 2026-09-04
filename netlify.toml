@@ -1,5 +1,6 @@
 # Netlify — https://app.netlify.com
-# Set env var NG_APP_API_URL before first build (see docs/DEPLOY.md)
+# NG_APP_API_URL is baked here so production builds hit the Render API
+# even if the dashboard env var was never set.
 
 [build]
   base = "frontend"
@@ -8,6 +9,7 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  NG_APP_API_URL = "https://cannahub-api.onrender.com/api/v1"
 
 # Static design preview — served as-is, do NOT redirect to Angular
 [[redirects]]

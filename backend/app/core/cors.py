@@ -7,10 +7,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import get_settings
 
 
+# Live frontend origin. Kept in code so CORS works even if Render env vars
+# were never updated from the blueprint placeholder.
+LIVE_FRONTEND_ORIGINS = (
+    "https://findaname.netlify.app",
+)
+
+
 def configure_cors(app) -> None:
     """Attach CORS middleware allowing the configured frontend origin(s)."""
     settings = get_settings()
-    origins = [settings.frontend_url, "http://localhost:4200"]
+    origins = [settings.frontend_url, "http://localhost:4200", *LIVE_FRONTEND_ORIGINS]
 
     extra = os.getenv("CORS_EXTRA_ORIGINS", "")
     if extra:

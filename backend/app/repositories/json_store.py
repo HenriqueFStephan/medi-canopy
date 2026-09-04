@@ -30,10 +30,21 @@ class JsonStore:
         self.path = path
         self.seed_path = seed_path
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        if not self.path.exists() and seed_path and seed_path.exists():
-            self.path.write_text(seed_path.read_text(encoding="utf-8"), encoding="utf-8")
+        if self._should_seed() and self.seed_path is not None:
+            self.path.write_text(self.seed_path.read_text(encoding="utf-8"), encoding="utf-8")
         elif not self.path.exists():
             self.path.write_text("[]", encoding="utf-8")
+
+    def _should_seed(self) -> bool:
+        """Copy seed when the store is missing or still an empty list."""
+        if not self.seed_path or not self.seed_path.exists():
+            return False
+        if not self.path.exists():
+            return True
+        try:
+            return json.loads(self.path.read_text(encoding="utf-8")) == []
+        except (json.JSONDecodeError, OSError):
+            return True
 
     def read_all(self) -> list[dict[str, Any]]:
         return json.loads(self.path.read_text(encoding="utf-8"))

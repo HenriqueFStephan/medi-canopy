@@ -1,0 +1,53 @@
+[
+  {
+    "id": "course-001",
+    "title": "Fundamentos de Cultivo Indoor Profissional",
+    "slug": "fundamentos-cultivo-indoor",
+    "description": "Do zero ao primeiro ciclo: ambiente controlado, nutrição, manejo integrado de pragas e documentação para compliance. Curso completo em desenvolvimento.",
+    "level": "iniciante",
+    "price_display": "Em breve",
+    "cover_image_url": null,
+    "coming_soon": true,
+    "published": true,
+    "modules": [
+      {
+        "title": "Módulo 1 — Ambiente e climatização",
+        "description": "VPD, HVAC, sensores e redundância.",
+        "duration_minutes": 90
+      },
+      {
+        "title": "Módulo 2 — Propagação e vegetativo",
+        "description": "Métodos, espaçamento e registro fenológico.",
+        "duration_minutes": 120
+      },
+      {
+        "title": "Módulo 3 — Floração e colheita",
+        "description": "Triggers, secagem e cura com controle de qualidade.",
+        "duration_minutes": 120
+      }
+    ]
+  },
+  {
+    "id": "course-002",
+    "title": "Compliance e Operações no Mercado Brasileiro",
+    "slug": "compliance-operacoes-brasil",
+    "description": "ANVISA, rastreabilidade, importação e boas práticas para operadores e consultores.",
+    "level": "intermediário",
+    "price_display": "Em breve",
+    "cover_image_url": null,
+    "coming_soon": true,
+    "published": true,
+    "modules": [
+      {
+        "title": "Módulo 1 — Panorama regulatório",
+        "description": "Medicinal, industrial e perspectivas legislativas.",
+        "duration_minutes": 60
+      },
+      {
+        "title": "Módulo 2 — Documentação e auditoria",
+        "description": "SOPs, lotes e preparação para inspeção.",
+        "duration_minutes": 90
+      }
+    ]
+  }
+]

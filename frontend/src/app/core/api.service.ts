@@ -13,7 +13,7 @@ import {
 } from './models';
 
 /**
- * HTTP client for CanaHub FastAPI backend.
+ * HTTP client for Medi Canopy FastAPI backend.
  * All endpoints are versioned under /api/v1.
  */
 @Injectable({ providedIn: 'root' })

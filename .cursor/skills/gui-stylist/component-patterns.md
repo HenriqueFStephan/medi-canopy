@@ -1,6 +1,6 @@
 # Component Styling Patterns
 
-Reusable SCSS patterns for CanaHub Angular components.
+Reusable SCSS patterns for Medi Canopy Angular components.
 
 ---
 

@@ -1,1 +1,1 @@
-"""CanaHub scheduled agents package."""
+"""Medi Canopy scheduled agents package."""

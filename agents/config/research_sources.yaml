@@ -23,5 +23,5 @@ apis:
     base_url: https://api.openalex.org
 
 email_digest:
-  subject_template: "[CanaHub] Pesquisas para revisão — {date}"
+  subject_template: "[Medi Canopy] Pesquisas para revisão — {date}"
   max_papers_per_email: 15

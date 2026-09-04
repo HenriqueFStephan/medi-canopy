@@ -1,7 +1,7 @@
 ---
 name: run-research-agent
 description: >-
-  Runs the CanaHub research agent for scientific papers, email digest placeholders,
+  Runs the Medi Canopy research agent for scientific papers, email digest placeholders,
   and PaperNormalizer blog conversion. Use for scholarly content pipeline work.
 ---
 

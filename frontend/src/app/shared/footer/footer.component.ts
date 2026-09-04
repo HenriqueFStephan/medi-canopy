@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
   template: `
     <footer class="footer">
       <div class="container">
-        <p>&copy; {{ year }} CanaHub · Informação confiável sobre cannabis</p>
+        <p>&copy; {{ year }} {{ siteName }} · Informação confiável sobre cannabis</p>
         <p>
           <a routerLink="/news">Notícias</a>
           ·
@@ -26,5 +26,6 @@ import { environment } from '../../../environments/environment';
 })
 export class FooterComponent {
   readonly year = new Date().getFullYear();
+  readonly siteName = environment.siteName;
   readonly instagramUrl = environment.instagramUrl;
 }

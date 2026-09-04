@@ -20,7 +20,7 @@ export const environment = {
   production: true,
   apiUrl: '${apiUrl.replace(/'/g, "\\'")}',
   instagramUrl: 'https://www.instagram.com/papiroebers',
-  siteName: 'CanaHub',
+  siteName: 'Medi Canopy',
 };
 `;
 

@@ -1,11 +1,11 @@
 ---
 name: project-navigation
 description: >-
-  Navigates the CanaHub monorepo (Angular frontend, FastAPI backend, agents).
+  Navigates the Medi Canopy monorepo (Angular frontend, FastAPI backend, agents).
   Use when exploring Site_Biel, finding modules, or understanding architecture.
 ---
 
-# CanaHub Project Navigation
+# Medi Canopy Project Navigation
 
 ## Layout
 

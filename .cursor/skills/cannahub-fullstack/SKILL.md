@@ -1,11 +1,11 @@
 ---
 name: cannahub-fullstack
 description: >-
-  Implements features in CanaHub following Angular + FastAPI conventions.
+  Implements features in Medi Canopy following Angular + FastAPI conventions.
   Use when adding API endpoints, frontend pages, or cross-stack features.
 ---
 
-# CanaHub Full-Stack Development
+# Medi Canopy Full-Stack Development
 
 ## Backend (FastAPI)
 

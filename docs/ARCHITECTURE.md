@@ -1,8 +1,8 @@
-# Architecture — CanaHub
+# Architecture — Medi Canopy
 
 ## Vision
 
-CanaHub is an information hub for the cannabis ecosystem: market news, medical research, policy (Brazil-first, global coverage), courses, and end-to-end cultivation consulting. Content from automated agents is **never published directly** — it enters a review queue or email digest for the author.
+Medi Canopy is an information hub for the cannabis ecosystem: market news, medical research, policy (Brazil-first, global coverage), courses, and end-to-end cultivation consulting. Content from automated agents is **never published directly** — it enters a review queue or email digest for the author.
 
 ## High-Level Diagram
 

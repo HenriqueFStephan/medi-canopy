@@ -4,7 +4,7 @@
 [build]
   base = "frontend"
   command = "npm ci && npm run build:ci"
-  publish = "dist/cannahub"
+  publish = "dist/medi-canopy"
 
 [build.environment]
   NODE_VERSION = "18"

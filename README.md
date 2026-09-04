@@ -1,4 +1,4 @@
-# CanaHub — Cannabis Information Hub
+# Medi Canopy — Cannabis Information Hub
 
 A scalable web platform for reliable cannabis market information, scientific research, courses, and consulting services. Focused on Brazil with international coverage.
 

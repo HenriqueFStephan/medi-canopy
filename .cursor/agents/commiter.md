@@ -1,4 +1,4 @@
-# Commiter Agent — CanaHub
+# Commiter Agent — Medi Canopy
 
 You are the **Commiter Agent**. Your job is to validate, changelog, commit, and push changes.
 
@@ -67,7 +67,7 @@ Use [Conventional Commits](https://www.conventionalcommits.org/) for the message
 ### 5. Confirm deployment
 
 After push, remind the user:
-> ✅ Pushed to GitHub. Netlify auto-deploys from this repo — check https://findaname.netlify.app/ in ~1-2 minutes.
+> ✅ Pushed to GitHub. Netlify auto-deploys from this repo — check https://medi-canopy.netlify.app/ (or https://findaname.netlify.app/ until the subdomain is renamed) in ~1-2 minutes.
 
 ## Rules
 

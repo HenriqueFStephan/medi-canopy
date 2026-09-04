@@ -1,4 +1,4 @@
-# Agent System — CanaHub
+# Agent System — Medi Canopy
 
 ## Overview
 

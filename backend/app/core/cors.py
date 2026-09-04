@@ -10,6 +10,7 @@ from app.core.config import get_settings
 # Live frontend origin. Kept in code so CORS works even if Render env vars
 # were never updated from the blueprint placeholder.
 LIVE_FRONTEND_ORIGINS = (
+    "https://medi-canopy.netlify.app",
     "https://findaname.netlify.app",
 )
 

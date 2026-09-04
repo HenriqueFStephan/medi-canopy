@@ -1,4 +1,4 @@
-# Deploy CanaHub — step-by-step (you do this; ~15 minutes)
+# Deploy Medi Canopy — step-by-step (you do this; ~15 minutes)
 
 I **cannot** log into GitHub, Render, or Netlify on your machine. Follow these steps exactly.
 
@@ -9,7 +9,7 @@ I **cannot** log into GitHub, Render, or Netlify on your machine. Follow these s
 ### 0a. Create repo on GitHub
 
 1. Open **https://github.com/new**
-2. Repository name: `cannahub` (or `Site_Biel`)
+2. Repository name: `medi-canopy` (or `Site_Biel`)
 3. **Private** or Public — your choice
 4. Do **not** add README (we already have one)
 5. Click **Create repository**
@@ -21,14 +21,14 @@ cd "c:\Users\henri\OneDrive\Área de Trabalho\Leisure\VSC\Site_Biel"
 
 git init
 git add .
-git commit -m "Initial CanaHub demo — frontend, backend, deploy config"
+git commit -m "Initial Medi Canopy demo — frontend, backend, deploy config"
 
 git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/cannahub.git
+git remote add origin https://github.com/YOUR_USERNAME/medi-canopy.git
 git push -u origin main
 ```
 
-Replace `YOUR_USERNAME/cannahub` with your repo URL.
+Replace `YOUR_USERNAME/medi-canopy` with your repo URL.
 
 > If Git asks for login, use a **Personal Access Token** as password:  
 > GitHub → Settings → Developer settings → Personal access tokens
@@ -40,7 +40,7 @@ Replace `YOUR_USERNAME/cannahub` with your repo URL.
 1. Open **https://dashboard.render.com** → log in (or sign up with GitHub)
 2. Click **New +** → **Blueprint**
 3. Connect your GitHub account if prompted
-4. Select the **cannahub** repository
+4. Select the **medi-canopy** repository
 5. Render detects `render.yaml` → click **Apply**
 6. Wait for deploy (~3–5 min)
 7. Copy your service URL, e.g. `https://cannahub-api.onrender.com`
@@ -67,14 +67,14 @@ API docs: `https://cannahub-api.onrender.com/docs`
 
 1. Open **https://app.netlify.com** → log in (or sign up with GitHub)
 2. **Add new site** → **Import an existing project** → **GitHub**
-3. Authorize Netlify → select **cannahub** repo
+3. Authorize Netlify → select **medi-canopy** repo
 4. Netlify reads `netlify.toml` automatically. Verify:
 
    | Field | Value |
    |-------|-------|
    | Base directory | `frontend` |
    | Build command | `npm ci && npm run build:ci` |
-   | Publish directory | `frontend/dist/cannahub` |
+   | Publish directory | `frontend/dist/medi-canopy` |
 
 5. **Before deploy** → **Site configuration** → **Environment variables** → **Add variable**:
 
@@ -89,7 +89,7 @@ API docs: `https://cannahub-api.onrender.com/docs`
 
 ### Optional: rename site
 
-Netlify → **Domain management** → **Options** → change to `cannahub` → `https://cannahub.netlify.app`
+Netlify → **Domain management** → **Options** → change to `medi-canopy` → `https://medi-canopy.netlify.app`
 
 ---
 
@@ -98,7 +98,7 @@ Netlify → **Domain management** → **Options** → change to `cannahub` → `
 1. Back to **https://dashboard.render.com**
 2. Open **cannahub-api** service
 3. **Environment** → edit `FRONTEND_URL`:
-   - Set to your Netlify URL, e.g. `https://cannahub.netlify.app`
+   - Set to your Netlify URL, e.g. `https://medi-canopy.netlify.app`
    - **No trailing slash**
 4. Click **Save Changes** → Render redeploys automatically (~2 min)
 
@@ -162,7 +162,7 @@ Instagram continua em: https://www.instagram.com/papiroebers
 
 1. https://dash.cloudflare.com → **Workers & Pages** → **Create** → **Pages** → Connect Git
 2. Build command: `cd frontend && npm ci && npm run build:ci`
-3. Output: `frontend/dist/cannahub`
+3. Output: `frontend/dist/medi-canopy`
 4. Env: `NG_APP_API_URL` = your Render API + `/api/v1`
 5. Add `_redirects` or SPA rule: `/* /index.html 200`
 

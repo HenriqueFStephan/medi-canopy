@@ -1,4 +1,4 @@
-# Deliverable Report — CanaHub Phase 1 Demo
+# Deliverable Report — Medi Canopy Phase 1 Demo
 
 **Date:** 2026-06-27  
 **Project:** Site_Biel — Cannabis Information Hub
@@ -15,7 +15,7 @@ A full monorepo demo was created with:
 - **Cursor agent tooling** (skills, hooks, agent defs, MCP design)
 - **Brand identity** and documentation suite
 
-Working title: **CanaHub** — align final name with author.
+Official name: **Medi Canopy**.
 
 ---
 

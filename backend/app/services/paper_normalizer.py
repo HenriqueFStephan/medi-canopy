@@ -119,7 +119,7 @@ class ScientificPaperNormalizer:
 {paper.citation_block}
 
 ---
-*Artigo científico curado para o blog CanaHub. Consulte a fonte original antes de decisões clínicas ou regulatórias.*
+*Artigo científico curado para o blog Medi Canopy. Consulte a fonte original antes de decisões clínicas ou regulatórias.*
 """
 
         excerpt = paper.summary_pt or (paper.abstract[:280] + "…" if len(paper.abstract) > 280 else paper.abstract)

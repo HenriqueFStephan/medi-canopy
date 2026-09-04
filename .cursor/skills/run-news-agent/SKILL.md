@@ -1,7 +1,7 @@
 ---
 name: run-news-agent
 description: >-
-  Runs the CanaHub daily news agent manually, debugs output, and explains review
+  Runs the Medi Canopy daily news agent manually, debugs output, and explains review
   queue flow. Use when triggering news search, testing agents, or DevOps scheduling.
 ---
 

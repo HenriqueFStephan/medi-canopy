@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
     <header class="header">
       <div class="container header__inner">
         <a routerLink="/" class="logo">
-          <span class="logo__cana">Cana</span><span class="logo__hub">Hub</span>
+          <span class="logo__medi">Medi</span><span class="logo__canopy"> Canopy</span>
         </a>
         <nav class="nav">
           <a routerLink="/services" routerLinkActive="active">Serviços</a>

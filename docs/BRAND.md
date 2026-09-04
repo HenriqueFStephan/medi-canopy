@@ -1,10 +1,10 @@
-# Brand Identity — CanaHub
+# Brand Identity — Medi Canopy
 
 Inspired by professional cannabis consulting ([4trees](https://4treesbuilding.ca/projects), [PlantManager](https://plantmanager.com.br/)) and the author's voice on [@papiroebers](https://www.instagram.com/papiroebers).
 
 ## Name & Tagline
 
-- **Product name:** CanaHub (working title — align with author before launch)
+- **Product name:** Medi Canopy
 - **Tagline (PT):** *Informação confiável sobre cannabis — do campo à política.*
 - **Tagline (EN):** *Trusted cannabis intelligence — from cultivation to policy.*
 

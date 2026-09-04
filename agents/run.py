@@ -19,7 +19,7 @@ if str(REPO_ROOT) not in sys.path:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="CanaHub agent runner")
+    parser = argparse.ArgumentParser(description="Medi Canopy agent runner")
     parser.add_argument(
         "--agent",
         choices=["news", "research", "all"],

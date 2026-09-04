@@ -1,5 +1,5 @@
 """
-Shared Pydantic schemas for CanaHub API requests and responses.
+Shared Pydantic schemas for Medi Canopy API requests and responses.
 
 All public API contracts are defined here for consistency between
 frontend TypeScript interfaces and backend validation.

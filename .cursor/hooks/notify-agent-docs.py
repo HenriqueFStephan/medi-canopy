@@ -32,7 +32,7 @@ def main() -> int:
                 json.dumps(
                     {
                         "additional_context": (
-                            "CanaHub: After editing this path, consider updating "
+                            "Medi Canopy: After editing this path, consider updating "
                             "docs/AGENT_NAVIGATION.md if you added a new module. "
                             "See docs/ARCHITECTURE.md for patterns."
                         )

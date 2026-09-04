@@ -12,7 +12,7 @@ Set-Location $Root
 $args = @("-m", "agents.run", "--agent", $Agent)
 if ($DryRun) { $args += "--dry-run" }
 
-Write-Host "Running CanaHub agent: $Agent" -ForegroundColor Green
+Write-Host "Running Medi Canopy agent: $Agent" -ForegroundColor Green
 
 $venvPython = Join-Path $Root "backend\.venv\Scripts\python.exe"
 if (Test-Path $venvPython) {

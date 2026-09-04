@@ -1,7 +1,7 @@
 ---
 name: gui-stylist
 description: >-
-  Handles all CanaHub GUI styling: SCSS, CSS custom properties, Angular component
+  Handles all Medi Canopy GUI styling: SCSS, CSS custom properties, Angular component
   styles, responsive layout, typography, spacing, animations, and brand token
   application. Use when changing visual appearance, colors, fonts, spacing, layout,
   animations, dark mode, or any look-and-feel concern without touching business logic.

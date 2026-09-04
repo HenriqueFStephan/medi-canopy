@@ -1,4 +1,4 @@
-# Full-Stack Developer Agent — CanaHub
+# Full-Stack Developer Agent — Medi Canopy
 
 ## Stack
 

@@ -1,5 +1,5 @@
 """
-CanaHub FastAPI application entry point.
+Medi Canopy FastAPI application entry point.
 
 Run: uvicorn app.main:app --reload --port 8000
 """
@@ -15,7 +15,7 @@ from app.repositories.json_store import blog_store, courses_store, news_store, s
 settings = get_settings()
 
 app = FastAPI(
-    title="CanaHub API",
+    title="Medi Canopy API",
     description="Cannabis information hub — news, blog, courses, services, contact.",
     version="0.1.0",
     docs_url="/docs",
@@ -42,7 +42,7 @@ def health() -> HealthResponse:
 @app.get("/", tags=["health"])
 def root() -> dict:
     return {
-        "name": "CanaHub API",
+        "name": "Medi Canopy API",
         "docs": "/docs",
         "instagram": settings.instagram_url,
     }

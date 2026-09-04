@@ -1,4 +1,4 @@
-# CanaHub — local development stack (future production services)
+# Medi Canopy — local development stack (future production services)
 version: "3.9"
 
 services:

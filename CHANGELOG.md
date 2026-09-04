@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to CanaHub will be documented in this file.
+All notable changes to Medi Canopy will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Conventional Commits](https://www.conventionalcommits.org/).
@@ -8,6 +8,7 @@ and this project adheres to [Conventional Commits](https://www.conventionalcommi
 ## [Unreleased]
 
 ### Changed
+- Official product name is now **Medi Canopy** across the frontend, API titles, and docs
 - Locked the live site to Forest Canopy palette and V4 minimal layout
 - Removed palette/layout preview pages and unused color-identity options
 

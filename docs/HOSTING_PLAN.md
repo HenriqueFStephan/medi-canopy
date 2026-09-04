@@ -1,4 +1,4 @@
-# Hosting Plan — CanaHub (Free Tier)
+# Hosting Plan — Medi Canopy (Free Tier)
 
 **Goal:** Let the author preview the demo online at zero cost.  
 **Stack:** Angular static build + FastAPI API (separate hosts).
@@ -25,7 +25,7 @@ Author browser
       │
       ▼
 ┌─────────────────────┐
-│  Netlify / CF Pages │  https://cannahub.netlify.app
+│  Netlify / CF Pages │  https://medi-canopy.netlify.app
 │  (Angular static)   │
 └──────────┬──────────┘
            │ HTTPS  GET /api/v1/*
@@ -101,7 +101,7 @@ Before deploying, you need:
 
 | Variable | Example | Your value |
 |----------|---------|------------|
-| `FRONTEND_URL` | `https://cannahub.netlify.app` | __________ |
+| `FRONTEND_URL` | `https://medi-canopy.netlify.app` | __________ |
 | `API_PUBLIC_URL` | `https://cannahub-api.onrender.com` | __________ |
 
 ---
@@ -146,7 +146,7 @@ Optional: add `render.yaml` at repo root (see below).
    |-------|-------|
    | **Base directory** | `frontend` |
    | **Build command** | `npm ci && npm run build` |
-   | **Publish directory** | `frontend/dist/cannahub` |
+   | **Publish directory** | `frontend/dist/medi-canopy` |
 
 4. **Environment variables** (build time):
 
@@ -162,7 +162,7 @@ Optional: add `render.yaml` at repo root (see below).
    # netlify.toml (repo root or frontend/)
    [build]
      base = "frontend"
-     publish = "dist/cannahub"
+     publish = "dist/medi-canopy"
      command = "npm ci && npm run build"
 
    [[redirects]]
@@ -185,7 +185,7 @@ Optional: add `render.yaml` at repo root (see below).
    |-------|-------|
    | **Framework preset** | None |
    | **Build command** | `cd frontend && npm ci && npm run build` |
-   | **Build output** | `frontend/dist/cannahub` |
+   | **Build output** | `frontend/dist/medi-canopy` |
 
 3. Env var: `NG_APP_API_URL` = backend URL + `/api/v1`
 4. **SPA routing:** `_redirects` file or Cloudflare **Single Page Application** rule:
@@ -205,7 +205,7 @@ Optional: add `render.yaml` at repo root (see below).
    |-------|-------|
    | **Root Directory** | `frontend` |
    | **Build Command** | `npm install && npm run build` |
-   | **Publish Directory** | `dist/cannahub` |
+   | **Publish Directory** | `dist/medi-canopy` |
 
 3. Set env + CORS same as Netlify flow.
 
@@ -224,7 +224,7 @@ export const environment = {
   production: true,
   apiUrl: 'https://cannahub-api.onrender.com/api/v1', // or NG_APP_API_URL injection
   instagramUrl: 'https://www.instagram.com/papiroebers',
-  siteName: 'CanaHub',
+  siteName: 'Medi Canopy',
 };
 ```
 

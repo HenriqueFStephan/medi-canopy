@@ -1,4 +1,4 @@
-# CanaHub API — Render deploy from monorepo root.
+# Medi Canopy API — Render deploy from monorepo root.
 # Render looks for Dockerfile at repo root when using Docker runtime.
 # Backend code lives in backend/; this file wraps it for deployment.
 

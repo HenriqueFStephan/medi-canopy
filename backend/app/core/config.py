@@ -16,7 +16,7 @@ DATA_DIR = BACKEND_ROOT / "data"
 
 
 class Settings(BaseSettings):
-    """Runtime configuration for the CanaHub API."""
+    """Runtime configuration for the Medi Canopy API."""
 
     model_config = SettingsConfigDict(
         env_file=(BACKEND_ROOT / ".env", REPO_ROOT / "debt.txt"),

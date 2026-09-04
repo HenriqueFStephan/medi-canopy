@@ -1,4 +1,4 @@
-# Agent Navigation Map — CanaHub
+# Agent Navigation Map — Medi Canopy
 
 **Purpose:** Help Cursor agents and developers find the right files quickly.
 

@@ -1,1 +1,1 @@
-"""CanaHub FastAPI application package."""
+"""Medi Canopy FastAPI application package."""

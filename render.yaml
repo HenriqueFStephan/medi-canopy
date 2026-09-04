@@ -20,4 +20,4 @@ services:
       - key: LLM_PROVIDER
         value: placeholder
       - key: FRONTEND_URL
-        value: https://findaname.netlify.app
+        value: https://medi-canopy.netlify.app

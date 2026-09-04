@@ -1,4 +1,4 @@
-# MCP Server Design — CanaHub (Placeholders)
+# MCP Server Design — Medi Canopy (Placeholders)
 
 MCP servers are **designed but not implemented**. Use this document when wiring Cursor MCP tools in a future phase.
 

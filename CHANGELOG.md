@@ -7,6 +7,11 @@ and this project adheres to [Conventional Commits](https://www.conventionalcommi
 
 ## [Unreleased]
 
+### Added
+
+- Daily Cannabis 2026-09-03 digest fixture (12 peer-reviewed papers from issue #6)
+- `scripts/import_daily_cannabis_digest.py` to enqueue digest papers into the author review queue
+
 ## [2026-09-03]
 
 ### Added

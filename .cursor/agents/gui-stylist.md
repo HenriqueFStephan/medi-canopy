@@ -21,12 +21,13 @@ You are the **GUI Stylist** for CanaHub. Your only concern is visual appearance:
 
 ## Brand Contract
 
-Always follow `docs/BRAND.md`. Never deviate from the canonical tokens unless the user explicitly overrides them.
+Always follow `docs/BRAND.md` (Forest Canopy + V4 layout). Never deviate from the canonical tokens unless the user explicitly overrides them.
 
 | Token | Value | Use |
 |-------|-------|-----|
 | `--color-primary` | `#1B4332` | Headers, primary buttons |
-| `--color-primary-light` | `#2D6A4F` | Hover, accents |
+| `--color-primary-mid` | `#2D6A4F` | Hover, links |
+| `--color-primary-light` | `#52B788` | Tints, tags |
 | `--color-secondary` | `#95D5B2` | Badges, highlights |
 | `--color-accent` | `#D4A574` | CTAs, icons |
 | `--color-earth` | `#5C4033` | Consulting section |

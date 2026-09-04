@@ -7,6 +7,10 @@ and this project adheres to [Conventional Commits](https://www.conventionalcommi
 
 ## [Unreleased]
 
+### Changed
+- Locked the live site to Forest Canopy palette and V4 minimal layout
+- Removed palette/layout preview pages and unused color-identity options
+
 ## [2026-09-03]
 
 ### Added

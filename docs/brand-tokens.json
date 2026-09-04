@@ -1,8 +1,13 @@
 {
   "name": "CanaHub",
+  "look": {
+    "palette": "Forest Canopy",
+    "layout": "V4 Minimal Clean"
+  },
   "colors": {
     "primary": "#1B4332",
-    "primaryLight": "#2D6A4F",
+    "primaryMid": "#2D6A4F",
+    "primaryLight": "#52B788",
     "secondary": "#95D5B2",
     "accent": "#D4A574",
     "earth": "#5C4033",

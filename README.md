@@ -72,10 +72,11 @@ python -m agents.run --agent research
 | [docs/AGENT_NAVIGATION.md](docs/AGENT_NAVIGATION.md) | Map for AI agents working on repo |
 | [debt.txt](debt.txt) | Credentials & config placeholders |
 
-## Design References
+## Design
 
-- [4trees Cannabis Building](https://4treesbuilding.ca/projects) — professional facility consulting layout
-- [PlantManager](https://plantmanager.com.br/) — Brazilian cannabis management aesthetic
+Locked look: **Forest Canopy** palette with **V4** (minimal clean) layout. Tokens live in `frontend/src/styles/_variables.scss` and `docs/BRAND.md`.
+
+References: [4trees Cannabis Building](https://4treesbuilding.ca/projects), [PlantManager](https://plantmanager.com.br/).
 
 ## License
 

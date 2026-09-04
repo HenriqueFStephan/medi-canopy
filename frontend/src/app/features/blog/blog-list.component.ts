@@ -23,20 +23,16 @@ import { environment } from '../../../environments/environment';
         <div *ngIf="loading" class="loading">Carregando posts…</div>
         <div *ngIf="error" class="error-state">{{ error }}</div>
 
-        <div class="blog-grid" *ngIf="!loading && !error">
-          <article class="card blog-card" *ngFor="let post of posts">
-            <span class="tag" *ngIf="post.source_type === 'instagram'">Instagram</span>
-            <span class="tag" *ngIf="post.source_type === 'agent_research'">Pesquisa</span>
-            <h2>
-              <a [routerLink]="['/blog', post.slug]">{{ post.title }}</a>
-            </h2>
-            <p>{{ post.excerpt }}</p>
-            <div class="blog-card__meta">
-              <span>{{ post.author_name }}</span>
-              <span>{{ post.published_at | date:'mediumDate' }}</span>
-            </div>
-            <a [routerLink]="['/blog', post.slug]" class="read-more">Ler mais →</a>
-          </article>
+        <div class="news-rows" *ngIf="!loading && !error">
+          <a class="news-row" *ngFor="let post of posts" [routerLink]="['/blog', post.slug]">
+            <span class="col-date">{{ post.published_at | date:'d MMM y' }}</span>
+            <span class="col-tag">
+              <span class="tag" *ngIf="post.source_type === 'instagram'">Instagram</span>
+              <span class="tag" *ngIf="post.source_type === 'agent_research'">Pesquisa</span>
+            </span>
+            <span class="col-title">{{ post.title }}</span>
+            <span class="col-arrow">→</span>
+          </a>
         </div>
       </div>
     </section>

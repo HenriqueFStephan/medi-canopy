@@ -13,14 +13,12 @@ import { environment } from '../../../environments/environment';
           <span class="logo__cana">Cana</span><span class="logo__hub">Hub</span>
         </a>
         <nav class="nav">
-          <a routerLink="/news" routerLinkActive="active">Notícias</a>
-          <a routerLink="/blog" routerLinkActive="active">Blog</a>
-          <a routerLink="/courses" routerLinkActive="active">Cursos</a>
           <a routerLink="/services" routerLinkActive="active">Serviços</a>
-          <a routerLink="/contact" routerLinkActive="active">Contato</a>
-          <a [href]="instagramUrl" target="_blank" rel="noopener" class="nav__ig" aria-label="Instagram">
-            Instagram
-          </a>
+          <a routerLink="/blog" routerLinkActive="active">Blog</a>
+          <a routerLink="/news" routerLinkActive="active">Notícias</a>
+          <a routerLink="/courses" routerLinkActive="active">Cursos</a>
+          <a routerLink="/contact" routerLinkActive="active" class="btn btn--primary nav__cta">Contato</a>
+          <a [href]="instagramUrl" target="_blank" rel="noopener" class="nav__ig">Instagram</a>
         </nav>
       </div>
     </header>

@@ -23,22 +23,19 @@ import { NewsArticle } from '../../core/models';
         <div *ngIf="loading" class="loading">Carregando notícias…</div>
         <div *ngIf="error" class="error-state">{{ error }}</div>
 
-        <div class="news-grid" *ngIf="!loading && !error">
-          <article class="card news-card" *ngFor="let article of articles">
-            <span class="tag">{{ article.region }}</span>
-            <h2>{{ article.title }}</h2>
-            <p>{{ article.summary }}</p>
-            <div class="news-card__meta">
-              <span *ngIf="article.source_name">{{ article.source_name }}</span>
-              <span *ngIf="article.published_at">{{ article.published_at | date:'mediumDate' }}</span>
-            </div>
-            <div class="tags">
-              <span class="tag" *ngFor="let t of article.tags">{{ t }}</span>
-            </div>
-            <a *ngIf="article.source_url" [href]="article.source_url" target="_blank" rel="noopener" class="news-card__link">
-              Fonte original →
-            </a>
-          </article>
+        <div class="news-rows" *ngIf="!loading && !error">
+          <a
+            class="news-row"
+            *ngFor="let article of articles"
+            [href]="article.source_url || '#'"
+            [attr.target]="article.source_url ? '_blank' : null"
+            rel="noopener"
+          >
+            <span class="col-date">{{ article.published_at | date:'d MMM y' }}</span>
+            <span class="col-tag"><span class="tag">{{ article.region }}</span></span>
+            <span class="col-title">{{ article.title }}</span>
+            <span class="col-arrow">→</span>
+          </a>
         </div>
       </div>
     </section>

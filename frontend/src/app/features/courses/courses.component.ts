@@ -18,25 +18,23 @@ import { Course } from '../../core/models';
         <div *ngIf="loading" class="loading">Carregando cursos…</div>
         <div *ngIf="error" class="error-state">{{ error }}</div>
 
-        <div class="courses-grid" *ngIf="!loading && !error">
-          <article class="card course-card" *ngFor="let course of courses">
-            <span class="badge" *ngIf="course.coming_soon">Em breve</span>
-            <h2>{{ course.title }}</h2>
-            <p class="course-card__level">{{ course.level }}</p>
-            <p>{{ course.description }}</p>
-            <p class="course-card__price">{{ course.price_display }}</p>
-            <div class="modules" *ngIf="course.modules.length">
-              <h3>Módulos</h3>
-              <ul>
+        <div class="feature-list" *ngIf="!loading && !error">
+          <article class="feature-list__item course-row" *ngFor="let course of courses">
+            <div>
+              <span class="tag" *ngIf="course.coming_soon">Em breve</span>
+              <h3>{{ course.title }}</h3>
+              <p class="course-row__level">{{ course.level }}</p>
+              <p>{{ course.description }}</p>
+              <p class="course-row__price" *ngIf="course.price_display">{{ course.price_display }}</p>
+              <ul class="modules" *ngIf="course.modules.length">
                 <li *ngFor="let m of course.modules">
                   <strong>{{ m.title }}</strong> — {{ m.duration_minutes }} min
-                  <span class="module-desc">{{ m.description }}</span>
                 </li>
               </ul>
+              <button type="button" class="btn btn--outline" disabled>
+                Inscrições em breve
+              </button>
             </div>
-            <button type="button" class="btn btn--outline" disabled>
-              Inscrições em breve
-            </button>
           </article>
         </div>
       </div>

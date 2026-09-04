@@ -18,19 +18,6 @@
   status = 200
   force = true
 
-# Static design preview — served as-is, do NOT redirect to Angular
-[[redirects]]
-  from = "/assets/page_url/*"
-  to = "/assets/page_url/:splat"
-  status = 200
-  force = false
-
-[[redirects]]
-  from = "/assets/color_identity/*"
-  to = "/assets/color_identity/:splat"
-  status = 200
-  force = false
-
 # Angular SPA catch-all (must be last)
 [[redirects]]
   from = "/*"

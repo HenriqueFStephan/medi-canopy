@@ -10,19 +10,22 @@ Inspired by professional cannabis consulting ([4trees](https://4treesbuilding.ca
 
 ## Color Palette
 
+**Locked look:** Forest Canopy (P1) with layout V4 (minimal clean).
+
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `--color-primary` | `#1B4332` | Deep forest green — headers, primary buttons |
-| `--color-primary-light` | `#2D6A4F` | Hover states, accents |
+| `--color-primary` / `--color-primary-dark` | `#1B4332` | Deep forest green — headers, primary buttons |
+| `--color-primary-mid` | `#2D6A4F` | Hover, links, italic hero accent |
+| `--color-primary-light` | `#52B788` | Light tint — tags, dividers, icons |
 | `--color-secondary` | `#95D5B2` | Highlights, badges, success |
-| `--color-accent` | `#D4A574` | Warm hemp gold — CTAs, icons |
-| `--color-earth` | `#5C4033` | Earth brown — consulting / services section |
+| `--color-accent` | `#D4A574` | Warm hemp gold — CTAs, numbered callouts |
+| `--color-earth` | `#5C4033` | Earth brown — rare callouts |
 | `--color-bg` | `#F8FAF7` | Page background |
-| `--color-bg-dark` | `#0D1F17` | Footer, hero overlays |
+| `--color-bg-dark` | `#0D1F17` | Footer |
 | `--color-surface` | `#FFFFFF` | Cards, panels |
 | `--color-text` | `#1A1A1A` | Body text |
 | `--color-text-muted` | `#5A6B62` | Secondary text |
-| `--color-border` | `#E2E8E4` | Dividers |
+| `--color-border` | `#E2E8E4` | Thin dividers |
 
 ### Accessibility
 
@@ -42,7 +45,7 @@ Loaded via Google Fonts in `index.html`.
 ## Visual Language
 
 - **Photography:** Real cultivation, facilities, research — avoid stereotypical "leaf" clipart.
-- **Layout:** Generous whitespace, card-based grids (reference: 4trees projects grid).
+- **Layout:** Generous whitespace, thin dividers, numbered lists and table-like rows (V4 minimal clean).
 - **Icons:** Line icons, organic curves; cannabis leaf used sparingly in logo mark only.
 - **Motion:** Subtle fade-in on scroll; no distracting animations.
 

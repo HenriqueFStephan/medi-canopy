@@ -1,90 +1,72 @@
 @import '../../../styles/variables';
 
 .hero {
-  background: linear-gradient(135deg, $color-bg-dark 0%, $color-primary 100%);
-  color: #fff;
-  padding: 5rem 0 6rem;
+  padding: 7rem 0 6rem;
+  border-bottom: 1px solid $color-border;
 
   h1 {
-    color: #fff;
-    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-size: clamp(2.75rem, 6vw, 5rem);
+    line-height: 1.08;
+    margin: 0 0 1.5rem;
     max-width: 16ch;
-    margin: 0 0 1rem;
+    letter-spacing: -0.02em;
 
     em {
-      font-style: normal;
-      color: $color-secondary;
+      font-style: italic;
+      color: $color-primary-mid;
     }
   }
 
-  &__eyebrow {
+  &__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: 1px solid $color-border;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-size: 0.8rem;
-    color: $color-secondary;
-    margin: 0 0 1rem;
+    padding: 0.3rem 0.9rem;
+    color: $color-text-muted;
+    margin-bottom: 2rem;
+
+    &::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: $color-accent;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
   }
 
   &__lead {
-    font-size: 1.15rem;
-    max-width: 52ch;
-    color: rgba(#fff, 0.85);
-    margin: 0 0 2rem;
+    font-size: 1rem;
+    color: $color-text-muted;
+    max-width: 46ch;
+    margin: 0;
   }
 
   &__actions {
     display: flex;
+    gap: 0.75rem;
     flex-wrap: wrap;
-    gap: 1rem;
   }
 }
 
-.section__title {
-  text-align: center;
-  margin-bottom: 2.5rem;
+.news-section {
+  border-top: 1px solid $color-border;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-}
-
-.feature-card {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-
-  h3 {
-    margin: 0.5rem 0;
-  }
-
-  p {
-    color: $color-text-muted;
-    margin: 0;
-    font-size: 0.95rem;
-  }
-
-  &__num {
-    font-family: $font-mono;
-    font-size: 0.75rem;
-    color: $color-accent;
-  }
-}
-
-.section--dark {
-  background: $color-earth;
-  color: #fff;
-
-  h2 { color: #fff; }
-}
-
-.cta {
-  text-align: center;
-
-  p {
-    color: rgba(#fff, 0.8);
-    max-width: 50ch;
-    margin: 0 auto 1.5rem;
-  }
+.cta-minimal__or {
+  margin: 0 0.5rem;
+  color: $color-text-muted;
 }

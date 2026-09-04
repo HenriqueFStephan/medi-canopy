@@ -9,7 +9,8 @@ Source of truth: `docs/BRAND.md` · SCSS file: `frontend/src/styles/_variables.s
 | Token | Hex | Role |
 |-------|-----|------|
 | `--color-primary` | `#1B4332` | Deep forest green — headers, primary buttons, nav background |
-| `--color-primary-light` | `#2D6A4F` | Lighter green — hover states, link accents |
+| `--color-primary-mid` | `#2D6A4F` | Hover states, links, italic accents |
+| `--color-primary-light` | `#52B788` | Lighter tint for tags, dividers, icons |
 | `--color-secondary` | `#95D5B2` | Mint — badges, success indicators, highlights |
 
 ### Accent & Earth

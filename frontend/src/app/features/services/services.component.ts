@@ -9,37 +9,39 @@ import { ServiceOffering } from '../../core/models';
   standalone: true,
   imports: [CommonModule, RouterLink],
   template: `
-    <section class="hero-services">
-      <div class="container">
-        <h1>Serviços de consultoria</h1>
-        <p>
-          Experiência em todo o ciclo do mercado — do projeto do galpão à colheita e operação comercial.
-          Referência em projetos como <a href="https://4treesbuilding.ca/projects" target="_blank" rel="noopener">4trees Cannabis Building</a>.
-        </p>
-      </div>
-    </section>
-
     <section class="section">
       <div class="container">
+        <header class="page-header">
+          <h1>Serviços de consultoria</h1>
+          <p>
+            Experiência em todo o ciclo do mercado — do projeto do galpão à colheita e operação comercial.
+            Referência em projetos como
+            <a href="https://4treesbuilding.ca/projects" target="_blank" rel="noopener">4trees Cannabis Building</a>.
+          </p>
+        </header>
+
         <div *ngIf="loading" class="loading">Carregando serviços…</div>
         <div *ngIf="error" class="error-state">{{ error }}</div>
 
-        <div class="services-grid" *ngIf="!loading && !error">
-          <article class="card service-card" *ngFor="let svc of services">
-            <div class="service-card__icon" [attr.data-icon]="svc.icon"></div>
-            <h2>{{ svc.title }}</h2>
-            <p>{{ svc.description }}</p>
-            <ul>
-              <li *ngFor="let h of svc.highlights">{{ h }}</li>
-            </ul>
-          </article>
-        </div>
+        <ul class="feature-list" *ngIf="!loading && !error">
+          <li *ngFor="let svc of services">
+            <div>
+              <h3>{{ svc.title }}</h3>
+              <p>{{ svc.description }}</p>
+              <ul class="highlights" *ngIf="svc.highlights.length">
+                <li *ngFor="let h of svc.highlights">{{ h }}</li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
 
-        <div class="cta-box">
-          <h2>Pronto para estruturar seu projeto?</h2>
-          <p>Agende uma conversa para mapear instalação, climatização, cultivo e compliance.</p>
-          <a routerLink="/contact" class="btn btn--primary">Solicitar consultoria</a>
-        </div>
+    <section class="cta-minimal">
+      <div class="container">
+        <h2>Pronto para estruturar seu projeto?</h2>
+        <p>Agende uma conversa para mapear instalação, climatização, cultivo e compliance.</p>
+        <a routerLink="/contact" class="btn btn--primary">Solicitar consultoria</a>
       </div>
     </section>
   `,

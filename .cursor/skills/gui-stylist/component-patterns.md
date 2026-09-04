@@ -30,7 +30,7 @@ Reusable SCSS patterns for CanaHub Angular components.
 .btn--primary {
   background: var(--color-primary);
   color: #fff;
-  &:hover { background: var(--color-primary-light); }
+  &:hover { background: var(--color-primary-mid); }
 }
 
 .btn--accent {

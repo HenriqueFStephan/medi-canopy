@@ -4,7 +4,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba($color-surface, 0.95);
+  background: rgba($color-surface, 0.93);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid $color-border;
 }
@@ -30,33 +30,37 @@
   gap: 1.25rem;
   align-items: center;
 
-  a {
+  > a {
     font-weight: 500;
     font-size: 0.9rem;
     color: $color-text;
     text-decoration: none;
     padding: 0.25rem 0;
 
-    &.active, &:hover {
+    &:hover,
+    &.active {
       color: $color-primary;
     }
 
-    &.active {
+    &.active:not(.nav__cta) {
       border-bottom: 2px solid $color-accent;
     }
   }
 
-  &__ig {
-    padding: 0.4rem 0.9rem !important;
-    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  &__cta {
+    padding: 0.45rem 1rem !important;
     color: #fff !important;
-    border-radius: $radius-md;
-    font-size: 0.85rem !important;
+    border-bottom: none !important;
 
-    &:hover {
-      opacity: 0.9;
+    &:hover,
+    &.active {
       color: #fff !important;
+      border-bottom: none !important;
     }
+  }
+
+  &__ig {
+    font-size: 0.9rem;
   }
 }
 

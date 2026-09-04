@@ -1,76 +1,32 @@
 @import '../../../styles/variables';
 
-.page-header {
-  max-width: 640px;
-  margin-bottom: 2.5rem;
-  p { color: $color-text-muted; }
-}
+.course-row {
+  .tag { margin-bottom: 0.5rem; }
 
-.courses-grid {
-  display: grid;
-  gap: 2rem;
-}
-
-.course-card {
-  position: relative;
-
-  h2 { margin: 0.5rem 0; }
+  .btn { margin-top: 1rem; }
 
   &__level {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: $color-accent;
-    margin: 0 0 0.75rem;
+    margin: 0 0 0.5rem;
   }
 
   &__price {
-    font-weight: 700;
+    font-weight: 600;
     color: $color-primary;
-    margin: 1rem 0;
+    margin: 0.75rem 0 0;
+    font-size: 0.9rem;
   }
-}
-
-.badge {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: $color-accent;
-  color: $color-bg-dark;
-  padding: 0.25rem 0.75rem;
-  border-radius: $radius-sm;
-  font-size: 0.75rem;
-  font-weight: 700;
 }
 
 .modules {
-  margin: 1.5rem 0;
-  padding-top: 1rem;
-  border-top: 1px solid $color-border;
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+  font-size: 0.875rem;
+  color: $color-text-muted;
 
-  h3 {
-    font-family: $font-body;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin: 0 0 0.75rem;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  li {
-    margin-bottom: 0.75rem;
-    font-size: 0.95rem;
-  }
-
-  .module-desc {
-    display: block;
-    color: $color-text-muted;
-    font-size: 0.85rem;
-    margin-top: 0.15rem;
-  }
+  li { margin-bottom: 0.25rem; }
 }

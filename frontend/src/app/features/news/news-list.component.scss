@@ -1,65 +1,24 @@
 @import '../../../styles/variables';
 
-.page-header {
-  max-width: 640px;
-  margin-bottom: 2.5rem;
-
-  p { color: $color-text-muted; }
-}
-
 .filters {
   display: flex;
   gap: 0.5rem;
-  margin-top: 1rem;
+  margin-top: 1.25rem;
 }
 
 .filter {
-  padding: 0.4rem 1rem;
+  padding: 0.35rem 0.9rem;
   border: 1px solid $color-border;
-  background: $color-surface;
-  border-radius: $radius-md;
+  background: transparent;
+  border-radius: 20px;
   cursor: pointer;
   font-family: $font-body;
+  font-size: 0.85rem;
+  color: $color-text;
 
   &.active {
     background: $color-primary;
     color: #fff;
     border-color: $color-primary;
   }
-}
-
-.news-grid {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.news-card {
-  h2 {
-    font-size: 1.35rem;
-    margin: 0.75rem 0 0.5rem;
-  }
-
-  p {
-    color: $color-text-muted;
-  }
-
-  &__meta {
-    display: flex;
-    gap: 1rem;
-    font-size: 0.85rem;
-    color: $color-text-muted;
-    margin: 1rem 0;
-  }
-
-  &__link {
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  margin-bottom: 0.75rem;
 }

@@ -1,6 +1,5 @@
 # Netlify — https://app.netlify.com
-# NG_APP_API_URL is baked here so production builds hit the Render API
-# even if the dashboard env var was never set.
+# Same-origin /api/v1 is proxied to the Render FastAPI service.
 
 [build]
   base = "frontend"
@@ -9,7 +8,15 @@
 
 [build.environment]
   NODE_VERSION = "18"
-  NG_APP_API_URL = "https://cannahub-api.onrender.com/api/v1"
+  NG_APP_API_URL = "/api/v1"
+
+# Proxy API calls to Render so the browser stays same-origin (no CORS).
+# Must sit above the Angular SPA catch-all.
+[[redirects]]
+  from = "/api/v1/*"
+  to = "https://cannahub-api.onrender.com/api/v1/:splat"
+  status = 200
+  force = true
 
 # Static design preview — served as-is, do NOT redirect to Angular
 [[redirects]]

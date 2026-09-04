@@ -8,7 +8,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const DEFAULT_API_URL = 'https://cannahub-api.onrender.com/api/v1';
+const DEFAULT_API_URL = '/api/v1';
 
 const apiUrl =
   process.env.NG_APP_API_URL ||

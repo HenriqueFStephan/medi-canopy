@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
-Dispatch one Cursor cloud agent per open GitHub issue.
+Dispatch one Cursor cloud agent per GitHub issue labeled `solve`.
 
 The launched agent is instructed to:
-- fix exactly one issue on its own branch
-- create a detailed PR
+- assess change complexity on a 1–5 scale
+- merge complexity 1–3 directly into the base branch
+- open a pull request only for complexity 4–5
 - include validation notes
 """
 
@@ -33,6 +34,7 @@ LAUNCH_SPACING_SECONDS = 60
 SKIP_LABELS = frozenset({"research", "[research]", "daily-cannabis"})
 RESEARCH_TITLE_MARKER = "[research]"
 RESEARCH_LABEL = "research"
+SOLVE_LABEL = "solve"
 DAILY_CANNABIS_TITLE_MARKER = "daily cannabis"
 
 
@@ -155,9 +157,13 @@ def _http_json(
         raise ApiError(f"{method} {url} failed: {exc.reason}", retryable=True) from exc
 
 
-def skip_reason(issue: Issue) -> str | None:
+def issue_labels(issue: Issue) -> set[str]:
+    return {label.strip().lower() for label in issue.labels}
+
+
+def skip_reason(issue: Issue, *, require_solve: bool = True) -> str | None:
     """Research notes are tracked as issues for the team, not as coding work."""
-    labels = {label.strip().lower() for label in issue.labels}
+    labels = issue_labels(issue)
     matched = labels & SKIP_LABELS
     if matched:
         return f"label {sorted(matched)[0]}"
@@ -166,6 +172,8 @@ def skip_reason(issue: Issue) -> str | None:
         return "title marker [RESEARCH]"
     if DAILY_CANNABIS_TITLE_MARKER in title_lower:
         return "title marker Daily Cannabis"
+    if require_solve and SOLVE_LABEL not in labels:
+        return f"missing `{SOLVE_LABEL}` label"
     return None
 
 
@@ -190,6 +198,27 @@ def ensure_research_label(repo: str, headers: dict[str, str]) -> None:
     log(f"Created label `{RESEARCH_LABEL}`.")
 
 
+def ensure_solve_label(repo: str, headers: dict[str, str]) -> None:
+    url = f"{GITHUB_API_BASE}/repos/{repo}/labels/{urllib.parse.quote(SOLVE_LABEL)}"
+    try:
+        _http_json("GET", url, headers=headers)
+        return
+    except ApiError as exc:
+        if exc.status != 404:
+            raise
+    _http_json(
+        "POST",
+        f"{GITHUB_API_BASE}/repos/{repo}/labels",
+        headers=headers,
+        payload={
+            "name": SOLVE_LABEL,
+            "color": "5319E7",
+            "description": "Queue this issue for the AI agent to implement",
+        },
+    )
+    log(f"Created label `{SOLVE_LABEL}`.")
+
+
 def stamp_research_label(repo: str, issue: Issue, headers: dict[str, str]) -> None:
     """Promote research title markers into the durable `research` label."""
     if RESEARCH_LABEL in {label.strip().lower() for label in issue.labels}:
@@ -210,12 +239,43 @@ def stamp_research_label(repo: str, issue: Issue, headers: dict[str, str]) -> No
         log(f"Could not stamp `{RESEARCH_LABEL}` on issue #{issue.number}: {exc}", error=True)
 
 
-def fetch_open_issues(repo: str, github_token: str, limit: int) -> list[Issue]:
-    headers = {
+def github_headers(github_token: str) -> dict[str, str]:
+    return {
         "Accept": "application/vnd.github+json",
         "Authorization": f"Bearer {github_token}",
         "X-GitHub-Api-Version": "2022-11-28",
     }
+
+
+def parse_issue(item: dict[str, Any]) -> Issue | None:
+    if "pull_request" in item:
+        return None
+    return Issue(
+        number=int(item["number"]),
+        title=item.get("title", "").strip(),
+        body=(item.get("body") or "").strip(),
+        html_url=item.get("html_url", ""),
+        labels=[label.get("name", "") for label in item.get("labels", []) if isinstance(label, dict)],
+    )
+
+
+def fetch_issue_by_number(repo: str, github_token: str, number: int) -> Issue | None:
+    headers = github_headers(github_token)
+    url = f"{GITHUB_API_BASE}/repos/{repo}/issues/{number}"
+    result = _http_json("GET", url, headers=headers)
+    if not isinstance(result, dict):
+        raise ApiError(f"Unexpected GitHub response for issue #{number}: {type(result)}")
+    return parse_issue(result)
+
+
+def fetch_open_issues(
+    repo: str,
+    github_token: str,
+    limit: int,
+    *,
+    label: str = SOLVE_LABEL,
+) -> list[Issue]:
+    headers = github_headers(github_token)
     issues: list[Issue] = []
     skipped = 0
     page = 1
@@ -227,6 +287,7 @@ def fetch_open_issues(repo: str, github_token: str, limit: int) -> list[Issue]:
                 "page": str(page),
                 "sort": "created",
                 "direction": "asc",
+                "labels": label,
             }
         )
         url = f"{GITHUB_API_BASE}/repos/{repo}/issues?{query}"
@@ -239,16 +300,9 @@ def fetch_open_issues(repo: str, github_token: str, limit: int) -> list[Issue]:
         page_items = 0
         for item in result:
             page_items += 1
-            # GitHub issues endpoint also returns PRs; skip those.
-            if "pull_request" in item:
+            issue = parse_issue(item)
+            if issue is None:
                 continue
-            issue = Issue(
-                number=int(item["number"]),
-                title=item.get("title", "").strip(),
-                body=(item.get("body") or "").strip(),
-                html_url=item.get("html_url", ""),
-                labels=[label.get("name", "") for label in item.get("labels", []) if isinstance(label, dict)],
-            )
             reason = skip_reason(issue)
             if reason:
                 skipped += 1
@@ -272,17 +326,17 @@ def fetch_open_issues(repo: str, github_token: str, limit: int) -> list[Issue]:
 def build_prompt(issue: Issue, repo: str, base_ref: str) -> str:
     labels = ", ".join(issue.labels) if issue.labels else "none"
     issue_body = issue.body if issue.body else "(no description provided)"
+    owner = repo.split("/", 1)[0]
     return textwrap.dedent(
         f"""
         You are working on repository {repo}.
-        Solve GitHub issue #{issue.number} on a dedicated branch and open a pull request.
+        Solve GitHub issue #{issue.number} on a dedicated branch.
 
         Constraints:
         - Touch only code relevant to issue #{issue.number}.
         - Keep scope focused and minimal.
         - Add or update tests when feasible.
         - Base branch: {base_ref}.
-        - The PR must be review-ready and include detailed context.
 
         Issue metadata:
         - URL: {issue.html_url}
@@ -291,20 +345,40 @@ def build_prompt(issue: Issue, repo: str, base_ref: str) -> str:
         - Description:
         {issue_body}
 
-        PR requirements:
-        - Title format: "fix(issue #{issue.number}): <short summary>"
-        - Body sections, in order:
-          1) Summary
-          2) Root Cause
-          3) Changes Made
-          4) Validation (tests/manual checks)
-          5) Risks / Follow-ups
-          6) Closes #{issue.number}
-        - Mention changed files and why each was changed.
+        Complexity assessment (required):
+        Before you implement, rate the change from 1 to 5 and keep that rating
+        throughout the run. Comment the rating on issue #{issue.number}.
+
+        1 — Trivial: typo, copy, comment, or one-line config/docs.
+        2 — Simple: localized change in a few files, existing pattern, low risk.
+        3 — Moderate: several files or straightforward logic; no architecture shift.
+        4 — Complex: cross-stack, API/schema, security, or behavior that needs review.
+        5 — Major: architecture, migration, large refactor, or uncertain design.
+
+        Delivery rules (follow exactly):
+        - Complexity 1–3: merge directly into `{base_ref}`. Do not leave an open
+          pull request. Prefer merging your working branch into `{base_ref}` and
+          pushing `{base_ref}`. If branch protection requires a pull request,
+          open one, merge it immediately (`gh pr merge --squash --delete-branch`),
+          and do not leave it for human review.
+        - Complexity 4–5: open a pull request and do NOT merge it.
+          Title format: "fix(issue #{issue.number}): <short summary>"
+          Request a review from `{owner}` so they receive GitHub's email with
+          the PR title. Body sections, in order:
+          1) Complexity (N/5, one-sentence justification)
+          2) Summary
+          3) Root Cause
+          4) Changes Made
+          5) Validation (tests/manual checks)
+          6) Risks / Follow-ups
+          7) Closes #{issue.number}
+          Mention changed files and why each was changed.
 
         Before finishing:
         - Run relevant checks/tests for changed components.
         - Ensure formatting/lint expectations still pass for touched files.
+        - Comment on issue #{issue.number} with the complexity rating and
+          whether you merged to `{base_ref}` or opened a PR.
         """
     ).strip()
 
@@ -329,7 +403,7 @@ def create_cursor_agent(
         "prompt": {"text": prompt},
         "model": {"id": model},
         "repos": [{"url": repo_url, "startingRef": base_ref}],
-        "autoCreatePR": True,
+        "autoCreatePR": False,
         "skipReviewerRequest": skip_reviewer_request,
     }
     return _http_json(
@@ -409,11 +483,15 @@ def create_cursor_agent_with_retry(**kwargs: Any) -> dict[str, Any]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Launch Cursor cloud agents to solve open GitHub issues.")
+    parser = argparse.ArgumentParser(
+        description="Launch Cursor cloud agents for GitHub issues labeled `solve`."
+    )
     parser.add_argument("--repo", required=True, help="owner/repo")
     parser.add_argument("--repo-url", required=True, help="Git clone URL, e.g. https://github.com/org/repo")
     parser.add_argument("--base-ref", required=True, help="Base branch used by cloud agents")
     parser.add_argument("--max-issues", type=int, default=1, help="Maximum number of issues to process")
+    parser.add_argument("--issue-number", type=int, default=0, help="Process a single issue number")
+    parser.add_argument("--label", default=SOLVE_LABEL, help="Only process issues with this label")
     parser.add_argument("--model", default="composer-2.5", help="Cursor model id")
     parser.add_argument("--dry-run", action="store_true", help="Only print planned operations")
     parser.add_argument(
@@ -435,15 +513,39 @@ def main() -> int:
     if args.max_issues < 1:
         log("--max-issues must be >= 1", error=True)
         return 2
+    if args.issue_number < 0:
+        log("--issue-number must be >= 1 when set", error=True)
+        return 2
 
     try:
-        issues = fetch_open_issues(args.repo, github_token, args.max_issues)
+        headers = github_headers(github_token)
+        ensure_solve_label(args.repo, headers)
+        if args.issue_number:
+            issue = fetch_issue_by_number(args.repo, github_token, args.issue_number)
+            if issue is None:
+                log(f"Issue #{args.issue_number} is a pull request, not an issue.", error=True)
+                return 1
+            reason = skip_reason(issue)
+            if reason:
+                log(f"Skipping issue #{issue.number} ({reason}): {issue.title}")
+                if "title marker" in reason:
+                    stamp_research_label(args.repo, issue, headers)
+                issues: list[Issue] = []
+            else:
+                issues = [issue]
+        else:
+            issues = fetch_open_issues(
+                args.repo,
+                github_token,
+                args.max_issues,
+                label=args.label,
+            )
     except ApiError as exc:
         log(f"Failed fetching issues: {exc}", error=True)
         return 1
 
     if not issues:
-        log("No open issues found.")
+        log(f"No open issues found with label `{args.label}`.")
         return 0
 
     log(f"Found {len(issues)} open issue(s) to process.")

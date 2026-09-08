@@ -50,15 +50,16 @@ python -m agents.run --agent news
 python -m agents.run --agent research
 ```
 
-### Issue-solving GitHub Action
+### 🔧 AI AGENT (issue solver)
 
 - Workflow: `.github/workflows/cursor-issue-solver.yml`
-- Purpose: daily run that reads open GitHub issues and starts one Cursor cloud agent per issue (each agent works in its own branch and opens a PR).
+- Purpose: when an issue is labeled `solve`, start a Cursor cloud agent for that issue. The agent rates complexity 1–5, merges levels 1–3 into the default branch, and opens a PR only for levels 4–5.
 - Manual test: run from Actions tab with `workflow_dispatch` (`dry_run=true` by default).
 - Required repository secret: `CURSOR_API_KEY`.
 - A failed Cursor launch now fails the GitHub job. Retryable `429` / GitHub App rate limits are retried automatically (Cursor often asks for ~60s).
 - Cloud Agents also need the [Cursor GitHub App](https://cursor.com/dashboard?tab=integrations) installed on this repository. If retries still fail with `get_installation_for_org`, reconnect GitHub there and confirm the repo is selected.
-- Research digests from `Weekly Cannabis Research` run Mondays and are filed as `[RESEARCH] Daily Cannabis …` with labels `research` + `daily-cannabis`. Digests older than 30 days are auto-closed on each run. The issue solver skips those labeled/titled research notes.
+- Complexity 4–5 PRs request a review from the repo owner so GitHub emails you with the PR title (watch notifications for “Review requested”).
+- Research digests from `Weekly Cannabis Research` run Mondays and are filed as `[RESEARCH] Daily Cannabis …` with labels `research` + `daily-cannabis`. Digests older than 30 days are auto-closed on each run. The issue solver skips those labeled/titled research notes even if they also have `solve`.
 
 ## Key Documents
 

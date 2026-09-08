@@ -80,6 +80,18 @@ On approval, `PaperNormalizer.to_blog_post()` produces:
 | Hooks | `.cursor/hooks.json` | Protect secrets, format Python |
 | MCP design | `.cursor/mcp/README.md` | Future MCP servers for news/research |
 
+## 🔧 AI AGENT (issue solver)
+
+**Workflow:** `.github/workflows/cursor-issue-solver.yml`
+**Script:** `scripts/run_issue_solver_agents.py`
+
+Triggered when an issue is labeled `solve` (not on a schedule). The cloud agent
+rates the change 1–5, merges complexity 1–3 into the default branch, and opens a
+pull request only for complexity 4–5. Research notes (`research` /
+`daily-cannabis`) are never dispatched.
+
+**Manual run:** Actions tab → 🔧 AI AGENT → `workflow_dispatch` (`dry_run=true` by default).
+
 ## Daily Cannabis Research (GitHub Action)
 
 **Workflow:** `.github/workflows/daily-cannabis-research.yml` (daily 06:30 UTC)
@@ -99,7 +111,8 @@ details stay in the job summary and the uploaded artifact.
 When nothing clears the filter, **no issue is created** — an empty digest is noise.
 
 Issues are labelled `daily-cannabis`, which `run_issue_solver_agents.py` excludes from
-dispatch so the issue solver never tries to "fix" a research digest.
+dispatch so the 🔧 AI AGENT workflow never tries to "fix" a research digest, even
+when the issue also has the `solve` label.
 
 **Manual run:**
 

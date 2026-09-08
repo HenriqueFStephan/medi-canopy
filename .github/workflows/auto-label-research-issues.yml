@@ -1,8 +1,8 @@
 name: Auto-label research issues
 
 # When a research note is filed (title contains [RESEARCH]), stamp the
-# `research` label so the Cursor issue solver skips it. Keeps the research
-# posting workflow unchanged aside from using that title marker.
+# `research` label so the 🔧 AI AGENT (`solve`) workflow skips it. Keeps the
+# research posting workflow unchanged aside from using that title marker.
 on:
   issues:
     types: [opened, edited, reopened]

@@ -1,6 +1,6 @@
-name: 🔧 AI AGENT
+name: "🔧 AI AGENT"
 
-run-name: 🔧 AI AGENT${{ github.event_name == 'issues' && format(' — #{0}', github.event.issue.number) || '' }}
+run-name: "${{ github.event_name == 'issues' && format('🔧 AI AGENT — {0}', github.event.issue.number) || '🔧 AI AGENT' }}"
 
 on:
   issues:
@@ -110,10 +110,7 @@ jobs:
             $EXTRA_FLAGS
 
   notify-pr:
-    if: >
-      github.event_name == 'pull_request' &&
-      github.event.action == 'opened' &&
-      startsWith(github.event.pull_request.title, 'fix(issue #')
+    if: "${{ github.event_name == 'pull_request' && github.event.action == 'opened' && startsWith(github.event.pull_request.title, 'fix(issue #') }}"
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:

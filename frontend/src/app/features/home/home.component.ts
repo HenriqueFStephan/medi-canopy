@@ -31,16 +31,10 @@ import { environment } from '../../../environments/environment';
       <div class="container">
         <h2 class="section__title">O que oferecemos</h2>
         <div class="feature-list">
-          <a routerLink="/news" class="feature-list__item">
+          <a routerLink="/services" class="feature-list__item">
             <div>
-              <h3>Notícias</h3>
-              <p>Mercado, política, medicina e indústria — fontes confiáveis, curadoria diária.</p>
-            </div>
-          </a>
-          <a routerLink="/blog" class="feature-list__item">
-            <div>
-              <h3>Blog</h3>
-              <p>Espaço do autor e pesquisas científicas revisadas. Conteúdo do Instagram integrado.</p>
+              <h3>Consultoria</h3>
+              <p>Ponta a ponta: instalação, climatização, cultivo e negócio.</p>
             </div>
           </a>
           <a routerLink="/courses" class="feature-list__item">
@@ -49,10 +43,16 @@ import { environment } from '../../../environments/environment';
               <p>Formação em cultivo indoor e compliance — arquitetura pronta, lançamento em breve.</p>
             </div>
           </a>
-          <a routerLink="/services" class="feature-list__item">
+          <a routerLink="/blog" class="feature-list__item">
             <div>
-              <h3>Consultoria</h3>
-              <p>Ponta a ponta: instalação, climatização, cultivo e negócio.</p>
+              <h3>Blog</h3>
+              <p>Espaço do autor e pesquisas científicas revisadas. Conteúdo do Instagram integrado.</p>
+            </div>
+          </a>
+          <a routerLink="/news" class="feature-list__item">
+            <div>
+              <h3>Notícias</h3>
+              <p>Mercado, política, medicina e indústria — fontes confiáveis, curadoria diária.</p>
             </div>
           </a>
         </div>

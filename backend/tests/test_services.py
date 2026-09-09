@@ -7,11 +7,11 @@ from app.main import app
 client = TestClient(app)
 
 EXPECTED_TITLES = [
-    "01 — Viabilidade & Investimentos",
-    "02 — Engenharia & Desenvolvimento",
-    "03 — Cultivo & Operações",
-    "04 — Regulatório & Qualidade",
-    "05 — Implantação & Performance",
+    "Viabilidade & Investimentos",
+    "Engenharia & Desenvolvimento",
+    "Cultivo & Operações",
+    "Regulatório & Qualidade",
+    "Implantação & Performance",
 ]
 
 

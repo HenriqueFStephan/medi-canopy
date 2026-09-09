@@ -4,6 +4,7 @@ JSON-file backed data store for demo phase.
 Replace with SQLAlchemy repository when migrating to PostgreSQL.
 """
 
+import hashlib
 import json
 import uuid
 from datetime import datetime, timezone
@@ -24,6 +25,10 @@ def _utc_now() -> datetime:
     return datetime.now(timezone.utc)
 
 
+def _file_sha(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
 class JsonStore:
     """Simple JSON persistence for list-based collections."""
 
@@ -35,17 +40,37 @@ class JsonStore:
             self.load_seed()
         elif not self.path.exists():
             self.path.write_text("[]", encoding="utf-8")
+        else:
+            self._write_seed_stamp()
+
+    @property
+    def _stamp_path(self) -> Path:
+        return self.path.with_name(self.path.name + ".seedsha")
+
+    def _write_seed_stamp(self) -> None:
+        if self.seed_path and self.seed_path.exists():
+            self._stamp_path.write_text(_file_sha(self.seed_path), encoding="utf-8")
 
     def _should_seed(self) -> bool:
-        """Copy seed when the store is missing or still an empty list."""
+        """Copy seed when missing, empty, or the committed seed file changed."""
         if not self.seed_path or not self.seed_path.exists():
             return False
+        seed_hash = _file_sha(self.seed_path)
         if not self.path.exists():
             return True
         try:
-            return json.loads(self.path.read_text(encoding="utf-8")) == []
+            live = json.loads(self.path.read_text(encoding="utf-8"))
         except (json.JSONDecodeError, OSError):
             return True
+        if live == []:
+            return True
+        if self._stamp_path.exists():
+            return self._stamp_path.read_text(encoding="utf-8").strip() != seed_hash
+        try:
+            seed = json.loads(self.seed_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            return False
+        return live != seed
 
     def load_seed(self) -> None:
         """Replace this store with its seed file (demo reset)."""
@@ -53,6 +78,7 @@ class JsonStore:
             raise FileNotFoundError(f"No seed file for {self.path.name}")
         data = json.loads(self.seed_path.read_text(encoding="utf-8"))
         self.write_all(data)
+        self._write_seed_stamp()
 
     def read_all(self) -> list[dict[str, Any]]:
         return repair_mojibake(json.loads(self.path.read_text(encoding="utf-8")))

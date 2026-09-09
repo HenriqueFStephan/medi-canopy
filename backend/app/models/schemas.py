@@ -5,11 +5,15 @@ All public API contracts are defined here for consistency between
 frontend TypeScript interfaces and backend validation.
 """
 
+import re
 from datetime import datetime
 from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel, EmailStr, Field, HttpUrl
+from pydantic import BaseModel, EmailStr, Field, HttpUrl, field_validator
+
+# CSS .feature-list already renders 01, 02, … — strip the same index from titles.
+_SERVICE_TITLE_INDEX = re.compile(r"^\s*\d+\s*[—–−-]\s*")
 
 
 class ReviewStatus(str, Enum):
@@ -161,6 +165,11 @@ class ServiceOffering(BaseModel):
     description: str
     icon: str = "leaf"
     highlights: list[str] = Field(default_factory=list)
+
+    @field_validator("title")
+    @classmethod
+    def strip_list_index(cls, value: str) -> str:
+        return _SERVICE_TITLE_INDEX.sub("", value).strip()
 
 
 # --- Contact ---

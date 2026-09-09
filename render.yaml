@@ -7,8 +7,15 @@ services:
   - type: web
     name: cannahub-api
     runtime: python
+    repo: https://github.com/HenriqueFStephan/medi-canopy
+    branch: main
     rootDir: backend
     plan: free
+    autoDeployTrigger: commit
+    buildFilter:
+      paths:
+        - backend/**
+        - render.yaml
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health

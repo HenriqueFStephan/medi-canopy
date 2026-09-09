@@ -25,7 +25,7 @@ import { ServiceOffering } from '../../core/models';
         <ul class="feature-list" *ngIf="!loading && !error">
           <li *ngFor="let svc of services">
             <div>
-              <h3>{{ svc.title }}</h3>
+              <h3>{{ displayTitle(svc.title) }}</h3>
               <p>{{ svc.description }}</p>
               <ul class="highlights" *ngIf="svc.highlights.length">
                 <li *ngFor="let h of svc.highlights">{{ h }}</li>
@@ -52,6 +52,11 @@ export class ServicesComponent implements OnInit {
   error = '';
 
   constructor(private api: ApiService) {}
+
+  /** CSS already numbers .feature-list rows; drop the same index from API titles. */
+  displayTitle(title: string): string {
+    return title.replace(/^\s*\d+\s*[—–−-]\s*/, '').trim();
+  }
 
   ngOnInit(): void {
     this.api.getServices().subscribe({

@@ -1,35 +1,35 @@
 [
   {
     "id": "svc-viability",
-    "title": "01 — Viabilidade & Investimentos",
+    "title": "Viabilidade & Investimentos",
     "description": "CAPEX • OPEX • Viabilidade • Benchmarking • Cenários de Escala",
     "icon": "chart",
     "highlights": []
   },
   {
     "id": "svc-engineering",
-    "title": "02 — Engenharia & Desenvolvimento",
+    "title": "Engenharia & Desenvolvimento",
     "description": "Master Planning • Engenharia Conceitual • Layout • Pré-dimensionamento • Sistemas",
     "icon": "blueprint",
     "highlights": []
   },
   {
     "id": "svc-cultivation",
-    "title": "03 — Cultivo & Operações",
+    "title": "Cultivo & Operações",
     "description": "CEA • Cultivo • Crop Steering • Fertirrigação • IPM • Pós-colheita • SOPs",
     "icon": "plant",
     "highlights": []
   },
   {
     "id": "svc-regulatory",
-    "title": "04 — Regulatório & Qualidade",
+    "title": "Regulatório & Qualidade",
     "description": "Compliance • GACP/GMP • Boas Práticas • Gap Analysis • Qualidade • Documentação",
     "icon": "shield",
     "highlights": []
   },
   {
     "id": "svc-implementation",
-    "title": "05 — Implantação & Performance",
+    "title": "Implantação & Performance",
     "description": "Fornecedores • Compras Técnicas • Comissionamento • Treinamento • Otimização",
     "icon": "cycle",
     "highlights": []

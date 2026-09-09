@@ -151,6 +151,7 @@ Instagram continua em: https://www.instagram.com/papiroebers
 | Problem | Fix |
 |---------|-----|
 | Render build fails | Check **Logs** — usually missing `requirements.txt` path; confirm rootDir is `backend` |
+| Render does not rebuild on GitHub push | Netlify only builds the frontend. For the API: (1) Render → **cannahub-api** → **Settings** → Auto-Deploy **Yes**, branch `main`, repo `HenriqueFStephan/medi-canopy` (reconnect GitHub if the repo was renamed). (2) Add GitHub Actions secret `RENDER_DEPLOY_HOOK_URL` from Render → **Settings** → **Deploy Hook**. Pushing `backend/**` then triggers `.github/workflows/deploy-backend.yml`. |
 | Netlify build fails | Set `NODE_VERSION=18` in env; check build log |
 | CORS error in browser | `FRONTEND_URL` on Render must exactly match Netlify URL |
 | Slow first load | Render free tier cold start — normal |

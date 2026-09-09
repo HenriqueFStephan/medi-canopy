@@ -2,11 +2,12 @@ name: "🔧 AI AGENT"
 
 run-name: "${{ github.event_name == 'issues' && format('🔧 AI AGENT — {0}', github.event.issue.number) || '🔧 AI AGENT' }}"
 
+# Automatic runs: only when an issue (not a pull request) is labeled `solve`.
+# GitHub still fires `issues.labeled` if a PR is labeled, so the job also
+# checks that the payload is not a pull request.
 on:
   issues:
     types: [labeled]
-  pull_request:
-    types: [opened]
   workflow_dispatch:
     inputs:
       max_issues:
@@ -33,13 +34,13 @@ on:
 permissions:
   contents: read
   issues: write
-  pull-requests: write
 
 jobs:
   launch-issue-agents:
     if: >
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'issues' &&
+       github.event.action == 'labeled' &&
        github.event.label.name == 'solve' &&
        github.event.issue.pull_request == null)
     runs-on: ubuntu-latest
@@ -108,37 +109,3 @@ jobs:
             --model "${{ steps.params.outputs.model }}" \
             --label solve \
             $EXTRA_FLAGS
-
-  notify-pr:
-    if: "${{ github.event_name == 'pull_request' && github.event.action == 'opened' && startsWith(github.event.pull_request.title, 'fix(issue #') }}"
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - name: Email owner via GitHub review request
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: ${{ github.repository }}
-          OWNER: ${{ github.repository_owner }}
-          PR: ${{ github.event.pull_request.number }}
-          TITLE: ${{ github.event.pull_request.title }}
-        run: |
-          set -euo pipefail
-
-          echo "PR #$PR opened: $TITLE"
-
-          # Complexity 1–3 may open a PR only to merge it immediately.
-          sleep 20
-          MERGED="$(gh api "repos/$REPO/pulls/$PR" --jq .merged)"
-          STATE="$(gh api "repos/$REPO/pulls/$PR" --jq .state)"
-          if [ "$MERGED" = "true" ] || [ "$STATE" = "closed" ]; then
-            echo "PR already merged or closed; skipping review-request email."
-            exit 0
-          fi
-
-          echo "Notifying $OWNER (GitHub emails the requested reviewer with the PR title)."
-          if gh api "repos/$REPO/pulls/$PR/requested_reviewers" \
-              -f "reviewers[]=$OWNER"; then
-            echo "Requested review from $OWNER."
-          else
-            echo "Could not request review from $OWNER (org owner or already the author)."
-          fi

@@ -75,4 +75,5 @@ export interface ConsultingRequestResponse {
   success: boolean;
   message: string;
   email_sent: boolean;
+  email_error?: string | null;
 }

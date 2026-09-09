@@ -89,7 +89,12 @@ def submit_consulting_request(payload: ConsultingRequestCreate) -> ConsultingReq
         if mail.sent
         else "Solicitação registrada. Retornaremos em breve."
     )
-    return ConsultingRequestResponse(success=True, message=message, email_sent=mail.sent)
+    return ConsultingRequestResponse(
+        success=True,
+        message=message,
+        email_sent=mail.sent,
+        email_error=mail.error,
+    )
 
 
 @router.get("/{service_id}", response_model=ServiceOffering)

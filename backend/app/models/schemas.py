@@ -215,6 +215,7 @@ class ConsultingRequestResponse(BaseModel):
     success: bool
     message: str
     email_sent: bool = False
+    email_error: str | None = None
 
 
 # --- Health ---
@@ -224,3 +225,4 @@ class HealthResponse(BaseModel):
     status: str
     version: str = "0.1.0"
     environment: str
+    smtp_configured: bool = False

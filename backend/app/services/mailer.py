@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 import smtplib
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -11,6 +12,7 @@ from pathlib import Path
 
 from app.core.config import DATA_DIR, get_settings
 
+logger = logging.getLogger(__name__)
 OUTBOUND_DIR = DATA_DIR / "outbound_emails"
 
 
@@ -60,7 +62,19 @@ def send_html_email(
     settings = get_settings()
     if not settings.smtp_host:
         path = _write_placeholder(html_body, slug)
-        return SendResult(sent=False, placeholder_file=str(path))
+        return SendResult(
+            sent=False,
+            placeholder_file=str(path),
+            error="SMTP_HOST is not set",
+        )
+    password = (settings.smtp_password or "").replace(" ", "")
+    if settings.smtp_username and not password:
+        path = _write_placeholder(html_body, slug)
+        return SendResult(
+            sent=False,
+            placeholder_file=str(path),
+            error="SMTP_PASSWORD is not set",
+        )
 
     message = EmailMessage()
     message["Subject"] = subject
@@ -83,12 +97,10 @@ def send_html_email(
             smtp.ehlo()
         with smtp:
             if settings.smtp_username:
-                smtp.login(
-                    settings.smtp_username,
-                    (settings.smtp_password or "").replace(" ", ""),
-                )
+                smtp.login(settings.smtp_username, password)
             smtp.send_message(message)
     except (OSError, smtplib.SMTPException) as exc:
+        logger.warning("SMTP send failed: %s", exc)
         path = _write_placeholder(html_body, slug)
         return SendResult(sent=False, placeholder_file=str(path), error=str(exc))
 

@@ -36,7 +36,13 @@ app.include_router(review.router, prefix=API_PREFIX)
 
 @app.get("/health", response_model=HealthResponse, tags=["health"])
 def health() -> HealthResponse:
-    return HealthResponse(status="ok", environment=settings.app_env)
+    current = get_settings()
+    password = (current.smtp_password or "").replace(" ", "")
+    return HealthResponse(
+        status="ok",
+        environment=current.app_env,
+        smtp_configured=bool(current.smtp_host and password),
+    )
 
 
 @app.get("/", tags=["health"])

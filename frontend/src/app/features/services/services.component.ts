@@ -231,6 +231,7 @@ export class ServicesComponent implements OnInit, OnDestroy {
     }).subscribe({
       next: (res) => {
         this.success = res.message;
+        this.submitError = res.email_sent ? '' : (res.email_error || '');
         this.form.reset();
         this.selectedServiceIds = [];
         this.submitting = false;

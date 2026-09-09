@@ -23,6 +23,7 @@ def test_mailer_writes_placeholder_without_smtp(monkeypatch, tmp_path):
     )
 
     assert result.sent is False
+    assert result.error == "SMTP_HOST is not set"
     assert result.placeholder_file is not None
     saved = Path(result.placeholder_file)
     assert saved.exists()

@@ -1,5 +1,6 @@
-"""Tests for the daily cannabis research digest helpers."""
+"""Tests for the weekly paper report digest helpers."""
 
+from datetime import date
 from pathlib import Path
 import sys
 
@@ -16,14 +17,19 @@ from run_daily_cannabis_research import (  # noqa: E402
     extract_json_payload,
     filter_reliable_papers,
     issue_title,
+    load_catalog,
     parse_papers,
+    publication_cutoff,
     publish_issue,
     rejection_reason,
     render_issue_body,
     render_summary,
+    upsert_discovered_papers,
 )
 
 MIN_CONFIDENCE = 0.7
+AS_OF = date(2026, 9, 9)
+FILTER_KW = {"as_of": AS_OF, "max_age_days": 31}
 
 
 def make_paper(**overrides) -> Paper:
@@ -39,6 +45,7 @@ def make_paper(**overrides) -> Paper:
         "peer_reviewed": True,
         "confidence": 0.92,
         "summary": "Reduced seizure frequency versus placebo.",
+        "published": date(2026, 9, 1),
     }
     defaults.update(overrides)
     return Paper(**defaults)
@@ -68,6 +75,7 @@ def test_parse_papers_normalizes_doi_and_confidence():
                 "journal": "Construction and Building Materials",
                 "doi": "https://doi.org/10.1016/j.example",
                 "year": "2026-03",
+                "published": "2026-09-02",
                 "confidence": 88,
                 "peer_reviewed": True,
             }
@@ -76,6 +84,7 @@ def test_parse_papers_normalizes_doi_and_confidence():
     papers = parse_papers(payload)
     assert papers[0].doi == "10.1016/j.example"
     assert papers[0].year == 2026
+    assert papers[0].published == date(2026, 9, 2)
     assert papers[0].confidence == pytest.approx(0.88)
 
 
@@ -85,7 +94,7 @@ def test_parse_papers_requires_papers_list():
 
 
 def test_reliable_paper_is_accepted():
-    assert rejection_reason(make_paper(), MIN_CONFIDENCE) is None
+    assert rejection_reason(make_paper(), MIN_CONFIDENCE, as_of=AS_OF) is None
 
 
 @pytest.mark.parametrize(
@@ -99,17 +108,30 @@ def test_reliable_paper_is_accepted():
         ({"url": ""}, "missing link"),
         ({"confidence": 0.4}, "below threshold"),
         ({"doi": "", "url": "https://some-cannabis-blog.example.com/post"}, "not a recognised"),
+        ({"published": None}, "publication date missing"),
+        ({"published": date(2026, 7, 1)}, "older than 31 days"),
     ],
 )
 def test_unreliable_papers_are_rejected(overrides, expected_fragment):
-    reason = rejection_reason(make_paper(**overrides), MIN_CONFIDENCE)
+    reason = rejection_reason(make_paper(**overrides), MIN_CONFIDENCE, as_of=AS_OF)
     assert reason is not None
     assert expected_fragment in reason
 
 
 def test_paper_without_doi_but_scholarly_host_is_accepted():
     paper = make_paper(doi="", url="https://pubmed.ncbi.nlm.nih.gov/12345678/")
-    assert rejection_reason(paper, MIN_CONFIDENCE) is None
+    assert rejection_reason(paper, MIN_CONFIDENCE, as_of=AS_OF) is None
+
+
+def test_already_reported_paper_is_rejected():
+    paper = make_paper()
+    reason = rejection_reason(
+        paper,
+        MIN_CONFIDENCE,
+        as_of=AS_OF,
+        known_keys={"doi:10.1000/example"},
+    )
+    assert reason == "already reported in a previous digest"
 
 
 def test_filter_deduplicates_by_doi_and_sorts_by_confidence():
@@ -118,44 +140,73 @@ def test_filter_deduplicates_by_doi_and_sorts_by_confidence():
         make_paper(title="Higher confidence", doi="10.1000/b", url="https://doi.org/10.1000/b", confidence=0.95),
         make_paper(title="Duplicate", doi="10.1000/A", url="https://doi.org/10.1000/a", confidence=0.9),
     ]
-    outcome = filter_reliable_papers(papers, MIN_CONFIDENCE)
+    outcome = filter_reliable_papers(papers, MIN_CONFIDENCE, **FILTER_KW)
 
     assert [p.title for p in outcome.accepted] == ["Higher confidence", "Lower confidence"]
     assert outcome.rejected[0][1] == "duplicate of an earlier entry"
 
 
+def test_filter_skips_catalogued_papers():
+    papers = [
+        make_paper(),
+        make_paper(title="New hempcrete study", doi="10.1000/new", url="https://doi.org/10.1000/new"),
+    ]
+    outcome = filter_reliable_papers(
+        papers,
+        MIN_CONFIDENCE,
+        **FILTER_KW,
+        known_keys={"doi:10.1000/example"},
+    )
+    assert [p.title for p in outcome.accepted] == ["New hempcrete study"]
+    assert outcome.rejected[0][1] == "already reported in a previous digest"
+
+
 def test_render_summary_includes_title_and_links():
-    outcome = filter_reliable_papers([make_paper()], MIN_CONFIDENCE)
+    outcome = filter_reliable_papers([make_paper()], MIN_CONFIDENCE, **FILTER_KW)
     summary = render_summary("2026-09-03", outcome)
 
-    assert summary.startswith("# Daily Cannabis 2026-09-03")
+    assert summary.startswith("# Weekly Paper Report 2026-09-03")
     assert "https://doi.org/10.1000/example" in summary
     assert "Medical" in summary
 
 
 def test_render_summary_handles_no_reliable_papers():
-    outcome = filter_reliable_papers([make_paper(peer_reviewed=False)], MIN_CONFIDENCE)
+    outcome = filter_reliable_papers([make_paper(peer_reviewed=False)], MIN_CONFIDENCE, **FILTER_KW)
     summary = render_summary("2026-09-03", outcome)
 
     assert "No peer-reviewed papers cleared the reliability checks today." in summary
     assert "Discarded as unreliable (1)" in summary
 
 
-def test_prompt_covers_required_domains():
-    prompt = build_prompt("2026-09-03", 12, MIN_CONFIDENCE)
+def test_prompt_covers_required_domains_and_skip_list():
+    prompt = build_prompt(
+        "2026-09-09",
+        12,
+        MIN_CONFIDENCE,
+        known_papers=[
+            {
+                "doi": "10.1000/example",
+                "title": "Cannabidiol for refractory epilepsy: a randomized trial",
+            }
+        ],
+    )
 
-    assert "Daily Cannabis 2026-09-03" in prompt
+    assert "Weekly Paper Report 2026-09-09" in prompt
+    assert publication_cutoff("2026-09-09", 31).isoformat() in prompt
+    assert "past month only" in prompt
+    assert "10.1000/example" in prompt
+    assert "do NOT include these again" in prompt
     for keyword in ("Medical", "fashion and textiles", "construction", "peer-reviewed"):
         assert keyword in prompt
 
 
 def test_issue_title_matches_requested_format():
-    assert issue_title("2026-09-03") == "Daily Cannabis 2026-09-03"
+    assert issue_title("2026-09-03") == "[RESEARCH] Daily Cannabis 2026-09-03"
 
 
 def test_issue_body_lists_reliable_links_without_discarded_ones():
     papers = [make_paper(), make_paper(title="Sketchy claim", peer_reviewed=False, doi="10.1000/x")]
-    outcome = filter_reliable_papers(papers, MIN_CONFIDENCE)
+    outcome = filter_reliable_papers(papers, MIN_CONFIDENCE, **FILTER_KW)
 
     body = render_issue_body("2026-09-03", outcome)
 
@@ -176,7 +227,7 @@ def test_publish_issue_creates_issue_with_labels(monkeypatch):
 
     monkeypatch.setattr(daily, "create_github_issue", fake_create)
 
-    outcome = filter_reliable_papers([make_paper()], MIN_CONFIDENCE)
+    outcome = filter_reliable_papers([make_paper()], MIN_CONFIDENCE, **FILTER_KW)
     url = publish_issue(
         repo="org/repo",
         github_token="t0ken",
@@ -186,8 +237,9 @@ def test_publish_issue_creates_issue_with_labels(monkeypatch):
     )
 
     assert url == "https://github.com/org/repo/issues/9"
-    assert captured["title"] == "Daily Cannabis 2026-09-03"
+    assert captured["title"] == "[RESEARCH] Daily Cannabis 2026-09-03"
     assert "daily-cannabis" in captured["labels"]
+    assert "research" in captured["labels"]
     assert "https://doi.org/10.1000/example" in captured["body"]
 
 
@@ -203,7 +255,7 @@ def test_publish_issue_is_idempotent_for_the_same_day(monkeypatch):
 
     monkeypatch.setattr(daily, "create_github_issue", fail_create)
 
-    outcome = filter_reliable_papers([make_paper()], MIN_CONFIDENCE)
+    outcome = filter_reliable_papers([make_paper()], MIN_CONFIDENCE, **FILTER_KW)
     url = publish_issue(
         repo="org/repo",
         github_token="t0ken",
@@ -213,3 +265,30 @@ def test_publish_issue_is_idempotent_for_the_same_day(monkeypatch):
     )
 
     assert url == "https://github.com/org/repo/issues/5"
+
+
+def test_upsert_discovered_papers_is_idempotent(tmp_path):
+    catalog_path = tmp_path / "discovered_papers.json"
+    added = upsert_discovered_papers(catalog_path, [make_paper()], seen_on="2026-09-09")
+    assert added == 1
+
+    catalog = load_catalog(catalog_path)
+    assert len(catalog["papers"]) == 1
+    assert catalog["papers"][0]["doi"] == "10.1000/example"
+
+    added_again = upsert_discovered_papers(
+        catalog_path,
+        [make_paper(), make_paper(title="Newer paper", doi="10.1000/new", url="https://doi.org/10.1000/new")],
+        seen_on="2026-09-16",
+    )
+    assert added_again == 1
+    catalog = load_catalog(catalog_path)
+    dois = {item["doi"] for item in catalog["papers"]}
+    assert dois == {"10.1000/example", "10.1000/new"}
+
+
+def test_repo_catalog_has_unique_dois():
+    catalog = load_catalog(REPO_ROOT / "agents" / "data" / "discovered_papers.json")
+    dois = [str(item.get("doi") or "").lower() for item in catalog["papers"] if item.get("doi")]
+    assert len(dois) >= 20
+    assert len(dois) == len(set(dois))

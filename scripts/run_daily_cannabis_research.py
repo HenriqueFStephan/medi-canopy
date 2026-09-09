@@ -3,8 +3,9 @@
 Launch a Cursor cloud agent that gathers the latest peer-reviewed cannabis research.
 
 Coverage spans medical use, hemp fibre in fashion/textiles, construction materials,
-agronomy, and policy. Only peer-reviewed, verifiable papers survive the reliability
-filter; the surviving links are published as a GitHub issue titled
+agronomy, and policy. Only peer-reviewed, verifiable papers from the past month
+that are not already in agents/data/discovered_papers.json survive the filter;
+the surviving links are published as a GitHub issue titled
 "[RESEARCH] Daily Cannabis {date}".
 """
 
@@ -20,7 +21,7 @@ import textwrap
 import time
 import urllib.parse
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -45,6 +46,9 @@ DEFAULT_MAX_PAPERS = 12
 DEFAULT_POLL_INTERVAL_SECONDS = 30
 DEFAULT_TIMEOUT_SECONDS = 3600
 DEFAULT_CLEANUP_OLDER_THAN_DAYS = 30
+DEFAULT_MAX_AGE_DAYS = 31
+REPO_ROOT = Path(__file__).resolve().parent.parent
+DEFAULT_CATALOG_PATH = REPO_ROOT / "agents" / "data" / "discovered_papers.json"
 RESEARCH_CLEANUP_LABELS = frozenset({"research", "daily-cannabis"})
 RESEARCH_CLEANUP_TITLE_MARKERS = ("[research]", "daily cannabis")
 
@@ -144,6 +148,7 @@ class Paper:
     peer_reviewed: bool = False
     confidence: float = 0.0
     summary: str = ""
+    published: date | None = None
 
     def dedupe_key(self) -> str:
         if self.doi:
@@ -163,6 +168,55 @@ def utc_date(explicit: str | None = None) -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
 
+def parse_report_date(date_str: str) -> date:
+    return datetime.strptime(date_str, "%Y-%m-%d").date()
+
+
+def publication_cutoff(date_str: str, max_age_days: int) -> date:
+    return parse_report_date(date_str) - timedelta(days=max_age_days)
+
+
+def identity_keys(*, doi: str = "", url: str = "", title: str = "") -> set[str]:
+    keys: set[str] = set()
+    doi_text = (doi or "").strip().lower()
+    if doi_text:
+        keys.add(f"doi:{doi_text}")
+    url_text = normalize_url(url)
+    if url_text:
+        keys.add(f"url:{url_text}")
+    title_text = (title or "").strip().lower()
+    if title_text:
+        keys.add(f"title:{title_text}")
+    return keys
+
+
+def paper_identity_keys(paper: Paper) -> set[str]:
+    return identity_keys(doi=paper.doi, url=paper.url, title=paper.title)
+
+
+def record_identity_keys(item: dict[str, Any]) -> set[str]:
+    return identity_keys(
+        doi=str(item.get("doi") or ""),
+        url=str(item.get("url") or ""),
+        title=str(item.get("title") or ""),
+    )
+
+
+def discovered_paper_keys(records: list[dict[str, Any]]) -> set[str]:
+    keys: set[str] = set()
+    for item in records:
+        keys |= record_identity_keys(item)
+    return keys
+
+
+def paper_to_dict(paper: Paper) -> dict[str, Any]:
+    payload = dict(paper.__dict__)
+    published = payload.get("published")
+    if isinstance(published, date):
+        payload["published"] = published.isoformat()
+    return payload
+
+
 def normalize_url(url: str) -> str:
     cleaned = (url or "").strip().rstrip("/")
     cleaned = re.sub(r"^https?://", "", cleaned, flags=re.IGNORECASE)
@@ -177,11 +231,44 @@ def host_matches(host: str, candidates: set[str]) -> bool:
     return any(host == candidate or host.endswith(f".{candidate}") for candidate in candidates)
 
 
-def build_prompt(date_str: str, max_papers: int, min_confidence: float) -> str:
+def format_known_papers_for_prompt(records: list[dict[str, Any]]) -> str:
+    lines: list[str] = []
+    for item in records:
+        doi = str(item.get("doi") or "").strip()
+        title = str(item.get("title") or "").strip()
+        url = str(item.get("url") or "").strip()
+        ident = doi or url
+        if not ident and not title:
+            continue
+        if title and ident:
+            lines.append(f"        - {ident} — {title}")
+        else:
+            lines.append(f"        - {ident or title}")
+    return "\n".join(lines)
+
+
+def build_prompt(
+    date_str: str,
+    max_papers: int,
+    min_confidence: float,
+    *,
+    max_age_days: int = DEFAULT_MAX_AGE_DAYS,
+    known_papers: list[dict[str, Any]] | None = None,
+) -> str:
     topics = "\n".join(f"        - {topic}" for topic in RESEARCH_TOPICS)
+    cutoff = publication_cutoff(date_str, max_age_days)
+    known_section = ""
+    known_records = [item for item in (known_papers or []) if isinstance(item, dict)]
+    known_block = format_known_papers_for_prompt(known_records)
+    if known_block:
+        known_section = f"""
+        Previously reported — do NOT include these again (match by DOI, URL, or title):
+{known_block}
+"""
+
     return textwrap.dedent(
         f"""
-        You are a research librarian building the "Daily Cannabis {date_str}" digest.
+        You are a research librarian building the "Weekly Paper Report {date_str}" digest.
 
         Goal: find the most recent peer-reviewed scientific literature about cannabis
         and industrial hemp across these areas:
@@ -195,8 +282,10 @@ def build_prompt(date_str: str, max_papers: int, min_confidence: float) -> str:
           domain (doi.org, PubMed, PMC, ScienceDirect, Springer, Nature, Wiley, MDPI,
           Frontiers, SAGE, Taylor & Francis, PLOS, SciELO, Oxford, Cambridge, ACS, RSC...).
         - You verified the record actually exists; never invent a DOI, title or link.
-        - It is recent: prefer the last 12 months, and never older than 3 years.
-
+        - It was published in the past month only: on or after {cutoff.isoformat()} and
+          on or before {date_str}. Year-only dates are not acceptable. If you cannot
+          confirm a calendar date (YYYY-MM-DD) inside that window, omit the paper.
+{known_section}
         Reliability: assign each paper a `confidence` between 0 and 1 reflecting how sure
         you are that the record is real, peer-reviewed and correctly described. Report a low
         confidence instead of guessing. Papers below {min_confidence} will be discarded, and
@@ -216,6 +305,7 @@ def build_prompt(date_str: str, max_papers: int, min_confidence: float) -> str:
               "authors": "First Author et al.",
               "journal": "Journal name",
               "year": 2026,
+              "published": "2026-09-01",
               "doi": "10.1000/example",
               "url": "https://doi.org/10.1000/example",
               "category": "medical | textile | construction | agronomy | policy",
@@ -324,6 +414,30 @@ def _coerce_year(value: Any) -> int | None:
     return year if 1900 <= year <= 2200 else None
 
 
+def _coerce_published(value: Any) -> date | None:
+    """Parse a calendar publication date. Year-only values are rejected as too vague."""
+    if value is None or isinstance(value, bool):
+        return None
+    if isinstance(value, datetime):
+        return value.date()
+    if isinstance(value, date):
+        return value
+    text = str(value).strip()
+    if not text:
+        return None
+    if re.match(r"^\d{4}$", text):
+        return None
+    if re.match(r"^\d{4}-\d{2}$", text):
+        try:
+            return datetime.strptime(text, "%Y-%m").date()
+        except ValueError:
+            return None
+    try:
+        return datetime.strptime(text[:10], "%Y-%m-%d").date()
+    except ValueError:
+        return None
+
+
 def _coerce_confidence(value: Any) -> float:
     try:
         confidence = float(value)
@@ -346,26 +460,42 @@ def parse_papers(payload: dict[str, Any]) -> list[Paper]:
             continue
         doi = str(raw.get("doi") or "").strip()
         doi = re.sub(r"^(?:https?://)?(?:dx\.)?doi\.org/", "", doi, flags=re.IGNORECASE)
+        published = _coerce_published(
+            raw.get("published") or raw.get("publication_date") or raw.get("date")
+        )
+        year = _coerce_year(raw.get("year"))
+        if year is None and published is not None:
+            year = published.year
         papers.append(
             Paper(
                 title=str(raw.get("title") or "").strip(),
                 url=str(raw.get("url") or "").strip(),
                 journal=str(raw.get("journal") or "").strip(),
                 authors=str(raw.get("authors") or "").strip(),
-                year=_coerce_year(raw.get("year")),
+                year=year,
                 doi=doi,
                 category=str(raw.get("category") or "uncategorized").strip().lower(),
                 publication_type=str(raw.get("publication_type") or "").strip().lower(),
                 peer_reviewed=bool(raw.get("peer_reviewed")),
                 confidence=_coerce_confidence(raw.get("confidence")),
                 summary=str(raw.get("summary") or "").strip(),
+                published=published,
             )
         )
     return papers
 
 
-def rejection_reason(paper: Paper, min_confidence: float) -> str | None:
+def rejection_reason(
+    paper: Paper,
+    min_confidence: float,
+    *,
+    as_of: date | None = None,
+    max_age_days: int = DEFAULT_MAX_AGE_DAYS,
+    known_keys: set[str] | None = None,
+) -> str | None:
     """Return why a paper is not publishable, or None when it passes every check."""
+    if known_keys and paper_identity_keys(paper) & known_keys:
+        return "already reported in a previous digest"
     if not paper.title:
         return "missing title"
     if not paper.url:
@@ -389,14 +519,43 @@ def rejection_reason(paper: Paper, min_confidence: float) -> str | None:
 
     if paper.confidence < min_confidence:
         return f"confidence {paper.confidence:.2f} below threshold {min_confidence:.2f}"
+
+    as_of = as_of or datetime.now(timezone.utc).date()
+    if paper.published is None:
+        return (
+            f"publication date missing or not specific "
+            f"(need YYYY-MM-DD within the last {max_age_days} days)"
+        )
+    cutoff = as_of - timedelta(days=max_age_days)
+    if paper.published < cutoff:
+        return (
+            f"published {paper.published.isoformat()} is older than {max_age_days} days "
+            f"(cutoff {cutoff.isoformat()})"
+        )
+    if paper.published > as_of:
+        return f"published {paper.published.isoformat()} is after the report date {as_of.isoformat()}"
     return None
 
 
-def filter_reliable_papers(papers: list[Paper], min_confidence: float) -> FilterOutcome:
+def filter_reliable_papers(
+    papers: list[Paper],
+    min_confidence: float,
+    *,
+    as_of: date | None = None,
+    max_age_days: int = DEFAULT_MAX_AGE_DAYS,
+    known_keys: set[str] | None = None,
+) -> FilterOutcome:
     outcome = FilterOutcome()
     seen: set[str] = set()
+    as_of = as_of or datetime.now(timezone.utc).date()
     for paper in papers:
-        reason = rejection_reason(paper, min_confidence)
+        reason = rejection_reason(
+            paper,
+            min_confidence,
+            as_of=as_of,
+            max_age_days=max_age_days,
+            known_keys=known_keys,
+        )
         if reason:
             outcome.rejected.append((paper, reason))
             continue
@@ -428,6 +587,8 @@ def _render_accepted_sections(outcome: FilterOutcome) -> list[str]:
             lines.append(f"- [{paper.title}]({paper.url})")
             if meta:
                 lines.append(f"  - {meta}")
+            if paper.published:
+                lines.append(f"  - Published: {paper.published.isoformat()}")
             if paper.doi:
                 lines.append(f"  - DOI: `{paper.doi}`")
             lines.append(f"  - Confidence: {paper.confidence:.2f}")
@@ -455,8 +616,8 @@ def render_issue_body(date_str: str, outcome: FilterOutcome, *, agent_url: str =
         discarded = len(outcome.rejected)
         noun = "candidate was" if discarded == 1 else "candidates were"
         lines.append(
-            f"_{discarded} further {noun} discarded for failing the "
-            "peer-review or verifiability checks._"
+            f"_{discarded} further {noun} discarded (already reported, older than "
+            "one month, or failing the peer-review / verifiability checks)._"
         )
         lines.append("")
 
@@ -469,7 +630,7 @@ def render_issue_body(date_str: str, outcome: FilterOutcome, *, agent_url: str =
 
 def render_summary(date_str: str, outcome: FilterOutcome, *, agent_url: str = "") -> str:
     """Full diagnostic report for the job summary and archived artifact."""
-    lines = [f"# Daily Cannabis {date_str}", ""]
+    lines = [f"# Weekly Paper Report {date_str}", ""]
 
     if not outcome.accepted:
         lines.append("No peer-reviewed papers cleared the reliability checks today.")
@@ -750,10 +911,12 @@ def write_outputs(
     output_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / f"{date_str}_daily_cannabis.md").write_text(summary_markdown, encoding="utf-8")
     payload = {
-        "title": f"Daily Cannabis {date_str}",
+        "title": f"Weekly Paper Report {date_str}",
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "accepted": [paper.__dict__ for paper in outcome.accepted],
-        "rejected": [{"paper": paper.__dict__, "reason": reason} for paper, reason in outcome.rejected],
+        "accepted": [paper_to_dict(paper) for paper in outcome.accepted],
+        "rejected": [
+            {"paper": paper_to_dict(paper), "reason": reason} for paper, reason in outcome.rejected
+        ],
     }
     (output_dir / f"{date_str}_daily_cannabis.json").write_text(
         json.dumps(payload, indent=2), encoding="utf-8"
@@ -761,9 +924,74 @@ def write_outputs(
     log(f"Wrote report files to {output_dir}")
 
 
-def run_agent_and_collect(args: argparse.Namespace, cursor_api_key: str, date_str: str) -> tuple[list[Paper], str]:
-    prompt = build_prompt(date_str, args.max_papers, args.min_confidence)
-    run_name = f"Daily Cannabis {date_str}"
+def load_catalog(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {"updated_at": "", "papers": []}
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    if isinstance(raw, list):
+        return {"updated_at": "", "papers": raw}
+    if not isinstance(raw, dict):
+        raise ValueError(f"Catalog {path} is not a JSON object or list")
+    papers = raw.get("papers", [])
+    if not isinstance(papers, list):
+        raise ValueError(f"Catalog {path} has no papers list")
+    return raw
+
+
+def write_catalog(path: Path, catalog: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(catalog, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def upsert_discovered_papers(
+    path: Path,
+    papers: list[Paper],
+    *,
+    seen_on: str,
+) -> int:
+    catalog = load_catalog(path)
+    records = list(catalog.get("papers") or [])
+    keys = discovered_paper_keys(records)
+    added = 0
+    for paper in papers:
+        if paper_identity_keys(paper) & keys:
+            continue
+        records.append(
+            {
+                "title": paper.title,
+                "url": paper.url,
+                "doi": paper.doi,
+                "journal": paper.journal,
+                "authors": paper.authors,
+                "year": paper.year,
+                "published": paper.published.isoformat() if paper.published else "",
+                "category": paper.category,
+                "first_seen": seen_on,
+            }
+        )
+        keys |= paper_identity_keys(paper)
+        added += 1
+    if added:
+        catalog["papers"] = records
+        catalog["updated_at"] = datetime.now(timezone.utc).isoformat()
+        write_catalog(path, catalog)
+    return added
+
+
+def run_agent_and_collect(
+    args: argparse.Namespace,
+    cursor_api_key: str,
+    date_str: str,
+    known_papers: list[dict[str, Any]],
+) -> tuple[list[Paper], str]:
+    prompt = build_prompt(
+        date_str,
+        args.max_papers,
+        args.min_confidence,
+        max_age_days=args.max_age_days,
+        known_papers=known_papers,
+    )
+    run_name = f"Weekly Paper Report {date_str}"
 
     response = create_research_agent(
         cursor_api_key=cursor_api_key,
@@ -806,7 +1034,7 @@ def main() -> int:
         description="Collect peer-reviewed cannabis research via a Cursor cloud agent."
     )
     parser.add_argument("--repo-url", required=True, help="Git repo URL the agent starts from")
-    parser.add_argument("--repo", default=None, help="owner/repo that receives the 'Daily Cannabis' issue")
+    parser.add_argument("--repo", default=None, help="owner/repo that receives the weekly paper report issue")
     parser.add_argument("--base-ref", default="main", help="Base branch for the agent workspace")
     parser.add_argument("--model", default=DEFAULT_MODEL, help="Cursor model id")
     parser.add_argument("--date", default=None, help="Override the report date (YYYY-MM-DD)")
@@ -816,6 +1044,17 @@ def main() -> int:
         type=float,
         default=DEFAULT_MIN_CONFIDENCE,
         help="Reject papers whose reported confidence is below this value",
+    )
+    parser.add_argument(
+        "--max-age-days",
+        type=int,
+        default=DEFAULT_MAX_AGE_DAYS,
+        help="Only accept papers published within this many days of the report date",
+    )
+    parser.add_argument(
+        "--catalog",
+        default=str(DEFAULT_CATALOG_PATH),
+        help="JSON file of papers already posted; those DOIs/URLs are skipped",
     )
     parser.add_argument("--poll-interval", type=int, default=DEFAULT_POLL_INTERVAL_SECONDS)
     parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT_SECONDS)
@@ -854,10 +1093,23 @@ def main() -> int:
 
     date_str = utc_date(args.date)
     output_dir = Path(args.output_dir) if args.output_dir else None
+    catalog_path = Path(args.catalog)
 
     if args.cleanup_older_than_days < 0:
         log("--cleanup-older-than-days must be >= 0", error=True)
         return 2
+    if args.max_age_days < 1:
+        log("--max-age-days must be >= 1", error=True)
+        return 2
+
+    try:
+        catalog = load_catalog(catalog_path)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        log(f"Failed to load paper catalog {catalog_path}: {exc}", error=True)
+        return 2
+    known_papers = [item for item in catalog.get("papers", []) if isinstance(item, dict)]
+    known_keys = discovered_paper_keys(known_papers)
+    log(f"Loaded {len(known_papers)} previously reported paper(s) from {catalog_path}.")
 
     github_token = os.environ.get("GITHUB_TOKEN")
     if args.cleanup_older_than_days > 0:
@@ -882,8 +1134,16 @@ def main() -> int:
         return 0
 
     if args.dry_run:
-        log(f"[DRY RUN] Would launch agent 'Daily Cannabis {date_str}' with prompt:\n")
-        log(build_prompt(date_str, args.max_papers, args.min_confidence))
+        log(f"[DRY RUN] Would launch agent 'Weekly Paper Report {date_str}' with prompt:\n")
+        log(
+            build_prompt(
+                date_str,
+                args.max_papers,
+                args.min_confidence,
+                max_age_days=args.max_age_days,
+                known_papers=known_papers,
+            )
+        )
         return 0
 
     agent_url = ""
@@ -896,12 +1156,19 @@ def main() -> int:
             log("Missing required env var: CURSOR_API_KEY", error=True)
             return 2
         try:
-            papers, agent_url = run_agent_and_collect(args, cursor_api_key, date_str)
+            papers, agent_url = run_agent_and_collect(args, cursor_api_key, date_str, known_papers)
         except (ApiError, ValueError) as exc:
-            log(f"Daily Cannabis {date_str} failed: {exc}", error=True)
+            log(f"Weekly Paper Report {date_str} failed: {exc}", error=True)
             return 1
 
-    outcome = filter_reliable_papers(papers, args.min_confidence)
+    as_of = parse_report_date(date_str)
+    outcome = filter_reliable_papers(
+        papers,
+        args.min_confidence,
+        as_of=as_of,
+        max_age_days=args.max_age_days,
+        known_keys=known_keys,
+    )
     summary_markdown = render_summary(date_str, outcome, agent_url=agent_url)
     write_outputs(
         date_str=date_str,
@@ -910,8 +1177,12 @@ def main() -> int:
         output_dir=output_dir,
     )
 
+    if outcome.accepted:
+        added = upsert_discovered_papers(catalog_path, outcome.accepted, seen_on=date_str)
+        log(f"Catalog {catalog_path}: added {added} newly accepted paper(s).")
+
     log(
-        f"Daily Cannabis {date_str}: {len(outcome.accepted)} accepted, "
+        f"Weekly Paper Report {date_str}: {len(outcome.accepted)} accepted, "
         f"{len(outcome.rejected)} discarded."
     )
 
@@ -939,7 +1210,7 @@ def main() -> int:
             agent_url=agent_url,
         )
     except ApiError as exc:
-        log(f"Failed to publish 'Daily Cannabis {date_str}' issue: {exc}", error=True)
+        log(f"Failed to publish 'Weekly Paper Report {date_str}' issue: {exc}", error=True)
         return 1
 
     return 0

@@ -16,6 +16,7 @@
 | Contact form | `frontend/.../contact/`, `backend/app/api/v1/contact.py` |
 | Credentials / keys | `debt.txt` (local only), `backend/app/core/config.py` |
 | Agent fixtures (no API) | `agents/fixtures/` |
+| Weekly paper report catalog | `agents/data/discovered_papers.json` |
 | Cursor skills | `.cursor/skills/` |
 | Cursor hooks | `.cursor/hooks.json`, `.cursor/hooks/` |
 | MCP design | `.cursor/mcp/README.md` |

@@ -92,27 +92,33 @@ pull request only for complexity 4–5. Research notes (`research` /
 
 **Manual run:** Actions tab → 🔧 AI AGENT → `workflow_dispatch` (`dry_run=true` by default).
 
-## Daily Cannabis Research (GitHub Action)
+## 🔬 WEEKLY PAPER REPORT (GitHub Action)
 
-**Workflow:** `.github/workflows/daily-cannabis-research.yml` (daily 06:30 UTC)
+**Workflow:** `.github/workflows/daily-cannabis-research.yml` (Mondays 06:30 UTC)
 **Script:** `scripts/run_daily_cannabis_research.py`
+**Catalog:** `agents/data/discovered_papers.json`
 
-Launches a Cursor cloud agent that searches for recent peer-reviewed literature on
+Launches a Cursor cloud agent that searches for peer-reviewed literature on
 medical cannabis, hemp fibre in fashion/textiles, hemp construction materials,
-agronomy, and policy. The workflow waits for the run, parses the agent's JSON reply,
-and opens a GitHub issue titled `Daily Cannabis {YYYY-MM-DD}` with the surviving links.
+agronomy, and policy. Only papers published in the **past 31 days** are eligible.
+DOIs/URLs already listed in the catalog are passed to the agent and filtered out
+so they are not posted again. Newly accepted papers are appended to the catalog.
+
+The workflow waits for the run, parses the agent's JSON reply, and opens a
+GitHub issue titled `[RESEARCH] Daily Cannabis {YYYY-MM-DD}` labelled
+`research` + `daily-cannabis`.
 
 **Reliability filter** — a paper reaches the issue only if it is flagged peer-reviewed,
 names a journal, is not a preprint/blog/thesis/patent, has a valid DOI or a link on a
-recognised publisher domain, and reports confidence at or above `--min-confidence`
+recognised publisher domain, reports a `published` date within 31 days, is not already
+in the catalog, and reports confidence at or above `--min-confidence`
 (default `0.7`). Discarded candidates are reduced to a count in the issue; their
 details stay in the job summary and the uploaded artifact.
 
 When nothing clears the filter, **no issue is created** — an empty digest is noise.
 
-Issues are labelled `daily-cannabis`, which `run_issue_solver_agents.py` excludes from
-dispatch so the 🔧 AI AGENT workflow never tries to "fix" a research digest, even
-when the issue also has the `solve` label.
+The 🔧 AI AGENT workflow only launches on the `solve` label, so research digests
+are never dispatched as coding tasks.
 
 **Manual run:**
 

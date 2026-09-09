@@ -59,7 +59,7 @@ python -m agents.run --agent research
 - A failed Cursor launch now fails the GitHub job. Retryable `429` / GitHub App rate limits are retried automatically (Cursor often asks for ~60s).
 - Cloud Agents also need the [Cursor GitHub App](https://cursor.com/dashboard?tab=integrations) installed on this repository. If retries still fail with `get_installation_for_org`, reconnect GitHub there and confirm the repo is selected.
 - Complexity 4–5 PRs request a review from the repo owner so GitHub emails you with the PR title (watch notifications for “Review requested”).
-- Research digests from `Weekly Cannabis Research` run Mondays and are filed as `[RESEARCH] Daily Cannabis …` with labels `research` + `daily-cannabis`. Digests older than 30 days are auto-closed on each run. The issue solver skips those labeled/titled research notes even if they also have `solve`.
+- Research digests from `🔬 WEEKLY PAPER REPORT` run Mondays and are filed as `[RESEARCH] Daily Cannabis …` with labels `research` + `daily-cannabis`. The workflow already applies those labels when it opens the issue. Digests older than 30 days are auto-closed on each run. Previously posted papers live in `agents/data/discovered_papers.json` and are skipped on later runs; only papers from the past month are eligible. The issue solver skips those labeled/titled research notes even if they also have `solve`.
 
 ## Key Documents
 

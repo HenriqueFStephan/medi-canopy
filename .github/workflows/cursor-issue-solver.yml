@@ -2,6 +2,7 @@ name: "🔧 AI AGENT"
 
 run-name: "${{ github.event_name == 'issues' && format('🔧 AI AGENT — {0}', github.event.issue.number) || '🔧 AI AGENT' }}"
 
+# Diagram: docs/workflows/ai-agent.md
 # Automatic runs: only when an issue (not a pull request) is labeled `solve`.
 # GitHub still fires `issues.labeled` if a PR is labeled, so the job also
 # checks that the payload is not a pull request.

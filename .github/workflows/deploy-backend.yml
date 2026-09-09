@@ -1,5 +1,6 @@
 name: Deploy backend
 
+# Diagram: docs/workflows/deploy-backend.md
 # Render's GitHub auto-deploy is easy to lose after a repo rename or if Auto-Deploy
 # is off in the dashboard. This workflow POSTs the service deploy hook instead.
 # Secret: RENDER_DEPLOY_HOOK_URL from Render → cannahub-api → Settings → Deploy Hook.

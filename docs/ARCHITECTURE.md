@@ -136,4 +136,4 @@ Backend enables CORS for `FRONTEND_URL`. Production: reverse proxy (nginx) serve
 | Manual research | `python -m agents.run --agent research` |
 | Scheduled (future) | Cron / GitHub Actions / K8s CronJob → same CLI |
 
-See [AGENTS.md](./AGENTS.md) and [../scripts/run-agents.ps1](../scripts/run-agents.ps1).
+See [AGENTS.md](./AGENTS.md), [workflows/](./workflows/README.md), and [../scripts/run-agents.ps1](../scripts/run-agents.ps1).

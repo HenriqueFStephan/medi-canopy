@@ -83,6 +83,7 @@ On approval, `PaperNormalizer.to_blog_post()` produces:
 ## 🔧 AI AGENT (issue solver)
 
 **Workflow:** `.github/workflows/cursor-issue-solver.yml`
+**Diagram:** [docs/workflows/ai-agent.md](./workflows/ai-agent.md)
 **Script:** `scripts/run_issue_solver_agents.py`
 
 Triggered only when an issue is labeled `solve` (not on pull requests or a
@@ -97,6 +98,7 @@ dispatched.
 ## 🔬 WEEKLY PAPER REPORT (GitHub Action)
 
 **Workflow:** `.github/workflows/daily-cannabis-research.yml` (Mondays 06:30 UTC)
+**Diagram:** [docs/workflows/weekly-paper-report.md](./workflows/weekly-paper-report.md)
 **Script:** `scripts/run_daily_cannabis_research.py`
 **Catalog:** `agents/data/discovered_papers.json`
 

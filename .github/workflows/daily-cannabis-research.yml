@@ -2,6 +2,8 @@ name: "🔬 WEEKLY PAPER REPORT"
 
 run-name: "🔬 WEEKLY PAPER REPORT${{ inputs.date && format(' ({0})', inputs.date) || '' }}"
 
+# Diagram: docs/workflows/weekly-paper-report.md
+
 on:
   schedule:
     # Mondays 06:30 UTC

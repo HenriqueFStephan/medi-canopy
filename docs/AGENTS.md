@@ -85,10 +85,12 @@ On approval, `PaperNormalizer.to_blog_post()` produces:
 **Workflow:** `.github/workflows/cursor-issue-solver.yml`
 **Script:** `scripts/run_issue_solver_agents.py`
 
-Triggered when an issue is labeled `solve` (not on a schedule). The cloud agent
-rates the change 1–5, merges complexity 1–3 into the default branch, and opens a
-pull request only for complexity 4–5. Research notes (`research` /
-`daily-cannabis`) are never dispatched.
+Triggered only when an issue is labeled `solve` (not on pull requests or a
+schedule). The job also ignores PRs that receive the `solve` label, because
+GitHub treats pull requests as issues. The cloud agent rates the change 1–5,
+merges complexity 1–3 into the default branch, and opens a pull request only for
+complexity 4–5. Research notes (`research` / `daily-cannabis`) are never
+dispatched.
 
 **Manual run:** Actions tab → 🔧 AI AGENT → `workflow_dispatch` (`dry_run=true` by default).
 

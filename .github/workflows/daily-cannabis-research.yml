@@ -1,6 +1,6 @@
-name: Weekly Cannabis Research
+name: "🔬 WEEKLY PAPER REPORT"
 
-run-name: Weekly Cannabis research${{ inputs.date && format(' ({0})', inputs.date) || '' }}
+run-name: "🔬 WEEKLY PAPER REPORT${{ inputs.date && format(' ({0})', inputs.date) || '' }}"
 
 on:
   schedule:
@@ -38,7 +38,7 @@ on:
         default: "false"
 
 permissions:
-  contents: read
+  contents: write
   issues: write
 
 concurrency:
@@ -54,6 +54,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -117,14 +119,29 @@ jobs:
             --max-papers "${{ steps.params.outputs.max_papers }}" \
             --min-confidence "${{ steps.params.outputs.min_confidence }}" \
             --cleanup-older-than-days "${{ steps.params.outputs.cleanup_older_than_days }}" \
+            --catalog "agents/data/discovered_papers.json" \
+            --max-age-days 31 \
             --output-dir "agents/output/daily_cannabis" \
             $EXTRA_FLAGS
+
+      - name: Commit updated paper catalog
+        if: steps.params.outputs.dry_run != 'true' && steps.params.outputs.cleanup_only != 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add agents/data/discovered_papers.json
+          if git diff --cached --quiet; then
+            echo "Paper catalog unchanged."
+            exit 0
+          fi
+          git commit -m "chore: record papers from weekly paper report ${{ steps.params.outputs.date }}"
+          git push origin "HEAD:${{ github.ref_name }}"
 
       - name: Upload report
         if: always() && steps.params.outputs.dry_run != 'true' && steps.params.outputs.cleanup_only != 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: weekly-cannabis-${{ steps.params.outputs.date }}
+          name: weekly-paper-report-${{ steps.params.outputs.date }}
           path: agents/output/daily_cannabis/
           if-no-files-found: warn
           retention-days: 90

@@ -12,11 +12,10 @@ import { ServiceOffering } from '../../core/models';
     <section class="section">
       <div class="container">
         <header class="page-header">
-          <h1>Serviços de consultoria</h1>
+          <h1>Consultoria Técnica e Estratégica em Cannabis Medicinal</h1>
           <p>
-            Experiência em todo o ciclo do mercado — do projeto do galpão à colheita e operação comercial.
-            Referência em projetos como
-            <a href="https://4treesbuilding.ca/projects" target="_blank" rel="noopener">4trees Cannabis Building</a>.
+            Visão integrada de toda a cadeia produtiva — da concepção e implantação da unidade ao cultivo,
+            processamento e operação comercial.
           </p>
         </header>
 

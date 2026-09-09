@@ -1,46 +1,37 @@
 [
   {
-    "id": "svc-design",
-    "title": "Projeto de Instalação",
-    "description": "Layout de galpão, fluxos de trabalho, salas limpas e especificações para construtoras — do conceito à planta executiva.",
-    "icon": "blueprint",
-    "highlights": [
-      "Dimensionamento de áreas vegetativo/floração",
-      "Integração com arquitetura e engenharia civil",
-      "Documentação para licenciamento"
-    ]
+    "id": "svc-viability",
+    "title": "01 — Viabilidade & Investimentos",
+    "description": "CAPEX • OPEX • Viabilidade • Benchmarking • Cenários de Escala",
+    "icon": "chart",
+    "highlights": []
   },
   {
-    "id": "svc-climate",
-    "title": "Engenharia de Climatização",
-    "description": "Sistemas autônomos de HVAC, dehumidificação e controle ambiental com redundância para operação 24/7.",
-    "icon": "climate",
-    "highlights": [
-      "Projeto de VPD e setpoints por fase",
-      "Automação e alarmes",
-      "Manutenção preventiva"
-    ]
+    "id": "svc-engineering",
+    "title": "02 — Engenharia & Desenvolvimento",
+    "description": "Master Planning • Engenharia Conceitual • Layout • Pré-dimensionamento • Sistemas",
+    "icon": "blueprint",
+    "highlights": []
   },
   {
     "id": "svc-cultivation",
-    "title": "Cultivo e Manejo",
-    "description": "Do clone à colheita: protocolos de nutrição, IPM e treinamento de equipes em campo.",
+    "title": "03 — Cultivo & Operações",
+    "description": "CEA • Cultivo • Crop Steering • Fertirrigação • IPM • Pós-colheita • SOPs",
     "icon": "plant",
-    "highlights": [
-      "Padronização de lotes",
-      "Diário de cultivo digital",
-      "Otimização de yield e qualidade"
-    ]
+    "highlights": []
   },
   {
-    "id": "svc-business",
-    "title": "Ciclo Completo do Negócio",
-    "description": "Consultoria ponta a ponta — inspirada em projetos como [4trees](https://4treesbuilding.ca/projects): da concepção à operação comercial.",
+    "id": "svc-regulatory",
+    "title": "04 — Regulatório & Qualidade",
+    "description": "Compliance • GACP/GMP • Boas Práticas • Gap Analysis • Qualidade • Documentação",
+    "icon": "shield",
+    "highlights": []
+  },
+  {
+    "id": "svc-implementation",
+    "title": "05 — Implantação & Performance",
+    "description": "Fornecedores • Compras Técnicas • Comissionamento • Treinamento • Otimização",
     "icon": "cycle",
-    "highlights": [
-      "Planejamento financeiro e CapEx",
-      "Compliance e relacionamento regulatório",
-      "Treinamento de Master Grower"
-    ]
+    "highlights": []
   }
 ]

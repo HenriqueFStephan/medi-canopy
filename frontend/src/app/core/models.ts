@@ -61,3 +61,18 @@ export interface ContactResponse {
   success: boolean;
   message: string;
 }
+
+export interface ConsultingRequestPayload {
+  name: string;
+  email: string;
+  company?: string;
+  phone?: string;
+  service_ids: string[];
+  message: string;
+}
+
+export interface ConsultingRequestResponse {
+  success: boolean;
+  message: string;
+  email_sent: boolean;
+}

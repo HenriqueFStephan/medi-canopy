@@ -8,3 +8,221 @@
 
   li { margin-bottom: 0.25rem; }
 }
+
+.consulting-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: rgba($color-bg-dark, 0.62);
+  animation: overlay-in 0.2s ease both;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+.consulting-dialog {
+  position: relative;
+  width: min(36rem, 100%);
+  max-height: min(90vh, 52rem);
+  overflow: auto;
+  text-align: left;
+  padding: 1.75rem 1.5rem 1.5rem;
+  animation: dialog-in 0.22s ease both;
+
+  h2 {
+    margin: 0 2rem 0.5rem 0;
+    font-size: clamp(1.35rem, 3vw, 1.75rem);
+  }
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+.consulting-dialog__lead {
+  margin: 0 0 1.25rem;
+  color: $color-text-muted;
+  font-size: 0.95rem;
+}
+
+.consulting-dialog__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: $radius-md;
+  background: transparent;
+  color: $color-text-muted;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-text;
+    background: rgba($color-primary, 0.06);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba($color-primary, 0.3);
+    outline-offset: 1px;
+  }
+}
+
+.consulting-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+
+  .btn {
+    align-self: stretch;
+    justify-content: center;
+  }
+
+  p {
+    max-width: none;
+    margin: 0;
+  }
+}
+
+.field-row {
+  display: grid;
+  gap: 1.15rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  min-width: 0;
+
+  label,
+  legend {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: $color-text;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    font-family: $font-body;
+    font-size: 1rem;
+    color: $color-text;
+    background: $color-surface;
+
+    &:focus {
+      outline: 2px solid rgba($color-primary, 0.3);
+      outline-offset: 1px;
+      border-color: $color-primary;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.65;
+  }
+}
+
+.optional {
+  font-weight: 400;
+  color: $color-text-muted;
+}
+
+.interest-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.interest-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  color: $color-text;
+  background: $color-surface;
+  transition: border-color 0.15s ease, background 0.15s ease;
+
+  input {
+    width: auto;
+    margin-top: 0.15rem;
+    accent-color: $color-primary;
+  }
+
+  &:hover {
+    border-color: $color-primary-light;
+  }
+
+  &:has(input:checked) {
+    border-color: $color-primary;
+    background: rgba($color-secondary, 0.28);
+  }
+
+  &:has(input:focus-visible) {
+    outline: 2px solid rgba($color-primary, 0.3);
+    outline-offset: 1px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.success {
+  margin: 0;
+  color: $color-primary;
+  font-weight: 600;
+}
+
+.error {
+  margin: 0;
+  color: $color-earth;
+}
+
+@keyframes overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dialog-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

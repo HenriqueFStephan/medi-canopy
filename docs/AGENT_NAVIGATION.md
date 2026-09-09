@@ -14,6 +14,7 @@
 | Paper → blog formatting | `backend/app/services/paper_normalizer.py` |
 | Add course placeholder | `backend/data/seed/courses.json`, `frontend/.../courses/` |
 | Contact form | `frontend/.../contact/`, `backend/app/api/v1/contact.py` |
+| Consulting request email | `frontend/.../services/`, `backend/app/api/v1/services.py`, `backend/app/services/consulting_email.py` |
 | Credentials / keys | `debt.txt` (local only), `backend/app/core/config.py` |
 | Agent fixtures (no API) | `agents/fixtures/` |
 | Weekly paper report catalog | `agents/data/discovered_papers.json` |

@@ -44,6 +44,10 @@ class Settings(BaseSettings):
     smtp_port: int = 587
     smtp_username: str = ""
     smtp_password: str = ""
+    smtp_from: str = ""
+    # TODO: set CONSULTING_NOTIFY_TO=adm@medicanopy.com.br when that mailbox is available.
+    # Until then, consulting requests are sent to the Gmail used as SMTP sender (self-test).
+    consulting_notify_to: str = ""
 
     instagram_handle: str = "papiroebers"
     instagram_url: str = "https://www.instagram.com/papiroebers"

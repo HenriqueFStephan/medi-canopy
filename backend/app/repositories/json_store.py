@@ -101,6 +101,7 @@ blog_store = JsonStore(DATA_DIR / "blog.json", SEED_DIR / "blog.json")
 courses_store = JsonStore(DATA_DIR / "courses.json", SEED_DIR / "courses.json")
 services_store = JsonStore(DATA_DIR / "services.json", SEED_DIR / "services.json")
 contact_store = JsonStore(DATA_DIR / "contact_messages.json")
+consulting_store = JsonStore(DATA_DIR / "consulting_requests.json")
 
 
 def get_review_queue() -> list[dict[str, Any]]:

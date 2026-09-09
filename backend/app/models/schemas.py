@@ -187,6 +187,36 @@ class ContactMessageResponse(BaseModel):
     message: str
 
 
+class ConsultingRequestCreate(BaseModel):
+    name: str = Field(..., min_length=2, max_length=120)
+    email: EmailStr
+    company: str = Field("", max_length=160)
+    phone: str = Field("", max_length=40)
+    service_ids: list[str] = Field(default_factory=list, max_length=20)
+    message: str = Field(..., min_length=10, max_length=5000)
+
+    @field_validator("name", "company", "phone", "message")
+    @classmethod
+    def strip_text(cls, value: str) -> str:
+        return value.strip()
+
+    @field_validator("service_ids")
+    @classmethod
+    def unique_service_ids(cls, value: list[str]) -> list[str]:
+        seen: list[str] = []
+        for item in value:
+            cleaned = item.strip()
+            if cleaned and cleaned not in seen:
+                seen.append(cleaned)
+        return seen
+
+
+class ConsultingRequestResponse(BaseModel):
+    success: bool
+    message: str
+    email_sent: bool = False
+
+
 # --- Health ---
 
 

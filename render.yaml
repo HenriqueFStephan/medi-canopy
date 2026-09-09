@@ -28,3 +28,18 @@ services:
         value: placeholder
       - key: FRONTEND_URL
         value: https://medi-canopy.netlify.app
+      - key: AUTHOR_NAME
+        value: Medi Canopy
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USERNAME
+        value: henrique.f.stephan@gmail.com
+      - key: SMTP_FROM
+        value: henrique.f.stephan@gmail.com
+      # TODO: change CONSULTING_NOTIFY_TO to adm@medicanopy.com.br when that inbox is available.
+      - key: CONSULTING_NOTIFY_TO
+        value: henrique.f.stephan@gmail.com
+      - key: SMTP_PASSWORD
+        sync: false

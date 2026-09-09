@@ -7,6 +7,8 @@ import {
   BlogPost,
   ContactPayload,
   ContactResponse,
+  ConsultingRequestPayload,
+  ConsultingRequestResponse,
   Course,
   NewsArticle,
   ServiceOffering,
@@ -46,5 +48,14 @@ export class ApiService {
 
   submitContact(payload: ContactPayload): Observable<ContactResponse> {
     return this.http.post<ContactResponse>(`${this.base}/contact`, payload);
+  }
+
+  submitConsultingRequest(
+    payload: ConsultingRequestPayload,
+  ): Observable<ConsultingRequestResponse> {
+    return this.http.post<ConsultingRequestResponse>(
+      `${this.base}/services/consulting-request`,
+      payload,
+    );
   }
 }

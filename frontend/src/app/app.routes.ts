@@ -32,19 +32,11 @@ export const routes: Routes = [
       import('./features/services/services.component').then((m) => m.ServicesComponent),
   },
   {
-<<<<<<< HEAD
-=======
-    path: 'projects',
-    loadComponent: () =>
-      import('./features/projects/projects.component').then((m) => m.ProjectsComponent),
-  },
-  {
     path: 'hub',
     loadComponent: () =>
       import('./features/hub/hub.component').then((m) => m.HubComponent),
   },
   {
->>>>>>> 5e5fb26 (feat(issue #20): add Hub page for strategic partner ecosystem)
     path: 'contact',
     loadComponent: () =>
       import('./features/contact/contact.component').then((m) => m.ContactComponent),

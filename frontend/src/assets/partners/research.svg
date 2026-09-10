@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Pesquisa">
+  <rect width="120" height="120" rx="16" fill="#2d6a4f"/>
+  <circle cx="52" cy="52" r="18" fill="none" stroke="#95d5b2" stroke-width="6"/>
+  <path d="M66 66l22 22" stroke="#d4a574" stroke-width="8" stroke-linecap="round"/>
+  <path d="M34 86h28" stroke="#95d5b2" stroke-width="4" stroke-linecap="round"/>
+</svg>

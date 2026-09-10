@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -18,13 +17,10 @@ import { environment } from '../../../environments/environment';
           <a routerLink="/news" routerLinkActive="active">Notícias</a>
           <a routerLink="/courses" routerLinkActive="active">Cursos</a>
           <a routerLink="/contact" routerLinkActive="active" class="btn btn--primary nav__cta">Contato</a>
-          <a [href]="instagramUrl" target="_blank" rel="noopener" class="nav__ig">Instagram</a>
         </nav>
       </div>
     </header>
   `,
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
-  readonly instagramUrl = environment.instagramUrl;
-}
+export class HeaderComponent {}

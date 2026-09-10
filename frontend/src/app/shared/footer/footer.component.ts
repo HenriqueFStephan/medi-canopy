@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
   template: `
     <footer class="footer">
       <div class="container">
-        <p>&copy; {{ year }} {{ siteName }} · Informação confiável sobre cannabis</p>
+        <p class="footer__legal">{{ legalName }}</p>
         <p>
           <a routerLink="/news">Notícias</a>
           ·
@@ -25,7 +25,6 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent {
-  readonly year = new Date().getFullYear();
-  readonly siteName = environment.siteName;
+  readonly legalName = '2026 Medi Canopy Biotecnologia, Educação e Consultoria Ltda';
   readonly instagramUrl = environment.instagramUrl;
 }

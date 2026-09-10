@@ -12,7 +12,13 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
           <a routerLink="/services" routerLinkActive="active">Serviços</a>
           <a routerLink="/blog" routerLinkActive="active">Artigos Científicos</a>
           <a routerLink="/news" routerLinkActive="active">Notícias</a>
-          <a routerLink="/hub" routerLinkActive="active">Hub</a>
+          <a
+            routerLink="/hub"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: false }"
+          >
+            Hub
+          </a>
           <a routerLink="/courses" routerLinkActive="active">Cursos</a>
           <a routerLink="/contact" routerLinkActive="active" class="btn btn--primary nav__cta">Contato</a>
         </nav>

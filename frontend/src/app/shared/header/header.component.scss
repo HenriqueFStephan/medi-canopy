@@ -16,25 +16,10 @@
   height: 72px;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  flex-shrink: 0;
+.logo {
+  font-family: $font-heading;
+  font-size: 1.75rem;
   text-decoration: none;
-
-  &__logo {
-    display: block;
-    width: auto;
-    height: 2.5rem;
-    object-fit: contain;
-  }
-
-  &__name {
-    font-family: $font-heading;
-    font-size: 1.75rem;
-    line-height: 1;
-  }
 
   &__medi { color: $color-primary; }
   &__canopy { color: $color-accent; }
@@ -76,23 +61,15 @@
 }
 
 @media (max-width: 768px) {
+  .logo {
+    font-size: 1.5rem;
+  }
+
   .header__inner {
     flex-direction: column;
     height: auto;
     padding: 1rem 0;
     gap: 1rem;
-  }
-
-  .brand {
-    align-self: flex-end;
-
-    &__logo {
-      height: 2rem;
-    }
-
-    &__name {
-      font-size: 1.5rem;
-    }
   }
 
   .nav {

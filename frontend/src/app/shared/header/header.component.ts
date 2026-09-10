@@ -16,7 +16,6 @@ import { environment } from '../../../environments/environment';
           <a routerLink="/services" routerLinkActive="active">Serviços</a>
           <a routerLink="/blog" routerLinkActive="active">Artigos Científicos</a>
           <a routerLink="/news" routerLinkActive="active">Notícias</a>
-          <a routerLink="/projects" routerLinkActive="active">Projetos</a>
           <a routerLink="/courses" routerLinkActive="active">Cursos</a>
           <a routerLink="/contact" routerLinkActive="active" class="btn btn--primary nav__cta">Contato</a>
           <a [href]="instagramUrl" target="_blank" rel="noopener" class="nav__ig">Instagram</a>

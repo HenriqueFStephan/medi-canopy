@@ -16,8 +16,6 @@ import { environment } from '../../../environments/environment';
           <a routerLink="/blog">Blog</a>
           ·
           <a routerLink="/contact">Contato</a>
-          ·
-          <a [href]="instagramUrl" target="_blank" rel="noopener">Instagram</a>
         </p>
       </div>
     </footer>
@@ -27,5 +25,4 @@ import { environment } from '../../../environments/environment';
 export class FooterComponent {
   readonly year = new Date().getFullYear();
   readonly siteName = environment.siteName;
-  readonly instagramUrl = environment.instagramUrl;
 }

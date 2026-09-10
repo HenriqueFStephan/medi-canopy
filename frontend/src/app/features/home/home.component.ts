@@ -3,7 +3,6 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ApiService } from '../../core/api.service';
 import { NewsArticle } from '../../core/models';
-import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -84,15 +83,12 @@ import { environment } from '../../../environments/environment';
         <h2>Pronto para começar?</h2>
         <p>Do homegrown ao headquarters — experiência real em todo o ciclo do mercado.</p>
         <a routerLink="/contact" class="btn btn--primary">Fale conosco</a>
-        <span class="cta-minimal__or">ou</span>
-        <a [href]="instagramUrl" target="_blank" rel="noopener" class="btn btn--outline">Seguir no Instagram</a>
       </div>
     </section>
   `,
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  readonly instagramUrl = environment.instagramUrl;
   headlines: NewsArticle[] = [];
 
   constructor(private api: ApiService) {}

@@ -13,7 +13,7 @@ import { environment } from '../../../environments/environment';
     <section class="section">
       <div class="container">
         <header class="page-header">
-          <h1>Blog</h1>
+          <h1>Artigos Científicos</h1>
           <p>
             Espaço do autor com curadoria humana. Pesquisas científicas e posts do
             <a [href]="instagramUrl" target="_blank" rel="noopener">&#64;papiroebers</a>.
@@ -54,7 +54,7 @@ export class BlogListComponent implements OnInit {
         this.loading = false;
       },
       error: () => {
-        this.error = 'Não foi possível carregar o blog.';
+        this.error = 'Não foi possível carregar os artigos científicos.';
         this.loading = false;
       },
     });

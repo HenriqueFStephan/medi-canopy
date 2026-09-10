@@ -13,7 +13,7 @@ import { environment } from '../../../environments/environment';
         <p>
           <a routerLink="/news">Notícias</a>
           ·
-          <a routerLink="/blog">Blog</a>
+          <a routerLink="/blog">Artigos Científicos</a>
           ·
           <a routerLink="/contact">Contato</a>
           ·

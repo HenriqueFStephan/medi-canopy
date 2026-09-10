@@ -14,7 +14,7 @@ import { environment } from '../../../environments/environment';
         </a>
         <nav class="nav">
           <a routerLink="/services" routerLinkActive="active">Serviços</a>
-          <a routerLink="/blog" routerLinkActive="active">Blog</a>
+          <a routerLink="/blog" routerLinkActive="active">Artigos Científicos</a>
           <a routerLink="/news" routerLinkActive="active">Notícias</a>
           <a routerLink="/projects" routerLinkActive="active">Projetos</a>
           <a routerLink="/courses" routerLinkActive="active">Cursos</a>

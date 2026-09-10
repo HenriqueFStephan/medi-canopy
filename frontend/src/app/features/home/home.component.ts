@@ -45,7 +45,7 @@ import { environment } from '../../../environments/environment';
           </a>
           <a routerLink="/blog" class="feature-list__item">
             <div>
-              <h3>Blog</h3>
+              <h3>Artigos Científicos</h3>
               <p>Espaço do autor e pesquisas científicas revisadas. Conteúdo do Instagram integrado.</p>
             </div>
           </a>

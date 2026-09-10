@@ -15,6 +15,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
           <a routerLink="/services" routerLinkActive="active">Serviços</a>
           <a routerLink="/blog" routerLinkActive="active">Artigos Científicos</a>
           <a routerLink="/news" routerLinkActive="active">Notícias</a>
+<<<<<<< HEAD
+=======
+          <a routerLink="/projects" routerLinkActive="active">Projetos</a>
+          <a routerLink="/hub" routerLinkActive="active">Hub</a>
+>>>>>>> 5e5fb26 (feat(issue #20): add Hub page for strategic partner ecosystem)
           <a routerLink="/courses" routerLinkActive="active">Cursos</a>
           <a routerLink="/contact" routerLinkActive="active" class="btn btn--primary nav__cta">Contato</a>
         </nav>

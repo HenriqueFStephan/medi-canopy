@@ -13,6 +13,7 @@ from run_issue_solver_agents import (  # noqa: E402
     IssueComment,
     build_prompt,
     comment_has_prefix,
+    extract_source_links,
     skip_reason,
 )
 
@@ -94,16 +95,39 @@ def test_correction_prompt_leads_with_comment():
     assert "Change the header copy." in prompt
 
 
+def test_extract_source_links_from_digest():
+    body = (
+        "## Medical\n"
+        "- [Cannabidiol for refractory epilepsy](https://doi.org/10.1000/example)\n"
+        "  - DOI: `10.1000/example`\n"
+        "- Extra note https://pubmed.ncbi.nlm.nih.gov/123\n"
+    )
+    links = extract_source_links(body)
+    assert links[0] == "https://doi.org/10.1000/example"
+    assert "https://pubmed.ncbi.nlm.nih.gov/123" in links
+
+
 def test_post_prompt_uses_comment_and_digest():
     comment = make_comment("[POST] Cannabidiol for refractory epilepsy")
     issue = make_issue(
         title="[RESEARCH] Daily Cannabis 2026-09-08",
-        body="Paper: Cannabidiol for refractory epilepsy. DOI 10.1000/example",
+        body=(
+            "## Medical\n"
+            "- [Cannabidiol for refractory epilepsy](https://doi.org/10.1000/example)\n"
+            "  - The Lancet Neurology · 2026 · Silva et al.\n"
+            "  - DOI: `10.1000/example`\n"
+        ),
         labels=["daily-cannabis", "research"],
     )
     prompt = build_prompt(issue, "org/repo", "main", trigger="post", comment=comment)
-    assert "Publish a blog post" in prompt
+    assert "Publish the named paper" in prompt
     assert "Cannabidiol for refractory epilepsy" in prompt
     assert "backend/data/seed/blog.json" in prompt
+    assert "backend/data/seed/news.json" in prompt
     assert "do not close this research digest" in prompt.lower() or "do not close issue" in prompt.lower()
     assert "agent_research" in prompt
+    assert "Analyze the paper in depth" in prompt
+    assert "https://doi.org/10.1000/example" in prompt
+    assert "`[texto](https://…)`" in prompt or "clickable markdown" in prompt
+    assert "source_url" in prompt
+    assert "Never drop a source link" in prompt

@@ -45,6 +45,14 @@ def _infer_tags(paper: ScientificPaperRaw) -> list[str]:
     return tags
 
 
+def _source_url(paper: ScientificPaperRaw | ScientificPaperNormalized) -> str:
+    doi = (getattr(paper, "doi", None) or "").strip()
+    url = (getattr(paper, "url", None) or "").strip()
+    if doi:
+        return f"https://doi.org/{doi}"
+    return url
+
+
 def _build_citation(paper: ScientificPaperRaw) -> str:
     """APA-style citation block (simplified)."""
     authors = ", ".join(paper.authors[:3])
@@ -52,7 +60,13 @@ def _build_citation(paper: ScientificPaperRaw) -> str:
         authors += ", et al."
     year = (paper.published_date or "")[:4] or "n.d."
     journal = paper.journal or "Preprint"
-    doi_part = f" https://doi.org/{paper.doi}" if paper.doi else ""
+    source = _source_url(paper)
+    if paper.doi and source:
+        doi_part = f" [{paper.doi}]({source})"
+    elif source:
+        doi_part = f" [Artigo original]({source})"
+    else:
+        doi_part = ""
     return f"{authors} ({year}). {paper.title}. *{journal}.*{doi_part}"
 
 
@@ -96,6 +110,9 @@ class ScientificPaperNormalizer:
         Content markdown includes abstract, placeholder summary, and citation.
         """
         authors_line = ", ".join(paper.authors) if paper.authors else "Autores não informados"
+        source = _source_url(paper)
+        journal = paper.journal or "Periódico não informado"
+        fonte = f"[{journal}]({source})" if source else journal
         summary_section = (
             f"## Resumo\n\n{paper.summary_pt}\n\n"
             if paper.summary_pt
@@ -106,7 +123,7 @@ class ScientificPaperNormalizer:
 
 **Publicado em:** {paper.published_date or "Data não informada"}  
 **Autores:** {authors_line}  
-**Fonte:** {paper.journal or "Periódico não informado"}
+**Fonte:** {fonte}
 
 {summary_section}
 

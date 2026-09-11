@@ -35,3 +35,19 @@ def test_to_blog_post_markdown():
     assert blog.slug == norm.slug
     assert "Hemp Textiles Review" in blog.content_markdown
     assert blog.source_type.value == "agent_research"
+
+
+def test_to_blog_post_includes_markdown_source_link():
+    raw = ScientificPaperRaw(
+        title="CBD trial",
+        authors=["Silva, M."],
+        abstract="A trial.",
+        doi="10.1000/test",
+        journal="Test Journal",
+        published_date="2026-01-01",
+        url="https://doi.org/10.1000/test",
+    )
+    normalizer = ScientificPaperNormalizer()
+    blog = normalizer.to_blog_post(normalizer.normalize(raw))
+    assert "[Test Journal](https://doi.org/10.1000/test)" in blog.content_markdown
+    assert "[10.1000/test](https://doi.org/10.1000/test)" in (blog.citation or "")

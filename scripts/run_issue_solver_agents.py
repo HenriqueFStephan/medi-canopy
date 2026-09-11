@@ -20,6 +20,7 @@ import argparse
 import base64
 import json
 import os
+import re
 import sys
 import textwrap
 import time
@@ -44,6 +45,9 @@ DAILY_CANNABIS_TITLE_MARKER = "daily cannabis"
 CORRECTION_PREFIX = "[CORRECTION]"
 POST_PREFIX = "[POST]"
 TRIGGERS = ("solve", "correction", "post")
+MARKDOWN_LINK_RE = re.compile(r"\[([^\]]+)\]\((https?://[^)\s]+)\)")
+BARE_URL_RE = re.compile(r"https?://[^\s)<>\"']+")
+DOI_TICK_RE = re.compile(r"DOI:\s*`([^`]+)`", re.IGNORECASE)
 
 
 @dataclass
@@ -180,6 +184,42 @@ def issue_labels(issue: Issue) -> set[str]:
 def comment_has_prefix(body: str, prefix: str) -> bool:
     """True when the comment starts with the command prefix (ignoring leading space)."""
     return body.lstrip().upper().startswith(prefix.upper())
+
+
+def extract_source_links(body: str) -> list[str]:
+    """URLs and DOIs from a research-issue description, in first-seen order."""
+    found: list[str] = []
+    seen: set[str] = set()
+
+    def add(url: str) -> None:
+        cleaned = url.strip().rstrip(").,;")
+        if not cleaned:
+            return
+        key = cleaned.lower()
+        if key in seen:
+            return
+        seen.add(key)
+        found.append(cleaned)
+
+    text = body or ""
+    for match in MARKDOWN_LINK_RE.finditer(text):
+        add(match.group(2))
+    for match in BARE_URL_RE.finditer(text):
+        add(match.group(0))
+    for match in DOI_TICK_RE.finditer(text):
+        add(f"https://doi.org/{match.group(1).strip()}")
+    return found
+
+
+def _source_links_block(links: list[str]) -> str:
+    if not links:
+        return (
+            "Source links found in the research issue:\n"
+            "- (none parsed — search the description again; if a URL or DOI is "
+            "present, you must still use it)"
+        )
+    listed = "\n".join(f"- {url}" for url in links)
+    return "Source links found in the research issue (open these before writing):\n" + listed
 
 
 def skip_reason(issue: Issue, *, trigger: str = "solve") -> str | None:
@@ -434,37 +474,57 @@ def build_prompt(
     elif trigger == "post":
         if comment is None:
             raise ValueError("post trigger requires a comment")
+        source_links = extract_source_links(issue.body)
         task = "\n\n".join(
             [
                 textwrap.dedent(
                     f"""
                     You are working on repository {repo}.
-                    Publish a blog post from this daily-cannabis research digest
-                    (GitHub issue #{issue.number}) on a dedicated branch.
+                    Publish the named paper(s) from this daily-cannabis research digest
+                    (GitHub issue #{issue.number}) onto the Medi Canopy site.
 
                     Constraints:
-                    - The triggering [POST] comment names which paper or content to publish.
+                    - The triggering [POST] comment names which paper or news item to publish.
                     - Do not treat the digest as a coding bug to "solve".
                     - Do not implement papers that the comment does not name.
                     - Do not close issue #{issue.number}; other papers may still be posted.
                     - Keep scope focused and minimal.
                     - Base branch: {base_ref}.
+
+                    Read the papers before you write (required):
+                    - The issue description is a digest. It is not enough to paraphrase its
+                      one-line summaries.
+                    - Open every source URL/DOI for the selected paper(s) listed below and
+                      in the digest (markdown links like [title](url), DOI lines, bare URLs).
+                    - Analyze the paper in depth — abstract, methods, main results,
+                      limitations, and conflicts/funding — before writing any resumo,
+                      abstract, or commentary for the website.
+                    - If the full text is paywalled, still open the landing page/abstract
+                      that the link provides, say so briefly, and keep the original link.
                     """
                 ).strip(),
                 "Triggering comment:\n" + _comment_block(comment, POST_PREFIX),
+                _source_links_block(source_links),
                 textwrap.dedent(
                     """
                     Publishing rules:
                     - This [POST] comment is human approval for the named paper only.
-                    - Add a post to `backend/data/seed/blog.json` matching existing entries
-                      (title, slug, excerpt, content_markdown, tags, source_type, citation,
-                      author_name, published_at).
-                    - `source_type` must be `agent_research`.
-                    - Write in Portuguese, evidence-based, citing the paper (DOI/URL).
+                    - Always include every URL or DOI given in the issue description for
+                      that paper. Never drop a source link.
+                    - Links on the site must be clickable markdown: `[texto](https://…)`.
+                      Bare URLs and citation text without a markdown link do not render.
+                    - Blog (`backend/data/seed/blog.json`): `source_type` = `agent_research`.
+                      Put a **Fonte** / **Artigo original** section with the markdown link.
+                      Also set `citation` to include the same URL (prefer https://doi.org/…).
+                    - News (`backend/data/seed/news.json`): set `source_url` to that URL
+                      (the news list navigates there) and `source_name` to the journal or
+                      publisher. Repeat the markdown link in `content`.
+                    - Write in Portuguese, evidence-based, after the in-depth reading above.
                     - Follow `backend/app/services/paper_normalizer.py` and `docs/BRAND.md`.
                     """
                 ).strip(),
-                "Research digest (source material):\n" + metadata,
+                "Research digest (source material — includes the paper titles and links):\n"
+                + metadata,
             ]
         )
         rules = _delivery_rules(

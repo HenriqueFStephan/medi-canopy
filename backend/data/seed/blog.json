@@ -5,7 +5,11 @@
     "slug": "ciclo-completo-instalacao-indoor",
     "excerpt": "Compartilhando aprendizados do planejamento do galpão ao primeiro harvest — climatização autônoma, VPD e fluxo de trabalho.",
     "content_markdown": "# Do projeto à colheita\n\nNos últimos meses documentei no Instagram [@papiroebers](https://www.instagram.com/papiroebers) cada etapa de um projeto real: layout do galpão, engenharia do sistema climático, escolha de cultivares e rotina de manejo.\n\n## Planejamento\n\nAntes da primeira planta, definimos zonas de vegetação e floração, redundância em HVAC e monitoramento 24/7.\n\n## Operação\n\nManutenção preventiva e registros de ambiente (temperatura, UR, CO₂) foram decisivos para consistência entre lotes.\n\n---\n*Conteúdo originalmente publicado no Instagram — curadoria Medi Canopy.*",
-    "tags": ["cultivation", "consulting", "brazil"],
+    "tags": [
+      "cultivation",
+      "consulting",
+      "brazil"
+    ],
     "source_type": "instagram",
     "cover_image_url": null,
     "instagram_url": "https://www.instagram.com/papiroebers",
@@ -20,7 +24,10 @@
     "slug": "regulamentacao-brasil-2026",
     "excerpt": "Panorama político e regulatório com foco prático para quem opera ou planeja entrar no mercado legal brasileiro.",
     "content_markdown": "# Regulamentação no Brasil\n\nO cenário regulatório continua em evolução. Neste post reúno pontos que discuti com operadores e seguidores no Instagram.\n\n- Marco do cânhamo industrial vs. cannabis medicinal\n- Papel da ANVISA e exigências de rastreabilidade\n- Oportunidades para consultoria técnica de ponta a ponta\n\nAcompanhe também as notícias curadas na seção **News** deste hub.\n\n---\n*Siga [@papiroebers](https://www.instagram.com/papiroebers) para atualizações em tempo real.*",
-    "tags": ["policy", "brazil"],
+    "tags": [
+      "policy",
+      "brazil"
+    ],
     "source_type": "instagram",
     "cover_image_url": null,
     "instagram_url": "https://www.instagram.com/papiroebers",
@@ -35,7 +42,10 @@
     "slug": "beneficios-medicinais-evidencia",
     "excerpt": "Como avaliar estudos sobre CBD e THC sem cair em hype — guia rápido para leitores e pacientes.",
     "content_markdown": "# Benefícios medicinais: evidência vs. moda\n\nCannabis medicinal merece rigor. Quando compartilho conteúdo no Instagram, priorizo:\n\n1. **Fonte primária** — artigo original, não só manchete\n2. **Desenho do estudo** — RCT vs. observacional\n3. **Conflito de interesse** — quem financiou?\n\nO agente de pesquisa deste site envia papers diariamente para minha revisão por e-mail. Só o que passa por essa triagem vira post formal aqui no blog.\n\n---\n*Curadoria humana é inegociável para saúde pública.*",
-    "tags": ["medical", "research"],
+    "tags": [
+      "medical",
+      "research"
+    ],
     "source_type": "instagram",
     "cover_image_url": null,
     "instagram_url": "https://www.instagram.com/papiroebers",
@@ -43,5 +53,223 @@
     "author_name": "Papi Ro Ebers",
     "published_at": "2026-05-28T09:15:00",
     "updated_at": "2026-05-28T09:15:00"
+  },
+  {
+    "id": "blog-research-20260907-01",
+    "title": "Phenotypic and genetic characterization of sixteen grain and dual-type industrial hemp varieties (Cannabis sativa L.) for agronomic and yield component traits",
+    "slug": "phenotypic-and-genetic-characterization-of-sixteen-grain-and-dual-type-industria",
+    "excerpt": "Ensaios de campo plurianuais no Missouri com 16 variedades de cânhamo para grão e duplo propósito identificaram Futura 83 como a melhor produtora, com rendimentos de 2434–2793 kg/ha. A expressão diferencial de genes candidatos ligados à deiscência de sementes e floração oferece alvos para melhoramento genético de cânhamo granífero na região.",
+    "content_markdown": "# Phenotypic and genetic characterization of sixteen grain and dual-type industrial hemp varieties (Cannabis sativa L.) for agronomic and yield component traits\n\n**Publicado em:** 2025  \n**Autores:** Tamang et al.  \n**Fonte:** Frontiers in Plant Science\n\n## Resumo\n\nEnsaios de campo plurianuais no Missouri com 16 variedades de cânhamo para grão e duplo propósito identificaram Futura 83 como a melhor produtora, com rendimentos de 2434–2793 kg/ha. A expressão diferencial de genes candidatos ligados à deiscência de sementes e floração oferece alvos para melhoramento genético de cânhamo granífero na região.\n\n## Contexto\n\nEste artigo foi selecionado pelo agente de pesquisa Medi Canopy no digest diário de 2026-09-07 após verificação de confiabilidade (DOI válido, periódico revisado por pares). Consulte a fonte original para metodologia completa e limitações.\n\n## Referência\n\nTamang et al. (2025). Phenotypic and genetic characterization of sixteen grain and dual-type industrial hemp varieties (Cannabis sativa L.) for agronomic and yield component traits. *Frontiers in Plant Science.* https://doi.org/10.3389/fpls.2025.1632346\n\n---\n*Artigo científico curado para o blog Medi Canopy. Consulte a fonte original antes de decisões clínicas ou regulatórias.*\n",
+    "tags": [
+      "cultivation",
+      "research"
+    ],
+    "source_type": "agent_research",
+    "cover_image_url": null,
+    "instagram_url": null,
+    "citation": "Tamang et al. (2025). Phenotypic and genetic characterization of sixteen grain and dual-type industrial hemp varieties (Cannabis sativa L.) for agronomic and yield component traits. *Frontiers in Plant Science.* https://doi.org/10.3389/fpls.2025.1632346",
+    "author_name": "Medi Canopy",
+    "published_at": "2026-09-07T12:00:00",
+    "updated_at": "2026-09-07T12:00:00"
+  },
+  {
+    "id": "blog-research-20260907-02",
+    "title": "Selecting Optimal Hemp (Cannabis sativa L.) Varieties for Long Fibre Production in Western Europe",
+    "slug": "selecting-optimal-hemp-cannabis-sativa-l-varieties-for-long-fibre-production-in",
+    "excerpt": "Ensaios de três anos em duas localidades na Flandres mostraram que emergência precária pode reduzir pela metade a produção de fibra longa, enquanto variedades tardias atingiram até 2,4 t ha⁻¹ de fibra longa com qualidade comparável ao linho. Bialobrzeskie destacou-se como opção de floração médio-tardia para fibra na Europa Ocidental.",
+    "content_markdown": "# Selecting Optimal Hemp (Cannabis sativa L.) Varieties for Long Fibre Production in Western Europe\n\n**Publicado em:** 2025  \n**Autores:** Pappaert et al.  \n**Fonte:** Agronomy\n\n## Resumo\n\nEnsaios de três anos em duas localidades na Flandres mostraram que emergência precária pode reduzir pela metade a produção de fibra longa, enquanto variedades tardias atingiram até 2,4 t ha⁻¹ de fibra longa com qualidade comparável ao linho. Bialobrzeskie destacou-se como opção de floração médio-tardia para fibra na Europa Ocidental.\n\n## Contexto\n\nEste artigo foi selecionado pelo agente de pesquisa Medi Canopy no digest diário de 2026-09-07 após verificação de confiabilidade (DOI válido, periódico revisado por pares). Consulte a fonte original para metodologia completa e limitações.\n\n## Referência\n\nPappaert et al. (2025). Selecting Optimal Hemp (Cannabis sativa L.) Varieties for Long Fibre Production in Western Europe. *Agronomy.* https://doi.org/10.3390/agronomy15071521\n\n---\n*Artigo científico curado para o blog Medi Canopy. Consulte a fonte original antes de decisões clínicas ou regulatórias.*\n",
+    "tags": [
+      "cultivation",
+      "textile",
+      "research"
+    ],
+    "source_type": "agent_research",
+    "cover_image_url": null,
+    "instagram_url": null,
+    "citation": "Pappaert et al. (2025). Selecting Optimal Hemp (Cannabis sativa L.) Varieties for Long Fibre Production in Western Europe. *Agronomy.* https://doi.org/10.3390/agronomy15071521",
+    "author_name": "Medi Canopy",
+    "published_at": "2026-09-07T12:01:00",
+    "updated_at": "2026-09-07T12:01:00"
+  },
+  {
+    "id": "blog-research-20260907-03",
+    "title": "Subcanopy and Inter-Canopy Supplemental Light Enhances and Standardizes Yields in Medicinal Cannabis (Cannabis sativa L.)",
+    "slug": "subcanopy-and-inter-canopy-supplemental-light-enhances-and-standardizes-yields-i",
+    "excerpt": "Em ambiente controlado, a iluminação inter-canópica por LED aumentou o rendimento de inflorescências secas em 30% e reduziu a variabilidade de THC e terpenos em mais de 50%, comparada à iluminação superior isolada. Estratégia prática para uniformizar produção medicinal indoor.",
+    "content_markdown": "# Subcanopy and Inter-Canopy Supplemental Light Enhances and Standardizes Yields in Medicinal Cannabis (Cannabis sativa L.)\n\n**Publicado em:** 2025  \n**Autores:** Garrido et al.  \n**Fonte:** Plants\n\n## Resumo\n\nEm ambiente controlado, a iluminação inter-canópica por LED aumentou o rendimento de inflorescências secas em 30% e reduziu a variabilidade de THC e terpenos em mais de 50%, comparada à iluminação superior isolada. Estratégia prática para uniformizar produção medicinal indoor.\n\n## Contexto\n\nEste artigo foi selecionado pelo agente de pesquisa Medi Canopy no digest diário de 2026-09-07 após verificação de confiabilidade (DOI válido, periódico revisado por pares). Consulte a fonte original para metodologia completa e limitações.\n\n## Referência\n\nGarrido et al. (2025). Subcanopy and Inter-Canopy Supplemental Light Enhances and Standardizes Yields in Medicinal Cannabis (Cannabis sativa L.). *Plants.* https://doi.org/10.3390/plants14101469\n\n---\n*Artigo científico curado para o blog Medi Canopy. Consulte a fonte original antes de decisões clínicas ou regulatórias.*\n",
+    "tags": [
+      "cultivation",
+      "medical",
+      "research"
+    ],
+    "source_type": "agent_research",
+    "cover_image_url": null,
+    "instagram_url": null,
+    "citation": "Garrido et al. (2025). Subcanopy and Inter-Canopy Supplemental Light Enhances and Standardizes Yields in Medicinal Cannabis (Cannabis sativa L.). *Plants.* https://doi.org/10.3390/plants14101469",
+    "author_name": "Medi Canopy",
+    "published_at": "2026-09-07T12:02:00",
+    "updated_at": "2026-09-07T12:02:00"
+  },
+  {
+    "id": "blog-research-20260907-04",
+    "title": "Thermal and mechanical properties of hempcrete with low-carbon binders: Effects of 3D distribution and orientation of hemp shivs and microstructures of hempcrete",
+    "slug": "thermal-and-mechanical-properties-of-hempcrete-with-low-carbon-binders-effects-o",
+    "excerpt": "Com micro-CT, os autores compararam hempcrete com cal hidratada, calcário-caulim calcinado e ligantes alcalino-ativados; formulações alcalino-ativadas alcançaram 4,1 vezes mais resistência à compressão e 30,9% menos condutividade térmica que a cal hidratada, ligando química do ligante e microestrutura do shiv ao desempenho.",
+    "content_markdown": "# Thermal and mechanical properties of hempcrete with low-carbon binders: Effects of 3D distribution and orientation of hemp shivs and microstructures of hempcrete\n\n**Publicado em:** 2025  \n**Autores:** Song et al.  \n**Fonte:** Journal of Building Engineering\n\n## Resumo\n\nCom micro-CT, os autores compararam hempcrete com cal hidratada, calcário-caulim calcinado e ligantes alcalino-ativados; formulações alcalino-ativadas alcançaram 4,1 vezes mais resistência à compressão e 30,9% menos condutividade térmica que a cal hidratada, ligando química do ligante e microestrutura do shiv ao desempenho.\n\n## Contexto\n\nEste artigo foi selecionado pelo agente de pesquisa Medi Canopy no digest diário de 2026-09-07 após verificação de confiabilidade (DOI válido, periódico revisado por pares). Consulte a fonte original para metodologia completa e limitações.\n\n## Referência\n\nSong et al. (2025). Thermal and mechanical properties of hempcrete with low-carbon binders: Effects of 3D distribution and orientation of hemp shivs and microstructures of hempcrete. *Journal of Building Engineering.* https://doi.org/10.1016/j.jobe.2025.113863\n\n---\n*Artigo científico curado para o blog Medi Canopy. Consulte a fonte original antes de decisões clínicas ou regulatórias.*\n",
+    "tags": [
+      "textile",
+      "research"
+    ],
+    "source_type": "agent_research",
+    "cover_image_url": null,
+    "instagram_url": null,
+    "citation": "Song et al. (2025). Thermal and mechanical properties of hempcrete with low-carbon binders: Effects of 3D distribution and orientation of hemp shivs and microstructures of hempcrete. *Journal of Building Engineering.* https://doi.org/10.1016/j.jobe.2025.113863",
+    "author_name": "Medi Canopy",
+    "published_at": "2026-09-07T12:03:00",
+    "updated_at": "2026-09-07T12:03:00"
+  },
+  {
+    "id": "blog-research-20260907-05",
+    "title": "Effect of Technological Variables on Thermal Conductivity and Compressive Strength of Hemp–Lime Composites",
+    "slug": "effect-of-technological-variables-on-thermal-conductivity-and-compressive-streng",
+    "excerpt": "Estudo fatorial de relação água/ligante e grau de compactação indicou que a proporção ligante/shiv e o nível de compactação governam condutividade térmica e resistência via densidade aparente. Resultados apoiam diretrizes padronizadas para paredes, coberturas e pisos de materiais bio-based.",
+    "content_markdown": "# Effect of Technological Variables on Thermal Conductivity and Compressive Strength of Hemp–Lime Composites\n\n**Publicado em:** 2026  \n**Autores:** Piątkiewicz et al.  \n**Fonte:** CivilEng\n\n## Resumo\n\nEstudo fatorial de relação água/ligante e grau de compactação indicou que a proporção ligante/shiv e o nível de compactação governam condutividade térmica e resistência via densidade aparente. Resultados apoiam diretrizes padronizadas para paredes, coberturas e pisos de materiais bio-based.\n\n## Contexto\n\nEste artigo foi selecionado pelo agente de pesquisa Medi Canopy no digest diário de 2026-09-07 após verificação de confiabilidade (DOI válido, periódico revisado por pares). Consulte a fonte original para metodologia completa e limitações.\n\n## Referência\n\nPiątkiewicz et al. (2026). Effect of Technological Variables on Thermal Conductivity and Compressive Strength of Hemp–Lime Composites. *CivilEng.* https://doi.org/10.3390/civileng7020033\n\n---\n*Artigo científico curado para o blog Medi Canopy. Consulte a fonte original antes de decisões clínicas ou regulatórias.*\n",
+    "tags": [
+      "textile",
+      "research"
+    ],
+    "source_type": "agent_research",
+    "cover_image_url": null,
+    "instagram_url": null,
+    "citation": "Piątkiewicz et al. (2026). Effect of Technological Variables on Thermal Conductivity and Compressive Strength of Hemp–Lime Composites. *CivilEng.* https://doi.org/10.3390/civileng7020033",
+    "author_name": "Medi Canopy",
+    "published_at": "2026-09-07T12:04:00",
+    "updated_at": "2026-09-07T12:04:00"
+  },
+  {
+    "id": "blog-research-20260907-06",
+    "title": "Full-spectrum extract from Cannabis sativa DKJ127 for chronic low back pain: a phase 3 randomized placebo-controlled trial",
+    "slug": "full-spectrum-extract-from-cannabis-sativa-dkj127-for-chronic-low-back-pain-a-ph",
+    "excerpt": "Em ensaio de fase 3 com 820 adultos com dor lombar crônica, o extrato full-spectrum VER-01 reduziu significativamente a intensidade da dor versus placebo ao longo de 12 semanas, sem sinais de dependência ou abstinência. Um dos maiores RCTs a apoiar analgesia canábica para dor crônica comum.",
+    "content_markdown": "# Full-spectrum extract from Cannabis sativa DKJ127 for chronic low back pain: a phase 3 randomized placebo-controlled trial\n\n**Publicado em:** 2025  \n**Autores:** Karst et al.  \n**Fonte:** Nature Medicine\n\n## Resumo\n\nEm ensaio de fase 3 com 820 adultos com dor lombar crônica, o extrato full-spectrum VER-01 reduziu significativamente a intensidade da dor versus placebo ao longo de 12 semanas, sem sinais de dependência ou abstinência. Um dos maiores RCTs a apoiar analgesia canábica para dor crônica comum.\n\n## Contexto\n\nEste artigo foi selecionado pelo agente de pesquisa Medi Canopy no digest diário de 2026-09-07 após verificação de confiabilidade (DOI válido, periódico revisado por pares). Consulte a fonte original para metodologia completa e limitações.\n\n## Referência\n\nKarst et al. (2025). Full-spectrum extract from Cannabis sativa DKJ127 for chronic low back pain: a phase 3 randomized placebo-controlled trial. *Nature Medicine.* https://doi.org/10.1038/s41591-025-03977-0\n\n---\n*Artigo científico curado para o blog Medi Canopy. Consulte a fonte original antes de decisões clínicas ou regulatórias.*\n",
+    "tags": [
+      "medical",
+      "research"
+    ],
+    "source_type": "agent_research",
+    "cover_image_url": null,
+    "instagram_url": null,
+    "citation": "Karst et al. (2025). Full-spectrum extract from Cannabis sativa DKJ127 for chronic low back pain: a phase 3 randomized placebo-controlled trial. *Nature Medicine.* https://doi.org/10.1038/s41591-025-03977-0",
+    "author_name": "Medi Canopy",
+    "published_at": "2026-09-07T12:05:00",
+    "updated_at": "2026-09-07T12:05:00"
+  },
+  {
+    "id": "blog-research-20260907-07",
+    "title": "Cannabidiol for chronic pain in rheumatoid arthritis and ankylosing spondylitis: a randomized, placebo-controlled trial with exploratory tetrahydrocannabinol add-on",
+    "slug": "cannabidiol-for-chronic-pain-in-rheumatoid-arthritis-and-ankylosing-spondylitis",
+    "excerpt": "Ensaio multicêntrico em 66 pacientes com artrite reumatoide ou espondilite anquilosante: CBD em baixa dose não produziu alívio relevante, mas adição aberta de THC em não respondedores melhorou dor e sono. Sugere papel possível de canabinoides combinados, com confirmação necessária em ensaios cegos.",
+    "content_markdown": "# Cannabidiol for chronic pain in rheumatoid arthritis and ankylosing spondylitis: a randomized, placebo-controlled trial with exploratory tetrahydrocannabinol add-on\n\n**Publicado em:** 2026  \n**Autores:** Hendricks et al.  \n**Fonte:** Journal of Cannabis Research\n\n## Resumo\n\nEnsaio multicêntrico em 66 pacientes com artrite reumatoide ou espondilite anquilosante: CBD em baixa dose não produziu alívio relevante, mas adição aberta de THC em não respondedores melhorou dor e sono. Sugere papel possível de canabinoides combinados, com confirmação necessária em ensaios cegos.\n\n## Contexto\n\nEste artigo foi selecionado pelo agente de pesquisa Medi Canopy no digest diário de 2026-09-07 após verificação de confiabilidade (DOI válido, periódico revisado por pares). Consulte a fonte original para metodologia completa e limitações.\n\n## Referência\n\nHendricks et al. (2026). Cannabidiol for chronic pain in rheumatoid arthritis and ankylosing spondylitis: a randomized, placebo-controlled trial with exploratory tetrahydrocannabinol add-on. *Journal of Cannabis Research.* https://doi.org/10.1186/s42238-026-00496-8\n\n---\n*Artigo científico curado para o blog Medi Canopy. Consulte a fonte original antes de decisões clínicas ou regulatórias.*\n",
+    "tags": [
+      "medical",
+      "research"
+    ],
+    "source_type": "agent_research",
+    "cover_image_url": null,
+    "instagram_url": null,
+    "citation": "Hendricks et al. (2026). Cannabidiol for chronic pain in rheumatoid arthritis and ankylosing spondylitis: a randomized, placebo-controlled trial with exploratory tetrahydrocannabinol add-on. *Journal of Cannabis Research.* https://doi.org/10.1186/s42238-026-00496-8",
+    "author_name": "Medi Canopy",
+    "published_at": "2026-09-07T12:06:00",
+    "updated_at": "2026-09-07T12:06:00"
+  },
+  {
+    "id": "blog-research-20260907-08",
+    "title": "Medicinal cannabis for symptom control in advanced cancer: a double-blind, placebo-controlled, randomised clinical trial of 1:1 tetrahydrocannabinol and cannabidiol",
+    "slug": "medicinal-cannabis-for-symptom-control-in-advanced-cancer-a-double-blind-placebo",
+    "excerpt": "Em 144 pacientes em cuidados paliativos oncológicos, óleo oral 1:1 THC:CBD não reduziu a carga total de sintomas versus placebo em 28 dias. Pequeno benefício em dor foi compensado por maior toxicidade psicomimética, moderando expectativas de alívio amplo em paliação.",
+    "content_markdown": "# Medicinal cannabis for symptom control in advanced cancer: a double-blind, placebo-controlled, randomised clinical trial of 1:1 tetrahydrocannabinol and cannabidiol\n\n**Publicado em:** 2025  \n**Autores:** Hardy et al.  \n**Fonte:** Supportive Care in Cancer\n\n## Resumo\n\nEm 144 pacientes em cuidados paliativos oncológicos, óleo oral 1:1 THC:CBD não reduziu a carga total de sintomas versus placebo em 28 dias. Pequeno benefício em dor foi compensado por maior toxicidade psicomimética, moderando expectativas de alívio amplo em paliação.\n\n## Contexto\n\nEste artigo foi selecionado pelo agente de pesquisa Medi Canopy no digest diário de 2026-09-07 após verificação de confiabilidade (DOI válido, periódico revisado por pares). Consulte a fonte original para metodologia completa e limitações.\n\n## Referência\n\nHardy et al. (2025). Medicinal cannabis for symptom control in advanced cancer: a double-blind, placebo-controlled, randomised clinical trial of 1:1 tetrahydrocannabinol and cannabidiol. *Supportive Care in Cancer.* https://doi.org/10.1007/s00520-025-09763-5\n\n---\n*Artigo científico curado para o blog Medi Canopy. Consulte a fonte original antes de decisões clínicas ou regulatórias.*\n",
+    "tags": [
+      "medical",
+      "research"
+    ],
+    "source_type": "agent_research",
+    "cover_image_url": null,
+    "instagram_url": null,
+    "citation": "Hardy et al. (2025). Medicinal cannabis for symptom control in advanced cancer: a double-blind, placebo-controlled, randomised clinical trial of 1:1 tetrahydrocannabinol and cannabidiol. *Supportive Care in Cancer.* https://doi.org/10.1007/s00520-025-09763-5",
+    "author_name": "Medi Canopy",
+    "published_at": "2026-09-07T12:07:00",
+    "updated_at": "2026-09-07T12:07:00"
+  },
+  {
+    "id": "blog-research-20260907-09",
+    "title": "The adverse public health effects of non-medical cannabis legalisation in Canada and the USA",
+    "slug": "the-adverse-public-health-effects-of-non-medical-cannabis-legalisation-in-canada",
+    "excerpt": "Síntese de evidências associa legalização não medicinal no Canadá e EUA a aumento de uso adulto, visitas a emergência, danos relacionados a psicose e lesões no trânsito, amplificados em mercados comercializados com produtos de alta potência. Defende vigilância contínua e regulação orientada à saúde pública.",
+    "content_markdown": "# The adverse public health effects of non-medical cannabis legalisation in Canada and the USA\n\n**Publicado em:** 2025  \n**Autores:** Mekonen Yimer et al.  \n**Fonte:** The Lancet Public Health\n\n## Resumo\n\nSíntese de evidências associa legalização não medicinal no Canadá e EUA a aumento de uso adulto, visitas a emergência, danos relacionados a psicose e lesões no trânsito, amplificados em mercados comercializados com produtos de alta potência. Defende vigilância contínua e regulação orientada à saúde pública.\n\n## Contexto\n\nEste artigo foi selecionado pelo agente de pesquisa Medi Canopy no digest diário de 2026-09-07 após verificação de confiabilidade (DOI válido, periódico revisado por pares). Consulte a fonte original para metodologia completa e limitações.\n\n## Referência\n\nMekonen Yimer et al. (2025). The adverse public health effects of non-medical cannabis legalisation in Canada and the USA. *The Lancet Public Health.* https://doi.org/10.1016/S2468-2667(24)00299-8\n\n---\n*Artigo científico curado para o blog Medi Canopy. Consulte a fonte original antes de decisões clínicas ou regulatórias.*\n",
+    "tags": [
+      "policy",
+      "research"
+    ],
+    "source_type": "agent_research",
+    "cover_image_url": null,
+    "instagram_url": null,
+    "citation": "Mekonen Yimer et al. (2025). The adverse public health effects of non-medical cannabis legalisation in Canada and the USA. *The Lancet Public Health.* https://doi.org/10.1016/S2468-2667(24)00299-8",
+    "author_name": "Medi Canopy",
+    "published_at": "2026-09-07T12:08:00",
+    "updated_at": "2026-09-07T12:08:00"
+  },
+  {
+    "id": "blog-research-20260907-10",
+    "title": "Getting \"The whole picture\": A review of international research on the outcomes of regulated cannabis supply",
+    "slug": "getting-the-whole-picture-a-review-of-international-research-on-the-outcomes-of",
+    "excerpt": "Revisão de modelos regulados na Holanda, Espanha, Uruguai, Canadá e estados americanos: fornecimento legal reduziu prisões relacionadas à cannabis e aumentou uso adulto e utilização de saúde, com desfechos negativos mais consistentes em estados comercializados dos EUA. Destaca trade-offs para formuladores de política.",
+    "content_markdown": "# Getting \"The whole picture\": A review of international research on the outcomes of regulated cannabis supply\n\n**Publicado em:** 2025  \n**Autores:** Belackova et al.  \n**Fonte:** International Journal of Drug Policy\n\n## Resumo\n\nRevisão de modelos regulados na Holanda, Espanha, Uruguai, Canadá e estados americanos: fornecimento legal reduziu prisões relacionadas à cannabis e aumentou uso adulto e utilização de saúde, com desfechos negativos mais consistentes em estados comercializados dos EUA. Destaca trade-offs para formuladores de política.\n\n## Contexto\n\nEste artigo foi selecionado pelo agente de pesquisa Medi Canopy no digest diário de 2026-09-07 após verificação de confiabilidade (DOI válido, periódico revisado por pares). Consulte a fonte original para metodologia completa e limitações.\n\n## Referência\n\nBelackova et al. (2025). Getting \"The whole picture\": A review of international research on the outcomes of regulated cannabis supply. *International Journal of Drug Policy.* https://doi.org/10.1016/j.drugpo.2025.104796\n\n---\n*Artigo científico curado para o blog Medi Canopy. Consulte a fonte original antes de decisões clínicas ou regulatórias.*\n",
+    "tags": [
+      "policy",
+      "research"
+    ],
+    "source_type": "agent_research",
+    "cover_image_url": null,
+    "instagram_url": null,
+    "citation": "Belackova et al. (2025). Getting \"The whole picture\": A review of international research on the outcomes of regulated cannabis supply. *International Journal of Drug Policy.* https://doi.org/10.1016/j.drugpo.2025.104796",
+    "author_name": "Medi Canopy",
+    "published_at": "2026-09-07T12:09:00",
+    "updated_at": "2026-09-07T12:09:00"
+  },
+  {
+    "id": "blog-research-20260907-11",
+    "title": "A comparative life cycle assessment of textile fiber production processes: Hemp versus cotton",
+    "slug": "a-comparative-life-cycle-assessment-of-textile-fiber-production-processes-hemp-v",
+    "excerpt": "Análise de ciclo de vida por hectare indicou produção de fibra de cânhamo com impactos substancialmente menores de eutrofização, aquecimento global e acidificação que algodão, do cultivo ao processamento. Apoia cânhamo como fibra natural de menor impacto em cadeias têxteis.",
+    "content_markdown": "# A comparative life cycle assessment of textile fiber production processes: Hemp versus cotton\n\n**Publicado em:** 2025  \n**Autores:** Jaczynska et al.  \n**Fonte:** Cleaner Waste Systems\n\n## Resumo\n\nAnálise de ciclo de vida por hectare indicou produção de fibra de cânhamo com impactos substancialmente menores de eutrofização, aquecimento global e acidificação que algodão, do cultivo ao processamento. Apoia cânhamo como fibra natural de menor impacto em cadeias têxteis.\n\n## Contexto\n\nEste artigo foi selecionado pelo agente de pesquisa Medi Canopy no digest diário de 2026-09-07 após verificação de confiabilidade (DOI válido, periódico revisado por pares). Consulte a fonte original para metodologia completa e limitações.\n\n## Referência\n\nJaczynska et al. (2025). A comparative life cycle assessment of textile fiber production processes: Hemp versus cotton. *Cleaner Waste Systems.* https://doi.org/10.1016/j.clwas.2025.100277\n\n---\n*Artigo científico curado para o blog Medi Canopy. Consulte a fonte original antes de decisões clínicas ou regulatórias.*\n",
+    "tags": [
+      "textile",
+      "research"
+    ],
+    "source_type": "agent_research",
+    "cover_image_url": null,
+    "instagram_url": null,
+    "citation": "Jaczynska et al. (2025). A comparative life cycle assessment of textile fiber production processes: Hemp versus cotton. *Cleaner Waste Systems.* https://doi.org/10.1016/j.clwas.2025.100277",
+    "author_name": "Medi Canopy",
+    "published_at": "2026-09-07T12:10:00",
+    "updated_at": "2026-09-07T12:10:00"
+  },
+  {
+    "id": "blog-research-20260907-12",
+    "title": "Carbon footprint and oxygen footprint assessment of hemp yarn",
+    "slug": "carbon-footprint-and-oxygen-footprint-assessment-of-hemp-yarn",
+    "excerpt": "Do cultivo à produção de fio, a fiação respondeu por 86,4% das emissões de carbono e 88% do consumo de oxigênio, enquanto o cultivo sequestrou carbono e liberou oxigênio. O framework ajuda produtores têxteis a identificar hotspots de descarbonização.",
+    "content_markdown": "# Carbon footprint and oxygen footprint assessment of hemp yarn\n\n**Publicado em:** 2024  \n**Autores:** Liu et al.  \n**Fonte:** International Journal of Global Warming\n\n## Resumo\n\nDo cultivo à produção de fio, a fiação respondeu por 86,4% das emissões de carbono e 88% do consumo de oxigênio, enquanto o cultivo sequestrou carbono e liberou oxigênio. O framework ajuda produtores têxteis a identificar hotspots de descarbonização.\n\n## Contexto\n\nEste artigo foi selecionado pelo agente de pesquisa Medi Canopy no digest diário de 2026-09-07 após verificação de confiabilidade (DOI válido, periódico revisado por pares). Consulte a fonte original para metodologia completa e limitações.\n\n## Referência\n\nLiu et al. (2024). Carbon footprint and oxygen footprint assessment of hemp yarn. *International Journal of Global Warming.* https://doi.org/10.1504/ijgw.2024.137161\n\n---\n*Artigo científico curado para o blog Medi Canopy. Consulte a fonte original antes de decisões clínicas ou regulatórias.*\n",
+    "tags": [
+      "textile",
+      "research"
+    ],
+    "source_type": "agent_research",
+    "cover_image_url": null,
+    "instagram_url": null,
+    "citation": "Liu et al. (2024). Carbon footprint and oxygen footprint assessment of hemp yarn. *International Journal of Global Warming.* https://doi.org/10.1504/ijgw.2024.137161",
+    "author_name": "Medi Canopy",
+    "published_at": "2026-09-07T12:11:00",
+    "updated_at": "2026-09-07T12:11:00"
   }
 ]

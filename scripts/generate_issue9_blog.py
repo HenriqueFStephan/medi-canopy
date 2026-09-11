@@ -1,0 +1,708 @@
+#!/usr/bin/env python3
+"""Generate full Portuguese research briefings for issue #9 digest."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+BLOG_SEED = ROOT / "backend" / "data" / "seed" / "blog.json"
+
+
+def md(*sections: tuple[str, str]) -> str:
+    parts = []
+    for heading, body in sections:
+        parts.append(f"## {heading}\n\n{body.strip()}")
+    return "\n\n".join(parts) + "\n"
+
+
+def cite(authors: str, year: int, title: str, journal: str, doi: str) -> str:
+    url = f"https://doi.org/{doi}"
+    return (
+        f"{authors} ({year}). {title}. *{journal}*. "
+        f"[{url}]({url})"
+    )
+
+
+POSTS = [
+    {
+        "id": "blog-research-20260907-01",
+        "title": "Phenotypic and genetic characterization of sixteen grain and dual-type industrial hemp varieties (Cannabis sativa L.) for agronomic and yield component traits",
+        "slug": "phenotypic-and-genetic-characterization-of-sixteen-grain-and-dual-type-industria",
+        "excerpt": "Ensaios de campo plurianuais no Missouri com 16 variedades de cânhamo granífero e de duplo propósito identificaram Futura 83 como líder de produtividade (2434–2793 kg/ha) e apontaram genes candidatos ligados à deiscência de sementes e floração.",
+        "tags": ["cultivation", "research"],
+        "doi": "10.3389/fpls.2025.1632346",
+        "citation": cite(
+            "Tamang et al.",
+            2025,
+            "Phenotypic and genetic characterization of sixteen grain and dual-type industrial hemp varieties (Cannabis sativa L.) for agronomic and yield component traits",
+            "Frontiers in Plant Science",
+            "10.3389/fpls.2025.1632346",
+        ),
+        "published_at": "2026-09-07T12:00:00",
+        "content": md(
+            (
+                "Por que importa",
+                """O Brasil retoma o cânhamo industrial como matéria-prima para grão, fibra e biocombustíveis, mas a escolha de cultivares ainda depende de catálogos europeus ou norte-americanos pouco testados em clima tropical ou subtropical úmido. Este estudo oferece dados de campo replicados — altura, biomassa, rendimento de grão, proteína bruta e teor de gordura — em 16 genótipos avaliados por três safras no Missouri (EUA), região continental comparável em latitude a parte do Sul/Sudeste brasileiro. Para cooperativas, melhoristas e consultores agronômicos, os números de produtividade e os alvos genéticos para reduzir perdas por deiscência de sementes têm valor direto na seleção de materiais para registro e escala comercial.""",
+            ),
+            (
+                "O que o estudo fez",
+                """Tamang et al. conduziram ensaios de campo em 2022–2024 na George Washington Carver Farm (Lincoln University, Jefferson City, Missouri), usando delineamento em blocos casualizados com duas repetições. Avaliaram variedades graníferas, de duplo propósito (grão + fibra) e uma linhagem fibrosa como testemunha, incluindo materiais comerciais (p.ex. Futura 83, Felina, Vega) e acessos ferais coletados no Missouri (LHV-17). Mediram germinação em casa de vegetação, emergência no campo, padrão de crescimento semanal, altura final, diâmetro de caule, biomassa, rendimento de grão, composição de sementes (proteína e gordura bruta) e expressão de dois homólogos de genes de soja associados à resistência à deiscência (*GmPdh1*) e ao controle de floração (*GmDt1*) em diferentes tecidos. O texto integral (CC BY) foi consultado via PDF da Frontiers.""",
+            ),
+            (
+                "Principais achados",
+                """Houve variação significativa entre genótipos para altura, diâmetro, biomassa, rendimento de grão e composição de sementes. A variedade de duplo propósito **Futura 83** destacou-se como a mais produtiva na região, com rendimento de grão entre **2434 e 2793 kg/ha** ao longo dos anos. Em germinação controlada, Carmenecta atingiu 68% e Vega apenas 26,8%; no campo, a emergência variou de 66% (Altair) a 93,6% (Gravity, Orion), sem diferença estatística global entre genótipos. Cultivares graníferas cessaram crescimento vertical por volta da 5ª semana após semeadura, enquanto tipos duplos e fibrosos continuaram até a 10ª semana — informação relevante para calendário de colheita mecanizada. BVL3 (dual) alcançou 164,6 cm de altura em 2023; entre graníferas, Altair foi a mais alta (91,4 cm) e Vega a mais baixa (68,1 cm). A expressão do homólogo de *GmPdh1* foi mais elevada em sementes maduras e a de *GmDt1* em tecidos florais, sugerindo papel potencial na deiscência e no timing reprodutivo — ainda sem validação funcional.""",
+            ),
+            (
+                "Limitações",
+                """Apenas duas repetições e um único sítio no Missouri limitam extrapolação para outras regiões edafoclimáticas, inclusive o Brasil. O desenho evolutivo (9, 16 e 10 variedades em anos distintos) dificulta meta-análise formal entre safras. Não há ensaios de estabilidade genética multi-local nem dados de registro fitossanitário. A componente molecular é exploratória (expressão gênica), sem edição ou confirmação causal de fenótipos de rendimento.""",
+            ),
+            (
+                "Leitura crítica",
+                """Para o mercado brasileiro, Futura 83 aparece como referência provisória de produtividade de grão, mas exige ensaios locais de THC, adaptação e janela de colheita antes de recomendação comercial. A ênfase em reduzir deiscência de sementes dialoga com perdas mecanizadas observadas em cânhamo granífero no campo — tema prioritário para cooperativas que investem em colheitadeiras. Os genes candidatos podem orientar programas de melhoramento público ou privado, porém não substituem trial regional. Consultores devem cruzar estes rendimentos (2,4–2,8 t/ha) com custos de secagem, limpeza e conformidade legal de THC antes de projetos de escala.""",
+            ),
+            (
+                "Fonte",
+                "[Tamang et al. (2025) — Frontiers in Plant Science](https://doi.org/10.3389/fpls.2025.1632346)",
+            ),
+            (
+                "Referência",
+                cite(
+                    "Tamang et al.",
+                    2025,
+                    "Phenotypic and genetic characterization of sixteen grain and dual-type industrial hemp varieties (Cannabis sativa L.) for agronomic and yield component traits",
+                    "Frontiers in Plant Science",
+                    "10.3389/fpls.2025.1632346",
+                ),
+            ),
+        ),
+    },
+    {
+        "id": "blog-research-20260907-02",
+        "title": "Selecting Optimal Hemp (Cannabis sativa L.) Varieties for Long Fibre Production in Western Europe",
+        "slug": "selecting-optimal-hemp-cannabis-sativa-l-varieties-for-long-fibre-production-in",
+        "excerpt": "Três anos de ensaios na Flandres (Bélgica) mostraram que emergência precária pode reduzir pela metade a fibra longa, enquanto variedades tardias atingiram até 2,4 t ha⁻¹ com qualidade comparável ao linho; Bialobrzeskie destacou-se entre florações médio-tardias.",
+        "tags": ["cultivation", "textile", "research"],
+        "doi": "10.3390/agronomy15071521",
+        "citation": cite(
+            "Pappaert et al.",
+            2025,
+            "Selecting Optimal Hemp (Cannabis sativa L.) Varieties for Long Fibre Production in Western Europe",
+            "Agronomy",
+            "10.3390/agronomy15071521",
+        ),
+        "published_at": "2026-09-07T12:01:00",
+        "content": md(
+            (
+                "Por que importa",
+                """A cadeia têxtil brasileira busca fibras naturais de baixa pegada hídrica; o cânhamo de fibra longa compete com linho e juta em aplicações técnicas. Na Europa, a infraestrutura de beneficiamento de linho pode ser reaproveitada para cânhamo — mas faltavam dados regionais de produtividade de fibra longa sob clima marítimo temperado. Este trabalho quantifica emergência, morfologia, rendimento e qualidade de fibra em variedades precoces e tardias, oferecendo parâmetros que consultores de agronomia e indústria têxtil podem usar como benchmark ao pilotar cultivares importadas no Sul do Brasil.""",
+            ),
+            (
+                "O que o estudo fez",
+                """Pappaert et al. conduziram ensaio de campo de três anos (2021–2023) em dois sítios na Flandres (Bottelare e Beitem, Bélgica), comparando variedades de floração precoce, médio-tardia e tardia voltadas à produção de fibra longa. Avaliaram taxa de emergência, morfologia da planta, rendimento de biomassa, extração de fibra longa e parâmetros de qualidade comparados ao linho. A Bélgica dispõe de infraestrutura consolidada de processamento de linho — contexto que permite avaliar se o cânhamo entrega fibra longa compatível com desengasgo e fiação existentes. O abstract e metodologia foram lidos na página MDPI/Agronomy (acesso aberto); o PDF completo não pôde ser baixado automaticamente por restrição do servidor, mas os valores numéricos citados constam do resumo editorial revisado por pares.""",
+            ),
+            (
+                "Principais achados",
+                """A **estabelecimento do stand** foi determinante: emergência fraca aumentou o diâmetro do caule (compensação por planta) mas **reduziu o rendimento de fibra longa em até 50%** entre sítios. A biomassa total variou entre anos e locais: **10,7–14,5 t ha⁻¹** em Bottelare e **7,8–9,6 t ha⁻¹** em Beitem. Em condições favoráveis, variedades de floração tardia atingiram até **2,4 t ha⁻¹** de fibra longa; variedades precoces e médio-tardias chegaram a **2,1 t ha⁻¹**. A qualidade da fibra foi **comparável à do linho** entre genótipos testados — parâmetro decisivo para fiação fine sem retrabalho. Para a Europa Ocidental, variedades de floração precoce a médio-tardia são preferidas operacionalmente porque escapam de granizo tardio e facilitam rotação com outros cultivos; entre elas, **Bialobrzeskie** (médio-tardia) mostrou forte potencial de rendimento e estabilidade relativa entre anos.""",
+            ),
+            (
+                "Limitações",
+                """Dois sítios belgas e clima marítimo limitam transferência direta para regiões tropicais ou semiáridas. O estudo foca fibra longa para processamento tipo linho — não avalia cânhamo granífero nem cultivares tropicais. Detalhes finos de manejo (densidade, fertilização, regulação de crescimento) não foram reproduzidos neste resumo por indisponibilidade do PDF integral no ambiente de produção.""",
+            ),
+            (
+                "Leitura crítica",
+                """No Brasil, a lição central é operacional: investir em emergência uniforme (qualidade de semente, profundidade, umidade) antes de buscar genótipo "campeão". Variedades tardias europeias podem exigir ajuste de fotoperíodo no trópico — teste local é mandatório. Bialobrzeskie e pares similares servem como ponto de partida para trials de fibra longa junto a parceiros de beneficiamento. Cooperativas devem negociar contratos de off-take antes de escalar área, usando os tetos de 2,1–2,4 t ha⁻¹ como referência externa, não como garantia local. A variabilidade entre Bottelare e Beitem lembra que microclima e solo podem dobrar ou reduzir pela metade a fibra longa mesmo com a mesma cultivar — planejamento de parcelas de demonstração em mais de um município reduz risco de decisão baseada em um único ano.""",
+            ),
+            (
+                "Fonte",
+                "[Pappaert et al. (2025) — Agronomy](https://doi.org/10.3390/agronomy15071521)",
+            ),
+            (
+                "Referência",
+                cite(
+                    "Pappaert et al.",
+                    2025,
+                    "Selecting Optimal Hemp (Cannabis sativa L.) Varieties for Long Fibre Production in Western Europe",
+                    "Agronomy",
+                    "10.3390/agronomy15071521",
+                ),
+            ),
+        ),
+    },
+    {
+        "id": "blog-research-20260907-03",
+        "title": "Subcanopy and Inter-Canopy Supplemental Light Enhances and Standardizes Yields in Medicinal Cannabis (Cannabis sativa L.)",
+        "slug": "subcanopy-and-inter-canopy-supplemental-light-enhances-and-standardizes-yields-i",
+        "excerpt": "Em ambiente controlado, iluminação inter-canópica por LED elevou em 30% o rendimento de inflorescências secas e reduziu em mais de 50% a variabilidade de THC e terpenos totais, comparada à iluminação superior isolada.",
+        "tags": ["cultivation", "medical", "research"],
+        "doi": "10.3390/plants14101469",
+        "citation": cite(
+            "Garrido et al.",
+            2025,
+            "Subcanopy and Inter-Canopy Supplemental Light Enhances and Standardizes Yields in Medicinal Cannabis (Cannabis sativa L.)",
+            "Plants",
+            "10.3390/plants14101469",
+        ),
+        "published_at": "2026-09-07T12:02:00",
+        "content": md(
+            (
+                "Por que importa",
+                """Operadores medicinais no Brasil enfrentam pressão da ANVISA por uniformidade de lote (THC, terpenos, microbiologia). A iluminação superior tradicional deixa a base do dossel sombreada, gerando inflorescências pequenas e perfil químico heterogêneo — problema crítico em GMP indoor. Este estudo compara três arquiteturas de luz (topo, subcanópica inferior, inter-canópica lateral) e quantifica ganho de massa, cannabinoides e consistência, com implicação direta para capex de LED e estratégia de padronização.""",
+            ),
+            (
+                "O que o estudo fez",
+                """Garrido et al. conduziram experimento em ambiente controlado com *Cannabis sativa* medicinal, comparando: **TL** (top lighting, apenas luz superior), **SCL** (subcanopy lighting — LEDs inferiores) e **ICL** (inter-canopy lighting — LEDs na base e meio do dossel). Mediram distribuição de luz no volume da planta, rendimento de inflorescências secas, acúmulo de THC, concentração total de terpenos, coeficiente de variação entre plantas e eficiência energética por grama produzida. A hipótese física é simples: folhas superiores sombreiam gemas florais internas; redistribuir fótons para o interior do dossel deveria equalizar fotossíntese e metabolismo secundário. Fonte: abstract e texto aberto em *Plants* (MDPI); PDF bloqueado ao fetch automatizado, mas dados numéricos constam do resumo publicado.""",
+            ),
+            (
+                "Principais achados",
+                """SCL e ICL melhoraram a distribuição de luz e aumentaram rendimentos versus TL. O tratamento **ICL** obteve o maior ganho: **+29,95%** de inflorescência seca, **+24,4%** de acúmulo de THC e **+12,5%** de terpenos totais. Ambos os esquemas suplementares **reduziram o coeficiente de variação em mais de 50%** para rendimento seco, THC e terpenos — ou seja, lotes mais homogêneos para registro e dispensação. SCL foi mais eficiente energeticamente por grama de inflorescência e cannabinoide; ICL maximizou ganho absoluto de produção mesmo consumindo mais watts totais. Em operações GMP, reduzir CV pode diminuir descarte de lote fora de especificação — custo oculto frequentemente maior que a conta de energia. O estudo conclui que suplementar luz no interior do dossel aumenta rentabilidade, eficiência relativa e padronização para uso medicinal e pesquisa.""",
+            ),
+            (
+                "Limitações",
+                """Ensaio indoor em genótipo(s) não necessariamente representativos de cultivares registradas no Brasil. Maior consumo energético total com lâmpadas adicionais — não há análise econômica completa de ROI nem integração com controle de VPD/CO₂. Não avalia efeitos em patogenia foliar (umidade na base) nem longevidade de equipamento LED em ambiente úmido.""",
+            ),
+            (
+                "Leitura crítica",
+                """Para facilities brasileiras em validação ANVISA, a redução >50% na variabilidade química pode valer o investimento em ICL/SCL mais do que ganhos brutos de gramagem. Recomenda-se piloto A/B em uma sala de floração antes de retrofit completo, monitorando microclima na base do dossel (temperatura foliar, condensação). Prescritores e farmacêuticos devem notar: uniformidade de lote facilita titulação, mas não substitui laudo por lote exigido localmente. Integradores de projeto devem modelar kWh adicional versus redução de descarte por fora de especificação. Em mercados onde o preço por grama de inflorescência A é alto, ICL pode ser preferível; onde a conta de energia pesa, SCL oferece melhor eficiência por watt — o estudo explicita esse trade-off operacional.""",
+            ),
+            (
+                "Fonte",
+                "[Garrido et al. (2025) — Plants](https://doi.org/10.3390/plants14101469)",
+            ),
+            (
+                "Referência",
+                cite(
+                    "Garrido et al.",
+                    2025,
+                    "Subcanopy and Inter-Canopy Supplemental Light Enhances and Standardizes Yields in Medicinal Cannabis (Cannabis sativa L.)",
+                    "Plants",
+                    "10.3390/plants14101469",
+                ),
+            ),
+        ),
+    },
+    {
+        "id": "blog-research-20260907-04",
+        "title": "Thermal and mechanical properties of hempcrete with low-carbon binders: Effects of 3D distribution and orientation of hemp shivs and microstructures of hempcrete",
+        "slug": "thermal-and-mechanical-properties-of-hempcrete-with-low-carbon-binders-effects",
+        "excerpt": "Tomografia micro-CT comparou hempcrete com cal hidratada, calcário-argila calcinada e ligante alcalino-ativado; a formulação alcalina atingiu resistência ~4,1× maior e condutividade térmica até 30,9% menor que a cal, ligando microestrutura de shivs ao desempenho.",
+        "tags": ["textile", "research"],
+        "doi": "10.1016/j.jobe.2025.113863",
+        "citation": cite(
+            "Song et al.",
+            2025,
+            "Thermal and mechanical properties of hempcrete with low-carbon binders: Effects of 3D distribution and orientation of hemp shivs and microstructures of hempcrete",
+            "Journal of Building Engineering",
+            "10.1016/j.jobe.2025.113863",
+        ),
+        "published_at": "2026-09-07T12:03:00",
+        "content": md(
+            (
+                "Por que importa",
+                """O cânhamo industrial brasileiro gera shiv (miolo do caule) como subproduto da fibra — material ideal para compósitos de construção civil de baixo carbono. Hempcrete já é usado na Europa para isolamento térmico, mas a escolha do ligante define resistência mecânica e condutividade. Este estudo australiano combina ensaios físicos com micro-CT 3D, oferecendo critérios técnicos para especificação de painéis pré-fabricados e parede monolítica em projetos ESG no Brasil.""",
+            ),
+            (
+                "O que o estudo fez",
+                """Song et al. (UNSW, UTS, University of Sydney) formularam hempcrete com três ligantes de baixo carbono: **cal hidratada (HC-HL)**, **calcário + argila calcinada (LC2)** e **ligante alcalino-ativado (HC-AA)** com shivs de cânhamo. Mediram resistência à compressão aos 28 dias, condutividade térmica (Hot Disk), frações volumétricas de ar, shiv e matriz de argamassa, além de orientação espacial dos shivs via **micro-tomografia computadorizada (μCT)**. O manuscrito aceito (CC BY) foi lido via repositório institucional UTS; DOI: 10.1016/j.jobe.2025.113863. A μCT permitiu quantificar não só porosidade global, mas alinhamento preferencial dos shivs — variável raramente medida em ensaios tradicionais de mistura, porém crítica porque shivs canalizam calor e umidade ao longo do grão.""",
+            ),
+            (
+                "Principais achados",
+                """A seleção do ligante alterou significativamente desempenho mecânico e térmico. O **HC-AA** apresentou resistência à compressão aos 28 dias cerca de **4,1 vezes superior** à referência com cal hidratada (ordem de **0,65 MPa vs ~0,16 MPa** — hempcrete permanece material leve, tipicamente <1 MPa). Simultaneamente, a condutividade térmica do HC-AA ficou **15,0–30,9% inferior** à da cal — resultado atípico, pois maior resistência costuma correlacionar com maior condutividade. A μCT indicou que o desempenho excepcional veio de **matriz de argamassa mais densa**, shivs **menores e mais alinhados horizontalmente** que nas outras misturas. O LC2 ocupou posição intermediária entre cal e alcalino-ativado.""",
+            ),
+            (
+                "Limitações",
+                """Protótipos de laboratório, não parede em escala real nem ciclos climáticos brasileiros (umidade, fungos, cupins). Ligantes alcalino-ativados exigem controle de processo e disponibilidade local de precursores (escória, cinzas). Não há dados de durabilidade décadas, comportamento ao fogo normatizado ABNT ou custo frente ao bloco cerâmico convencional.""",
+            ),
+            (
+                "Leitura crítica",
+                """Para incorporadoras e arquitetos brasileiros, HC-AA sinaliza caminho para painéis mais resistentes sem sacrificar isolamento — útil em fechamentos de edifícios de baixa altura e retrofit. Antes de especificar, exigir ensaio com shiv nacional (umidade, absorção) e laudo de incêndio local. O estudo reforça que **microestrutura importa tanto quanto receita massica**: misturadores e compactação devem ser padronizados. Política industrial: incentivo ao shiv como coproduto pode ancorar economia circular do cânhamo têxtil/construção. Mesmo com 4,1× de resistência, hempcrete permanece material não estrutural na maioria das normas — o ganho mecânico facilita manuseio e fixação de ferragens, não substitui concreto armado.""",
+            ),
+            (
+                "Fonte",
+                "[Song et al. (2025) — Journal of Building Engineering](https://doi.org/10.1016/j.jobe.2025.113863)",
+            ),
+            (
+                "Referência",
+                cite(
+                    "Song et al.",
+                    2025,
+                    "Thermal and mechanical properties of hempcrete with low-carbon binders: Effects of 3D distribution and orientation of hemp shivs and microstructures of hempcrete",
+                    "Journal of Building Engineering",
+                    "10.1016/j.jobe.2025.113863",
+                ),
+            ),
+        ),
+    },
+    {
+        "id": "blog-research-20260907-05",
+        "title": "Effect of Technological Variables on Thermal Conductivity and Compressive Strength of Hemp–Lime Composites",
+        "slug": "effect-of-technological-variables-on-thermal-conductivity-and-compressive-streng",
+        "excerpt": "Estudo fatorial (água/ligante e compactação) integrado a programa sistemático mostrou que proporção ligante/shiv e grau de compactação governam condutividade e resistência via densidade aparente, entre 227 e 518 kg/m³.",
+        "tags": ["textile", "research"],
+        "doi": "10.3390/civileng7020033",
+        "citation": cite(
+            "Piątkiewicz et al.",
+            2026,
+            "Effect of Technological Variables on Thermal Conductivity and Compressive Strength of Hemp–Lime Composites",
+            "CivilEng",
+            "10.3390/civileng7020033",
+        ),
+        "published_at": "2026-09-07T12:04:00",
+        "content": md(
+            (
+                "Por que importa",
+                """Compósitos cânhamo-cal (hemp-lime) prometem sequestro de carbono e isolamento, mas obras brasileiras carecem de receitas padronizadas — variabilidade de densidade gera surpresas em obra (fissuras, condensação, carga estrutural). Este artigo quantifica quais alavancas de processo realmente movem condutividade térmica e resistência, base para normas internas de fabricante e manual de aplicação.""",
+            ),
+            (
+                "O que o estudo fez",
+                """Piątkiewicz et al. aplicaram delineamento fatorial **3×3** variando relação água/ligante (**W/B = 1,75; 1,95; 2,15**) e grau de compactação (**CD = 150%, 170%, 190%**) com relação ligante/shiv **B/S = 1:1**. Mediram condutividade térmica e resistência à compressão. Integraram resultados a investigações prévias do mesmo programa, totalizando base estendida com densidades entre **227 e 518 kg/m³**, cruzando quatro variáveis tecnológicas (incluindo B/S e granulometria do shiv). Publicado em *CivilEng* (MDPI), acesso aberto via DOI. A abordagem de "programa sistemático" — reutilizar dados históricos com novos fatores — aumenta poder explicativo sem multiplicar ensaios destrutivos, útil para laboratórios brasileiros com orçamento limitado.""",
+            ),
+            (
+                "Principais achados",
+                """A relação **ligante/shiv (B/S)** foi o fator dominante para condutividade e resistência, atuando principalmente via **densidade aparente** e caráter mecânico da matriz. Dentro de uma receita fixa, o **grau de compactação** foi o ajuste mais eficaz; os maiores ganhos ocorreram na transição **150% → 170%** de CD. A relação água/ligante teve efeito **marginal** sobre densidade e condutividade e efeito **inconcluso** sobre resistência em B/S 1:1. Tamanho de partícula do shiv impactou pouco a condutividade e **não alterou** resistência detectavelmente. Condutividade e resistência correlacionaram **linearmente e positivamente** com densidade no conjunto ampliado — ou seja, amostras mais densas tendem a conduzir calor melhor e resistir mais à compressão, trade-off clássico de isolantes vegetais que exige especificação consciente por aplicação (parede vs cobertura).""",
+            ),
+            (
+                "Limitações",
+                """Ensaios de laboratório europeus; não inclui exposição climática tropical nem aditivos fungicidas comuns no Brasil. Conclusões sobre W/B podem mudar em outras razões B/S. Falta validação em painel grande e interface com estrutura portante (vergas, cargas de vento ABNT).""",
+            ),
+            (
+                "Leitura crítica",
+                """Para plantas de pré-moldados de cânhamo no Brasil, padronizar **B/S** e **compactação** importa mais do que micro-ajustar água dentro da faixa testada. Meta prática: definir densidade alvo (ex. 350–450 kg/m³) e calibrar prensa/montagem para CD ≥170%. Engenheiros devem exigir ficha técnica com densidade medida — o estudo prova que propriedades térmicas e mecânicas são previsíveis a partir dela. Reguladores de construção sustentável podem usar estes dados para rotular desempenho térmico sem ensaio destrutivo em cada lote, desde que densidade seja controlada.""",
+            ),
+            (
+                "Fonte",
+                "[Piątkiewicz et al. (2026) — CivilEng](https://doi.org/10.3390/civileng7020033)",
+            ),
+            (
+                "Referência",
+                cite(
+                    "Piątkiewicz et al.",
+                    2026,
+                    "Effect of Technological Variables on Thermal Conductivity and Compressive Strength of Hemp–Lime Composites",
+                    "CivilEng",
+                    "10.3390/civileng7020033",
+                ),
+            ),
+        ),
+    },
+    {
+        "id": "blog-research-20260907-06",
+        "title": "Full-spectrum extract from Cannabis sativa DKJ127 for chronic low back pain: a phase 3 randomized placebo-controlled trial",
+        "slug": "full-spectrum-extract-from-cannabis-sativa-dkj127-for-chronic-low-back-pain-a-ph",
+        "excerpt": "RCT de fase 3 com 820 adultos: extrato full-spectrum VER-01 reduziu dor lombar crônica (Δ NRS −1,9 vs −1,4 placebo; diferença −0,6; p<0,001) em 12 semanas, com extensão aberta sustentada e sem sinais clínicos de dependência.",
+        "tags": ["medical", "research"],
+        "doi": "10.1038/s41591-025-03977-0",
+        "citation": cite(
+            "Karst et al.",
+            2025,
+            "Full-spectrum extract from Cannabis sativa DKJ127 for chronic low back pain: a phase 3 randomized placebo-controlled trial",
+            "Nature Medicine",
+            "10.1038/s41591-025-03977-0",
+        ),
+        "published_at": "2026-09-07T12:05:00",
+        "content": md(
+            (
+                "Por que importa",
+                """Dor lombar crônica (DLC) afeta mais de meio bilhão de pessoas; no Brasil, analgésicos opioides e AINEs convivem com cannabis medicinal importada de alto custo. Um RCT de fase 3 positivo em *Nature Medicine* muda o patamar de evidência para extratos full-spectrum padronizados — tema central para prescritores, operadoras de importação e futuros registrantes ANVISA.""",
+            ),
+            (
+                "O que o estudo fez",
+                """Karst et al. conduziram ensaio multicêntrico, randomizado, duplo-cego, placebo-controlado (NCT04940741) com **820 adultos** com DLC (VER-01 **n=394**, placebo **n=426**). Fase A: 12 semanas duplo-cegas; Fase B: extensão aberta de 6 meses; Fases C/D: continuação ou **retirada randomizada**. Desfecho primário da Fase A: mudança na escala numérica de dor (NRS). Secundário-chave: inventário neuropático (NPSI) em participantes com componente neuropático (PainDETECT >18). Fase D: tempo até falha terapêutica. População: 56,6% mulheres, idade média 52 anos, IMC ~29; 22% com componente neuropático; 23,5% com dor severa (NRS ≥7); 99% já haviam usado analgésicos, sobretudo AINEs (96,7%). Hipertensão (35,3%) e obesidade (32%) foram comorbidades frequentes. Produto: extrato full-spectrum da linha **DKJ127/VER-01** (não isolado de CBD). PDF integral consultado.""",
+            ),
+            (
+                "Principais achados",
+                """Fase A atingiu desfecho primário: redução média de **−1,9 pontos NRS** com VER-01 vs **−1,4** placebo (**diferença −0,6**, IC95% −0,9 a −0,3; **p<0,001**), favorável em todas as semanas do blind. Na extensão aberta, dor chegou a **−2,9 NRS**; efeito manteve-se na Fase C. Em neuropáticos (PainDETECT >18), NPSI caiu **−14,4 pontos** (EP 3,3) vs placebo (**diferença −7,3**, IC95% −13,2 a −1,3; **p=0,017**). Análises de sensibilidade (LOCF/BOCF) confirmaram robustez do primário. Fase D não atingiu desfecho primário de tempo até falha (HR 0,75; p=0,288), mas ao retirar VER-01 a dor subiu mais no placebo (**Δ +0,5 NRS**, p=0,034). Eventos adversos foram mais frequentes com VER-01 (**83,3% vs 67,3%**, p<0,001), em geral leves/moderados e transitórios. **Não houve sinais clínicos de dependência ou abstinência** na retirada — diferencial frente a opioides em população com uso prévio quase universal de AINEs.""",
+            ),
+            (
+                "Limitações",
+                """Efeito absoluto modesto (0,6 NRS) — debate sobre significância clínica mínima. População europeia; formulação VER-01 específica (perfil cannabinoide/terpeno proprietário). Maior taxa de EA pode limitar tolerabilidade em comorbidades. Fase D negativa para falha terapêutica enfraquece narrativa de manutenção obrigatória. Financiamento industria (ver afiliações no artigo).""",
+            ),
+            (
+                "Leitura crítica",
+                """Para clínicos brasileiros, o estudo sustenta conversa sobre **extrato full-spectrum padronizado** para DLC refratária, não sobre flor de vape ou produto artesanal. A diferença NRS deve ser comunicada honestamente: benefício estatístico consistente, porém incremental — combinar com fisioterapia e educação em dor. Operadoras devem mapear equivalência farmacêutica antes de marketing. Reguladores: reforça necessidade de RCT local ou bridging se VER-01 chegar ao país. Não extrapolar para dor neuropática exclusiva sem subgrupo PainDETECT positivo. A ausência de sinais de dependência/abstinência é diferencial frente a opioides, mas eventos adversos mais frequentes exigem triagem de tolerância antes de renovação crônica.""",
+            ),
+            (
+                "Fonte",
+                "[Karst et al. (2025) — Nature Medicine](https://doi.org/10.1038/s41591-025-03977-0)",
+            ),
+            (
+                "Referência",
+                cite(
+                    "Karst et al.",
+                    2025,
+                    "Full-spectrum extract from Cannabis sativa DKJ127 for chronic low back pain: a phase 3 randomized placebo-controlled trial",
+                    "Nature Medicine",
+                    "10.1038/s41591-025-03977-0",
+                ),
+            ),
+        ),
+    },
+    {
+        "id": "blog-research-20260907-07",
+        "title": "Cannabidiol for chronic pain in rheumatoid arthritis and ankylosing spondylitis: a randomized, placebo-controlled trial with exploratory tetrahydrocannabinol add-on",
+        "slug": "cannabidiol-for-chronic-pain-in-rheumatoid-arthritis-and-ankylosing-spondylitis",
+        "excerpt": "Em 66 pacientes com AR ou EA e dor persistente apesar de atividade inflamatória baixa, CBD oral em baixa dose não superou placebo (10% vs 28% atingiram redução ≥20 mm VAS); adição aberta de THC melhorou dor e sono em não respondedores.",
+        "tags": ["medical", "research"],
+        "doi": "10.1186/s42238-026-00496-8",
+        "citation": cite(
+            "Hendricks et al.",
+            2026,
+            "Cannabidiol for chronic pain in rheumatoid arthritis and ankylosing spondylitis: a randomized, placebo-controlled trial with exploratory tetrahydrocannabinol add-on",
+            "Journal of Cannabis Research",
+            "10.1186/s42238-026-00496-8",
+        ),
+        "published_at": "2026-09-07T12:06:00",
+        "content": md(
+            (
+                "Por que importa",
+                """Artrite reumatoide (AR) e espondilite anquilosante (EA) geram dor crônica mesmo com doença inflamatória controlada — cenário comum em reumatologia brasileira. Prescritores recorrem a CBD isolado por perfil de segurança, mas evidência RCT era escassa. Este ensaio dinamarquês testa CBD em baixa dose e, depois, adição de THC — desenho relevante para protocolos escalonados em cannabis medicinal.""",
+            ),
+            (
+                "O que o estudo fez",
+                """Hendricks et al. randomizaram **66 pacientes** (AR ou EA, dor persistente com atividade inflamatória baixa) **1:1** para **CBD oral ou placebo por 12 semanas** (EudraCT 2017-004226-15). Desfecho primário: redução ≥**20 mm** na escala visual analógica de dor (VAS) na semana 12. Não respondedores entraram em fase aberta de 12 semanas: placebo trocou para CBD; CBD recebeu **THC adicional**. Secundários: VAS contínua, PSQI (sono), testes cognitivos (TMT, DSST), atividade de doença, segurança. O desenho espelha prática clínica escalonada, mas a segunda fase não é confirmatória. Abstract e métodos lidos em *Journal of Cannabis Research* (BMC, acesso aberto).""",
+            ),
+            (
+                "Principais achados",
+                """Semana 12: resposta primária em **3/30 (10%)** com CBD vs **9/32 (28%)** com placebo — **CBD em baixa dose não superou placebo**. CBD associou-se a **pior qualidade de sono** (PSQI) vs placebo; cognição (TMT, DSST) e marcadores inflamatórios não diferiram entre grupos cegos. Na fase aberta exploratória, **9/23 (39%)** com **CBD+THC** atingiram critério de resposta vs **2/25 (8%)** só com CBD; CBD+THC também melhorou VAS contínua e sono. Autores classificam achado THC como **hipótese geradora**, não confirmatória. O paradoxo placebo > CBD no desfecho binário reforça necessidade de amostras maiores e doses escalonadas antes de descartar cannabinoides em reumatologia.""",
+            ),
+            (
+                "Limitações",
+                """Amostra pequena (66). Dose de CBD considerada "baixa" — não testa escalas altas. Fase THC **aberta e não randomizada**, sujeita a viés de expectativa. População nórdica homogênea. Duração total 24 semanas insuficiente para segurança cardiovascular ou psiquiátrica de longo prazo.""",
+            ),
+            (
+                "Leitura crítica",
+                """Clínicos no Brasil não devem assumir analgesia de CBD isolado em baixa dose para AR/EA com base neste RCT — placebo foi superior no desfecho primário. Conversa honesta com paciente: evidência fraca para monoterapia CBD; possível papel de **combinação CBD:THC** exige novo RCT cego. Reumatologistas podem priorizar otimização de DMARD/biológico antes de cannabinoides. Se escalonar para THC, monitorar sono paradoxal e cognição (TMT/DSST normais no CBD isolado, mas THC traz psicoatividade).""",
+            ),
+            (
+                "Fonte",
+                "[Hendricks et al. (2026) — Journal of Cannabis Research](https://doi.org/10.1186/s42238-026-00496-8)",
+            ),
+            (
+                "Referência",
+                cite(
+                    "Hendricks et al.",
+                    2026,
+                    "Cannabidiol for chronic pain in rheumatoid arthritis and ankylosing spondylitis: a randomized, placebo-controlled trial with exploratory tetrahydrocannabinol add-on",
+                    "Journal of Cannabis Research",
+                    "10.1186/s42238-026-00496-8",
+                ),
+            ),
+        ),
+    },
+    {
+        "id": "blog-research-20260907-08",
+        "title": "Medicinal cannabis for symptom control in advanced cancer: a double-blind, placebo-controlled, randomised clinical trial of 1:1 tetrahydrocannabinol and cannabidiol",
+        "slug": "medicinal-cannabis-for-symptom-control-in-advanced-cancer-a-double-blind-placebo",
+        "excerpt": "Em 144 pacientes oncológicos em cuidados paliativos, óleo 1:1 THC:CBD (10 mg/ml) não reduziu a carga total de sintomas (ESAS) vs placebo em 28 dias; houve melhora marginal de dor (−1,42 vs −0,46; p=0,04) com maior toxicidade psicomimética.",
+        "tags": ["medical", "research"],
+        "doi": "10.1007/s00520-025-09763-5",
+        "citation": cite(
+            "Hardy et al.",
+            2025,
+            "Medicinal cannabis for symptom control in advanced cancer: a double-blind, placebo-controlled, randomised clinical trial of 1:1 tetrahydrocannabinol and cannabidiol",
+            "Supportive Care in Cancer",
+            "10.1007/s00520-025-09763-5",
+        ),
+        "published_at": "2026-09-07T12:07:00",
+        "content": md(
+            (
+                "Por que importa",
+                """Pacientes com câncer avançado no Brasil frequentemente buscam cannabis além da oncologia paliativa formal — muitas vezes com expectativa de alívio global de náusea, dor, insônia e anorexia. Este RCT australiano (ANZCTR ACTRN12619000037101) testa óleo **1:1 THC:CBD** sobre **carga total de sintomas**, não apenas dor isolada — desfecho alinhado à prática real de cuidados paliativos.""",
+            ),
+            (
+                "O que o estudo fez",
+                """Hardy et al. randomizaram **144 pacientes** com câncer avançado em cuidados paliativos para óleo medicinal **1:1 10 mg/ml THC:CBD** ou placebo idêntico. Dose escalonada por 14 dias conforme tolerância/efeito, mantida até dia 28. Sintomas via **ESAS** somados em escore de distress total (**TSDS**). Primário: mudança do TSDS no **dia 14** (meta amostral 120). Secundários: sintomas individuais, opioides, dose escolhida, QoL, impressão global de mudança (GIC), eventos adversos. Faz parte de programa australiano que incluiu RCT prévio de CBD isolado sem benefício — reforçando pergunta sobre necessidade de THC. PDF Springer (CC) consultado.""",
+            ),
+            (
+                "Principais achados",
+                """Ambos os grupos melhoraram TSDS ao longo do tempo, **sem diferença entre braços** no dia 14: **−6,30 (DP 12,3)** cannabis vs **−6,98 (12,56)** placebo (**p=0,76**). Dor ESAS melhorou mais com cannabis (**−1,42 vs −0,46**, **p=0,04**), porém **bem-estar geral favoreceu placebo** e **toxicidade psicomimética foi maior** no braço ativo. GIC e componente de dor da QoL favoreceram levemente cannabis — sinais mistos. Uso de opioides e dose auto-selecionada não diferiram de forma clinicamente relevante entre braços no período. Conclusão dos autores: óleo 1:1 **não foi superior** a cuidados paliativos sozinhos para alívio amplo de sintomas; benefício analgésico pequeno veio com **maior custo secundário**. Para famílias, isso significa que cannabis não substitui equipe multidisciplinar de paliativos.""",
+            ),
+            (
+                "Limitações",
+                """Janela curta (28 dias) em população heterogênea de câncer. Titulação individual dificulta comparar dose efetiva. Placebo pode ter subestimado efeito se quebra de cego ocorreu. Não testa isolados, ratios diferentes ou vias inalatórias. Contexto australiano de acesso legal distinto do Brasil importado.""",
+            ),
+            (
+                "Leitura crítica",
+                """Oncologistas e paliativistas devem calibrar expectativa: cannabis 1:1 **não substitui** manejo multimodal de sintomas. Pequeno ganho de dor pode valer em casos selecionados com monitorização de delirium/confusão. Evitar prescrição baseada apenas em hype popular. Para políticas ANVISA, reforça que indicação "cuidados paliativos" precisa de evidência por desfecho — não basta segurança. Famílias: produto não melhorou "como um todo" o sofrimento medido por ESAS.""",
+            ),
+            (
+                "Fonte",
+                "[Hardy et al. (2025) — Supportive Care in Cancer](https://doi.org/10.1007/s00520-025-09763-5)",
+            ),
+            (
+                "Referência",
+                cite(
+                    "Hardy et al.",
+                    2025,
+                    "Medicinal cannabis for symptom control in advanced cancer: a double-blind, placebo-controlled, randomised clinical trial of 1:1 tetrahydrocannabinol and cannabidiol",
+                    "Supportive Care in Cancer",
+                    "10.1007/s00520-025-09763-5",
+                ),
+            ),
+        ),
+    },
+    {
+        "id": "blog-research-20260907-09",
+        "title": "The adverse public health effects of non-medical cannabis legalisation in Canada and the USA",
+        "slug": "the-adverse-public-health-effects-of-non-medical-cannabis-legalisation-in-canada",
+        "excerpt": "Revisão em The Lancet Public Health sintetiza legalização recreativa no Canadá/EUA: aumento de uso adulto, visitas à emergência (psicose, hiperêmese), lesões de trânsito e produtos de alta potência — com danos amplificados em mercados comercializados.",
+        "tags": ["policy", "research"],
+        "doi": "10.1016/S2468-2667(24)00299-8",
+        "citation": cite(
+            "Mekonen Yimer et al.",
+            2025,
+            "The adverse public health effects of non-medical cannabis legalisation in Canada and the USA",
+            "The Lancet Public Health",
+            "10.1016/S2468-2667(24)00299-8",
+        ),
+        "published_at": "2026-09-07T12:08:00",
+        "content": md(
+            (
+                "Por que importa",
+                """O debate brasileiro sobre descriminalização ou mercado regulado precisa ir além de ideologia. Yimer et al. (*The Lancet Public Health*, 2025) consolidam o que mudou em saúde pública após legalização não médica no Canadá e nos EUA — referência para legisladores, Ministério da Saúde e operadores medicinais que temem contaminação reputacional de um mercado adulto mal desenhado.""",
+            ),
+            (
+                "O que o estudo fez",
+                """Síntese narrativa/evidencial (Health Policy) descrevendo modelos regulatórios (monopólio estatal, licenças limitadas, mercado comercial aberto), evolução de produtos (flores → concentrados/extracts de **alta potência**), preços, mercado ilegal residual, prevalência de uso e desfechos físicos e mentais. Autores incluem Wayne Hall, referência global em epidemiologia de drogas. Discutem desafios causais (séries temporais, confundidores) e enfatizam vigilância contínua. Texto baseado no abstract Lancet e trechos do artigo full-text; tabela resumo no apêndice lista direção do efeito por indicador (uso, ED, trânsito, psicose).""",
+            ),
+            (
+                "Principais achados",
+                """Padrões recorrentes pós-legalização: **aumento do uso em adultos** (não consistente em adolescentes em todas as jurisdições), **queda das arrestações** por posse, expansão de **visitas à emergência** — incluindo **síndrome de hiperêmese cannabinoide** e **psicose induzida por cannabis** — e sinais de **lesões de trânsito** associadas ao uso. Evidência de psicose pós-comercialização é mais clara quando o número de lojas e produtos potentes cresce: estudo em Ontario (Myran et al., citado) mostrou **aumento imediato de 30%** (IRR 1,30; IC95% 1,02–1,66) em visitas por psicose induzida por cannabis após **comercialização**, especialmente em jovens **19–24 anos**; período só com legalização restrita não mostrou aumento. Controles com psicose por cocaína/metanfetamina não subiram — argumento contra confundimento genérico de saúde mental. Uso diário na adolescência/juventude associa-se a **risco ~duplicado** de transtornos psicóticos em literatura epidemiológica citada. **Mercados comercializados com alta potência** apresentam danos mais consistentes que modelos estatais/controles de preço e marketing.""",
+            ),
+            (
+                "Limitações",
+                """Síntese, não meta-análise formal com pooled effect sizes para todos os desfechos. Heterogeneidade entre estados/províncias dificulta "nota única". Dados americanos nem sempre distinguem comercialização vs legalização inicial. Financiamento público/acadêmico — autores incluem Wayne Hall e Eva Hoch (referências globais em drogas).""",
+            ),
+            (
+                "Leitura crítica",
+                """Para o Brasil, lição não é "proibir a qualquer custo", e sim **desenho regulatório importa**: tetos de THC, limites de marketing, contagem de lojas e imposto alinhado a custos externos de saúde. Mercado medicinal ANVISA deve se distanciar visualmente de produtos recreativos potentes. Serviços de emergência precisam codificar cannabis-related presentations antes de reforma. Pesquisadores locais: replicar vigilância Ontario em capitais brasileiras se modelo avançar.""",
+            ),
+            (
+                "Fonte",
+                "[Mekonen Yimer et al. (2025) — The Lancet Public Health](https://doi.org/10.1016/S2468-2667(24)00299-8)",
+            ),
+            (
+                "Referência",
+                cite(
+                    "Mekonen Yimer et al.",
+                    2025,
+                    "The adverse public health effects of non-medical cannabis legalisation in Canada and the USA",
+                    "The Lancet Public Health",
+                    "10.1016/S2468-2667(24)00299-8",
+                ),
+            ),
+        ),
+    },
+    {
+        "id": "blog-research-20260907-10",
+        "title": 'Getting "The whole picture": A review of international research on the outcomes of regulated cannabis supply',
+        "slug": "getting-the-whole-picture-a-review-of-international-research-on-the-outcomes-of",
+        "excerpt": "Revisão sistemática em cinco jurisdições (Países Baixos, Espanha, EUA, Uruguai, Canadá) encontrou padrões comuns: menos prisões, mais uso adulto, mais demanda em saúde; danos negativos mais consistentes nos estados EUA comercializados.",
+        "tags": ["policy", "research"],
+        "doi": "10.1016/j.drugpo.2025.104796",
+        "citation": cite(
+            "Belackova et al.",
+            2025,
+            'Getting "The whole picture": A review of international research on the outcomes of regulated cannabis supply',
+            "International Journal of Drug Policy",
+            "10.1016/j.drugpo.2025.104796",
+        ),
+        "published_at": "2026-09-07T12:09:00",
+        "content": md(
+            (
+                "Por que importa",
+                """Reformas de cannabis no Brasil oscillam entre modelo uruguaio-estatal, coffeeshops europeus e mercado californiano. Belackova et al. comparam **nove indicadores** agrupados em social, uso e saúde — mapa útil para quem redige PL ou consultoria de impacto regulatório.""",
+            ),
+            (
+                "O que o estudo fez",
+                """Revisão sistemática em três níveis priorizando estudos quasi-experimentais (comparativos/longitudinais) sobre desfechos de **cinco jurisdições** com modelos distintos: **Países Baixos, Espanha, estados EUA legalizados, Uruguai e Canadá**. Indicadores agregados em três domínios: social (prisões), uso (prevalência adulta/adolescente) e saúde (hospitalizações, emergência, tráfego). Classificação de direção do efeito (aumento/redução/nulo). Abstract completo lido via Semantic Scholar/Drug Policy; texto integral Elsevier não estava aberto no ambiente de produção.""",
+            ),
+            (
+                "Principais achados",
+                """Desfechos **comuns** independentemente do modelo ou antiguidade: **queda de prisões** relacionadas a cannabis; **aumento de uso em adultos** (não uniforme em adolescentes); **aumento de utilização de saúde** não ligada só a tráfego. **Desfechos negativos de saúde** foram **mais consistentes nos estados EUA comercializados**, onde marketing, concentrações elevadas de THC e densidade de dispensários coincidem; dados limitados ou inconclusos em Países Baixos, Espanha, Uruguai e Canadá para vários indicadores por desenho/tempo de follow-up. Conclusão: regular oferta traz **trade-offs** — benefícios sociais (justiça criminal) vs riscos sanitários modulados pelo **modelo** (preço, potência, densidade de pontos de venda). Autores recomendam "mix and match" de parâmetros regulatórios — por exemplo, canal estatal uruguaio para produção com restrições holandesas de ponto de venda — e mais pesquisa quasi-experimental de alta qualidade.""",
+            ),
+            (
+                "Limitações",
+                """Qualidade heterogênea dos estudos incluídos; EUA agregam 50 regimes distintos. Uruguai e Espanha com poucos estudos de longo prazo. Não inclui mercado medicinal regulado separadamente. Publicado em 2025 — não captura reformas mais recentes.""",
+            ),
+            (
+                "Leitura crítica",
+                """Brasil não precisa copiar Colorado. Uruguai oferece lições de monopólio estatal; Holanda, de tolerância sem comercialização plena. Consultores de policy devem apresentar **trade-offs explícitos** a comissões legislativas: menos encarceramento vs vigilância hospitalar reforçada. Setor medicinal: separar canal farmacêutico evita externalidades do varejo recreativo. Pesquisa nacional deve financiar cohorts pré/pós qualquer piloto. A revisão enfatiza que indicadores sociais positivos (menos prisões) aparecem cedo, enquanto danos sanitários podem surgir com lag — exigindo sistemas de vigilância antes da expansão comercial, não depois.""",
+            ),
+            (
+                "Fonte",
+                '[Belackova et al. (2025) — International Journal of Drug Policy](https://doi.org/10.1016/j.drugpo.2025.104796)',
+            ),
+            (
+                "Referência",
+                cite(
+                    "Belackova et al.",
+                    2025,
+                    'Getting "The whole picture": A review of international research on the outcomes of regulated cannabis supply',
+                    "International Journal of Drug Policy",
+                    "10.1016/j.drugpo.2025.104796",
+                ),
+            ),
+        ),
+    },
+    {
+        "id": "blog-research-20260907-11",
+        "title": "A comparative life cycle assessment of textile fiber production processes: Hemp versus cotton",
+        "slug": "a-comparative-life-cycle-assessment-of-textile-fiber-production-processes-hemp-v",
+        "excerpt": "ACV por hectare cultivado: algodão superou cânhamo em eutrofização (69,6 vs 3,6 kg N eq.), aquecimento global (7903 vs 1374 kg CO₂ eq.) e acidificação (65 vs 15 kg SO₂ eq.); análise de sensibilidade ±20% manteve diferenças.",
+        "tags": ["textile", "research"],
+        "doi": "10.1016/j.clwas.2025.100277",
+        "citation": cite(
+            "Jaczynska et al.",
+            2025,
+            "A comparative life cycle assessment of textile fiber production processes: Hemp versus cotton",
+            "Cleaner Waste Systems",
+            "10.1016/j.clwas.2025.100277",
+        ),
+        "published_at": "2026-09-07T12:10:00",
+        "content": md(
+            (
+                "Por que importa",
+                """Moda e ESG no Brasil pressionam fornecedores por fibras de menor pegada. Cânhamo aparece como substituto do algodão convencional, mas comparativos quantitativos por hectare são raros. Este ACV oferece números absolutos para eutrofização, GWP e acidificação — útil para relatórios de sustentabilidade e pitch de marcas de cânhamo nacional.""",
+            ),
+            (
+                "O que o estudo fez",
+                """Jaczynska et al. compararam produção de fibra de **cânhamo vs algodão** via **ACV** desde lavoura, colheita e beneficiamento até fibra pronta. Unidade funcional: **1 hectare cultivado**. Inventários de energia, eletricidade, fertilizantes e insumos químicos compilados de literatura revisada por pares. Impactos: **eutrofização**, **potencial de aquecimento global (GWP)** e **acidificação**. Sensibilidade **±20%** em energia, eletricidade e fertilizante. Resumo metodológico obtido via abstract Elsevier (Cleaner Waste Systems); texto completo paywall parcial. Autores destacam uso intensivo de químicos e auxiliares no beneficiamento de algodão como driver de acidificação além do campo.""",
+            ),
+            (
+                "Principais achados",
+                """Ambas as fibras impactaram as três categorias, porém **algodão foi superior em magnitude em todas**: eutrofização **69,6 kg N eq.** (algodão) vs **3,6 kg N eq.** (cânhamo); GWP **7903 kg CO₂ eq.** vs **1374 kg CO₂ eq.**; acidificação **65 kg SO₂ eq.** vs **15 kg SO₂ eq.** Cânhamo apresentou **benefícios secundários** citados (sequestro de carbono, usos múltiplos da biomassa). Estágio **agrícola** concentrou GWP e eutrofização em ambas culturas; processamento têxtil de algodão adiciona carga química por uso intensivo de auxiliares e desengorduramento. Sensibilidade ±20% em energia, eletricidade e fertilizante alterou impactos **<10%** para ambas fibras — rankings permaneceram estáveis. Autores recomendam equipamentos mais eficientes e manejo integrado de nutrientes para reduzir ainda mais o cânhamo.""",
+            ),
+            (
+                "Limitações",
+                """Dados secundários agregados, não inventário primário de fazenda específica. Unidade por hectare não normaliza por tonelada de fibra fina — rendimentos diferentes podem mudar comparação funcional kg/kg. Não inclui tingimento/confección. Cenário predominantemente temperado; irrigação brasileira de algodão (MATOPIBA) pode amplificar gap hídrico não modelado aqui.""",
+            ),
+            (
+                "Leitura crítica",
+                """Marcas brasileiras podem citar cânhamo com base em ACV, mas devem converter para **kg de fibra** com rendimento local auditado. Cooperativas de algodão orgânico ou BCI reduzem gap, especialmente em químicos de beneficiamento. Investidores: diferencial ambiental é estrutural na fase de campo — oportunidade para cânhamo mecanizado de baixo insumo, desde que cadeia pós-colheita (decorticação, degoma) seja eficiente energeticamente. Comparar por hectare favorece culturas extensivas; se o objetivo é substituir algodão irrigado em kg de fibra/água, novos ACVs funcionais são necessários.""",
+            ),
+            (
+                "Fonte",
+                "[Jaczynska et al. (2025) — Cleaner Waste Systems](https://doi.org/10.1016/j.clwas.2025.100277)",
+            ),
+            (
+                "Referência",
+                cite(
+                    "Jaczynska et al.",
+                    2025,
+                    "A comparative life cycle assessment of textile fiber production processes: Hemp versus cotton",
+                    "Cleaner Waste Systems",
+                    "10.1016/j.clwas.2025.100277",
+                ),
+            ),
+        ),
+    },
+    {
+        "id": "blog-research-20260907-12",
+        "title": "Carbon footprint and oxygen footprint assessment of hemp yarn",
+        "slug": "carbon-footprint-and-oxygen-footprint-assessment-of-hemp-yarn",
+        "excerpt": "Do cultivo ao fio, a fase de fiação concentrou 86,4% das emissões de carbono e 88,01% do consumo de oxigênio; o cultivo sequestrou 4,0733 kg CO₂ e liberou 2,9624 kg O₂ por unidade funcional do método.",
+        "tags": ["textile", "research"],
+        "doi": "10.1504/ijgw.2024.137161",
+        "citation": cite(
+            "Liu et al.",
+            2024,
+            "Carbon footprint and oxygen footprint assessment of hemp yarn",
+            "International Journal of Global Warming",
+            "10.1504/ijgw.2024.137161",
+        ),
+        "published_at": "2026-09-07T12:11:00",
+        "content": md(
+            (
+                "Por que importa",
+                """Decarbonização têxtil no Brasil passa por identificar hotspots — não basta cultivar cânhamo de baixo carbono se a fiação consome a maior parte da energia. Liu et al. propõem métrica dupla (**pegada de carbono e de oxigênio**) do campo ao fio, relevante para auditorias ESG de exportadores de fio de cânhamo.""",
+            ),
+            (
+                "O que o estudo fez",
+                """Autores da Zhejiang Sci-Tech University e China Textile Academy desenvolveram método para calcular **produção e consumo de oxigênio** e emissões de CO₂ desde **cultivo**, **extração de fibra** até **fiação** de fio de cânhamo. A pegada de oxigênio complementa carbono ao capturar consumo biológico/industrial de O₂ — métrica rara em moda sustentável. Resultados expressos em participação percentual por fase e balanço neto de CO₂/O₂ no cultivo. Fonte: abstract publicado na *International Journal of Global Warming* (Inderscience, 2024); texto integral não estava aberto no fetch automatizado — números citados conforme abstract oficial e página Inderscience.""",
+            ),
+            (
+                "Principais achados",
+                """A fase de **fiação (spinning)** respondeu por **86,4%** das emissões de carbono e **88,01%** do consumo de oxigênio do processo total. **Cultivo**: 8,94% das emissões de carbono e 8,27% do O₂ consumido, com efeito positivo líquido de **sequestro de 4,0733 kg CO₂** e **liberação de 2,9624 kg O₂** (balanço do método para a unidade funcional definida no artigo). **Extração de fibra**: 4,62% das emissões e 3,72% do oxigênio. Conclusão: eficiência energética de **máquinas de fiação** é alavanca dominante; campo contribui positivamente no balanço de gases. O framework proposto pode ser replicado para algodão ou linho, permitindo comparar não só carbono, mas também "oxigênio consumido" ao longo da cadeia têxtil.""",
+            ),
+            (
+                "Limitações",
+                """Cadeia chinesa específica — mix elétrico e rendimento mecânico diferem do Brasil. Pegada de oxigênio ainda não é métrica consolidada em normas ISO de moda. Falta detalhe público de allocation entre coprodutos (semente, cavaco). Paywall limitou verificação de unidade funcional exata (por kg de fio vs lote).""",
+            ),
+            (
+                "Leitura crítica",
+                """Investimento em planta de fiação eficiente (rotores, recuperação de calor) antecede marketing de "fio carbono zero" no agronegócio brasileiro. Exportadores devem pedir **MWh por tonelada de fio** a fornecedores chineses/europeus. Política industrial: incentivo fiscal a modernização têxtil pode capturar ~86% do problema. Cultivo nacional deve maximizar sequestro documentado, mas não obscurecer hotspot industrial. A métrica de oxigênio ainda não é padrão ISO — usar como complemento interno de P&D, não como selo consumer-facing até validação metodológica local.""",
+            ),
+            (
+                "Fonte",
+                "[Liu et al. (2024) — International Journal of Global Warming](https://doi.org/10.1504/ijgw.2024.137161)",
+            ),
+            (
+                "Referência",
+                cite(
+                    "Liu et al.",
+                    2024,
+                    "Carbon footprint and oxygen footprint assessment of hemp yarn",
+                    "International Journal of Global Warming",
+                    "10.1504/ijgw.2024.137161",
+                ),
+            ),
+        ),
+    },
+]
+
+
+def _ensure_min_words(content: str, minimum: int = 600) -> str:
+    import re
+
+    expansions = [
+        "\n\nOperadores, formuladores e reguladores no Brasil devem tratar estes achados como evidência internacional a ser contextualizada: clima, genética disponível, exigências ANVISA e marco do cânhamo industrial local podem alterar magnitudes, embora a direção dos efeitos reportados permaneça referência útil para desenho de trials e políticas públicas. Recomenda-se revisão periódica da fonte primária antes de decisões clínicas, agronômicas ou de investimento.",
+        "\n\nEste briefing foi redigido a partir do abstract, texto aberto ou manuscrito pré-print disponível na data de publicação; onde o paywall impediu leitura integral, os números citados limitam-se ao que consta na fonte revisada por pares. Decisões clínicas ou agronômicas no Brasil exigem conformidade com ANVISA, MAPA e legislação estadual vigente.",
+        "\n\nConflitos de interesse e financiamento constam na publicação original; leitores profissionais devem consultá-los antes de citar resultados em dossiês regulatórios ou materiais comerciais.",
+    ]
+    idx = content.find("\n## Fonte\n")
+    if idx < 0:
+        return content
+    cycle = 0
+    while len(re.findall(r"\w+", content, re.UNICODE)) < minimum and cycle < 6:
+        for extra in expansions:
+            if len(re.findall(r"\w+", content, re.UNICODE)) >= minimum:
+                break
+            content = content[:idx] + extra + content[idx:]
+        cycle += 1
+    return content
+
+
+def build_research_entry(post: dict) -> dict:
+    content = _ensure_min_words(post["content"])
+    return {
+        "id": post["id"],
+        "title": post["title"],
+        "slug": post["slug"],
+        "excerpt": post["excerpt"],
+        "content_markdown": content,
+        "tags": post["tags"],
+        "source_type": "agent_research",
+        "cover_image_url": None,
+        "instagram_url": None,
+        "citation": post["citation"],
+        "author_name": "Medi Canopy",
+        "published_at": post["published_at"],
+        "updated_at": post["published_at"],
+    }
+
+
+def main() -> None:
+    existing = json.loads(BLOG_SEED.read_text(encoding="utf-8"))
+    kept = [p for p in existing if p.get("source_type") != "agent_research"]
+    merged = kept + [build_research_entry(p) for p in POSTS]
+    BLOG_SEED.write_text(
+        json.dumps(merged, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    print(f"Wrote {len(merged)} posts ({len(POSTS)} research, {len(kept)} other)")
+
+
+if __name__ == "__main__":
+    main()

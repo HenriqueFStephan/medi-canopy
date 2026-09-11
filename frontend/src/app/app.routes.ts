@@ -32,9 +32,22 @@ export const routes: Routes = [
       import('./features/services/services.component').then((m) => m.ServicesComponent),
   },
   {
-    path: 'projects',
+    path: 'hub',
     loadComponent: () =>
-      import('./features/projects/projects.component').then((m) => m.ProjectsComponent),
+      import('./features/hub/hub-layout.component').then((m) => m.HubLayoutComponent),
+    children: [
+      { path: '', redirectTo: 'parceiros', pathMatch: 'full' },
+      {
+        path: 'parceiros',
+        loadComponent: () =>
+          import('./features/hub/hub-partners.component').then((m) => m.HubPartnersComponent),
+      },
+      {
+        path: 'clientes',
+        loadComponent: () =>
+          import('./features/hub/hub-clients.component').then((m) => m.HubClientsComponent),
+      },
+    ],
   },
   {
     path: 'contact',

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Tecnologia">
+  <rect width="120" height="120" rx="16" fill="#1b4332"/>
+  <path d="M36 78V42h14l16 24V42h14v36H66L50 54v24H36z" fill="#95d5b2"/>
+  <circle cx="88" cy="36" r="6" fill="#d4a574"/>
+</svg>

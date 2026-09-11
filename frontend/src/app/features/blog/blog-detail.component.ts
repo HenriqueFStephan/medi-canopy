@@ -12,7 +12,7 @@ import { environment } from '../../../environments/environment';
   template: `
     <section class="section" *ngIf="post">
       <article class="container article">
-        <a routerLink="/blog" class="back">← Voltar ao blog</a>
+        <a routerLink="/blog" class="back">← Voltar aos artigos científicos</a>
         <header>
           <span class="tag" *ngIf="post.source_type === 'instagram'">Do Instagram</span>
           <h1>{{ post.title }}</h1>

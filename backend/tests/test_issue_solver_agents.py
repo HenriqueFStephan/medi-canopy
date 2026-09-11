@@ -126,8 +126,11 @@ def test_post_prompt_uses_comment_and_digest():
     assert "backend/data/seed/news.json" in prompt
     assert "do not close this research digest" in prompt.lower() or "do not close issue" in prompt.lower()
     assert "agent_research" in prompt
-    assert "Analyze the paper in depth" in prompt
+    assert "Read the paper" in prompt
     assert "https://doi.org/10.1000/example" in prompt
-    assert "`[texto](https://…)`" in prompt or "clickable markdown" in prompt
+    assert "clickable markdown" in prompt
     assert "source_url" in prompt
-    assert "Never drop a source link" in prompt
+    assert "Principais achados" in prompt
+    assert "600–1000" in prompt
+    assert "one-paragraph Resumo" in prompt
+    assert "Do NOT:" in prompt

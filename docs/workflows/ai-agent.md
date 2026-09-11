@@ -81,7 +81,7 @@ flowchart TB
 |---------|------------|--------------|
 | `solve` | Issue labeled `solve` (including a new issue opened with that label) | Issue title, labels, and body |
 | `correction` | Comment body starts with `[CORRECTION]` | The comment is the task; issue body is context only |
-| `post` | Comment body starts with `[POST]` **and** the issue has `daily-cannabis` | Named paper(s); digest links are extracted and must be opened in depth before writing; every URL/DOI is copied onto the site as a clickable link |
+| `post` | Comment body starts with `[POST]` **and** the issue has `daily-cannabis` | Open the paper (PDF/full text when possible); write a 600–1000+ word Portuguese briefing (methods, findings, limitations, Brazil reading); copy every URL/DOI as a clickable markdown link |
 
 Comments are enough to start the workflow. The issue does **not** need the `solve` label for `[CORRECTION]` or `[POST]`. Ordinary comments, and `[POST]` on issues without `daily-cannabis`, do not run the job.
 

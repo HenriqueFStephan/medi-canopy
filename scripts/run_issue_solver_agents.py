@@ -488,42 +488,71 @@ def build_prompt(
                     - Do not treat the digest as a coding bug to "solve".
                     - Do not implement papers that the comment does not name.
                     - Do not close issue #{issue.number}; other papers may still be posted.
-                    - Keep scope focused and minimal.
+                    - Do not add unrelated site changes.
                     - Base branch: {base_ref}.
 
                     Read the papers before you write (required):
-                    - The issue description is a digest. It is not enough to paraphrase its
-                      one-line summaries.
-                    - Open every source URL/DOI for the selected paper(s) listed below and
-                      in the digest (markdown links like [title](url), DOI lines, bare URLs).
-                    - Analyze the paper in depth — abstract, methods, main results,
-                      limitations, and conflicts/funding — before writing any resumo,
-                      abstract, or commentary for the website.
-                    - If the full text is paywalled, still open the landing page/abstract
-                      that the link provides, say so briefly, and keep the original link.
+                    - The issue description is only a catalog. Never paraphrase its
+                      one-line summary as the website article.
+                    - Open every source URL/DOI for the selected paper. Follow through to
+                      the publisher page, PubMed/PMC, and the PDF if it is available.
+                    - Read the paper (or the fullest text you can reach: abstract, full
+                      HTML, PDF). Take notes on design, population, data, period,
+                      outcomes, effect sizes/numbers, subgroups, limitations, and
+                      funding/conflicts.
+                    - If the full text is paywalled, use the abstract plus any open
+                      tables/supplement, say that the full text was not open, and still
+                      write the deepest briefing those sources allow. Keep the original
+                      link.
                     """
                 ).strip(),
                 "Triggering comment:\n" + _comment_block(comment, POST_PREFIX),
                 _source_links_block(source_links),
                 textwrap.dedent(
                     """
+                    Article depth (required — this is the main deliverable):
+                    Write an original Portuguese briefing for a professional cannabis
+                    audience (operators, clinicians, policy readers in Brazil). It must
+                    be a complete exposition of the paper, not a teaser.
+
+                    Do NOT:
+                    - Use `paper_normalizer.py` as the article body (that helper is a
+                      short placeholder: title + two-sentence resumo + English abstract).
+                    - Write a one-paragraph Resumo and stop.
+                    - Add a "Contexto" about how Medi Canopy's agent selected the paper.
+                    - Repeat `title` as a leading `#` heading (the site already shows it).
+                    - Invent numbers that are not in the paper.
+
+                    Do:
+                    - `excerpt`: 2–3 sentences for the list card.
+                    - `content_markdown`: a full briefing, typically 600–1000+ words,
+                      with these sections in order (use `##` headings, Portuguese):
+                      1) **Por que importa** — why a Brazilian reader should care
+                      2) **O que o estudo fez** — design, data sources, period, sample
+                      3) **Principais achados** — concrete results (numbers, outcomes,
+                         subgroups, high-potency / commercial-market effects when present)
+                      4) **Limitações** — what the authors cannot claim
+                      5) **Leitura crítica** — what it does and does not mean for
+                         practice or policy in Brazil
+                      6) **Fonte** — clickable markdown link to the paper
+                      7) **Referência** — citation with the same markdown link
+                    - News items may be shorter than blog posts, but still include
+                      methods, findings, and a source link — never a single blurb.
+
                     Publishing rules:
                     - This [POST] comment is human approval for the named paper only.
-                    - Always include every URL or DOI given in the issue description for
-                      that paper. Never drop a source link.
-                    - Links on the site must be clickable markdown: `[texto](https://…)`.
-                      Bare URLs and citation text without a markdown link do not render.
-                    - Blog (`backend/data/seed/blog.json`): `source_type` = `agent_research`.
-                      Put a **Fonte** / **Artigo original** section with the markdown link.
-                      Also set `citation` to include the same URL (prefer https://doi.org/…).
-                    - News (`backend/data/seed/news.json`): set `source_url` to that URL
-                      (the news list navigates there) and `source_name` to the journal or
-                      publisher. Repeat the markdown link in `content`.
-                    - Write in Portuguese, evidence-based, after the in-depth reading above.
-                    - Follow `backend/app/services/paper_normalizer.py` and `docs/BRAND.md`.
+                    - Always include every URL or DOI given in the issue description.
+                    - Links must be clickable markdown: `[texto](https://…)`. Bare URLs
+                      in the Referência block do not become links on the site.
+                    - Blog: `backend/data/seed/blog.json`, `source_type` = `agent_research`,
+                      `citation` includes the same URL (prefer https://doi.org/…).
+                    - News: `backend/data/seed/news.json`, set `source_url` and
+                      `source_name`; repeat the markdown link in `content`.
+                    - Voice: `docs/BRAND.md` (authoritative, Brazil-first, evidence-based).
+                    - Match existing JSON field names in the seed files.
                     """
                 ).strip(),
-                "Research digest (source material — includes the paper titles and links):\n"
+                "Research digest (catalog only — titles and links, not the article copy):\n"
                 + metadata,
             ]
         )

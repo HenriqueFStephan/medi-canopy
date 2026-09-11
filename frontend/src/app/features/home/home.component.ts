@@ -45,7 +45,7 @@ import { NewsArticle } from '../../core/models';
           <a routerLink="/blog" class="feature-list__item">
             <div>
               <h3>Artigos Científicos</h3>
-              <p>Espaço do autor e pesquisas científicas revisadas. Conteúdo do Instagram integrado.</p>
+              <p>Pesquisas científicas revisadas com curadoria humana.</p>
             </div>
           </a>
           <a routerLink="/news" class="feature-list__item">

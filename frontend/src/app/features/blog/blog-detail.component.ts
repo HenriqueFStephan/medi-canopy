@@ -3,7 +3,6 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ApiService } from '../../core/api.service';
 import { BlogPost } from '../../core/models';
-import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-blog-detail',
@@ -14,18 +13,13 @@ import { environment } from '../../../environments/environment';
       <article class="container article">
         <a routerLink="/blog" class="back">← Voltar aos artigos científicos</a>
         <header>
-          <span class="tag" *ngIf="post.source_type === 'instagram'">Do Instagram</span>
+          <span class="tag" *ngIf="post.source_type === 'agent_research'">Pesquisa</span>
           <h1>{{ post.title }}</h1>
           <p class="article__meta">
             {{ post.author_name }} · {{ post.published_at | date:'longDate' }}
           </p>
         </header>
         <div class="article__body" [innerHTML]="renderedContent"></div>
-        <footer class="article__footer" *ngIf="post.instagram_url">
-          <a [href]="post.instagram_url" target="_blank" rel="noopener" class="btn btn--accent">
-            Ver no Instagram
-          </a>
-        </footer>
       </article>
     </section>
     <div *ngIf="loading" class="loading">Carregando…</div>

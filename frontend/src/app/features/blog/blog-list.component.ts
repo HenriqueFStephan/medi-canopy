@@ -3,7 +3,6 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ApiService } from '../../core/api.service';
 import { BlogPost } from '../../core/models';
-import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-blog-list',
@@ -15,8 +14,7 @@ import { environment } from '../../../environments/environment';
         <header class="page-header">
           <h1>Artigos Científicos</h1>
           <p>
-            Espaço do autor com curadoria humana. Pesquisas científicas e posts do
-            <a [href]="instagramUrl" target="_blank" rel="noopener">&#64;papiroebers</a>.
+            Pesquisas científicas revisadas com curadoria humana.
           </p>
         </header>
 
@@ -27,7 +25,6 @@ import { environment } from '../../../environments/environment';
           <a class="news-row" *ngFor="let post of posts" [routerLink]="['/blog', post.slug]">
             <span class="col-date">{{ post.published_at | date:'d MMM y' }}</span>
             <span class="col-tag">
-              <span class="tag" *ngIf="post.source_type === 'instagram'">Instagram</span>
               <span class="tag" *ngIf="post.source_type === 'agent_research'">Pesquisa</span>
             </span>
             <span class="col-title">{{ post.title }}</span>
@@ -43,7 +40,6 @@ export class BlogListComponent implements OnInit {
   posts: BlogPost[] = [];
   loading = true;
   error = '';
-  readonly instagramUrl = environment.instagramUrl;
 
   constructor(private api: ApiService) {}
 

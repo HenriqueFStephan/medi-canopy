@@ -83,7 +83,7 @@ flowchart TB
 
 A paper reaches the issue only if it is flagged peer-reviewed, names a journal, is not a preprint/blog/thesis/patent, has a DOI or a recognised publisher host, was published in the last 31 days, is not already in the catalog, and meets `--min-confidence` (default `0.7`). Rejected candidates stay in the job summary and the artifact.
 
-Research issues are not coding tasks. The AI agent workflow only starts on the `solve` label, so these digests are not dispatched as fixes.
+Research issues are not coding tasks. Labeling a digest `solve` does not dispatch a fix. To turn a named paper into a blog post, comment `[POST] …` on the `daily-cannabis` issue.
 
 ## Manual run
 

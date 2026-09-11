@@ -24,7 +24,7 @@ flowchart LR
 
   Push["Push to main<br/>backend/**"]:::trigger
   Cron["Monday 06:30 UTC"]:::trigger
-  Label["Issue labeled solve"]:::trigger
+  Label["Issue labeled solve<br/>or [CORRECTION] / [POST] comment"]:::trigger
   Manual["Run workflow"]:::trigger
 
   Deploy["Deploy backend"]:::job

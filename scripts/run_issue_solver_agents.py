@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """
-Dispatch one Cursor cloud agent per GitHub issue labeled `solve`.
+Dispatch one Cursor cloud agent for a single GitHub issue trigger.
+
+Triggers:
+- `solve`: the issue was labeled `solve`
+- `correction`: a comment whose body starts with `[CORRECTION]`
+- `post`: a `[POST]` comment on an issue labeled `daily-cannabis`
 
 The launched agent is instructed to:
 - assess change complexity on a 1–5 scale
@@ -30,12 +35,15 @@ CURSOR_API_BASE = "https://api.cursor.com/v1"
 MAX_LAUNCH_ATTEMPTS = 5
 MAX_RETRY_WAIT_SECONDS = 180
 DEFAULT_RETRY_WAIT_SECONDS = 60
-LAUNCH_SPACING_SECONDS = 60
 SKIP_LABELS = frozenset({"research", "[research]", "daily-cannabis"})
 RESEARCH_TITLE_MARKER = "[research]"
 RESEARCH_LABEL = "research"
 SOLVE_LABEL = "solve"
+DAILY_CANNABIS_LABEL = "daily-cannabis"
 DAILY_CANNABIS_TITLE_MARKER = "daily cannabis"
+CORRECTION_PREFIX = "[CORRECTION]"
+POST_PREFIX = "[POST]"
+TRIGGERS = ("solve", "correction", "post")
 
 
 @dataclass
@@ -45,6 +53,14 @@ class Issue:
     body: str
     html_url: str
     labels: list[str]
+
+
+@dataclass
+class IssueComment:
+    id: int
+    body: str
+    html_url: str
+    user: str = ""
 
 
 class ApiError(RuntimeError):
@@ -161,9 +177,23 @@ def issue_labels(issue: Issue) -> set[str]:
     return {label.strip().lower() for label in issue.labels}
 
 
-def skip_reason(issue: Issue, *, require_solve: bool = True) -> str | None:
-    """Research notes are tracked as issues for the team, not as coding work."""
+def comment_has_prefix(body: str, prefix: str) -> bool:
+    """True when the comment starts with the command prefix (ignoring leading space)."""
+    return body.lstrip().upper().startswith(prefix.upper())
+
+
+def skip_reason(issue: Issue, *, trigger: str = "solve") -> str | None:
+    """Return why this issue should not be dispatched for the given trigger."""
     labels = issue_labels(issue)
+    if trigger == "correction":
+        return None
+    if trigger == "post":
+        if DAILY_CANNABIS_LABEL not in labels:
+            return f"missing `{DAILY_CANNABIS_LABEL}` label"
+        return None
+    if trigger != "solve":
+        return f"unknown trigger `{trigger}`"
+
     matched = labels & SKIP_LABELS
     if matched:
         return f"label {sorted(matched)[0]}"
@@ -172,7 +202,7 @@ def skip_reason(issue: Issue, *, require_solve: bool = True) -> str | None:
         return "title marker [RESEARCH]"
     if DAILY_CANNABIS_TITLE_MARKER in title_lower:
         return "title marker Daily Cannabis"
-    if require_solve and SOLVE_LABEL not in labels:
+    if SOLVE_LABEL not in labels:
         return f"missing `{SOLVE_LABEL}` label"
     return None
 
@@ -268,83 +298,66 @@ def fetch_issue_by_number(repo: str, github_token: str, number: int) -> Issue | 
     return parse_issue(result)
 
 
-def fetch_open_issues(
-    repo: str,
-    github_token: str,
-    limit: int,
-    *,
-    label: str = SOLVE_LABEL,
-) -> list[Issue]:
+def fetch_issue_comment(repo: str, github_token: str, comment_id: int) -> IssueComment:
     headers = github_headers(github_token)
-    issues: list[Issue] = []
-    skipped = 0
-    page = 1
-    while len(issues) < limit:
-        query = urllib.parse.urlencode(
-            {
-                "state": "open",
-                "per_page": "100",
-                "page": str(page),
-                "sort": "created",
-                "direction": "asc",
-                "labels": label,
-            }
-        )
-        url = f"{GITHUB_API_BASE}/repos/{repo}/issues?{query}"
-        result = _http_json("GET", url, headers=headers)
-        if not isinstance(result, list):
-            raise ApiError(f"Unexpected GitHub response for issues: {type(result)}")
-        if not result:
-            break
-
-        page_items = 0
-        for item in result:
-            page_items += 1
-            issue = parse_issue(item)
-            if issue is None:
-                continue
-            reason = skip_reason(issue)
-            if reason:
-                skipped += 1
-                log(f"Skipping issue #{issue.number} ({reason}): {issue.title}")
-                if "title marker" in reason:
-                    stamp_research_label(repo, issue, headers)
-                continue
-            issues.append(issue)
-            if len(issues) >= limit:
-                break
-
-        if page_items < 100:
-            break
-        page += 1
-
-    if skipped:
-        log(f"Skipped {skipped} research/note issue(s).")
-    return issues
+    url = f"{GITHUB_API_BASE}/repos/{repo}/issues/comments/{comment_id}"
+    result = _http_json("GET", url, headers=headers)
+    if not isinstance(result, dict):
+        raise ApiError(f"Unexpected GitHub response for comment #{comment_id}: {type(result)}")
+    user = result.get("user") if isinstance(result.get("user"), dict) else {}
+    return IssueComment(
+        id=int(result.get("id") or comment_id),
+        body=(result.get("body") or "").strip(),
+        html_url=str(result.get("html_url") or ""),
+        user=str(user.get("login") or ""),
+    )
 
 
-def build_prompt(issue: Issue, repo: str, base_ref: str) -> str:
+def _issue_metadata_block(issue: Issue) -> str:
     labels = ", ".join(issue.labels) if issue.labels else "none"
     issue_body = issue.body if issue.body else "(no description provided)"
-    owner = repo.split("/", 1)[0]
     return textwrap.dedent(
         f"""
-        You are working on repository {repo}.
-        Solve GitHub issue #{issue.number} on a dedicated branch.
-
-        Constraints:
-        - Touch only code relevant to issue #{issue.number}.
-        - Keep scope focused and minimal.
-        - Add or update tests when feasible.
-        - Base branch: {base_ref}.
-
-        Issue metadata:
         - URL: {issue.html_url}
         - Title: {issue.title}
         - Labels: {labels}
         - Description:
         {issue_body}
+        """
+    ).strip()
 
+
+def _comment_block(comment: IssueComment, prefix: str) -> str:
+    return textwrap.dedent(
+        f"""
+        - Prefix required: {prefix}
+        - Author: {comment.user or "unknown"}
+        - URL: {comment.html_url or "(no comment URL)"}
+        - Body:
+        {comment.body or "(empty comment)"}
+        """
+    ).strip()
+
+
+def _delivery_rules(
+    issue: Issue,
+    repo: str,
+    base_ref: str,
+    *,
+    pr_title_prefix: str,
+    close_issue: bool,
+) -> str:
+    owner = repo.split("/", 1)[0]
+    related = (
+        f"7) Closes #{issue.number}"
+        if close_issue
+        else (
+            f"7) Related to #{issue.number} — do not close this research digest; "
+            "other papers may still be posted later."
+        )
+    )
+    return textwrap.dedent(
+        f"""
         Complexity assessment (required):
         Before you implement, rate the change from 1 to 5 and keep that rating
         throughout the run. Comment the rating on issue #{issue.number}.
@@ -362,7 +375,7 @@ def build_prompt(issue: Issue, repo: str, base_ref: str) -> str:
           open one, merge it immediately (`gh pr merge --squash --delete-branch`),
           and do not leave it for human review.
         - Complexity 4–5: open a pull request and do NOT merge it.
-          Title format: "fix(issue #{issue.number}): <short summary>"
+          Title format: "{pr_title_prefix}(issue #{issue.number}): <short summary>"
           Request a review from `{owner}` so they receive GitHub's email with
           the PR title. Body sections, in order:
           1) Complexity (N/5, one-sentence justification)
@@ -371,7 +384,7 @@ def build_prompt(issue: Issue, repo: str, base_ref: str) -> str:
           4) Changes Made
           5) Validation (tests/manual checks)
           6) Risks / Follow-ups
-          7) Closes #{issue.number}
+          {related}
           Mention changed files and why each was changed.
 
         Before finishing:
@@ -381,6 +394,104 @@ def build_prompt(issue: Issue, repo: str, base_ref: str) -> str:
           whether you merged to `{base_ref}` or opened a PR.
         """
     ).strip()
+
+
+def build_prompt(
+    issue: Issue,
+    repo: str,
+    base_ref: str,
+    *,
+    trigger: str = "solve",
+    comment: IssueComment | None = None,
+) -> str:
+    metadata = _issue_metadata_block(issue)
+    if trigger == "correction":
+        if comment is None:
+            raise ValueError("correction trigger requires a comment")
+        task = "\n\n".join(
+            [
+                textwrap.dedent(
+                    f"""
+                    You are working on repository {repo}.
+                    Apply a CORRECTION on GitHub issue #{issue.number} on a dedicated branch.
+
+                    Constraints:
+                    - The triggering comment is the task. Do not re-open the original
+                      issue scope unless the correction explicitly says so.
+                    - Touch only code needed for this correction.
+                    - Keep scope focused and minimal.
+                    - Add or update tests when feasible.
+                    - Base branch: {base_ref}.
+                    """
+                ).strip(),
+                "Triggering comment:\n" + _comment_block(comment, CORRECTION_PREFIX),
+                "Original issue (context only):\n" + metadata,
+            ]
+        )
+        rules = _delivery_rules(
+            issue, repo, base_ref, pr_title_prefix="fix", close_issue=True
+        )
+    elif trigger == "post":
+        if comment is None:
+            raise ValueError("post trigger requires a comment")
+        task = "\n\n".join(
+            [
+                textwrap.dedent(
+                    f"""
+                    You are working on repository {repo}.
+                    Publish a blog post from this daily-cannabis research digest
+                    (GitHub issue #{issue.number}) on a dedicated branch.
+
+                    Constraints:
+                    - The triggering [POST] comment names which paper or content to publish.
+                    - Do not treat the digest as a coding bug to "solve".
+                    - Do not implement papers that the comment does not name.
+                    - Do not close issue #{issue.number}; other papers may still be posted.
+                    - Keep scope focused and minimal.
+                    - Base branch: {base_ref}.
+                    """
+                ).strip(),
+                "Triggering comment:\n" + _comment_block(comment, POST_PREFIX),
+                textwrap.dedent(
+                    """
+                    Publishing rules:
+                    - This [POST] comment is human approval for the named paper only.
+                    - Add a post to `backend/data/seed/blog.json` matching existing entries
+                      (title, slug, excerpt, content_markdown, tags, source_type, citation,
+                      author_name, published_at).
+                    - `source_type` must be `agent_research`.
+                    - Write in Portuguese, evidence-based, citing the paper (DOI/URL).
+                    - Follow `backend/app/services/paper_normalizer.py` and `docs/BRAND.md`.
+                    """
+                ).strip(),
+                "Research digest (source material):\n" + metadata,
+            ]
+        )
+        rules = _delivery_rules(
+            issue, repo, base_ref, pr_title_prefix="feat", close_issue=False
+        )
+    else:
+        task = "\n\n".join(
+            [
+                textwrap.dedent(
+                    f"""
+                    You are working on repository {repo}.
+                    Solve GitHub issue #{issue.number} on a dedicated branch.
+
+                    Constraints:
+                    - Touch only code relevant to issue #{issue.number}.
+                    - Keep scope focused and minimal.
+                    - Add or update tests when feasible.
+                    - Base branch: {base_ref}.
+                    """
+                ).strip(),
+                "Issue (this labeled `solve` issue is the task):\n" + metadata,
+            ]
+        )
+        rules = _delivery_rules(
+            issue, repo, base_ref, pr_title_prefix="fix", close_issue=True
+        )
+    return f"{task}\n\n{rules}"
 
 
 def create_cursor_agent(
@@ -482,16 +593,35 @@ def create_cursor_agent_with_retry(**kwargs: Any) -> dict[str, Any]:
     raise last_error
 
 
+def _run_name(trigger: str, issue: Issue) -> str:
+    title = issue.title[:80]
+    if trigger == "correction":
+        return f"Correction #{issue.number}: {title}"
+    if trigger == "post":
+        return f"Post #{issue.number}: {title}"
+    return f"Issue #{issue.number}: {title}"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Launch Cursor cloud agents for GitHub issues labeled `solve`."
+        description="Launch a Cursor cloud agent for one GitHub issue trigger."
     )
     parser.add_argument("--repo", required=True, help="owner/repo")
     parser.add_argument("--repo-url", required=True, help="Git clone URL, e.g. https://github.com/org/repo")
     parser.add_argument("--base-ref", required=True, help="Base branch used by cloud agents")
-    parser.add_argument("--max-issues", type=int, default=1, help="Maximum number of issues to process")
-    parser.add_argument("--issue-number", type=int, default=0, help="Process a single issue number")
-    parser.add_argument("--label", default=SOLVE_LABEL, help="Only process issues with this label")
+    parser.add_argument("--issue-number", type=int, required=True, help="Issue number that triggered the run")
+    parser.add_argument(
+        "--trigger",
+        choices=TRIGGERS,
+        default="solve",
+        help="solve | correction | post",
+    )
+    parser.add_argument(
+        "--comment-id",
+        type=int,
+        default=0,
+        help="Issue comment ID (required for correction and post)",
+    )
     parser.add_argument("--model", default="composer-2.5", help="Cursor model id")
     parser.add_argument("--dry-run", action="store_true", help="Only print planned operations")
     parser.add_argument(
@@ -510,104 +640,90 @@ def main() -> int:
         log("Missing required env var: CURSOR_API_KEY", error=True)
         return 2
 
-    if args.max_issues < 1:
-        log("--max-issues must be >= 1", error=True)
+    if args.issue_number < 1:
+        log("--issue-number must be >= 1", error=True)
         return 2
-    if args.issue_number < 0:
-        log("--issue-number must be >= 1 when set", error=True)
+    if args.trigger in {"correction", "post"} and args.comment_id < 1:
+        log(f"--comment-id is required for trigger `{args.trigger}`", error=True)
         return 2
 
     try:
         headers = github_headers(github_token)
-        ensure_solve_label(args.repo, headers)
-        if args.issue_number:
-            issue = fetch_issue_by_number(args.repo, github_token, args.issue_number)
-            if issue is None:
-                log(f"Issue #{args.issue_number} is a pull request, not an issue.", error=True)
-                return 1
-            reason = skip_reason(issue)
-            if reason:
-                log(f"Skipping issue #{issue.number} ({reason}): {issue.title}")
-                if "title marker" in reason:
-                    stamp_research_label(args.repo, issue, headers)
-                issues: list[Issue] = []
-            else:
-                issues = [issue]
-        else:
-            issues = fetch_open_issues(
-                args.repo,
-                github_token,
-                args.max_issues,
-                label=args.label,
-            )
+        if args.trigger == "solve":
+            ensure_solve_label(args.repo, headers)
+        issue = fetch_issue_by_number(args.repo, github_token, args.issue_number)
+        if issue is None:
+            log(f"Issue #{args.issue_number} is a pull request, not an issue.", error=True)
+            return 1
+        comment: IssueComment | None = None
+        if args.comment_id:
+            comment = fetch_issue_comment(args.repo, github_token, args.comment_id)
     except ApiError as exc:
-        log(f"Failed fetching issues: {exc}", error=True)
+        log(f"Failed fetching issue trigger: {exc}", error=True)
         return 1
 
-    if not issues:
-        log(f"No open issues found with label `{args.label}`.")
+    if args.trigger == "correction":
+        if comment is None or not comment_has_prefix(comment.body, CORRECTION_PREFIX):
+            log(
+                f"Skipping issue #{issue.number}: comment does not start with {CORRECTION_PREFIX}",
+            )
+            return 0
+    elif args.trigger == "post":
+        if comment is None or not comment_has_prefix(comment.body, POST_PREFIX):
+            log(f"Skipping issue #{issue.number}: comment does not start with {POST_PREFIX}")
+            return 0
+
+    reason = skip_reason(issue, trigger=args.trigger)
+    if reason:
+        log(f"Skipping issue #{issue.number} ({reason}): {issue.title}")
+        if args.trigger == "solve" and "title marker" in reason:
+            stamp_research_label(args.repo, issue, headers)
         return 0
 
-    log(f"Found {len(issues)} open issue(s) to process.")
-    launched = 0
-    failed: list[int] = []
-    last_launch_at: float | None = None
+    prompt = build_prompt(
+        issue,
+        args.repo,
+        args.base_ref,
+        trigger=args.trigger,
+        comment=comment,
+    )
+    run_name = _run_name(args.trigger, issue)
+    log(f"Trigger `{args.trigger}` on issue #{issue.number}: {issue.title}")
 
-    for issue in issues:
-        prompt = build_prompt(issue, args.repo, args.base_ref)
-        run_name = f"Issue #{issue.number}: {issue.title[:80]}"
+    if args.dry_run:
+        log(f"[DRY RUN] Would launch agent for issue #{issue.number}: {issue.title}")
+        log(f"[DRY RUN] Prompt preview:\n{prompt[:2000]}")
+        return 0
 
-        if args.dry_run:
-            log(f"[DRY RUN] Would launch agent for issue #{issue.number}: {issue.title}")
-            launched += 1
-            continue
-
-        if last_launch_at is not None:
-            elapsed = time.monotonic() - last_launch_at
-            remaining = LAUNCH_SPACING_SECONDS - int(elapsed)
-            if remaining > 0:
-                _sleep(remaining, "avoid Cursor GitHub App rate limit between launches")
-
-        try:
-            response = create_cursor_agent_with_retry(
-                cursor_api_key=cursor_api_key or "",
-                model=args.model,
-                repo_url=args.repo_url,
-                base_ref=args.base_ref,
-                prompt=prompt,
-                run_name=run_name,
-                skip_reviewer_request=args.skip_reviewer_request,
-            )
-        except ApiError as exc:
-            log(f"Issue #{issue.number} launch failed: {exc}", error=True)
-            failed.append(issue.number)
-            last_launch_at = time.monotonic()
-            continue
-
-        last_launch_at = time.monotonic()
-        log(f"Issue #{issue.number} Cursor payload keys: {sorted(response.keys())}")
-        agent_id, agent_url = agent_identity(response)
-        if not agent_id:
-            log(
-                f"Issue #{issue.number} launch returned no agent id:\n{json.dumps(response, indent=2)[:8000]}",
-                error=True,
-            )
-            failed.append(issue.number)
-            continue
-
-        launched += 1
-        log(f"Issue #{issue.number} -> agent {agent_id}")
-        if agent_url:
-            log(f"  URL: {agent_url}")
-        run = response.get("run") if isinstance(response.get("run"), dict) else {}
-        if run.get("id"):
-            log(f"  Run: {run.get('id')} ({run.get('status') or 'unknown status'})")
-
-    log(f"Launched {launched}/{len(issues)} agent(s).")
-    if failed:
-        failed_list = ", ".join(f"#{n}" for n in failed)
-        log(f"Failed to launch agents for issues: {failed_list}", error=True)
+    try:
+        response = create_cursor_agent_with_retry(
+            cursor_api_key=cursor_api_key or "",
+            model=args.model,
+            repo_url=args.repo_url,
+            base_ref=args.base_ref,
+            prompt=prompt,
+            run_name=run_name,
+            skip_reviewer_request=args.skip_reviewer_request,
+        )
+    except ApiError as exc:
+        log(f"Issue #{issue.number} launch failed: {exc}", error=True)
         return 1
+
+    log(f"Issue #{issue.number} Cursor payload keys: {sorted(response.keys())}")
+    agent_id, agent_url = agent_identity(response)
+    if not agent_id:
+        log(
+            f"Issue #{issue.number} launch returned no agent id:\n{json.dumps(response, indent=2)[:8000]}",
+            error=True,
+        )
+        return 1
+
+    log(f"Issue #{issue.number} -> agent {agent_id}")
+    if agent_url:
+        log(f"  URL: {agent_url}")
+    run = response.get("run") if isinstance(response.get("run"), dict) else {}
+    if run.get("id"):
+        log(f"  Run: {run.get('id')} ({run.get('status') or 'unknown status'})")
     return 0
 
 

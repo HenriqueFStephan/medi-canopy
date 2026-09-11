@@ -38,8 +38,9 @@ from run_issue_solver_agents import (  # noqa: E402
 )
 
 DEFAULT_MODEL = "composer-2.5"
-# Keep in sync with DEFAULT_EXCLUDED_LABELS in run_issue_solver_agents.py so the
-# issue solver never tries to "fix" one of these digests.
+# Keep in sync with SKIP_LABELS in run_issue_solver_agents.py so a `solve` label
+# never treats these digests as coding tasks. `[POST]` comments on
+# daily-cannabis issues are a separate trigger.
 DEFAULT_ISSUE_LABELS = ("daily-cannabis", "research")
 DEFAULT_MIN_CONFIDENCE = 0.7
 DEFAULT_MAX_PAPERS = 12

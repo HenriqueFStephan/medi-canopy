@@ -86,12 +86,17 @@ On approval, `PaperNormalizer.to_blog_post()` produces:
 **Diagram:** [docs/workflows/ai-agent.md](./workflows/ai-agent.md)
 **Script:** `scripts/run_issue_solver_agents.py`
 
-Triggered only when an issue is labeled `solve` (not on pull requests or a
-schedule). The job also ignores PRs that receive the `solve` label, because
-GitHub treats pull requests as issues. The cloud agent rates the change 1–5,
-merges complexity 1–3 into the default branch, and opens a pull request only for
-complexity 4–5. Research notes (`research` / `daily-cannabis`) are never
-dispatched.
+Triggered by one of:
+
+- an issue labeled `solve` (including a new issue opened with that label)
+- a comment whose body starts with `[CORRECTION]` (any issue; `solve` not required)
+- a comment whose body starts with `[POST]` on an issue labeled `daily-cannabis`
+
+The job ignores pull requests. Each run applies the agent to **that triggering
+issue only** — it does not search for other open issues. The cloud agent rates
+the change 1–5, merges complexity 1–3 into the default branch, and opens a pull
+request only for complexity 4–5. A `solve` label on a research digest is still
+skipped; `[POST]` is the way to turn a named paper into a blog post.
 
 **Manual run:** Actions tab → 🔧 AI AGENT → `workflow_dispatch` (`dry_run=true` by default).
 
@@ -121,8 +126,9 @@ details stay in the job summary and the uploaded artifact.
 
 When nothing clears the filter, **no issue is created** — an empty digest is noise.
 
-The 🔧 AI AGENT workflow only launches on the `solve` label, so research digests
-are never dispatched as coding tasks.
+The 🔧 AI AGENT workflow does not treat research digests as `solve` coding
+tasks. To publish a paper from a digest, comment `[POST] …` on the
+`daily-cannabis` issue.
 
 **Manual run:**
 

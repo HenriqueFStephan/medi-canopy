@@ -53,12 +53,12 @@ python -m agents.run --agent research
 ### 🔧 AI AGENT (issue solver)
 
 - Workflow: `.github/workflows/cursor-issue-solver.yml`
-- Purpose: when an issue is labeled `solve`, start a Cursor cloud agent for that issue. The agent rates complexity 1–5, merges levels 1–3 into the default branch, and opens a PR only for levels 4–5. Opening or merging a pull request does not start this workflow.
+- Purpose: start a Cursor cloud agent for **the triggering issue only** when (1) the issue is labeled `solve`, (2) a comment starts with `[CORRECTION]`, or (3) a `[POST]` comment is left on a `daily-cannabis` issue. Comments are enough; the issue does not need `solve` for correction/post. The agent rates complexity 1–5, merges levels 1–3 into the default branch, and opens a PR only for levels 4–5. Opening or merging a pull request does not start this workflow.
 - Manual test: run from Actions tab with `workflow_dispatch` (`dry_run=true` by default).
 - Required repository secret: `CURSOR_API_KEY`.
 - A failed Cursor launch now fails the GitHub job. Retryable `429` / GitHub App rate limits are retried automatically (Cursor often asks for ~60s).
 - Cloud Agents also need the [Cursor GitHub App](https://cursor.com/dashboard?tab=integrations) installed on this repository. If retries still fail with `get_installation_for_org`, reconnect GitHub there and confirm the repo is selected.
-- Research digests from `🔬 WEEKLY PAPER REPORT` run Mondays and are filed as `[RESEARCH] Daily Cannabis …` with labels `research` + `daily-cannabis`. The workflow already applies those labels when it opens the issue. Digests older than 30 days are auto-closed on each run. Previously posted papers live in `agents/data/discovered_papers.json` and are skipped on later runs; only papers from the past month are eligible. The issue solver skips those labeled/titled research notes even if they also have `solve`.
+- Research digests from `🔬 WEEKLY PAPER REPORT` run Mondays and are filed as `[RESEARCH] Daily Cannabis …` with labels `research` + `daily-cannabis`. The workflow already applies those labels when it opens the issue. Digests older than 30 days are auto-closed on each run. Previously posted papers live in `agents/data/discovered_papers.json` and are skipped on later runs; only papers from the past month are eligible. Labeling a digest `solve` does not dispatch a coding fix; comment `[POST] …` on the digest to turn a named paper into a blog post.
 
 ## Key Documents
 

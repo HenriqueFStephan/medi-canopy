@@ -4,7 +4,7 @@
 **Script:** [`scripts/run_issue_solver_agents.py`](../../scripts/run_issue_solver_agents.py)
 **Secrets:** `CURSOR_API_KEY`, `GITHUB_TOKEN` (provided by Actions)
 
-A Cursor cloud agent works an issue labeled `solve`. Complexity 1–3 is merged to the base branch; 4–5 opens a pull request. Research notes are never dispatched.
+A Cursor cloud agent runs against **the issue that triggered the workflow** — it does not search for other open issues. Complexity 1–3 is merged to the base branch; 4–5 opens a pull request.
 
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
@@ -21,17 +21,21 @@ flowchart TB
   classDef step fill:#2D6A4F,stroke:#1B4332,color:#F8FAF7
 
   subgraph Triggers["Triggers"]
-    Labeled["issues.labeled"]:::trigger
+    Labeled["issues.labeled<br/>label is solve"]:::trigger
+    Correction["issue_comment.created<br/>body starts with [CORRECTION]"]:::trigger
+    Post["issue_comment.created<br/>[POST] on daily-cannabis"]:::trigger
     Manual["workflow_dispatch"]:::trigger
   end
 
-  Gate{"Manual run, or<br/>label is solve<br/>and not a PR?"}:::decision
+  Gate{"Matched trigger<br/>and not a PR?"}:::decision
   SkipJob["Job skipped"]:::skip
   Job["Job: launch-issue-agents<br/>90 min timeout"]:::job
   Setup["Checkout + Python 3.11"]:::step
-  Script["run_issue_solver_agents.py"]:::step
+  Script["run_issue_solver_agents.py<br/>that issue only"]:::step
 
   Labeled --> Gate
+  Correction --> Gate
+  Post --> Gate
   Manual --> Gate
   Gate -->|no| SkipJob
   Gate -->|yes| Job --> Setup --> Script
@@ -53,28 +57,38 @@ flowchart TB
   classDef skip fill:#E2E8E4,stroke:#5A6B62,color:#1A1A1A
   classDef ext fill:#5C4033,stroke:#0D1F17,color:#F8FAF7
 
-  Pick["Select open solve issues<br/>or a single issue number"]:::step
-  Research{"research / daily-cannabis<br/>label or title?"}:::decision
-  Skip["Skip — not a coding task"]:::skip
+  Pick["Use the triggering issue<br/>and comment, if any"]:::step
+  Kind{"Which trigger?"}:::decision
+  SkipSolve["Skip research / daily-cannabis<br/>on solve"]:::skip
   Cursor["Cursor cloud agent"]:::ext
   Rate{"Complexity 1-5"}:::decision
   Merge["Merge into base branch"]:::output
   PR["Open pull request<br/>do not merge"]:::output
   Comment["Comment on the issue"]:::output
 
-  Pick --> Research
-  Research -->|yes| Skip
-  Research -->|no| Cursor --> Rate
+  Pick --> Kind
+  Kind -->|solve on a digest| SkipSolve
+  Kind -->|solve / correction / post| Cursor --> Rate
   Rate -->|1 to 3| Merge
   Rate -->|4 or 5| PR
   Merge --> Comment
   PR --> Comment
 ```
 
-GitHub still fires `issues.labeled` when a **pull request** is labeled, so the job `if:` also requires `github.event.issue.pull_request == null`. Manual `workflow_dispatch` defaults to `dry_run=true`.
+## What each trigger sends to the agent
+
+| Trigger | Fires when | Prompt focus |
+|---------|------------|--------------|
+| `solve` | Issue labeled `solve` (including a new issue opened with that label) | Issue title, labels, and body |
+| `correction` | Comment body starts with `[CORRECTION]` | The comment is the task; issue body is context only |
+| `post` | Comment body starts with `[POST]` **and** the issue has `daily-cannabis` | The comment names the paper; the digest is source material for a blog post |
+
+Comments are enough to start the workflow. The issue does **not** need the `solve` label for `[CORRECTION]` or `[POST]`. Ordinary comments, and `[POST]` on issues without `daily-cannabis`, do not run the job.
+
+GitHub still fires `issues` / `issue_comment` when the target is a **pull request**, so the job `if:` also requires `github.event.issue.pull_request == null`. Manual `workflow_dispatch` defaults to `dry_run=true` and requires an issue number.
 
 ## Manual run
 
-Actions tab → **🔧 AI AGENT** → **Run workflow**. Leave `dry_run` true to print planned actions without calling Cursor.
+Actions tab → **🔧 AI AGENT** → **Run workflow**. Set `issue_number`, optionally `trigger` and `comment_id`. Leave `dry_run` true to print planned actions without calling Cursor.
 
 More context: [AGENTS.md](../AGENTS.md).

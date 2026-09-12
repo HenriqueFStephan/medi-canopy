@@ -1,50 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
+
 import { ApiService } from '../../core/api.service';
+import { I18nService, TranslatePipe } from '../../core/i18n';
 import { BlogPost } from '../../core/models';
 
 @Component({
   selector: 'app-blog-detail',
   standalone: true,
-  imports: [CommonModule, DatePipe, RouterLink],
+  imports: [CommonModule, DatePipe, RouterLink, TranslatePipe],
   template: `
     <section class="section" *ngIf="post">
       <article class="container article">
-        <a routerLink="/blog" class="back">← Voltar aos artigos científicos</a>
+        <a routerLink="/blog" class="back">{{ 'blog.back' | t }}</a>
         <header>
-          <span class="tag" *ngIf="post.source_type === 'agent_research'">Pesquisa</span>
+          <span class="tag" *ngIf="post.source_type === 'agent_research'">{{ 'blog.researchTag' | t }}</span>
           <h1>{{ post.title }}</h1>
           <p class="article__meta">
-            {{ post.author_name }} · {{ post.published_at | date:'longDate' }}
+            {{ post.author_name }} · {{ post.published_at | date:'longDate':undefined:i18n.dateLocale() }}
           </p>
         </header>
         <div class="article__body" [innerHTML]="renderedContent"></div>
       </article>
     </section>
-    <div *ngIf="loading" class="loading">Carregando…</div>
-    <div *ngIf="error" class="error-state container">{{ error }}</div>
+    <div *ngIf="loading" class="loading">{{ 'blog.detailLoading' | t }}</div>
+    <div *ngIf="error" class="error-state container">{{ error | t }}</div>
   `,
   styleUrls: ['./blog-detail.component.scss'],
 })
-export class BlogDetailComponent implements OnInit {
+export class BlogDetailComponent implements OnInit, OnDestroy {
   post: BlogPost | null = null;
   loading = true;
-  error = '';
+  error: '' | 'blog.notFound' = '';
   renderedContent = '';
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
     private route: ActivatedRoute,
     private api: ApiService,
+    readonly i18n: I18nService,
   ) {}
 
   ngOnInit(): void {
+    this.load();
+    this.i18n.lang$.pipe(takeUntil(this.destroy$)).subscribe(() => this.load());
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private load(): void {
     const slug = this.route.snapshot.paramMap.get('slug');
     if (!slug) {
-      this.error = 'Post não encontrado.';
+      this.error = 'blog.notFound';
       this.loading = false;
       return;
     }
+    this.loading = true;
+    this.error = '';
+    this.post = null;
     this.api.getBlogBySlug(slug).subscribe({
       next: (data) => {
         this.post = data;
@@ -52,7 +70,7 @@ export class BlogDetailComponent implements OnInit {
         this.loading = false;
       },
       error: () => {
-        this.error = 'Post não encontrado.';
+        this.error = 'blog.notFound';
         this.loading = false;
       },
     });

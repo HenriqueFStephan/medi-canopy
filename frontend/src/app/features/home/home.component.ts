@@ -1,26 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
+
 import { ApiService } from '../../core/api.service';
+import { I18nService, TranslatePipe } from '../../core/i18n';
 import { NewsArticle } from '../../core/models';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, DatePipe, RouterLink],
+  imports: [CommonModule, DatePipe, RouterLink, TranslatePipe],
   template: `
     <section class="hero">
       <div class="container">
-        <span class="hero__chip">Hub de informação · Brasil &amp; mundo</span>
-        <h1>Informação que <em>importa</em> para o seu cultivo</h1>
+        <span class="hero__chip">{{ 'home.chip' | t }}</span>
+        <h1>{{ 'home.titleBefore' | t }}<em>{{ 'home.titleEm' | t }}</em>{{ 'home.titleAfter' | t }}</h1>
         <div class="hero__bottom">
-          <p class="hero__lead">
-            Notícias curadas, blog com rigor científico, cursos e consultoria completa —
-            do projeto do galpão à colheita.
-          </p>
+          <p class="hero__lead">{{ 'home.lead' | t }}</p>
           <div class="hero__actions">
-            <a routerLink="/services" class="btn btn--primary">Começar</a>
-            <a routerLink="/news" class="btn btn--outline">Notícias</a>
+            <a routerLink="/services" class="btn btn--primary">{{ 'home.ctaStart' | t }}</a>
+            <a routerLink="/news" class="btn btn--outline">{{ 'home.ctaNews' | t }}</a>
           </div>
         </div>
       </div>
@@ -28,30 +28,30 @@ import { NewsArticle } from '../../core/models';
 
     <section class="section">
       <div class="container">
-        <h2 class="section__title">O que oferecemos</h2>
+        <h2 class="section__title">{{ 'home.offerTitle' | t }}</h2>
         <div class="feature-list">
           <a routerLink="/services" class="feature-list__item">
             <div>
-              <h3>Consultoria</h3>
-              <p>Ponta a ponta: instalação, climatização, cultivo e negócio.</p>
+              <h3>{{ 'home.consultingTitle' | t }}</h3>
+              <p>{{ 'home.consultingDesc' | t }}</p>
             </div>
           </a>
           <a routerLink="/courses" class="feature-list__item">
             <div>
-              <h3>Cursos e formação</h3>
-              <p>Formação em cultivo indoor e compliance — arquitetura pronta, lançamento em breve.</p>
+              <h3>{{ 'home.coursesTitle' | t }}</h3>
+              <p>{{ 'home.coursesDesc' | t }}</p>
             </div>
           </a>
           <a routerLink="/blog" class="feature-list__item">
             <div>
-              <h3>Artigos Científicos</h3>
-              <p>Pesquisas científicas revisadas com curadoria humana.</p>
+              <h3>{{ 'home.blogTitle' | t }}</h3>
+              <p>{{ 'home.blogDesc' | t }}</p>
             </div>
           </a>
           <a routerLink="/news" class="feature-list__item">
             <div>
-              <h3>Notícias</h3>
-              <p>Mercado, política, medicina e indústria — fontes confiáveis, curadoria diária.</p>
+              <h3>{{ 'home.newsTitle' | t }}</h3>
+              <p>{{ 'home.newsDesc' | t }}</p>
             </div>
           </a>
         </div>
@@ -60,7 +60,7 @@ import { NewsArticle } from '../../core/models';
 
     <section class="section news-section" *ngIf="headlines.length">
       <div class="container">
-        <h2 class="section__title">Últimas notícias</h2>
+        <h2 class="section__title">{{ 'home.headlinesTitle' | t }}</h2>
         <div class="news-rows">
           <a
             class="news-row"
@@ -69,7 +69,7 @@ import { NewsArticle } from '../../core/models';
             [attr.target]="article.source_url ? '_blank' : null"
             rel="noopener"
           >
-            <span class="col-date">{{ article.published_at | date:'d MMM y' }}</span>
+            <span class="col-date">{{ article.published_at | date:'d MMM y':undefined:i18n.dateLocale() }}</span>
             <span class="col-tag"><span class="tag">{{ article.region }}</span></span>
             <span class="col-title">{{ article.title }}</span>
             <span class="col-arrow">→</span>
@@ -80,20 +80,34 @@ import { NewsArticle } from '../../core/models';
 
     <section class="cta-minimal">
       <div class="container">
-        <h2>Pronto para começar?</h2>
-        <p>Do homegrown ao headquarters — experiência real em todo o ciclo do mercado.</p>
-        <a routerLink="/contact" class="btn btn--primary">Fale conosco</a>
+        <h2>{{ 'home.ctaTitle' | t }}</h2>
+        <p>{{ 'home.ctaLead' | t }}</p>
+        <a routerLink="/contact" class="btn btn--primary">{{ 'home.ctaContact' | t }}</a>
       </div>
     </section>
   `,
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   headlines: NewsArticle[] = [];
+  private readonly destroy$ = new Subject<void>();
 
-  constructor(private api: ApiService) {}
+  constructor(
+    private api: ApiService,
+    readonly i18n: I18nService,
+  ) {}
 
   ngOnInit(): void {
+    this.load();
+    this.i18n.lang$.pipe(takeUntil(this.destroy$)).subscribe(() => this.load());
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private load(): void {
     this.api.getNews().subscribe({
       next: (data) => {
         this.headlines = data.slice(0, 5);

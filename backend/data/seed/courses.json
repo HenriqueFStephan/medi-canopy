@@ -25,7 +25,29 @@
         "description": "Triggers, secagem e cura com controle de qualidade.",
         "duration_minutes": 120
       }
-    ]
+    ],
+    "i18n": {
+      "en": {
+        "title": "Fundamentals of Professional Indoor Cultivation",
+        "description": "From zero to the first cycle: controlled environment, nutrition, integrated pest management and compliance documentation. Full course in development.",
+        "level": "beginner",
+        "price_display": "Coming soon",
+        "modules": [
+          {
+            "title": "Module 1 — Environment and climate",
+            "description": "VPD, HVAC, sensors and redundancy."
+          },
+          {
+            "title": "Module 2 — Propagation and vegetative",
+            "description": "Methods, spacing and phenological records."
+          },
+          {
+            "title": "Module 3 — Flowering and harvest",
+            "description": "Triggers, drying and curing with quality control."
+          }
+        ]
+      }
+    }
   },
   {
     "id": "course-002",
@@ -48,6 +70,24 @@
         "description": "SOPs, lotes e preparação para inspeção.",
         "duration_minutes": 90
       }
-    ]
+    ],
+    "i18n": {
+      "en": {
+        "title": "Compliance and Operations in the Brazilian Market",
+        "description": "ANVISA, traceability, import and good practices for operators and consultants.",
+        "level": "intermediate",
+        "price_display": "Coming soon",
+        "modules": [
+          {
+            "title": "Module 1 — Regulatory landscape",
+            "description": "Medical, industrial and legislative outlook."
+          },
+          {
+            "title": "Module 2 — Documentation and audit",
+            "description": "SOPs, batches and inspection readiness."
+          }
+        ]
+      }
+    }
   }
 ]

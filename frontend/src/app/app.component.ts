@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './shared/header/header.component';
+
+import { I18nService } from './core/i18n';
 import { FooterComponent } from './shared/footer/footer.component';
+import { HeaderComponent } from './shared/header/header.component';
 
 @Component({
   selector: 'app-root',
@@ -20,4 +22,8 @@ import { FooterComponent } from './shared/footer/footer.component';
     }
   `],
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor(_i18n: I18nService) {
+    // Ensure document language/title apply on bootstrap.
+  }
+}

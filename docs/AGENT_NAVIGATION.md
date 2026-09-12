@@ -6,7 +6,7 @@
 
 | Task | Go to |
 |------|-------|
-| Change brand colors | `frontend/src/styles/_variables.scss`, `docs/BRAND.md` (Forest Canopy / V4) |
+| Change website language (PT-BR / EN) | `frontend/src/app/core/i18n/`, `frontend/.../header/`, `backend/app/core/locale.py` |
 | Add API endpoint | `backend/app/api/v1/`, register in `backend/app/main.py` |
 | Modify news list UI | `frontend/src/app/features/news/` |
 | Run news agent manually | `python -m agents.run --agent news` or `.cursor/skills/run-news-agent/` |

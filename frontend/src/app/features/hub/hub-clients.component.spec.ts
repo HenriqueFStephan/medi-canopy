@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { I18nService } from '../../core/i18n';
 import { HubClientsComponent } from './hub-clients.component';
 import { HUB_CLIENTS } from './hub.data';
 
@@ -11,6 +12,7 @@ describe('HubClientsComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(HubClientsComponent);
+    TestBed.inject(I18nService).setLang('pt-BR');
     fixture.detectChanges();
   });
 

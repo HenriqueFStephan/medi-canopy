@@ -2,9 +2,10 @@
 
 from datetime import datetime
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 
 from app.core.config import get_settings
+from app.core.locale import CONTACT_OK, normalize_lang
 from app.models.schemas import ContactMessageCreate, ContactMessageResponse
 from app.repositories.json_store import contact_store, new_id
 
@@ -12,7 +13,10 @@ router = APIRouter(prefix="/contact", tags=["contact"])
 
 
 @router.post("", response_model=ContactMessageResponse)
-def submit_contact(payload: ContactMessageCreate) -> ContactMessageResponse:
+def submit_contact(
+    payload: ContactMessageCreate,
+    lang: str | None = Query(default=None),
+) -> ContactMessageResponse:
     """
   Persist contact message and optionally forward to webhook (future).
 
@@ -29,5 +33,5 @@ def submit_contact(payload: ContactMessageCreate) -> ContactMessageResponse:
 
     return ContactMessageResponse(
         success=True,
-        message="Mensagem recebida. Retornaremos em breve.",
+        message=CONTACT_OK[normalize_lang(lang)],
     )

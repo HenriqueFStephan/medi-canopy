@@ -1,42 +1,44 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+
 import { ApiService } from '../../core/api.service';
+import { TranslatePipe } from '../../core/i18n';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   template: `
     <section class="section">
       <div class="container contact">
         <header class="page-header">
-          <h1>Contato</h1>
-          <p>Consultoria, parcerias ou dúvidas sobre o hub — envie sua mensagem.</p>
+          <h1>{{ 'contact.title' | t }}</h1>
+          <p>{{ 'contact.lead' | t }}</p>
         </header>
 
         <form [formGroup]="form" (ngSubmit)="onSubmit()" class="contact-form card">
           <div class="field">
-            <label for="name">Nome</label>
+            <label for="name">{{ 'contact.name' | t }}</label>
             <input id="name" type="text" formControlName="name" />
           </div>
           <div class="field">
-            <label for="email">E-mail</label>
+            <label for="email">{{ 'contact.email' | t }}</label>
             <input id="email" type="email" formControlName="email" />
           </div>
           <div class="field">
-            <label for="subject">Assunto</label>
+            <label for="subject">{{ 'contact.subject' | t }}</label>
             <input id="subject" type="text" formControlName="subject" />
           </div>
           <div class="field">
-            <label for="message">Mensagem</label>
+            <label for="message">{{ 'contact.message' | t }}</label>
             <textarea id="message" rows="6" formControlName="message"></textarea>
           </div>
           <button type="submit" class="btn btn--primary" [disabled]="form.invalid || submitting">
-            {{ submitting ? 'Enviando…' : 'Enviar mensagem' }}
+            {{ submitting ? ('contact.submitting' | t) : ('contact.submit' | t) }}
           </button>
-          <p *ngIf="success" class="success">{{ success }}</p>
-          <p *ngIf="submitError" class="error">{{ submitError }}</p>
+          <p *ngIf="success" class="success">{{ success | t }}</p>
+          <p *ngIf="submitError" class="error">{{ submitError | t }}</p>
         </form>
       </div>
     </section>
@@ -52,8 +54,8 @@ export class ContactComponent {
   });
 
   submitting = false;
-  success = '';
-  submitError = '';
+  success: '' | 'contact.success' = '';
+  submitError: '' | 'contact.error' = '';
 
   constructor(
     private fb: FormBuilder,
@@ -73,12 +75,12 @@ export class ContactComponent {
       message: string;
     }).subscribe({
       next: (res) => {
-        this.success = res.message;
+        this.success = res.success ? 'contact.success' : '';
         this.form.reset();
         this.submitting = false;
       },
       error: () => {
-        this.submitError = 'Erro ao enviar. Tente novamente ou verifique o backend.';
+        this.submitError = 'contact.error';
         this.submitting = false;
       },
     });

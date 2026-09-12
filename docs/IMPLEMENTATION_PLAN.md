@@ -39,7 +39,7 @@
 - [ ] PostgreSQL + Alembic
 - [ ] Redis job queue
 - [ ] Full-text search
-- [ ] i18n (PT-BR primary, EN secondary)
+- [x] i18n (PT-BR primary, EN secondary)
 
 ## Estimated effort (rough)
 

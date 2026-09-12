@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { TranslatePipe } from '../../core/i18n';
 import { HUB_PARTNERS, HubPartner } from './hub.data';
 
 @Component({
   selector: 'app-hub-partners',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   template: `
     <section class="hub-section" aria-labelledby="hub-partners-title">
-      <h2 id="hub-partners-title" class="hub-section__title">Parceiros Medi Canopy</h2>
-      <p class="hub-section__intro">
-        Conheça as empresas que compõem o ecossistema Medi Canopy — atuando de forma
-        integrada em tecnologia, pesquisa, regulação, jurídico e compliance.
-      </p>
+      <h2 id="hub-partners-title" class="hub-section__title">{{ 'hub.partnersTitle' | t }}</h2>
+      <p class="hub-section__intro">{{ 'hub.partnersIntro' | t }}</p>
 
       <div class="hub-card-grid" *ngIf="partners.length; else emptyState">
         <article class="hub-card" *ngFor="let partner of partners">
@@ -20,7 +19,7 @@ import { HUB_PARTNERS, HubPartner } from './hub.data';
             <img
               class="hub-card__logo"
               [src]="partner.logoUrl"
-              [alt]="'Logo ' + partner.name"
+              [alt]="'hub.logoAlt' | t:{ name: partner.name }"
               width="80"
               height="80"
               loading="lazy"
@@ -37,17 +36,14 @@ import { HUB_PARTNERS, HubPartner } from './hub.data';
               target="_blank"
               rel="noopener noreferrer"
             >
-              Visitar site →
+              {{ 'hub.visitSite' | t }}
             </a>
           </div>
         </article>
       </div>
 
       <ng-template #emptyState>
-        <p class="hub-empty" role="status">
-          Estamos ampliando nossa rede de parceiros estratégicos. Em breve, novos
-          parceiros serão apresentados aqui.
-        </p>
+        <p class="hub-empty" role="status">{{ 'hub.partnersEmpty' | t }}</p>
       </ng-template>
     </section>
   `,

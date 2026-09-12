@@ -1,23 +1,25 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { TranslatePipe } from '../../core/i18n';
+
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, TranslatePipe],
   template: `
     <footer class="footer">
       <div class="container">
         <p class="footer__legal">{{ legalName }}</p>
         <p class="footer__links">
-          <a routerLink="/contact">Contato</a>
+          <a routerLink="/contact">{{ 'footer.contact' | t }}</a>
           <span class="footer__sep" aria-hidden="true">·</span>
           <a
             [href]="whatsappUrl"
             target="_blank"
             rel="noopener noreferrer"
             class="footer__icon-link"
-            aria-label="WhatsApp: +55 (11) 98564-8892"
+            [attr.aria-label]="'footer.whatsappAria' | t"
           >
             <svg class="footer__icon" viewBox="0 0 24 24" aria-hidden="true">
               <path
@@ -32,7 +34,7 @@ import { RouterLink } from '@angular/router';
             target="_blank"
             rel="noopener noreferrer"
             class="footer__icon-link"
-            aria-label="Instagram: @medicanopy"
+            [attr.aria-label]="'footer.instagramAria' | t"
           >
             <svg class="footer__icon" viewBox="0 0 24 24" aria-hidden="true">
               <path

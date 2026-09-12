@@ -62,6 +62,7 @@ class NewsArticleCreate(NewsArticleBase):
 
 class BlogPostBase(BaseModel):
     title: str
+    title_pt: Optional[str] = None
     slug: str
     excerpt: str
     content_markdown: str
@@ -90,6 +91,7 @@ class ScientificPaperRaw(BaseModel):
     """Raw paper payload from scholarly APIs or agent fixtures."""
 
     title: str
+    title_pt: Optional[str] = None
     authors: list[str] = Field(default_factory=list)
     abstract: str = ""
     doi: Optional[str] = None
@@ -103,6 +105,7 @@ class ScientificPaperNormalized(BaseModel):
     """Normalized paper ready for author review or blog conversion."""
 
     title: str
+    title_pt: Optional[str] = None
     slug: str
     authors: list[str]
     abstract: str

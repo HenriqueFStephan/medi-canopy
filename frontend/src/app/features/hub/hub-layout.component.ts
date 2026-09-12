@@ -1,36 +1,34 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
+import { TranslatePipe } from '../../core/i18n';
+
 @Component({
   selector: 'app-hub-layout',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, TranslatePipe],
   template: `
     <section class="section hub-page">
       <div class="container">
         <header class="page-header">
-          <h1>Hub</h1>
-          <p class="hub-page__lead">
-            Explore o ecossistema Medi Canopy — parceiros estratégicos e empresas
-            atendidas em projetos de tecnologia, pesquisa, regulação, jurídico e
-            compliance no setor de cannabis medicinal.
-          </p>
+          <h1>{{ 'hub.title' | t }}</h1>
+          <p class="hub-page__lead">{{ 'hub.lead' | t }}</p>
         </header>
 
-        <nav class="hub-nav" aria-label="Seções do Hub">
+        <nav class="hub-nav" [attr.aria-label]="'hub.navAria' | t">
           <a
             class="hub-nav__link"
             routerLink="/hub/parceiros"
             routerLinkActive="hub-nav__link--active"
           >
-            Parceiros
+            {{ 'hub.partners' | t }}
           </a>
           <a
             class="hub-nav__link"
             routerLink="/hub/clientes"
             routerLinkActive="hub-nav__link--active"
           >
-            Clientes
+            {{ 'hub.clients' | t }}
           </a>
         </nav>
 

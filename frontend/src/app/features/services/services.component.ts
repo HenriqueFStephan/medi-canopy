@@ -1,26 +1,26 @@
 import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
+
 import { ApiService } from '../../core/api.service';
+import { I18nService, TranslatePipe } from '../../core/i18n';
 import { ServiceOffering } from '../../core/models';
 
 @Component({
   selector: 'app-services',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   template: `
     <section class="section">
       <div class="container">
         <header class="page-header">
-          <h1>Consultoria Técnica e Estratégica em Cannabis Medicinal</h1>
-          <p>
-            Visão integrada de toda a cadeia produtiva — da concepção e implantação da unidade ao cultivo,
-            processamento e operação comercial.
-          </p>
+          <h1>{{ 'services.title' | t }}</h1>
+          <p>{{ 'services.lead' | t }}</p>
         </header>
 
-        <div *ngIf="loading" class="loading">Carregando serviços…</div>
-        <div *ngIf="error" class="error-state">{{ error }}</div>
+        <div *ngIf="loading" class="loading">{{ 'services.loading' | t }}</div>
+        <div *ngIf="error" class="error-state">{{ error | t }}</div>
 
         <ul class="feature-list" *ngIf="!loading && !error">
           <li *ngFor="let svc of services">
@@ -38,10 +38,10 @@ import { ServiceOffering } from '../../core/models';
 
     <section class="cta-minimal">
       <div class="container">
-        <h2>Pronto para estruturar seu projeto?</h2>
-        <p>Agende uma conversa para mapear instalação, climatização, cultivo e compliance.</p>
+        <h2>{{ 'services.ctaTitle' | t }}</h2>
+        <p>{{ 'services.ctaLead' | t }}</p>
         <button type="button" class="btn btn--primary" (click)="openOverlay()">
-          Solicitar consultoria
+          {{ 'services.ctaButton' | t }}
         </button>
       </div>
     </section>
@@ -62,18 +62,18 @@ import { ServiceOffering } from '../../core/models';
           type="button"
           class="consulting-dialog__close"
           (click)="closeOverlay()"
-          aria-label="Fechar"
+          [attr.aria-label]="'services.closeAria' | t"
         >
           ×
         </button>
-        <h2 id="consulting-title">Solicitar consultoria</h2>
+        <h2 id="consulting-title">{{ 'services.formTitle' | t }}</h2>
         <p class="consulting-dialog__lead">
-          Confirme os dados abaixo para enviar a solicitação à equipe.
+          {{ 'services.formLead' | t }}
         </p>
 
         <form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulting-form" novalidate>
           <div class="field">
-            <label for="consulting-name">Nome</label>
+            <label for="consulting-name">{{ 'services.name' | t }}</label>
             <input
               #nameInput
               id="consulting-name"
@@ -83,21 +83,25 @@ import { ServiceOffering } from '../../core/models';
             />
           </div>
           <div class="field">
-            <label for="consulting-email">E-mail</label>
+            <label for="consulting-email">{{ 'services.email' | t }}</label>
             <input id="consulting-email" type="email" formControlName="email" autocomplete="email" />
           </div>
           <div class="field-row">
             <div class="field">
-              <label for="consulting-company">Empresa <span class="optional">(opcional)</span></label>
+              <label for="consulting-company">
+                {{ 'services.company' | t }} <span class="optional">{{ 'services.optional' | t }}</span>
+              </label>
               <input id="consulting-company" type="text" formControlName="company" autocomplete="organization" />
             </div>
             <div class="field">
-              <label for="consulting-phone">Telefone <span class="optional">(opcional)</span></label>
+              <label for="consulting-phone">
+                {{ 'services.phone' | t }} <span class="optional">{{ 'services.optional' | t }}</span>
+              </label>
               <input id="consulting-phone" type="tel" formControlName="phone" autocomplete="tel" />
             </div>
           </div>
           <fieldset class="field" [disabled]="!services.length">
-            <legend>Áreas de interesse <span class="optional">(opcional)</span></legend>
+            <legend>{{ 'services.interests' | t }} <span class="optional">{{ 'services.optional' | t }}</span></legend>
             <ul class="interest-list">
               <li *ngFor="let svc of services">
                 <label class="interest-option">
@@ -112,18 +116,18 @@ import { ServiceOffering } from '../../core/models';
             </ul>
           </fieldset>
           <div class="field">
-            <label for="consulting-message">Sobre o projeto</label>
+            <label for="consulting-message">{{ 'services.project' | t }}</label>
             <textarea
               id="consulting-message"
               rows="5"
               formControlName="message"
-              placeholder="Instalação, cultivo, compliance, prazos…"
+              [placeholder]="'services.projectPlaceholder' | t"
             ></textarea>
           </div>
           <button type="submit" class="btn btn--primary" [disabled]="form.invalid || submitting">
-            {{ submitting ? 'Enviando…' : 'Confirmar solicitação' }}
+            {{ submitting ? ('services.submitting' | t) : ('services.submit' | t) }}
           </button>
-          <p *ngIf="success" class="success" role="status">{{ success }}</p>
+          <p *ngIf="success" class="success" role="status">{{ success | t }}</p>
           <p *ngIf="submitError" class="error" role="alert">{{ submitError }}</p>
         </form>
       </div>
@@ -136,12 +140,13 @@ export class ServicesComponent implements OnInit, OnDestroy {
 
   services: ServiceOffering[] = [];
   loading = true;
-  error = '';
+  error: '' | 'services.error' = '';
   overlayOpen = false;
   submitting = false;
-  success = '';
+  success: '' | 'services.success' | 'services.successNoEmail' = '';
   submitError = '';
   selectedServiceIds: string[] = [];
+  private readonly destroy$ = new Subject<void>();
 
   form = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
@@ -154,6 +159,7 @@ export class ServicesComponent implements OnInit, OnDestroy {
   constructor(
     private api: ApiService,
     private fb: FormBuilder,
+    readonly i18n: I18nService,
   ) {}
 
   /** CSS already numbers .feature-list rows; drop the same index from API titles. */
@@ -177,20 +183,14 @@ export class ServicesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.api.getServices().subscribe({
-      next: (data) => {
-        this.services = data;
-        this.loading = false;
-      },
-      error: () => {
-        this.error = 'Não foi possível carregar os serviços.';
-        this.loading = false;
-      },
-    });
+    this.load();
+    this.i18n.lang$.pipe(takeUntil(this.destroy$)).subscribe(() => this.load());
   }
 
   ngOnDestroy(): void {
     this.unlockPage();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   @HostListener('document:keydown.escape')
@@ -230,7 +230,7 @@ export class ServicesComponent implements OnInit, OnDestroy {
       message: value.message ?? '',
     }).subscribe({
       next: (res) => {
-        this.success = res.message;
+        this.success = res.email_sent ? 'services.success' : 'services.successNoEmail';
         this.submitError = res.email_sent ? '' : (res.email_error || '');
         this.form.reset();
         this.selectedServiceIds = [];
@@ -241,8 +241,23 @@ export class ServicesComponent implements OnInit, OnDestroy {
         this.submitError =
           typeof detail === 'string'
             ? detail
-            : 'Erro ao enviar. Tente novamente ou verifique o backend.';
+            : this.i18n.t('services.errorSubmit');
         this.submitting = false;
+      },
+    });
+  }
+
+  private load(): void {
+    this.loading = true;
+    this.error = '';
+    this.api.getServices().subscribe({
+      next: (data) => {
+        this.services = data;
+        this.loading = false;
+      },
+      error: () => {
+        this.error = 'services.error';
+        this.loading = false;
       },
     });
   }

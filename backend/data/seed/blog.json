@@ -15,7 +15,14 @@
     "citation": "Tamang et al. (2025). Phenotypic and genetic characterization of sixteen grain and dual-type industrial hemp varieties (Cannabis sativa L.) for agronomic and yield component traits. *Frontiers in Plant Science*. [https://doi.org/10.3389/fpls.2025.1632346](https://doi.org/10.3389/fpls.2025.1632346)",
     "author_name": "Medi Canopy",
     "published_at": "2026-09-07T12:00:00",
-    "updated_at": "2026-09-07T12:00:00"
+    "updated_at": "2026-09-07T12:00:00",
+    "title_pt": "Caracterização fenotípica e genética de dezesseis variedades de cânhamo industrial granífero e de duplo propósito (Cannabis sativa L.) para caracteres agronômicos e de rendimento",
+    "i18n": {
+      "en": {
+        "excerpt": "Multi-year field trials in Missouri of 16 grain and dual-purpose hemp varieties identified Futura 83 as the yield leader (2434–2793 kg/ha) and pointed to candidate genes linked to seed shattering and flowering.",
+        "content_markdown": "## Why it matters\n\nBrazil is returning to industrial hemp as a feedstock for grain, fibre and biofuels, but cultivar choice still depends on European or North American catalogues rarely tested in humid tropical or subtropical climates. This study provides replicated field data — height, biomass, grain yield, crude protein and fat — on 16 genotypes over three seasons in Missouri, a continental latitude comparable to parts of southern/southeastern Brazil.\n\n## What the study did\n\nTamang et al. ran field trials in 2022–2024 at Lincoln University (Jefferson City, Missouri) in a randomised block design with two replicates. They assessed grain, dual-purpose and one fibre check, including commercial materials (e.g. Futura 83, Felina, Vega) and feral Missouri accessions. Measurements covered greenhouse germination, field emergence, weekly growth, final height, stem diameter, biomass, grain yield, seed composition, and expression of soybean homologues associated with shattering resistance (*GmPdh1*) and flowering (*GmDt1*).\n\n## Key findings\n\nGenotypes differed significantly for height, diameter, biomass, grain yield and seed composition. Dual-purpose **Futura 83** was the most productive, with grain yields of **2434–2793 kg/ha**. Controlled germination ranged from 68% (Carmenecta) to 26.8% (Vega); field emergence from 66% (Altair) to 93.6% (Gravity, Orion). Grain types stopped vertical growth around week 5, while dual and fibre types continued until week 10 — relevant for mechanised harvest timing.\n\n## Limitations\n\nOnly two replicates and a single Missouri site limit extrapolation to Brazil. The evolving variety set across years complicates formal meta-analysis. The molecular component is exploratory, without causal confirmation of yield phenotypes.\n\n## Critical reading\n\nFor the Brazilian market, Futura 83 is a provisional grain-yield benchmark and still needs local THC, adaptation and harvest-window trials before commercial recommendation. Candidate genes may guide breeding but do not replace regional trials. Consultants should cross these 2.4–2.8 t/ha yields with drying, cleaning and THC-compliance costs.\n\n## Source\n\n[Tamang et al. (2025) — Frontiers in Plant Science](https://doi.org/10.3389/fpls.2025.1632346)\n\n## Reference\n\nTamang et al. (2025). Phenotypic and genetic characterization of sixteen grain and dual-type industrial hemp varieties (Cannabis sativa L.) for agronomic and yield component traits. *Frontiers in Plant Science*. [https://doi.org/10.3389/fpls.2025.1632346](https://doi.org/10.3389/fpls.2025.1632346)\n"
+      }
+    }
   },
   {
     "id": "blog-research-20260907-02",
@@ -34,7 +41,14 @@
     "citation": "Pappaert et al. (2025). Selecting Optimal Hemp (Cannabis sativa L.) Varieties for Long Fibre Production in Western Europe. *Agronomy*. [https://doi.org/10.3390/agronomy15071521](https://doi.org/10.3390/agronomy15071521)",
     "author_name": "Medi Canopy",
     "published_at": "2026-09-07T12:01:00",
-    "updated_at": "2026-09-07T12:01:00"
+    "updated_at": "2026-09-07T12:01:00",
+    "title_pt": "Seleção de variedades ótimas de cânhamo (Cannabis sativa L.) para produção de fibra longa na Europa Ocidental",
+    "i18n": {
+      "en": {
+        "excerpt": "Three years of trials in Flanders (Belgium) showed that poor emergence can halve long-fibre yield, while late varieties reached up to 2.4 t ha⁻¹ with flax-comparable quality; Bialobrzeskie stood out among mid-late types.",
+        "content_markdown": "## Why it matters\n\nBrazil’s textile chain is looking for low-water natural fibres; long-fibre hemp competes with flax and jute in technical uses. Europe can reuse flax processing infrastructure for hemp — but regional long-fibre yield data under a temperate maritime climate were missing.\n\n## What the study did\n\nPappaert et al. ran a three-year field trial (2021–2023) at two Flanders sites, comparing early, mid-late and late varieties for long fibre. They measured emergence, morphology, biomass, long-fibre extraction and quality versus flax.\n\n## Key findings\n\n**Stand establishment** was decisive: weak emergence increased stem diameter but **cut long-fibre yield by up to 50%**. Total biomass ranged **10.7–14.5 t ha⁻¹** at Bottelare and **7.8–9.6 t ha⁻¹** at Beitem. In favourable conditions, late types reached up to **2.4 t ha⁻¹** of long fibre; early and mid-late types reached **2.1 t ha⁻¹**. Fibre quality was **comparable to flax**. Among operationally preferred early to mid-late types, **Bialobrzeskie** showed strong yield potential.\n\n## Limitations\n\nTwo Belgian sites and a maritime climate limit direct transfer to the tropics. The study focuses on flax-style long fibre, not grain hemp or tropical cultivars.\n\n## Critical reading\n\nThe operational lesson for Brazil is to invest in uniform emergence before chasing a “champion” genotype. Late European varieties may need photoperiod adjustment in the tropics — local trials are mandatory. Use 2.1–2.4 t ha⁻¹ as an external ceiling, not a local guarantee.\n\n## Source\n\n[Pappaert et al. (2025) — Agronomy](https://doi.org/10.3390/agronomy15071521)\n\n## Reference\n\nPappaert et al. (2025). Selecting Optimal Hemp (Cannabis sativa L.) Varieties for Long Fibre Production in Western Europe. *Agronomy*. [https://doi.org/10.3390/agronomy15071521](https://doi.org/10.3390/agronomy15071521)\n"
+      }
+    }
   },
   {
     "id": "blog-research-20260907-03",
@@ -53,7 +67,14 @@
     "citation": "Garrido et al. (2025). Subcanopy and Inter-Canopy Supplemental Light Enhances and Standardizes Yields in Medicinal Cannabis (Cannabis sativa L.). *Plants*. [https://doi.org/10.3390/plants14101469](https://doi.org/10.3390/plants14101469)",
     "author_name": "Medi Canopy",
     "published_at": "2026-09-07T12:02:00",
-    "updated_at": "2026-09-07T12:02:00"
+    "updated_at": "2026-09-07T12:02:00",
+    "title_pt": "Luz suplementar subcanópica e intercanópica aumenta e padroniza o rendimento em cannabis medicinal (Cannabis sativa L.)",
+    "i18n": {
+      "en": {
+        "excerpt": "In a controlled environment, inter-canopy LED lighting raised dry inflorescence yield by 30% and cut THC and total terpene variability by more than 50% versus top lighting alone.",
+        "content_markdown": "## Why it matters\n\nMedical operators in Brazil face ANVISA pressure for batch uniformity (THC, terpenes, microbiology). Traditional top lighting leaves the canopy base shaded, producing small inflorescences and heterogeneous chemistry — a critical GMP indoor problem.\n\n## What the study did\n\nGarrido et al. compared **TL** (top lighting only), **SCL** (subcanopy LEDs) and **ICL** (inter-canopy LEDs at the base and mid-canopy) in controlled-environment medicinal *Cannabis sativa*. They measured light distribution, dry inflorescence yield, THC accumulation, total terpenes, plant-to-plant CV and energy efficiency per gram.\n\n## Key findings\n\nSCL and ICL improved light distribution and yields versus TL. **ICL** delivered the largest gain: **+29.95%** dry inflorescence, **+24.4%** THC accumulation and **+12.5%** total terpenes. Both supplemental schemes **cut the coefficient of variation by more than 50%** for dry yield, THC and terpenes. SCL was more energy-efficient per gram; ICL maximised absolute production.\n\n## Limitations\n\nIndoor trial on genotype(s) not necessarily representative of Brazilian registered cultivars. Higher total energy use — no full ROI analysis or VPD/CO₂ integration. Pathogen and LED longevity effects in humid rooms were not assessed.\n\n## Critical reading\n\nFor Brazilian ANVISA-validation rooms, a >50% drop in chemical variability may justify ICL/SCL more than raw gram gains. Pilot A/B in one flowering room before a full retrofit, watching base-canopy microclimate.\n\n## Source\n\n[Garrido et al. (2025) — Plants](https://doi.org/10.3390/plants14101469)\n\n## Reference\n\nGarrido et al. (2025). Subcanopy and Inter-Canopy Supplemental Light Enhances and Standardizes Yields in Medicinal Cannabis (Cannabis sativa L.). *Plants*. [https://doi.org/10.3390/plants14101469](https://doi.org/10.3390/plants14101469)\n"
+      }
+    }
   },
   {
     "id": "blog-research-20260907-04",
@@ -71,7 +92,14 @@
     "citation": "Song et al. (2025). Thermal and mechanical properties of hempcrete with low-carbon binders: Effects of 3D distribution and orientation of hemp shivs and microstructures of hempcrete. *Journal of Building Engineering*. [https://doi.org/10.1016/j.jobe.2025.113863](https://doi.org/10.1016/j.jobe.2025.113863)",
     "author_name": "Medi Canopy",
     "published_at": "2026-09-07T12:03:00",
-    "updated_at": "2026-09-07T12:03:00"
+    "updated_at": "2026-09-07T12:03:00",
+    "title_pt": "Propriedades térmicas e mecânicas de hempcrete com ligantes de baixo carbono: efeitos da distribuição 3D e orientação dos shivs e da microestrutura",
+    "i18n": {
+      "en": {
+        "excerpt": "Micro-CT compared hempcrete with hydrated lime, limestone-calcined clay and an alkali-activated binder; the alkali mix reached ~4.1× higher strength and up to 30.9% lower thermal conductivity than lime.",
+        "content_markdown": "## Why it matters\n\nBrazilian industrial hemp yields shiv as a fibre by-product — ideal for low-carbon construction composites. Hempcrete is used in Europe for thermal insulation, but binder choice sets mechanical strength and conductivity.\n\n## What the study did\n\nSong et al. formulated hempcrete with three low-carbon binders: **hydrated lime (HC-HL)**, **limestone + calcined clay (LC2)** and **alkali-activated binder (HC-AA)**. They measured 28-day compressive strength, thermal conductivity, volume fractions of air, shiv and mortar, and shiv orientation via **μCT**.\n\n## Key findings\n\nBinder selection changed mechanical and thermal performance. **HC-AA** had 28-day compressive strength about **4.1 times** the lime reference (on the order of **0.65 MPa vs ~0.16 MPa**). HC-AA thermal conductivity was **15.0–30.9% lower** than lime. μCT indicated a **denser mortar matrix** and **smaller, more horizontally aligned shivs**. LC2 sat between lime and alkali-activated.\n\n## Limitations\n\nLaboratory prototypes, not full-scale walls or Brazilian climate cycles. Alkali-activated binders need process control and local precursors. No decade-scale durability, ABNT fire data or cost versus ceramic block.\n\n## Critical reading\n\nFor Brazilian developers, HC-AA points to stronger panels without sacrificing insulation. Specify tests with national shiv and local fire reports. Even at 4.1× strength, hempcrete remains non-structural under most codes.\n\n## Source\n\n[Song et al. (2025) — Journal of Building Engineering](https://doi.org/10.1016/j.jobe.2025.113863)\n\n## Reference\n\nSong et al. (2025). Thermal and mechanical properties of hempcrete with low-carbon binders: Effects of 3D distribution and orientation of hemp shivs and microstructures of hempcrete. *Journal of Building Engineering*. [https://doi.org/10.1016/j.jobe.2025.113863](https://doi.org/10.1016/j.jobe.2025.113863)\n"
+      }
+    }
   },
   {
     "id": "blog-research-20260907-05",
@@ -89,7 +117,14 @@
     "citation": "Piątkiewicz et al. (2026). Effect of Technological Variables on Thermal Conductivity and Compressive Strength of Hemp–Lime Composites. *CivilEng*. [https://doi.org/10.3390/civileng7020033](https://doi.org/10.3390/civileng7020033)",
     "author_name": "Medi Canopy",
     "published_at": "2026-09-07T12:04:00",
-    "updated_at": "2026-09-07T12:04:00"
+    "updated_at": "2026-09-07T12:04:00",
+    "title_pt": "Efeito de variáveis tecnológicas na condutividade térmica e na resistência à compressão de compósitos cânhamo-cal",
+    "i18n": {
+      "en": {
+        "excerpt": "A factorial study (water/binder and compaction) showed that binder/shiv ratio and compaction govern conductivity and strength via bulk density, between 227 and 518 kg/m³.",
+        "content_markdown": "## Why it matters\n\nHemp–lime composites promise carbon sequestration and insulation, but Brazilian jobsites lack standardised recipes — density scatter produces surprises (cracking, condensation, structural load).\n\n## What the study did\n\nPiątkiewicz et al. applied a **3×3** factorial design varying water/binder (**W/B = 1.75; 1.95; 2.15**) and compaction (**CD = 150%, 170%, 190%**) at binder/shiv **B/S = 1:1**. They measured thermal conductivity and compressive strength and integrated prior work spanning **227–518 kg/m³**.\n\n## Key findings\n\n**Binder/shiv (B/S)** was the dominant factor for conductivity and strength, mainly via **bulk density**. Within a fixed recipe, **compaction** was the most effective lever; the largest gains occurred from **150% → 170%** CD. Water/binder had a **marginal** effect on density and conductivity. Conductivity and strength correlated **linearly and positively** with density.\n\n## Limitations\n\nEuropean laboratory tests; no tropical exposure or common Brazilian fungicides. W/B conclusions may change at other B/S ratios. No large-panel or ABNT wind-load validation.\n\n## Critical reading\n\nFor Brazilian hemp precast plants, standardising **B/S** and **compaction** matters more than micro-tuning water in the tested range. A practical target is 350–450 kg/m³ with CD ≥170%.\n\n## Source\n\n[Piątkiewicz et al. (2026) — CivilEng](https://doi.org/10.3390/civileng7020033)\n\n## Reference\n\nPiątkiewicz et al. (2026). Effect of Technological Variables on Thermal Conductivity and Compressive Strength of Hemp–Lime Composites. *CivilEng*. [https://doi.org/10.3390/civileng7020033](https://doi.org/10.3390/civileng7020033)\n"
+      }
+    }
   },
   {
     "id": "blog-research-20260907-06",
@@ -107,7 +142,14 @@
     "citation": "Karst et al. (2025). Full-spectrum extract from Cannabis sativa DKJ127 for chronic low back pain: a phase 3 randomized placebo-controlled trial. *Nature Medicine*. [https://doi.org/10.1038/s41591-025-03977-0](https://doi.org/10.1038/s41591-025-03977-0)",
     "author_name": "Medi Canopy",
     "published_at": "2026-09-07T12:05:00",
-    "updated_at": "2026-09-07T12:05:00"
+    "updated_at": "2026-09-07T12:05:00",
+    "title_pt": "Extrato full-spectrum de Cannabis sativa DKJ127 para dor lombar crônica: ensaio clínico de fase 3, randomizado e controlado por placebo",
+    "i18n": {
+      "en": {
+        "excerpt": "Phase 3 RCT in 820 adults: full-spectrum extract VER-01 reduced chronic low back pain (Δ NRS −1.9 vs −1.4 placebo; difference −0.6; p<0.001) over 12 weeks, with a sustained open-label extension and no clinical signs of dependence.",
+        "content_markdown": "## Why it matters\n\nChronic low back pain affects more than half a billion people; in Brazil, opioids and NSAIDs coexist with high-cost imported medical cannabis. A positive phase 3 RCT in *Nature Medicine* raises the evidence bar for standardised full-spectrum extracts.\n\n## What the study did\n\nKarst et al. ran a multicentre, randomised, double-blind, placebo-controlled trial (NCT04940741) in **820 adults** with chronic low back pain (VER-01 **n=394**, placebo **n=426**). Phase A: 12 weeks blinded; then open-label extension and randomised withdrawal. Primary endpoint: NRS pain change.\n\n## Key findings\n\nPhase A met the primary endpoint: mean **−1.9 NRS** with VER-01 vs **−1.4** placebo (**difference −0.6**, 95% CI −0.9 to −0.3; **p<0.001**). In neuropathic participants, NPSI fell more than placebo (**p=0.017**). Adverse events were more frequent with VER-01 (**83.3% vs 67.3%**), generally mild/moderate. **No clinical signs of dependence or withdrawal** on discontinuation.\n\n## Limitations\n\nAbsolute effect is modest (0.6 NRS). European population; proprietary VER-01 profile. Higher AE rate may limit tolerability. Phase D missed time-to-treatment-failure. Industry funding.\n\n## Critical reading\n\nFor Brazilian clinicians, this supports a conversation about a **standardised full-spectrum extract** for refractory LBP — not artisan flower. Communicate the NRS difference honestly: statistically consistent but incremental.\n\n## Source\n\n[Karst et al. (2025) — Nature Medicine](https://doi.org/10.1038/s41591-025-03977-0)\n\n## Reference\n\nKarst et al. (2025). Full-spectrum extract from Cannabis sativa DKJ127 for chronic low back pain: a phase 3 randomized placebo-controlled trial. *Nature Medicine*. [https://doi.org/10.1038/s41591-025-03977-0](https://doi.org/10.1038/s41591-025-03977-0)\n"
+      }
+    }
   },
   {
     "id": "blog-research-20260907-07",
@@ -125,7 +167,14 @@
     "citation": "Hendricks et al. (2026). Cannabidiol for chronic pain in rheumatoid arthritis and ankylosing spondylitis: a randomized, placebo-controlled trial with exploratory tetrahydrocannabinol add-on. *Journal of Cannabis Research*. [https://doi.org/10.1186/s42238-026-00496-8](https://doi.org/10.1186/s42238-026-00496-8)",
     "author_name": "Medi Canopy",
     "published_at": "2026-09-07T12:06:00",
-    "updated_at": "2026-09-07T12:06:00"
+    "updated_at": "2026-09-07T12:06:00",
+    "title_pt": "Canabidiol para dor crônica na artrite reumatoide e na espondilite anquilosante: ensaio randomizado, controlado por placebo, com adição exploratória de tetra-hidrocanabinol",
+    "i18n": {
+      "en": {
+        "excerpt": "In 66 patients with RA or AS and persistent pain despite low inflammatory activity, low-dose oral CBD did not beat placebo (10% vs 28% reached ≥20 mm VAS reduction); open-label THC add-on improved pain and sleep in non-responders.",
+        "content_markdown": "## Why it matters\n\nRheumatoid arthritis and ankylosing spondylitis often leave chronic pain even when inflammation is controlled. Prescribers reach for isolated CBD for its safety profile, but RCT evidence was scarce.\n\n## What the study did\n\nHendricks et al. randomised **66 patients** 1:1 to **oral CBD or placebo for 12 weeks**. Primary endpoint: ≥**20 mm** VAS pain reduction at week 12. Non-responders entered a 12-week open-label phase: placebo switched to CBD; CBD received **add-on THC**.\n\n## Key findings\n\nWeek 12: primary response in **3/30 (10%)** on CBD vs **9/32 (28%)** on placebo — **low-dose CBD did not beat placebo**. CBD was associated with **worse sleep** (PSQI). In the exploratory open-label phase, **9/23 (39%)** on **CBD+THC** met response vs **2/25 (8%)** on CBD alone. Authors treat the THC finding as **hypothesis-generating**.\n\n## Limitations\n\nSmall sample (66). “Low” CBD dose — high-dose ranges untested. THC phase **open and non-randomised**. Homogeneous Nordic population. 24 weeks is short for long-term safety.\n\n## Critical reading\n\nBrazilian clinicians should not assume analgesia from low-dose isolated CBD in RA/AS from this RCT — placebo was superior on the primary endpoint. Any CBD:THC role needs a new blinded RCT.\n\n## Source\n\n[Hendricks et al. (2026) — Journal of Cannabis Research](https://doi.org/10.1186/s42238-026-00496-8)\n\n## Reference\n\nHendricks et al. (2026). Cannabidiol for chronic pain in rheumatoid arthritis and ankylosing spondylitis: a randomized, placebo-controlled trial with exploratory tetrahydrocannabinol add-on. *Journal of Cannabis Research*. [https://doi.org/10.1186/s42238-026-00496-8](https://doi.org/10.1186/s42238-026-00496-8)\n"
+      }
+    }
   },
   {
     "id": "blog-research-20260907-08",
@@ -143,7 +192,14 @@
     "citation": "Hardy et al. (2025). Medicinal cannabis for symptom control in advanced cancer: a double-blind, placebo-controlled, randomised clinical trial of 1:1 tetrahydrocannabinol and cannabidiol. *Supportive Care in Cancer*. [https://doi.org/10.1007/s00520-025-09763-5](https://doi.org/10.1007/s00520-025-09763-5)",
     "author_name": "Medi Canopy",
     "published_at": "2026-09-07T12:07:00",
-    "updated_at": "2026-09-07T12:07:00"
+    "updated_at": "2026-09-07T12:07:00",
+    "title_pt": "Cannabis medicinal para controle de sintomas no câncer avançado: ensaio clínico randomizado, duplo-cego e controlado por placebo com tetra-hidrocanabinol e canabidiol 1:1",
+    "i18n": {
+      "en": {
+        "excerpt": "In 144 oncology patients in palliative care, 1:1 THC:CBD oil (10 mg/ml) did not reduce total symptom burden (ESAS) vs placebo at 28 days; there was a marginal pain improvement (−1.42 vs −0.46; p=0.04) with more psychomimetic toxicity.",
+        "content_markdown": "## Why it matters\n\nPatients with advanced cancer in Brazil often seek cannabis beyond formal palliative oncology — frequently expecting global relief of nausea, pain, insomnia and anorexia. This Australian RCT tests **1:1 THC:CBD** oil on **total symptom burden**, not pain alone.\n\n## What the study did\n\nHardy et al. randomised **144 patients** with advanced cancer in palliative care to medicinal oil **1:1 10 mg/ml THC:CBD** or identical placebo. Dose was titrated for 14 days and held to day 28. Symptoms used summed **ESAS** as total distress (**TSDS**). Primary: TSDS change at **day 14**.\n\n## Key findings\n\nBoth groups improved TSDS over time, **with no between-arm difference** at day 14 (**p=0.76**). ESAS pain improved more with cannabis (**−1.42 vs −0.46**, **p=0.04**), but **general well-being favoured placebo** and **psychomimetic toxicity was higher** on active treatment. Authors conclude 1:1 oil **was not superior** to palliative care alone for broad symptom relief.\n\n## Limitations\n\nShort window (28 days) in a heterogeneous cancer population. Individual titration complicates effective-dose comparison. Does not test isolates, other ratios or inhaled routes.\n\n## Critical reading\n\nOncologists and palliative clinicians should calibrate expectations: 1:1 cannabis **does not replace** multimodal symptom management. A small pain gain may be worth it in selected cases with delirium/confusion monitoring.\n\n## Source\n\n[Hardy et al. (2025) — Supportive Care in Cancer](https://doi.org/10.1007/s00520-025-09763-5)\n\n## Reference\n\nHardy et al. (2025). Medicinal cannabis for symptom control in advanced cancer: a double-blind, placebo-controlled, randomised clinical trial of 1:1 tetrahydrocannabinol and cannabidiol. *Supportive Care in Cancer*. [https://doi.org/10.1007/s00520-025-09763-5](https://doi.org/10.1007/s00520-025-09763-5)\n"
+      }
+    }
   },
   {
     "id": "blog-research-20260907-09",
@@ -161,7 +217,14 @@
     "citation": "Mekonen Yimer et al. (2025). The adverse public health effects of non-medical cannabis legalisation in Canada and the USA. *The Lancet Public Health*. [https://doi.org/10.1016/S2468-2667(24)00299-8](https://doi.org/10.1016/S2468-2667(24)00299-8)",
     "author_name": "Medi Canopy",
     "published_at": "2026-09-07T12:08:00",
-    "updated_at": "2026-09-07T12:08:00"
+    "updated_at": "2026-09-07T12:08:00",
+    "title_pt": "Os efeitos adversos à saúde pública da legalização da cannabis não medicinal no Canadá e nos EUA",
+    "i18n": {
+      "en": {
+        "excerpt": "A Lancet Public Health review of recreational legalisation in Canada/USA: rising adult use, emergency visits (psychosis, hyperemesis), traffic injuries and high-potency products — with harms amplified in commercialised markets.",
+        "content_markdown": "## Why it matters\n\nBrazil’s debate on decriminalisation or a regulated market needs more than ideology. Yimer et al. (*The Lancet Public Health*, 2025) consolidate what changed in public health after non-medical legalisation in Canada and the USA.\n\n## What the study did\n\nA narrative/evidential Health Policy synthesis of regulatory models (state monopoly, limited licences, open commercial markets), product evolution (flower → high-potency concentrates), prices, residual illicit markets, prevalence and physical/mental outcomes.\n\n## Key findings\n\nRecurring post-legalisation patterns: **higher adult use** (not consistent in adolescents in every jurisdiction), **fewer possession arrests**, more **emergency visits** — including **cannabinoid hyperemesis** and **cannabis-induced psychosis** — and signals of **traffic injuries**. An Ontario study cited showed an **immediate 30%** rise (IRR 1.30) in cannabis-induced psychosis visits after **commercialisation**, especially in ages **19–24**. **Commercial high-potency markets** show more consistent harms than state/price-controlled models.\n\n## Limitations\n\nA synthesis, not a formal meta-analysis with pooled effects for every outcome. Heterogeneity across states/provinces. US data do not always separate commercialisation from initial legalisation.\n\n## Critical reading\n\nFor Brazil the lesson is not “ban at any cost”, but that **regulatory design matters**: THC caps, marketing limits, store density and taxes aligned with health externalities. The medical ANVISA channel should stay visually distinct from potent recreational products.\n\n## Source\n\n[Mekonen Yimer et al. (2025) — The Lancet Public Health](https://doi.org/10.1016/S2468-2667(24)00299-8)\n\n## Reference\n\nMekonen Yimer et al. (2025). The adverse public health effects of non-medical cannabis legalisation in Canada and the USA. *The Lancet Public Health*. [https://doi.org/10.1016/S2468-2667(24)00299-8](https://doi.org/10.1016/S2468-2667(24)00299-8)\n"
+      }
+    }
   },
   {
     "id": "blog-research-20260907-10",
@@ -179,7 +242,14 @@
     "citation": "Belackova et al. (2025). Getting \"The whole picture\": A review of international research on the outcomes of regulated cannabis supply. *International Journal of Drug Policy*. [https://doi.org/10.1016/j.drugpo.2025.104796](https://doi.org/10.1016/j.drugpo.2025.104796)",
     "author_name": "Medi Canopy",
     "published_at": "2026-09-07T12:09:00",
-    "updated_at": "2026-09-07T12:09:00"
+    "updated_at": "2026-09-07T12:09:00",
+    "title_pt": "Uma visão de conjunto: revisão da pesquisa internacional sobre os desfechos da oferta regulada de cannabis",
+    "i18n": {
+      "en": {
+        "excerpt": "A systematic review across five jurisdictions (Netherlands, Spain, USA, Uruguay, Canada) found common patterns: fewer arrests, more adult use, more health-care demand; negative health harms were most consistent in commercialised US states.",
+        "content_markdown": "## Why it matters\n\nCannabis reforms in Brazil oscillate between a Uruguayan state model, European coffeeshops and a California-style market. Belackova et al. compare **nine indicators** grouped into social, use and health — a useful map for bill drafting and regulatory-impact consulting.\n\n## What the study did\n\nA three-level systematic review prioritising quasi-experimental studies on outcomes in **five jurisdictions** with distinct models: **Netherlands, Spain, legalised US states, Uruguay and Canada**.\n\n## Key findings\n\n**Common** outcomes regardless of model: **fewer cannabis-related arrests**; **higher adult use** (not uniform in adolescents); **higher non-traffic health-care use**. **Negative health outcomes** were **more consistent in commercialised US states**, where marketing, high THC and dispensary density coincide. Authors recommend mixing regulatory parameters — e.g. Uruguay’s state production channel with Dutch point-of-sale limits.\n\n## Limitations\n\nHeterogeneous study quality; the US aggregates 50 regimes. Uruguay and Spain have few long-term studies. Does not separate a regulated medical market. Published in 2025 — misses later reforms.\n\n## Critical reading\n\nBrazil need not copy Colorado. Uruguay offers state-monopoly lessons; the Netherlands, tolerance without full commercialisation. Policy consultants should present **explicit trade-offs** to legislative committees: less incarceration vs stronger hospital surveillance.\n\n## Source\n\n[Belackova et al. (2025) — International Journal of Drug Policy](https://doi.org/10.1016/j.drugpo.2025.104796)\n\n## Reference\n\nBelackova et al. (2025). Getting \"The whole picture\": A review of international research on the outcomes of regulated cannabis supply. *International Journal of Drug Policy*. [https://doi.org/10.1016/j.drugpo.2025.104796](https://doi.org/10.1016/j.drugpo.2025.104796)\n"
+      }
+    }
   },
   {
     "id": "blog-research-20260907-11",
@@ -197,7 +267,14 @@
     "citation": "Jaczynska et al. (2025). A comparative life cycle assessment of textile fiber production processes: Hemp versus cotton. *Cleaner Waste Systems*. [https://doi.org/10.1016/j.clwas.2025.100277](https://doi.org/10.1016/j.clwas.2025.100277)",
     "author_name": "Medi Canopy",
     "published_at": "2026-09-07T12:10:00",
-    "updated_at": "2026-09-07T12:10:00"
+    "updated_at": "2026-09-07T12:10:00",
+    "title_pt": "Avaliação comparativa do ciclo de vida da produção de fibras têxteis: cânhamo versus algodão",
+    "i18n": {
+      "en": {
+        "excerpt": "LCA per cultivated hectare: cotton exceeded hemp in eutrophication (69.6 vs 3.6 kg N eq.), global warming (7903 vs 1374 kg CO₂ eq.) and acidification (65 vs 15 kg SO₂ eq.); ±20% sensitivity left the gaps intact.",
+        "content_markdown": "## Why it matters\n\nFashion and ESG pressure in Brazil push suppliers toward lower-footprint fibres. Hemp is pitched as a substitute for conventional cotton, but quantitative per-hectare comparatives are rare.\n\n## What the study did\n\nJaczynska et al. compared **hemp vs cotton** fibre production via **LCA** from field, harvest and processing to ready fibre. Functional unit: **1 cultivated hectare**. Impacts: **eutrophication**, **GWP** and **acidification**, with **±20%** sensitivity on energy, electricity and fertiliser.\n\n## Key findings\n\nBoth fibres affected all three categories, but **cotton was larger in every one**: eutrophication **69.6 vs 3.6 kg N eq.**; GWP **7903 vs 1374 kg CO₂ eq.**; acidification **65 vs 15 kg SO₂ eq.** The **agricultural** stage dominated GWP and eutrophication; cotton textile processing adds chemical load. ±20% sensitivity changed impacts **<10%** — rankings held.\n\n## Limitations\n\nSecondary aggregated data, not a farm-specific inventory. A per-hectare unit does not normalise per tonne of fine fibre. Dyeing/garment-making excluded. Temperate scenario; Brazilian cotton irrigation may widen an unmodelled water gap.\n\n## Critical reading\n\nBrazilian brands can cite hemp on an LCA basis, but should convert to **kg of fibre** with audited local yields. Comparing per hectare favours extensive crops; substituting irrigated cotton on a kg fibre/water basis needs new functional LCAs.\n\n## Source\n\n[Jaczynska et al. (2025) — Cleaner Waste Systems](https://doi.org/10.1016/j.clwas.2025.100277)\n\n## Reference\n\nJaczynska et al. (2025). A comparative life cycle assessment of textile fiber production processes: Hemp versus cotton. *Cleaner Waste Systems*. [https://doi.org/10.1016/j.clwas.2025.100277](https://doi.org/10.1016/j.clwas.2025.100277)\n"
+      }
+    }
   },
   {
     "id": "blog-research-20260907-12",
@@ -215,6 +292,13 @@
     "citation": "Liu et al. (2024). Carbon footprint and oxygen footprint assessment of hemp yarn. *International Journal of Global Warming*. [https://doi.org/10.1504/ijgw.2024.137161](https://doi.org/10.1504/ijgw.2024.137161)",
     "author_name": "Medi Canopy",
     "published_at": "2026-09-07T12:11:00",
-    "updated_at": "2026-09-07T12:11:00"
+    "updated_at": "2026-09-07T12:11:00",
+    "title_pt": "Avaliação da pegada de carbono e da pegada de oxigênio do fio de cânhamo",
+    "i18n": {
+      "en": {
+        "excerpt": "From cultivation to yarn, spinning accounted for 86.4% of carbon emissions and 88.01% of oxygen consumption; cultivation sequestered 4.0733 kg CO₂ and released 2.9624 kg O₂ per functional unit of the method.",
+        "content_markdown": "## Why it matters\n\nTextile decarbonisation in Brazil means finding hotspots — low-carbon hemp cultivation is not enough if spinning consumes most of the energy. Liu et al. propose a dual metric (**carbon and oxygen footprint**) from field to yarn.\n\n## What the study did\n\nAuthors at Zhejiang Sci-Tech University and the China Textile Academy calculated **oxygen production and consumption** and CO₂ emissions from **cultivation**, **fibre extraction** and **spinning** of hemp yarn. The oxygen footprint complements carbon by capturing biological/industrial O₂ use.\n\n## Key findings\n\n**Spinning** accounted for **86.4%** of carbon emissions and **88.01%** of oxygen consumption. **Cultivation**: 8.94% of carbon emissions and 8.27% of O₂ consumed, with a net positive **sequestration of 4.0733 kg CO₂** and **release of 2.9624 kg O₂**. **Fibre extraction**: 4.62% of emissions and 3.72% of oxygen. Energy efficiency of **spinning machinery** is the dominant lever.\n\n## Limitations\n\nA specific Chinese chain — electricity mix and mechanical yields differ from Brazil. Oxygen footprint is not yet a consolidated ISO fashion metric. Paywall limited verification of the exact functional unit.\n\n## Critical reading\n\nInvestment in efficient spinning (rotors, heat recovery) comes before “carbon-zero yarn” marketing in Brazilian agribusiness. Field cultivation should document sequestration, but must not hide the industrial hotspot.\n\n## Source\n\n[Liu et al. (2024) — International Journal of Global Warming](https://doi.org/10.1504/ijgw.2024.137161)\n\n## Reference\n\nLiu et al. (2024). Carbon footprint and oxygen footprint assessment of hemp yarn. *International Journal of Global Warming*. [https://doi.org/10.1504/ijgw.2024.137161](https://doi.org/10.1504/ijgw.2024.137161)\n"
+      }
+    }
   }
 ]

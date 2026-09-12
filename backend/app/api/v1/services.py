@@ -2,9 +2,10 @@
 
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 
 from app.core.config import get_settings
+from app.core.locale import CONSULTING_SAVED, CONSULTING_SENT, localize_item, localize_list, normalize_lang
 from app.models.schemas import (
     ConsultingRequestCreate,
     ConsultingRequestResponse,
@@ -22,12 +23,19 @@ router = APIRouter(prefix="/services", tags=["services"])
 
 
 @router.get("", response_model=list[ServiceOffering])
-def list_services() -> list[ServiceOffering]:
-    return [ServiceOffering.model_validate(i) for i in services_store.read_all()]
+def list_services(lang: str | None = Query(default=None)) -> list[ServiceOffering]:
+    locale = normalize_lang(lang)
+    return [
+        ServiceOffering.model_validate(i)
+        for i in localize_list(services_store.read_all(), locale)
+    ]
 
 
 @router.post("/consulting-request", response_model=ConsultingRequestResponse)
-def submit_consulting_request(payload: ConsultingRequestCreate) -> ConsultingRequestResponse:
+def submit_consulting_request(
+    payload: ConsultingRequestCreate,
+    lang: str | None = Query(default=None),
+) -> ConsultingRequestResponse:
     """Persist a consulting inquiry and send a branded HTML email to the author."""
     offerings = {
         item["id"]: ServiceOffering.model_validate(item)
@@ -84,11 +92,8 @@ def submit_consulting_request(payload: ConsultingRequestCreate) -> ConsultingReq
     }
     consulting_store.append(record)
 
-    message = (
-        "Solicitação enviada. Retornaremos em breve."
-        if mail.sent
-        else "Solicitação registrada. Retornaremos em breve."
-    )
+    locale = normalize_lang(lang)
+    message = CONSULTING_SENT[locale] if mail.sent else CONSULTING_SAVED[locale]
     return ConsultingRequestResponse(
         success=True,
         message=message,
@@ -98,8 +103,9 @@ def submit_consulting_request(payload: ConsultingRequestCreate) -> ConsultingReq
 
 
 @router.get("/{service_id}", response_model=ServiceOffering)
-def get_service(service_id: str) -> ServiceOffering:
+def get_service(service_id: str, lang: str | None = Query(default=None)) -> ServiceOffering:
+    locale = normalize_lang(lang)
     for item in services_store.read_all():
         if item["id"] == service_id:
-            return ServiceOffering.model_validate(item)
+            return ServiceOffering.model_validate(localize_item(item, locale))
     raise HTTPException(status_code=404, detail="Service not found")

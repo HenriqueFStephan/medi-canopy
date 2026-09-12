@@ -524,6 +524,9 @@ def build_prompt(
                     - Invent numbers that are not in the paper.
 
                     Do:
+                    - `title`: original paper title (usually English).
+                    - `title_pt`: a faithful Portuguese translation of that title
+                      (required — the site shows it when the visitor chooses PT-BR).
                     - `excerpt`: 2–3 sentences for the list card.
                     - `content_markdown`: a full briefing, typically 600–1000+ words,
                       with these sections in order (use `##` headings, Portuguese):

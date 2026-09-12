@@ -58,8 +58,9 @@ On approval, `PaperNormalizer.to_blog_post()` produces:
 
 ```python
 {
-  "title": "...",
-  "slug": "...",
+ "title": "...",
+ "title_pt": "...",
+ "slug": "...",
   "excerpt": "...",
   "content_markdown": "...",
   "tags": [...],

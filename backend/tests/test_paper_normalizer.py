@@ -21,6 +21,20 @@ def test_normalize_creates_slug_and_tags():
     assert result.citation_block
 
 
+def test_to_blog_post_keeps_portuguese_title():
+    raw = ScientificPaperRaw(
+        title="Hemp Textiles Review",
+        title_pt="Revisão de têxteis de cânhamo",
+        authors=["Weber, J."],
+        abstract="Industrial hemp fibers in sustainable textiles.",
+        journal="Textile Journal",
+    )
+    normalizer = ScientificPaperNormalizer()
+    blog = normalizer.to_blog_post(normalizer.normalize(raw))
+    assert blog.title == "Hemp Textiles Review"
+    assert blog.title_pt == "Revisão de têxteis de cânhamo"
+
+
 def test_to_blog_post_markdown():
     raw = ScientificPaperRaw(
         title="Hemp Textiles Review",

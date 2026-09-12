@@ -90,6 +90,7 @@ class ScientificPaperNormalizer:
 
         return ScientificPaperNormalized(
             title=raw.title,
+            title_pt=raw.title_pt,
             slug=_slugify(raw.title),
             authors=raw.authors,
             abstract=raw.abstract,
@@ -143,6 +144,7 @@ class ScientificPaperNormalizer:
 
         return BlogPostCreate(
             title=paper.title,
+            title_pt=paper.title_pt,
             slug=paper.slug,
             excerpt=excerpt,
             content_markdown=content,

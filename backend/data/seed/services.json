@@ -4,34 +4,64 @@
     "title": "Viabilidade & Investimentos",
     "description": "CAPEX • OPEX • Viabilidade • Benchmarking • Cenários de Escala",
     "icon": "chart",
-    "highlights": []
+    "highlights": [],
+    "i18n": {
+      "en": {
+        "title": "Viability & Investments",
+        "description": "CAPEX • OPEX • Viability • Benchmarking • Scale scenarios"
+      }
+    }
   },
   {
     "id": "svc-engineering",
     "title": "Engenharia & Desenvolvimento",
     "description": "Master Planning • Engenharia Conceitual • Layout • Pré-dimensionamento • Sistemas",
     "icon": "blueprint",
-    "highlights": []
+    "highlights": [],
+    "i18n": {
+      "en": {
+        "title": "Engineering & Development",
+        "description": "Master Planning • Conceptual Engineering • Layout • Pre-sizing • Systems"
+      }
+    }
   },
   {
     "id": "svc-cultivation",
     "title": "Cultivo & Operações",
     "description": "CEA • Cultivo • Crop Steering • Fertirrigação • IPM • Pós-colheita • SOPs",
     "icon": "plant",
-    "highlights": []
+    "highlights": [],
+    "i18n": {
+      "en": {
+        "title": "Cultivation & Operations",
+        "description": "CEA • Cultivation • Crop Steering • Fertigation • IPM • Post-harvest • SOPs"
+      }
+    }
   },
   {
     "id": "svc-regulatory",
     "title": "Regulatório & Qualidade",
     "description": "Compliance • GACP/GMP • Boas Práticas • Gap Analysis • Qualidade • Documentação",
     "icon": "shield",
-    "highlights": []
+    "highlights": [],
+    "i18n": {
+      "en": {
+        "title": "Regulatory & Quality",
+        "description": "Compliance • GACP/GMP • Good Practices • Gap Analysis • Quality • Documentation"
+      }
+    }
   },
   {
     "id": "svc-implementation",
     "title": "Implantação & Performance",
     "description": "Fornecedores • Compras Técnicas • Comissionamento • Treinamento • Otimização",
     "icon": "cycle",
-    "highlights": []
+    "highlights": [],
+    "i18n": {
+      "en": {
+        "title": "Implementation & Performance",
+        "description": "Suppliers • Technical Purchasing • Commissioning • Training • Optimisation"
+      }
+    }
   }
 ]

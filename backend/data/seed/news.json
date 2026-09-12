@@ -7,10 +7,21 @@
     "source_url": "https://www.gov.br/anvisa",
     "source_name": "ANVISA / Gov.br",
     "region": "BR",
-    "tags": ["policy", "medical", "brazil"],
+    "tags": [
+      "policy",
+      "medical",
+      "brazil"
+    ],
     "status": "approved",
     "published_at": "2026-06-20T10:00:00",
-    "created_at": "2026-06-20T10:00:00"
+    "created_at": "2026-06-20T10:00:00",
+    "i18n": {
+      "en": {
+        "title": "ANVISA updates guidance on medical cannabis products",
+        "summary": "New rules reinforce traceability and quality control for importers and manufacturers in Brazil.",
+        "content": "ANVISA published an update to the rules for registering and inspecting cannabis-based products for medical use. The focus is documented chain of custody, batch analytical reports and transparency for prescribers and patients.\n\nFor operators, that means reviewing import, storage and dispensing procedures. Consultants with compliance experience can support the adjustment without interrupting care."
+      }
+    }
   },
   {
     "id": "news-002",
@@ -20,10 +31,20 @@
     "source_url": "https://example.com/hemp-textiles",
     "source_name": "Industry Report (placeholder)",
     "region": "global",
-    "tags": ["textile", "market"],
+    "tags": [
+      "textile",
+      "market"
+    ],
     "status": "approved",
     "published_at": "2026-06-18T14:30:00",
-    "created_at": "2026-06-18T14:30:00"
+    "created_at": "2026-06-18T14:30:00",
+    "i18n": {
+      "en": {
+        "title": "Global industrial hemp market projects growth in sustainable textiles",
+        "summary": "Hemp fibres are gaining ground in fashion and construction for their low water footprint and high durability.",
+        "content": "Market reports point to expanding use of hemp in technical textiles and composite materials. European and North American companies are investing in local processing chains.\n\nIn Brazil, the industrial hemp regulatory framework opens room for pilots in cooperatives and the textile industry, provided genetic traceability and THC content stay in compliance."
+      }
+    }
   },
   {
     "id": "news-003",
@@ -33,9 +54,19 @@
     "source_url": "https://example.com/cbd-study",
     "source_name": "PubMed (placeholder)",
     "region": "global",
-    "tags": ["medical", "research"],
+    "tags": [
+      "medical",
+      "research"
+    ],
     "status": "approved",
     "published_at": "2026-06-15T09:00:00",
-    "created_at": "2026-06-15T09:00:00"
+    "created_at": "2026-06-15T09:00:00",
+    "i18n": {
+      "en": {
+        "title": "Observational study reinforces the need to standardise CBD doses",
+        "summary": "International research highlights variability across formulations and the importance of medical follow-up.",
+        "content": "An observational study in an indexed journal analysed cohorts of patients using CBD for neurological conditions. The authors emphasise that labelled concentrations do not always match actual content and call for stricter analytics.\n\nThe finding reinforces that trusted information hubs — with human curation — are essential for patients and professionals in Brazil."
+      }
+    }
   }
 ]

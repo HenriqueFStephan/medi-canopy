@@ -28,7 +28,11 @@ export interface HubClient {
   area?: string;
   website: string;
   /** i18n key for the external link CTA; defaults to hub.visitSite. */
-  linkLabelKey?: 'hub.visitSite' | 'hub.visitPlantManager' | 'hub.visit4TreesProjects';
+  linkLabelKey?:
+    | 'hub.visitSite'
+    | 'hub.visitPlantManager'
+    | 'hub.visit4TreesProjects'
+    | 'hub.visitLinkedInProfile';
   /** Optional blocks for Medi Canopy involvement and joint deliverables. */
   highlights?: HubClientHighlight[];
 }
@@ -133,6 +137,24 @@ export const HUB_CLIENTS: HubClient[] = [
         title: 'Atuação da Medi Canopy',
         description:
           'A Medi Canopy atuou nos anos de 2025 e 2026 na Coordenação de Projetos da 4Trees Cannabis Building, realizando Consultoria em Projetos Internacionais e Desenvolvimento de Conteúdo Educacional para a empresa, contribuindo para a estruturação e gestão de processos operacionais, organização de conhecimento técnico e desenvolvimento de materiais educacionais voltados à formação e capacitação de profissionais do setor de Cannabis.',
+      },
+    ],
+  },
+  {
+    id: 'nutrawerx',
+    name: 'Nutrawerx LLC',
+    logoUrl: '/assets/clients/nutrawerx.jpg',
+    description:
+      'A Nutrawerx LLC atuou por uma década no desenvolvimento de produtos e soluções relacionados a nutracêuticos e à ciência de canabinoides.',
+    area: 'Nutracêuticos',
+    website: 'https://www.linkedin.com/in/michael-sautman-5668a211/',
+    linkLabelKey: 'hub.visitLinkedInProfile',
+    highlights: [
+      {
+        id: 'medi-canopy-role',
+        title: 'Atuação da Medi Canopy',
+        description:
+          'A Nutrawerx realizou estudos de viabilidade para sua atuação no Brasil, contando com a Medi Canopy nas frentes de Viabilidade & Investimentos e Engenharia & Desenvolvimento. A atuação contemplou Master Planning, Engenharia Conceitual, desenvolvimento de layouts e pré-dimensionamento de sistemas operacionais, conectando requisitos técnicos e operacionais aos objetivos estratégicos do projeto. A Medi Canopy estrutura projetos desde o planejamento inicial até a definição conceitual de layouts, infraestrutura e sistemas, traduzindo necessidades de negócio em soluções operacionais estruturadas.',
       },
     ],
   },

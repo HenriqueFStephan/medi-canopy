@@ -115,4 +115,46 @@ describe('HubClientsComponent', () => {
     );
     expect(highlight.description).toContain('Coordenação de Projetos da 4Trees Cannabis Building');
   });
+
+  it('shows Nutrawerx LLC as a client card with LinkedIn CTA', () => {
+    const nutrawerx = HUB_CLIENTS.find((c) => c.id === 'nutrawerx');
+    expect(nutrawerx).withContext('Nutrawerx client entry').toBeTruthy();
+
+    const cards = fixture.nativeElement.querySelectorAll('.hub-card');
+    const card = cards[2];
+    expect(card.classList.contains('hub-card--extended')).toBeTrue();
+    expect(card.querySelector('.hub-card__name')?.textContent?.trim()).toBe('Nutrawerx LLC');
+    expect(card.querySelector('.hub-card__area')?.textContent?.trim()).toBe('Nutracêuticos');
+    expect(card.querySelector('.hub-card__desc')?.textContent?.trim()).toBe(nutrawerx!.description);
+
+    const logo = card.querySelector('.hub-card__logo') as HTMLImageElement;
+    expect(logo?.src).toContain('/assets/clients/nutrawerx.jpg');
+    expect(logo?.alt).toBe('Logo Nutrawerx LLC');
+
+    const link = card.querySelector('.hub-card__link') as HTMLAnchorElement;
+    expect(link?.href).toBe('https://www.linkedin.com/in/michael-sautman-5668a211/');
+    expect(link?.target).toBe('_blank');
+    expect(link?.rel).toContain('noopener');
+    expect(link?.textContent?.trim()).toBe('Conheça a Nutrawerx no LinkedIn →');
+  });
+
+  it('shows Medi Canopy involvement for Nutrawerx', () => {
+    const nutrawerx = HUB_CLIENTS.find((c) => c.id === 'nutrawerx');
+    const highlight = nutrawerx!.highlights![0];
+
+    const cards = fixture.nativeElement.querySelectorAll('.hub-card');
+    const card = cards[2];
+    const involvement = card.querySelector('.hub-card__highlight');
+    expect(involvement).withContext('Medi Canopy involvement block').toBeTruthy();
+
+    expect(card.querySelector('.hub-card__highlight-title')?.textContent?.trim()).toBe(
+      'Atuação da Medi Canopy',
+    );
+    expect(card.querySelector('.hub-card__highlight-desc')?.textContent?.trim()).toBe(
+      highlight.description,
+    );
+    expect(highlight.description).toContain('Viabilidade & Investimentos');
+    expect(highlight.description).toContain('Engenharia & Desenvolvimento');
+    expect(highlight.description).toContain('Master Planning');
+  });
 });

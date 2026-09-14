@@ -131,6 +131,7 @@ export const ptBR = {
   'hub.visitInstagram': 'Visite o Instagram',
   'hub.visitPlantManager': 'Conheça a PlantManager →',
   'hub.visit4TreesProjects': 'Conheça os projetos da 4Trees →',
+  'hub.visitLinkedInProfile': 'Conheça a Nutrawerx no LinkedIn →',
   'hub.clientsMediCanopyTitle': 'Atuação da Medi Canopy',
   'hub.logoAlt': 'Logo {{name}}',
 } as const;
@@ -266,6 +267,7 @@ export const en: Record<MsgKey, string> = {
   'hub.visitInstagram': 'Visit Instagram',
   'hub.visitPlantManager': 'Discover PlantManager →',
   'hub.visit4TreesProjects': 'Explore 4Trees projects →',
+  'hub.visitLinkedInProfile': 'Discover Nutrawerx on LinkedIn →',
   'hub.clientsMediCanopyTitle': 'Medi Canopy involvement',
   'hub.logoAlt': 'Logo {{name}}',
 };

@@ -31,7 +31,17 @@ export interface HubClient {
  *   website: 'https://acme.example.com',
  * }
  */
-export const HUB_PARTNERS: HubPartner[] = [];
+export const HUB_PARTNERS: HubPartner[] = [
+  {
+    id: 'green-growth',
+    name: 'Green Growth',
+    logoUrl: '/assets/partners/green-growth.png',
+    description:
+      'Consultoria jurídica e regulatória especializada em cannabis e cânhamo, oferecendo estruturação e inteligência regulatória para empresas do agro e da indústria. Atua na construção de operações com segurança jurídica, conformidade e visão de longo prazo.',
+    area: 'Jurídico e Regulatório',
+    website: 'https://greengrowth.group/',
+  },
+];
 
 /**
  * Companies Medi Canopy has served or delivered projects for.

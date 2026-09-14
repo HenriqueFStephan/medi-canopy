@@ -21,9 +21,27 @@ describe('HubPartnersComponent', () => {
     expect(title?.textContent?.trim()).toBe('Parceiros Medi Canopy');
   });
 
-  it('shows an empty state when there are no partners', () => {
-    expect(HUB_PARTNERS.length).toBe(0);
-    const empty = fixture.nativeElement.querySelector('.hub-empty');
-    expect(empty).withContext('empty state message').toBeTruthy();
+  it('shows Green Growth as a partner card', () => {
+    expect(HUB_PARTNERS.length).toBeGreaterThan(0);
+
+    const cards = fixture.nativeElement.querySelectorAll('.hub-card');
+    expect(cards.length).toBe(HUB_PARTNERS.length);
+
+    const greenGrowth = HUB_PARTNERS.find((p) => p.id === 'green-growth');
+    expect(greenGrowth).withContext('Green Growth partner entry').toBeTruthy();
+
+    const card = cards[0];
+    expect(card.querySelector('.hub-card__name')?.textContent?.trim()).toBe('Green Growth');
+    expect(card.querySelector('.hub-card__area')?.textContent?.trim()).toBe('Jurídico e Regulatório');
+    expect(card.querySelector('.hub-card__desc')?.textContent?.trim()).toBe(greenGrowth!.description);
+
+    const logo = card.querySelector('.hub-card__logo') as HTMLImageElement;
+    expect(logo?.src).toContain('/assets/partners/green-growth.png');
+    expect(logo?.alt).toBe('Logo Green Growth');
+
+    const link = card.querySelector('.hub-card__link') as HTMLAnchorElement;
+    expect(link?.href).toBe('https://greengrowth.group/');
+    expect(link?.target).toBe('_blank');
+    expect(link?.rel).toContain('noopener');
   });
 });

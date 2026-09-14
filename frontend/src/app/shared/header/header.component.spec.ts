@@ -23,16 +23,14 @@ describe('HeaderComponent', () => {
     i18n.setLang('pt-BR');
   });
 
-  it('renders the company logo mark to the left of the company name in the header', () => {
+  it('renders the company name without a logo mark in the header', () => {
     const brand = fixture.nativeElement.querySelector('.brand');
-    const logo = brand?.querySelector('.brand__logo');
     const name = brand?.querySelector('.brand__name');
 
     expect(brand).withContext('brand link in header').toBeTruthy();
-    expect(logo?.getAttribute('src')).toBe('assets/brand/logo-mark.png');
+    expect(brand?.querySelector('.brand__logo')).toBeNull();
     expect(name?.textContent).toContain('Medi');
     expect(name?.textContent).toContain('Canopy');
-    expect(logo?.compareDocumentPosition(name!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   it('places the language dropdown to the right of the logo cluster', () => {

@@ -29,14 +29,6 @@ import { I18nService, Lang, TranslatePipe } from '../../core/i18n';
 
         <div class="header__brand-cluster">
           <a routerLink="/" class="brand" [attr.aria-label]="'header.homeAria' | t">
-            <img
-              class="brand__logo"
-              src="assets/brand/logo-mark.png"
-              alt=""
-              width="40"
-              height="25"
-              decoding="async"
-            />
             <span class="brand__name">
               <span class="brand__medi">Medi</span><span class="brand__canopy"> Canopy</span>
             </span>

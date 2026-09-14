@@ -36,8 +36,24 @@ import { HUB_CLIENTS, HubClient } from './hub.data';
               target="_blank"
               rel="noopener noreferrer"
             >
-              {{ 'hub.visitSite' | t }}
+              {{ (client.linkLabelKey ?? 'hub.visitSite') | t }}
             </a>
+
+            <div
+              class="hub-card__involvement"
+              *ngIf="client.mediCanopyInvolvement as involvement"
+              [attr.aria-labelledby]="'hub-involvement-title-' + client.id"
+            >
+              <p class="hub-card__involvement-brand">Medi Canopy</p>
+              <h4
+                class="hub-card__involvement-title"
+                [id]="'hub-involvement-title-' + client.id"
+              >
+                {{ 'hub.clientsMediCanopyTitle' | t }}
+              </h4>
+              <p class="hub-card__involvement-role">{{ involvement.role }}</p>
+              <p class="hub-card__involvement-desc">{{ involvement.description }}</p>
+            </div>
           </div>
         </article>
       </div>

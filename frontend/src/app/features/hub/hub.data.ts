@@ -9,6 +9,13 @@ export interface HubPartner {
   linkLabelKey?: 'hub.visitSite' | 'hub.visitInstagram' | 'hub.visitPlantManager';
 }
 
+export interface HubClientMediCanopyInvolvement {
+  /** Role or service line, e.g. Gerente de Operações. */
+  role: string;
+  /** How Medi Canopy contributed to this client engagement. */
+  description: string;
+}
+
 export interface HubClient {
   id: string;
   name: string;
@@ -17,6 +24,10 @@ export interface HubClient {
   /** Optional segment, e.g. tecnologia, indústria, pesquisa, saúde. */
   area?: string;
   website: string;
+  /** i18n key for the external link CTA; defaults to hub.visitSite. */
+  linkLabelKey?: 'hub.visitSite' | 'hub.visit4TreesProjects';
+  /** Optional block highlighting Medi Canopy's work for this client. */
+  mediCanopyInvolvement?: HubClientMediCanopyInvolvement;
 }
 
 /**
@@ -78,4 +89,20 @@ export const HUB_PARTNERS: HubPartner[] = [
  *   website: 'https://acme.example.com',
  * }
  */
-export const HUB_CLIENTS: HubClient[] = [];
+export const HUB_CLIENTS: HubClient[] = [
+  {
+    id: '4trees-cannabis-building',
+    name: '4Trees Cannabis Building',
+    logoUrl: '/assets/clients/4trees-cannabis-building.webp',
+    description:
+      'A 4Trees Cannabis Building é uma empresa canadense especializada em consultoria e suporte para operações de Cannabis, com atuação em planejamento de instalações, suporte operacional, documentação, desenvolvimento de projetos e cultivo indoor em conformidade. A empresa trabalha com soluções práticas voltadas à estruturação e operação de instalações de cultivo, do planejamento à produção.',
+    area: 'Consultoria e Operações',
+    website: 'https://4treesbuilding.ca/projects',
+    linkLabelKey: 'hub.visit4TreesProjects',
+    mediCanopyInvolvement: {
+      role: 'Gerente de Operações e Desenvolvimento de Conteúdo Educacional',
+      description:
+        'A Medi Canopy atua junto à 4Trees Cannabis Building como Gerente de Operações e Desenvolvimento de Conteúdo Educacional, contribuindo para a estruturação e gestão de processos operacionais, organização de conhecimento técnico e desenvolvimento de materiais educacionais voltados à formação e capacitação de profissionais do setor de Cannabis.',
+    },
+  },
+];

@@ -131,9 +131,8 @@ export const HUB_CLIENTS: HubClient[] = [
       {
         id: 'medi-canopy-role',
         title: 'Atuação da Medi Canopy',
-        role: 'Coordenação de Operações, Consultoria em Projetos Internacionais e Desenvolvimento de Conteúdo Educacional',
         description:
-          'A Medi Canopy atuou nos anos de 2025 e 2026 junto à 4Trees Cannabis Building na Coordenação de Operações, realizando Consultoria em Projetos Internacionais e Desenvolvimento de Conteúdo Educacional para a empresa, contribuindo para a estruturação e gestão de processos operacionais, organização de conhecimento técnico e desenvolvimento de materiais educacionais voltados à formação e capacitação de profissionais do setor de Cannabis.',
+          'A Medi Canopy atuou nos anos de 2025 e 2026 na Coordenação de Projetos da 4Trees Cannabis Building, realizando Consultoria em Projetos Internacionais e Desenvolvimento de Conteúdo Educacional para a empresa, contribuindo para a estruturação e gestão de processos operacionais, organização de conhecimento técnico e desenvolvimento de materiais educacionais voltados à formação e capacitação de profissionais do setor de Cannabis.',
       },
     ],
   },

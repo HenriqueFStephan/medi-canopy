@@ -105,13 +105,14 @@ describe('HubClientsComponent', () => {
     const involvement = card.querySelector('.hub-card__highlight');
     expect(involvement).withContext('Medi Canopy involvement block').toBeTruthy();
 
-    expect(card.querySelector('.hub-card__highlight-brand')?.textContent?.trim()).toBe('Medi Canopy');
+    expect(card.querySelector('.hub-card__highlight-brand')).toBeNull();
     expect(card.querySelector('.hub-card__highlight-title')?.textContent?.trim()).toBe(
       'Atuação da Medi Canopy',
     );
-    expect(card.querySelector('.hub-card__highlight-role')?.textContent?.trim()).toBe(highlight.role);
+    expect(card.querySelector('.hub-card__highlight-role')).toBeNull();
     expect(card.querySelector('.hub-card__highlight-desc')?.textContent?.trim()).toBe(
       highlight.description,
     );
+    expect(highlight.description).toContain('Coordenação de Projetos da 4Trees Cannabis Building');
   });
 });

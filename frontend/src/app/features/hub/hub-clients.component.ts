@@ -14,30 +14,53 @@ import { HUB_CLIENTS, HubClient } from './hub.data';
       <p class="hub-section__intro">{{ 'hub.clientsIntro' | t }}</p>
 
       <div class="hub-card-grid" *ngIf="clients.length; else emptyState">
-        <article class="hub-card" *ngFor="let client of clients">
-          <div class="hub-card__logo-wrap">
-            <img
-              class="hub-card__logo"
-              [src]="client.logoUrl"
-              [alt]="'hub.logoAlt' | t:{ name: client.name }"
-              width="80"
-              height="80"
-              loading="lazy"
-            />
+        <article
+          class="hub-card"
+          [class.hub-card--extended]="client.highlights?.length"
+          *ngFor="let client of clients"
+        >
+          <div class="hub-card__header">
+            <div class="hub-card__logo-wrap">
+              <img
+                class="hub-card__logo"
+                [src]="client.logoUrl"
+                [alt]="'hub.logoAlt' | t:{ name: client.name }"
+                width="80"
+                height="80"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="hub-card__body">
+              <p class="hub-card__area" *ngIf="client.area">{{ client.area }}</p>
+              <h3 class="hub-card__name">{{ client.name }}</h3>
+              <p class="hub-card__desc">{{ client.description }}</p>
+              <a
+                class="hub-card__link"
+                [href]="client.website"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {{ (client.linkLabelKey ?? 'hub.visitSite') | t }}
+              </a>
+            </div>
           </div>
 
-          <div class="hub-card__body">
-            <p class="hub-card__area" *ngIf="client.area">{{ client.area }}</p>
-            <h3 class="hub-card__name">{{ client.name }}</h3>
-            <p class="hub-card__desc">{{ client.description }}</p>
-            <a
-              class="hub-card__link"
-              [href]="client.website"
-              target="_blank"
-              rel="noopener noreferrer"
+          <div class="hub-card__highlights" *ngIf="client.highlights?.length">
+            <section
+              class="hub-card__highlight"
+              [class.hub-card__highlight--featured]="highlight.variant === 'featured'"
+              *ngFor="let highlight of client.highlights"
+              [attr.aria-labelledby]="'hub-client-' + client.id + '-' + highlight.id"
             >
-              {{ 'hub.visitSite' | t }}
-            </a>
+              <h4
+                class="hub-card__highlight-title"
+                [id]="'hub-client-' + client.id + '-' + highlight.id"
+              >
+                {{ highlight.title }}
+              </h4>
+              <p class="hub-card__highlight-desc">{{ highlight.description }}</p>
+            </section>
           </div>
         </article>
       </div>

@@ -6,7 +6,7 @@ export interface HubPartner {
   area: string;
   website: string;
   /** i18n key for the external link CTA; defaults to hub.visitSite. */
-  linkLabelKey?: 'hub.visitSite' | 'hub.visitInstagram';
+  linkLabelKey?: 'hub.visitSite' | 'hub.visitInstagram' | 'hub.visitPlantManager';
 }
 
 export interface HubClient {
@@ -51,6 +51,16 @@ export const HUB_PARTNERS: HubPartner[] = [
     area: 'Práticas Integrativas',
     website: 'https://www.instagram.com/associacaoom/',
     linkLabelKey: 'hub.visitInstagram',
+  },
+  {
+    id: 'plantmanager',
+    name: 'PlantManager',
+    logoUrl: '/assets/partners/plantmanager.png',
+    description:
+      'PlantManager é uma plataforma brasileira de gestão inteligente para a cadeia de Cannabis Medicinal e Industrial, oferecendo soluções para gestão, rastreabilidade e conformidade regulatória. A plataforma atende diferentes etapas e perfis da cadeia, incluindo cultivo, associações medicinais, genética e melhoramento, cânhamo industrial e operações de importação e distribuição.',
+    area: 'Tecnologia',
+    website: 'https://plantmanager.com.br/',
+    linkLabelKey: 'hub.visitPlantManager',
   },
 ];
 

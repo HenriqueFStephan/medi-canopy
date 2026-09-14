@@ -77,4 +77,25 @@ describe('HubPartnersComponent', () => {
     expect(link?.rel).toContain('noopener');
     expect(link?.textContent?.trim()).toBe('Visite o Instagram');
   });
+
+  it('shows PlantManager as a partner card with website CTA', () => {
+    const plantManager = HUB_PARTNERS.find((p) => p.id === 'plantmanager');
+    expect(plantManager).withContext('PlantManager partner entry').toBeTruthy();
+
+    const cards = fixture.nativeElement.querySelectorAll('.hub-card');
+    const card = cards[2];
+    expect(card.querySelector('.hub-card__name')?.textContent?.trim()).toBe('PlantManager');
+    expect(card.querySelector('.hub-card__area')?.textContent?.trim()).toBe('Tecnologia');
+    expect(card.querySelector('.hub-card__desc')?.textContent?.trim()).toBe(plantManager!.description);
+
+    const logo = card.querySelector('.hub-card__logo') as HTMLImageElement;
+    expect(logo?.src).toContain('/assets/partners/plantmanager.png');
+    expect(logo?.alt).toBe('Logo PlantManager');
+
+    const link = card.querySelector('.hub-card__link') as HTMLAnchorElement;
+    expect(link?.href).toBe('https://plantmanager.com.br/');
+    expect(link?.target).toBe('_blank');
+    expect(link?.rel).toContain('noopener');
+    expect(link?.textContent?.trim()).toBe('Conheça a PlantManager →');
+  });
 });

@@ -129,6 +129,7 @@ export const ptBR = {
     'Estamos organizando nosso portfólio de clientes. Em breve, novas empresas atendidas serão apresentadas aqui.',
   'hub.visitSite': 'Visitar site →',
   'hub.visitInstagram': 'Visite o Instagram',
+  'hub.visitPlantManager': 'Conheça a PlantManager →',
   'hub.logoAlt': 'Logo {{name}}',
 } as const;
 
@@ -261,6 +262,7 @@ export const en: Record<MsgKey, string> = {
     'We are organizing our client portfolio. Companies we have served will appear here soon.',
   'hub.visitSite': 'Visit website →',
   'hub.visitInstagram': 'Visit Instagram',
+  'hub.visitPlantManager': 'Discover PlantManager →',
   'hub.logoAlt': 'Logo {{name}}',
 };
 

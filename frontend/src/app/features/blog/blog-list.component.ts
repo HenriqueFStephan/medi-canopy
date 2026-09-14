@@ -24,7 +24,7 @@ import { BlogPost } from '../../core/models';
 
         <div class="news-rows" *ngIf="!loading && !error">
           <a class="news-row" *ngFor="let post of posts" [routerLink]="['/blog', post.slug]">
-            <span class="col-date">{{ post.published_at | date:'d MMM y':undefined:i18n.dateLocale() }}</span>
+            <span class="col-date" *ngIf="displayDate(post) as date">{{ date | date:'d MMM y':undefined:i18n.dateLocale() }}</span>
             <span class="col-tag">
               <span class="tag" *ngIf="post.source_type === 'agent_research'">{{ 'blog.researchTag' | t }}</span>
             </span>
@@ -56,6 +56,16 @@ export class BlogListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  displayDate(post: BlogPost): string | null {
+    if (post.published_date) {
+      return post.published_date;
+    }
+    if (post.source_type !== 'agent_research') {
+      return post.published_at;
+    }
+    return null;
   }
 
   private load(): void {

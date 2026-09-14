@@ -48,10 +48,21 @@ describe('HeaderComponent', () => {
     expect(fixture.nativeElement.querySelector('.nav .lang-dropdown')).toBeNull();
   });
 
+  it('does not render the removed Notícias tab in navigation', () => {
+    const nav = fixture.nativeElement.querySelector('.nav') as HTMLElement;
+    const newsLink = Array.from(nav.querySelectorAll('a')).find((link) =>
+      link.getAttribute('href')?.includes('/news'),
+    );
+
+    expect(nav.textContent).not.toContain('Notícias');
+    expect(newsLink).toBeUndefined();
+  });
+
   it('switches navigation labels from the language dropdown', () => {
     const nav = fixture.nativeElement.querySelector('.nav') as HTMLElement;
     expect(nav.textContent).toContain('Serviços');
     expect(nav.textContent).toContain('Artigos Científicos');
+    expect(nav.textContent).not.toContain('News');
 
     const toggle = fixture.nativeElement.querySelector(
       '.lang-dropdown__toggle',

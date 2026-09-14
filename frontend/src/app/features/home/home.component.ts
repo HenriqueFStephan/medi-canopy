@@ -20,7 +20,6 @@ import { NewsArticle } from '../../core/models';
           <p class="hero__lead">{{ 'home.lead' | t }}</p>
           <div class="hero__actions">
             <a routerLink="/services" class="btn btn--primary">{{ 'home.ctaStart' | t }}</a>
-            <a routerLink="/news" class="btn btn--outline">{{ 'home.ctaNews' | t }}</a>
           </div>
         </div>
       </div>
@@ -48,12 +47,6 @@ import { NewsArticle } from '../../core/models';
               <p>{{ 'home.blogDesc' | t }}</p>
             </div>
           </a>
-          <a routerLink="/news" class="feature-list__item">
-            <div>
-              <h3>{{ 'home.newsTitle' | t }}</h3>
-              <p>{{ 'home.newsDesc' | t }}</p>
-            </div>
-          </a>
         </div>
       </div>
     </section>
@@ -62,18 +55,27 @@ import { NewsArticle } from '../../core/models';
       <div class="container">
         <h2 class="section__title">{{ 'home.headlinesTitle' | t }}</h2>
         <div class="news-rows">
-          <a
-            class="news-row"
-            *ngFor="let article of headlines"
-            [href]="article.source_url || '/news'"
-            [attr.target]="article.source_url ? '_blank' : null"
-            rel="noopener"
-          >
-            <span class="col-date">{{ article.published_at | date:'d MMM y':undefined:i18n.dateLocale() }}</span>
-            <span class="col-tag"><span class="tag">{{ article.region }}</span></span>
-            <span class="col-title">{{ article.title }}</span>
-            <span class="col-arrow">→</span>
-          </a>
+          <ng-container *ngFor="let article of headlines">
+            <a
+              *ngIf="article.source_url; else headlineText"
+              class="news-row"
+              [href]="article.source_url"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="col-date">{{ article.published_at | date:'d MMM y':undefined:i18n.dateLocale() }}</span>
+              <span class="col-tag"><span class="tag">{{ article.region }}</span></span>
+              <span class="col-title">{{ article.title }}</span>
+              <span class="col-arrow">→</span>
+            </a>
+            <ng-template #headlineText>
+              <div class="news-row news-row--static">
+                <span class="col-date">{{ article.published_at | date:'d MMM y':undefined:i18n.dateLocale() }}</span>
+                <span class="col-tag"><span class="tag">{{ article.region }}</span></span>
+                <span class="col-title">{{ article.title }}</span>
+              </div>
+            </ng-template>
+          </ng-container>
         </div>
       </div>
     </section>

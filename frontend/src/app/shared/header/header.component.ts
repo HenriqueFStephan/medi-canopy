@@ -14,7 +14,6 @@ import { I18nService, Lang, TranslatePipe } from '../../core/i18n';
         <nav class="nav">
           <a routerLink="/services" routerLinkActive="active">{{ 'nav.services' | t }}</a>
           <a routerLink="/blog" routerLinkActive="active">{{ 'nav.blog' | t }}</a>
-          <a routerLink="/news" routerLinkActive="active">{{ 'nav.news' | t }}</a>
           <a
             routerLink="/hub"
             routerLinkActive="active"

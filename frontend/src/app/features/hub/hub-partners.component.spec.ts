@@ -21,6 +21,13 @@ describe('HubPartnersComponent', () => {
     expect(title?.textContent?.trim()).toBe('Parceiros Medi Canopy');
   });
 
+  it('shows the partners section intro', () => {
+    const intro = fixture.nativeElement.querySelector('.hub-section__intro');
+    expect(intro?.textContent?.trim()).toBe(
+      'Conheça as organizações que integram o ecossistema Medi Canopy, reunindo associações de pacientes, empresas e parceiros estratégicos em diferentes frentes da cannabis medicinal.',
+    );
+  });
+
   it('shows Green Growth as a partner card', () => {
     expect(HUB_PARTNERS.length).toBeGreaterThan(0);
 

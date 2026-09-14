@@ -27,6 +27,7 @@ export interface BlogPost {
   citation?: string;
   author_name: string;
   published_at: string;
+  published_date?: string;
 }
 
 export interface Course {

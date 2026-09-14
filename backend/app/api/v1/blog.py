@@ -7,6 +7,7 @@ from fastapi import APIRouter, HTTPException, Query
 from app.core.locale import localize_item, localize_list, normalize_lang
 from app.models.schemas import BlogPost, BlogPostCreate
 from app.repositories.json_store import blog_store, new_id
+from app.services.blog_publication import publication_sort_key
 
 router = APIRouter(prefix="/blog", tags=["blog"])
 
@@ -20,7 +21,7 @@ def list_posts(
     items = localize_list(blog_store.read_all(), normalize_lang(lang))
     if tag:
         items = [i for i in items if tag in i.get("tags", [])]
-    items.sort(key=lambda x: x.get("published_at", ""), reverse=True)
+    items.sort(key=publication_sort_key, reverse=True)
     return [BlogPost.model_validate(i) for i in items[:limit]]
 
 

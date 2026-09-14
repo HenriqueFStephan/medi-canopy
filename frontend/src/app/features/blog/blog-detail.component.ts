@@ -19,7 +19,7 @@ import { BlogPost } from '../../core/models';
           <span class="tag" *ngIf="post.source_type === 'agent_research'">{{ 'blog.researchTag' | t }}</span>
           <h1>{{ post.title }}</h1>
           <p class="article__meta">
-            {{ post.author_name }} · {{ post.published_at | date:'longDate':undefined:i18n.dateLocale() }}
+            {{ post.author_name }}<ng-container *ngIf="displayDate(post) as date"> · {{ date | date:'longDate':undefined:i18n.dateLocale() }}</ng-container>
           </p>
         </header>
         <div class="article__body" [innerHTML]="renderedContent"></div>
@@ -51,6 +51,16 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  displayDate(post: BlogPost): string | null {
+    if (post.published_date) {
+      return post.published_date;
+    }
+    if (post.source_type !== 'agent_research') {
+      return post.published_at;
+    }
+    return null;
   }
 
   private load(): void {

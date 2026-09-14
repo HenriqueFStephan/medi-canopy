@@ -152,6 +152,7 @@ class ScientificPaperNormalizer:
             source_type=ContentSource.AGENT_RESEARCH,
             cover_image_url=paper.hero_image_url,
             citation=paper.citation_block,
+            published_date=paper.published_date,
         )
 
     def _placeholder_summary(self, raw: ScientificPaperRaw) -> str:

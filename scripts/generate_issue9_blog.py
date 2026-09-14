@@ -41,6 +41,7 @@ POSTS = [
             "10.3389/fpls.2025.1632346",
         ),
         "published_at": "2026-09-07T12:00:00",
+        "published_date": "2025-10-20",
         "content": md(
             (
                 "Por que importa",
@@ -93,6 +94,7 @@ POSTS = [
             "10.3390/agronomy15071521",
         ),
         "published_at": "2026-09-07T12:01:00",
+        "published_date": "2025-06-23",
         "content": md(
             (
                 "Por que importa",
@@ -145,6 +147,7 @@ POSTS = [
             "10.3390/plants14101469",
         ),
         "published_at": "2026-09-07T12:02:00",
+        "published_date": "2025-05-14",
         "content": md(
             (
                 "Por que importa",
@@ -197,6 +200,7 @@ POSTS = [
             "10.1016/j.jobe.2025.113863",
         ),
         "published_at": "2026-09-07T12:03:00",
+        "published_date": "2025-10-01",
         "content": md(
             (
                 "Por que importa",
@@ -249,6 +253,7 @@ POSTS = [
             "10.3390/civileng7020033",
         ),
         "published_at": "2026-09-07T12:04:00",
+        "published_date": "2026-05-29",
         "content": md(
             (
                 "Por que importa",
@@ -301,6 +306,7 @@ POSTS = [
             "10.1038/s41591-025-03977-0",
         ),
         "published_at": "2026-09-07T12:05:00",
+        "published_date": "2025-12-01",
         "content": md(
             (
                 "Por que importa",
@@ -353,6 +359,7 @@ POSTS = [
             "10.1186/s42238-026-00496-8",
         ),
         "published_at": "2026-09-07T12:06:00",
+        "published_date": "2026-08-31",
         "content": md(
             (
                 "Por que importa",
@@ -405,6 +412,7 @@ POSTS = [
             "10.1007/s00520-025-09763-5",
         ),
         "published_at": "2026-09-07T12:07:00",
+        "published_date": "2025-08-01",
         "content": md(
             (
                 "Por que importa",
@@ -457,6 +465,7 @@ POSTS = [
             "10.1016/S2468-2667(24)00299-8",
         ),
         "published_at": "2026-09-07T12:08:00",
+        "published_date": "2025-02-01",
         "content": md(
             (
                 "Por que importa",
@@ -509,6 +518,7 @@ POSTS = [
             "10.1016/j.drugpo.2025.104796",
         ),
         "published_at": "2026-09-07T12:09:00",
+        "published_date": "2025-08-01",
         "content": md(
             (
                 "Por que importa",
@@ -561,6 +571,7 @@ POSTS = [
             "10.1016/j.clwas.2025.100277",
         ),
         "published_at": "2026-09-07T12:10:00",
+        "published_date": "2025-06-01",
         "content": md(
             (
                 "Por que importa",
@@ -613,6 +624,7 @@ POSTS = [
             "10.1504/ijgw.2024.137161",
         ),
         "published_at": "2026-09-07T12:11:00",
+        "published_date": "2024-01-01",
         "content": md(
             (
                 "Por que importa",
@@ -690,6 +702,7 @@ def build_research_entry(post: dict) -> dict:
         "author_name": "Medi Canopy",
         "published_at": post["published_at"],
         "updated_at": post["published_at"],
+        "published_date": post.get("published_date"),
     }
 
 

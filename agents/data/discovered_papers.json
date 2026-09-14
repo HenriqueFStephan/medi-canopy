@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-09T18:19:39+00:00",
+  "updated_at": "2026-09-14T13:12:43.620502+00:00",
   "notes": "Papers already posted in weekly research digest issues. The weekly paper report skips these DOIs/URLs.",
   "papers": [
     {
@@ -289,6 +289,138 @@
       "category": "construction",
       "first_seen": "2026-09-07",
       "source_issue": 9
+    },
+    {
+      "title": "Multimodal examination of the acute effects of cannabis on subjective and physiological stress-related outcomes: a randomized placebo-controlled laboratory study",
+      "url": "https://doi.org/10.1038/s41386-026-02533-9",
+      "doi": "10.1038/s41386-026-02533-9",
+      "journal": "Neuropsychopharmacology",
+      "authors": "Cuttler et al.",
+      "year": 2026,
+      "published": "2026-08-22",
+      "category": "medical",
+      "first_seen": "2026-09-14"
+    },
+    {
+      "title": "Genomic variation in 271 diverse accessions of Cannabis sativa L. in China",
+      "url": "https://doi.org/10.1186/s12870-026-09909-5",
+      "doi": "10.1186/s12870-026-09909-5",
+      "journal": "BMC Plant Biology",
+      "authors": "Wang et al.",
+      "year": 2026,
+      "published": "2026-09-07",
+      "category": "agronomy",
+      "first_seen": "2026-09-14"
+    },
+    {
+      "title": "A Randomized Four-Period Cross-Over Phase I Study to Assess Bioavailability, Bioequivalence, and Tolerability of IHL-42X Compared with the Reference Drugs in Healthy Volunteers",
+      "url": "https://doi.org/10.1007/s40261-026-01595-3",
+      "doi": "10.1007/s40261-026-01595-3",
+      "journal": "Clinical Drug Investigation",
+      "authors": "Mbogo et al.",
+      "year": 2026,
+      "published": "2026-09-12",
+      "category": "medical",
+      "first_seen": "2026-09-14"
+    },
+    {
+      "title": "Cannabis to reduce chronic postsurgical pain following total knee arthroplasty: a pilot randomized controlled trial",
+      "url": "https://doi.org/10.1186/s42238-026-00492-y",
+      "doi": "10.1186/s42238-026-00492-y",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Busse et al.",
+      "year": 2026,
+      "published": "2026-08-25",
+      "category": "medical",
+      "first_seen": "2026-09-14"
+    },
+    {
+      "title": "Comparing cannabis retail systems in Canada: government versus private",
+      "url": "https://doi.org/10.1186/s42238-026-00487-9",
+      "doi": "10.1186/s42238-026-00487-9",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Childs et al.",
+      "year": 2026,
+      "published": "2026-08-20",
+      "category": "policy",
+      "first_seen": "2026-09-14"
+    },
+    {
+      "title": "Less water, same buds: moderate drought as a water-saving strategy for indoor cannabis",
+      "url": "https://doi.org/10.3389/fpls.2026.1930650",
+      "doi": "10.3389/fpls.2026.1930650",
+      "journal": "Frontiers in Plant Science",
+      "authors": "Crispim Massuela et al.",
+      "year": 2026,
+      "published": "2026-09-03",
+      "category": "agronomy",
+      "first_seen": "2026-09-14"
+    },
+    {
+      "title": "The effect of organic amendments on cannabidiol yield and topsoil health (0–10 cm) in floral hemp (Cannabis sativa L.) production system",
+      "url": "https://doi.org/10.1186/s42238-026-00485-x",
+      "doi": "10.1186/s42238-026-00485-x",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Atoloye et al.",
+      "year": 2026,
+      "published": "2026-08-14",
+      "category": "agronomy",
+      "first_seen": "2026-09-14"
+    },
+    {
+      "title": "Mechanical Performance of Hemp-Containing Denim Fabrics with Core-Engineered Weft Yarns",
+      "url": "https://doi.org/10.3390/fib14090095",
+      "doi": "10.3390/fib14090095",
+      "journal": "Fibers",
+      "authors": "Erbil et al.",
+      "year": 2026,
+      "published": "2026-08-25",
+      "category": "textile",
+      "first_seen": "2026-09-14"
+    },
+    {
+      "title": "Predicting Cannabidiol Pharmacokinetics in Older Adults Via Physiologically Based Pharmacokinetic Modeling",
+      "url": "https://doi.org/10.1208/s12248-026-01281-4",
+      "doi": "10.1208/s12248-026-01281-4",
+      "journal": "The AAPS Journal",
+      "authors": "Qian et al.",
+      "year": 2026,
+      "published": "2026-09-08",
+      "category": "medical",
+      "first_seen": "2026-09-14"
+    },
+    {
+      "title": "Innovative earth–hemp–hydraulic lime bio- and geo-based composite for sustainable seismic applications",
+      "url": "https://doi.org/10.12912/27197050/231235",
+      "doi": "10.12912/27197050/231235",
+      "journal": "Ecological Engineering & Environmental Technology",
+      "authors": "Elmountassir et al.",
+      "year": 2026,
+      "published": "2026-09-08",
+      "category": "construction",
+      "first_seen": "2026-09-14"
+    },
+    {
+      "title": "Time Domain Analysis of Machining Stability in Hemp Board Milling",
+      "url": "https://doi.org/10.3390/f17091068",
+      "doi": "10.3390/f17091068",
+      "journal": "Forests",
+      "authors": "Zielińska-Szwajka et al.",
+      "year": 2026,
+      "published": "2026-09-06",
+      "category": "construction",
+      "first_seen": "2026-09-14"
+    },
+    {
+      "title": "Measuring the circularity of bio-based textile fibers in light of planetary boundaries",
+      "url": "https://doi.org/10.1016/j.clcb.2026.100232",
+      "doi": "10.1016/j.clcb.2026.100232",
+      "journal": "Cleaner and Circular Bioeconomy",
+      "authors": "Iglesias et al.",
+      "year": 2026,
+      "published": "2026-08-14",
+      "category": "textile",
+      "first_seen": "2026-09-14"
     }
   ]
 }

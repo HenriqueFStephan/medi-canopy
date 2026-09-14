@@ -114,7 +114,7 @@ export const ptBR = {
   'hub.clients': 'Clientes',
   'hub.partnersTitle': 'Parceiros Medi Canopy',
   'hub.partnersIntro':
-    'Conheça as empresas que compõem o ecossistema Medi Canopy — atuando de forma integrada em tecnologia, pesquisa, regulação, jurídico e compliance.',
+    'Conheça as organizações que integram o ecossistema Medi Canopy, reunindo associações de pacientes, empresas e parceiros estratégicos em diferentes frentes da cannabis medicinal.',
   'hub.partnersEmpty':
     'Estamos ampliando nossa rede de parceiros estratégicos. Em breve, novos parceiros serão apresentados aqui.',
   'hub.clientsTitle': 'Clientes Medi Canopy',

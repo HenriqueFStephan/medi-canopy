@@ -114,40 +114,102 @@
   },
   {
     "id": "course-002",
-    "title": "Compliance e Operações no Mercado Brasileiro",
-    "slug": "compliance-operacoes-brasil",
-    "description": "ANVISA, rastreabilidade, importação e boas práticas para operadores e consultores.",
-    "level": "intermediário",
+    "title": "Genética, Biologia Vegetal e Melhoramento Aplicado da Cannabis",
+    "slug": "genetica-biologia-vegetal-melhoramento-cannabis",
+    "description": "Transformando conhecimento genético em potencial agronômico",
+    "level": "avançado",
     "price_display": "Em breve",
     "cover_image_url": null,
     "coming_soon": true,
     "published": true,
     "modules": [
       {
-        "title": "Módulo 1 — Panorama regulatório",
-        "description": "Medicinal, industrial e perspectivas legislativas.",
-        "duration_minutes": 60
+        "title": "Módulo 1 — Introdução à Genética para o Melhoramento de Plantas",
+        "description": "",
+        "duration_minutes": 0
       },
       {
-        "title": "Módulo 2 — Documentação e auditoria",
-        "description": "SOPs, lotes e preparação para inspeção.",
-        "duration_minutes": 90
+        "title": "Módulo 2 — DNA, RNA e a Base Molecular da Vida no Melhoramento de Plantas",
+        "description": "",
+        "duration_minutes": 0
+      },
+      {
+        "title": "Módulo 3 — Biologia Celular e Divisão Celular no Melhoramento Genético da Cannabis",
+        "description": "",
+        "duration_minutes": 0
+      },
+      {
+        "title": "Módulo 4 — Genética de Populações e Diversidade Genética no Melhoramento da Cannabis",
+        "description": "",
+        "duration_minutes": 0
+      },
+      {
+        "title": "Módulo 5 — Reprodução das Plantas e Ciclos de Vida (para o Melhoramento da Cannabis)",
+        "description": "",
+        "duration_minutes": 0
+      },
+      {
+        "title": "Módulo 6 — Hormônios Vegetais e Regulação Gênica no Melhoramento da Cannabis",
+        "description": "",
+        "duration_minutes": 0
+      },
+      {
+        "title": "Módulo 7 — Genética da Cannabis e Quimiotipos",
+        "description": "",
+        "duration_minutes": 0
+      },
+      {
+        "title": "Módulo 8 — Técnicas de Melhoramento da Cannabis (Estrutura Conceitual)",
+        "description": "",
+        "duration_minutes": 0
+      },
+      {
+        "title": "Módulo 9 — Genética Molecular Avançada no Melhoramento da Cannabis – Genômica e Melhoramento Assistido por Marcadores",
+        "description": "",
+        "duration_minutes": 0
+      },
+      {
+        "title": "Módulo 10 — Diversidade Genética, Conservação e Ética no Melhoramento da Cannabis",
+        "description": "",
+        "duration_minutes": 0
       }
     ],
     "i18n": {
       "en": {
-        "title": "Compliance and Operations in the Brazilian Market",
-        "description": "ANVISA, traceability, import and good practices for operators and consultants.",
-        "level": "intermediate",
+        "title": "Genetics, Plant Biology and Applied Cannabis Breeding",
+        "description": "Turning genetic knowledge into agronomic potential",
+        "level": "advanced",
         "price_display": "Coming soon",
         "modules": [
           {
-            "title": "Module 1 — Regulatory landscape",
-            "description": "Medical, industrial and legislative outlook."
+            "title": "Module 1 — Introduction to Genetics for Plant Breeding"
           },
           {
-            "title": "Module 2 — Documentation and audit",
-            "description": "SOPs, batches and inspection readiness."
+            "title": "Module 2 — DNA, RNA and the Molecular Basis of Life in Plant Breeding"
+          },
+          {
+            "title": "Module 3 — Cell Biology and Cell Division in Cannabis Genetic Breeding"
+          },
+          {
+            "title": "Module 4 — Population Genetics and Genetic Diversity in Cannabis Breeding"
+          },
+          {
+            "title": "Module 5 — Plant Reproduction and Life Cycles (for Cannabis Breeding)"
+          },
+          {
+            "title": "Module 6 — Plant Hormones and Gene Regulation in Cannabis Breeding"
+          },
+          {
+            "title": "Module 7 — Cannabis Genetics and Chemotypes"
+          },
+          {
+            "title": "Module 8 — Cannabis Breeding Techniques (Conceptual Framework)"
+          },
+          {
+            "title": "Module 9 — Advanced Molecular Genetics in Cannabis Breeding – Genomics and Marker-Assisted Breeding"
+          },
+          {
+            "title": "Module 10 — Genetic Diversity, Conservation and Ethics in Cannabis Breeding"
           }
         ]
       }

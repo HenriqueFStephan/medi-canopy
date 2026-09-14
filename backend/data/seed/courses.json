@@ -1,49 +1,112 @@
 [
   {
     "id": "course-001",
-    "title": "Fundamentos de Cultivo Indoor Profissional",
-    "slug": "fundamentos-cultivo-indoor",
-    "description": "Do zero ao primeiro ciclo: ambiente controlado, nutrição, manejo integrado de pragas e documentação para compliance. Curso completo em desenvolvimento.",
-    "level": "iniciante",
+    "title": "Produção de Flores de Cannabis de Grau Medicinal: O Modelo Canadense",
+    "slug": "producao-flores-cannabis-modelo-canadense",
+    "description": "Princípios, práticas e padrões para uma produção de alta qualidade",
+    "level": "profissional",
     "price_display": "Em breve",
     "cover_image_url": null,
     "coming_soon": true,
     "published": true,
     "modules": [
       {
-        "title": "Módulo 1 — Ambiente e climatização",
-        "description": "VPD, HVAC, sensores e redundância.",
-        "duration_minutes": 90
+        "title": "Parte I – Introdução à Cannabis Sativa: Uma Perspectiva Histórica",
+        "description": "",
+        "duration_minutes": 0
       },
       {
-        "title": "Módulo 2 — Propagação e vegetativo",
-        "description": "Métodos, espaçamento e registro fenológico.",
-        "duration_minutes": 120
+        "title": "Parte II – Do Cultivo ao Consumidor: Como Funciona a Regulação Canadense",
+        "description": "",
+        "duration_minutes": 0
       },
       {
-        "title": "Módulo 3 — Floração e colheita",
-        "description": "Triggers, secagem e cura com controle de qualidade.",
-        "duration_minutes": 120
+        "title": "Parte III – Planejamento Produtivo e Operacional de Cannabis Medicinal",
+        "description": "",
+        "duration_minutes": 0
+      },
+      {
+        "title": "Parte IV – Caracterização e Gestão do Material Genético de Cannabis Medicinal",
+        "description": "",
+        "duration_minutes": 0
+      },
+      {
+        "title": "Parte V – Manejo Integrado de Pragas (MIP)",
+        "description": "",
+        "duration_minutes": 0
+      },
+      {
+        "title": "Parte VI – A Ciência por Trás da Colheita",
+        "description": "",
+        "duration_minutes": 0
+      },
+      {
+        "title": "Parte VII – Pós-Colheita e Preservação do Produto",
+        "description": "",
+        "duration_minutes": 0
+      },
+      {
+        "title": "Parte VIII – Rastreabilidade e Controle de Qualidade",
+        "description": "",
+        "duration_minutes": 0
+      },
+      {
+        "title": "Parte IX – Gestão e Documentação",
+        "description": "",
+        "duration_minutes": 0
+      },
+      {
+        "title": "Parte X – Agricultura de Precisão e Tendências Tecnológicas",
+        "description": "",
+        "duration_minutes": 0
       }
     ],
     "i18n": {
       "en": {
-        "title": "Fundamentals of Professional Indoor Cultivation",
-        "description": "From zero to the first cycle: controlled environment, nutrition, integrated pest management and compliance documentation. Full course in development.",
-        "level": "beginner",
+        "title": "Medical-Grade Cannabis Flower Production: The Canadian Model",
+        "description": "Principles, practices and standards for high-quality production",
+        "level": "professional",
         "price_display": "Coming soon",
         "modules": [
           {
-            "title": "Module 1 — Environment and climate",
-            "description": "VPD, HVAC, sensors and redundancy."
+            "title": "Part I – Introduction to Cannabis Sativa: A Historical Perspective",
+            "description": ""
           },
           {
-            "title": "Module 2 — Propagation and vegetative",
-            "description": "Methods, spacing and phenological records."
+            "title": "Part II – From Cultivation to Consumer: How Canadian Regulation Works",
+            "description": ""
           },
           {
-            "title": "Module 3 — Flowering and harvest",
-            "description": "Triggers, drying and curing with quality control."
+            "title": "Part III – Productive and Operational Planning for Medical Cannabis",
+            "description": ""
+          },
+          {
+            "title": "Part IV – Characterization and Management of Medical Cannabis Genetic Material",
+            "description": ""
+          },
+          {
+            "title": "Part V – Integrated Pest Management (IPM)",
+            "description": ""
+          },
+          {
+            "title": "Part VI – The Science Behind Harvest",
+            "description": ""
+          },
+          {
+            "title": "Part VII – Post-Harvest and Product Preservation",
+            "description": ""
+          },
+          {
+            "title": "Part VIII – Traceability and Quality Control",
+            "description": ""
+          },
+          {
+            "title": "Part IX – Management and Documentation",
+            "description": ""
+          },
+          {
+            "title": "Part X – Precision Agriculture and Technology Trends",
+            "description": ""
           }
         ]
       }

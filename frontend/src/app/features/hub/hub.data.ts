@@ -5,6 +5,8 @@ export interface HubPartner {
   description: string;
   area: string;
   website: string;
+  /** i18n key for the external link CTA; defaults to hub.visitSite */
+  linkLabelKey?: 'hub.visitSite' | 'hub.visitInstagram';
 }
 
 export interface HubClient {
@@ -40,6 +42,15 @@ export const HUB_PARTNERS: HubPartner[] = [
       'Consultoria jurídica e regulatória especializada em cannabis e cânhamo, oferecendo estruturação e inteligência regulatória para empresas do agro e da indústria. Atua na construção de operações com segurança jurídica, conformidade e visão de longo prazo.',
     area: 'Jurídico e Regulatório',
     website: 'https://greengrowth.group/',
+  },
+  {
+    id: 'associacao-om',
+    name: 'OM – Associação Multidisciplinar em Práticas Integrativas',
+    logoUrl: '/assets/partners/associacao-om.jpg',
+    description: 'Cuidado especializado Humano e Animal. Informação e acesso ao tratamento.',
+    area: 'Práticas Integrativas',
+    website: 'https://www.instagram.com/associacaoom/',
+    linkLabelKey: 'hub.visitInstagram',
   },
 ];
 

@@ -125,6 +125,7 @@ export const ptBR = {
   'hub.clientsEmpty':
     'Estamos organizando nosso portfólio de clientes. Em breve, novas empresas atendidas serão apresentadas aqui.',
   'hub.visitSite': 'Visitar site →',
+  'hub.visitInstagram': 'Visite o Instagram →',
   'hub.logoAlt': 'Logo {{name}}',
 } as const;
 
@@ -253,6 +254,7 @@ export const en: Record<MsgKey, string> = {
   'hub.clientsEmpty':
     'We are organizing our client portfolio. Companies we have served will appear here soon.',
   'hub.visitSite': 'Visit website →',
+  'hub.visitInstagram': 'Visit Instagram →',
   'hub.logoAlt': 'Logo {{name}}',
 };
 

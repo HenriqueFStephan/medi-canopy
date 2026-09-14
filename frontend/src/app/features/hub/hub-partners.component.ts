@@ -36,7 +36,7 @@ import { HUB_PARTNERS, HubPartner } from './hub.data';
               target="_blank"
               rel="noopener noreferrer"
             >
-              {{ 'hub.visitSite' | t }}
+              {{ (partner.linkLabelKey ?? 'hub.visitSite') | t }}
             </a>
           </div>
         </article>

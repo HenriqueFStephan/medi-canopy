@@ -59,11 +59,57 @@ def test_list_blog_sorted_by_publication_date():
     assert response.status_code == 200
     rows = response.json()
     assert rows
-    assert rows[0]["published_date"] == "2026-08-31"
-    assert rows[0]["slug"] == "cannabidiol-for-chronic-pain-in-rheumatoid-arthritis-and-ankylosing-spondylitis"
+    assert rows[0]["published_date"] == "2026-09-12"
+    assert rows[0]["slug"] == (
+        "a-randomized-four-period-cross-over-phase-i-study-to-assess-bioavailability-bioe"
+    )
 
     dates = [row.get("published_date") for row in rows if row.get("published_date")]
     assert dates == sorted(dates, reverse=True)
+
+
+ISSUE28_DOIS = [
+    "10.1186/s12870-026-09909-5",
+    "10.3389/fpls.2026.1930650",
+    "10.1186/s42238-026-00485-x",
+    "10.12912/27197050/231235",
+    "10.3390/f17091068",
+    "10.1038/s41386-026-02533-9",
+    "10.1007/s40261-026-01595-3",
+    "10.1186/s42238-026-00492-y",
+    "10.1208/s12248-026-01281-4",
+    "10.1186/s42238-026-00487-9",
+    "10.3390/fib14090095",
+    "10.1016/j.clcb.2026.100232",
+]
+
+
+def test_issue28_research_posts_are_published():
+    from fastapi.testclient import TestClient
+
+    from app.main import app
+    from app.repositories.json_store import blog_store
+
+    api = TestClient(app)
+    response = api.get("/api/v1/blog")
+    assert response.status_code == 200
+    rows = response.json()
+    citations = " ".join(row.get("citation") or "" for row in rows)
+    for doi in ISSUE28_DOIS:
+        assert doi in citations
+
+    seed_rows = blog_store.read_all()
+    issue28_rows = [
+        row
+        for row in seed_rows
+        if row.get("id", "").startswith("blog-research-20260914-")
+    ]
+    assert len(issue28_rows) == 12
+    for row in issue28_rows:
+        assert row.get("source_type") == "agent_research"
+        assert row.get("title_pt")
+        assert row.get("i18n", {}).get("en", {}).get("excerpt")
+        assert "## Por que importa" in row.get("content_markdown", "")
 
 
 def test_to_blog_post_carries_published_date():

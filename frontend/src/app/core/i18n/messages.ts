@@ -110,7 +110,7 @@ export const ptBR = {
 
   'hub.title': 'Hub',
   'hub.lead':
-    'Explore o ecossistema Medi Canopy — parceiros estratégicos e empresas atendidas em projetos de tecnologia, pesquisa, regulação, jurídico e compliance no setor de cannabis medicinal.',
+    'Conheça o ecossistema Medi Canopy, que reúne associações, empresas e parceiros estratégicos envolvidos em cuidado, pesquisa, tecnologia, regulação, jurídico e compliance no universo da cannabis medicinal.',
   'hub.navAria': 'Seções do Hub',
   'hub.partners': 'Parceiros',
   'hub.clients': 'Clientes',

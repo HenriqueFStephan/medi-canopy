@@ -30,6 +30,16 @@ describe('HubLayoutComponent', () => {
     fixture.detectChanges();
   });
 
+  it('renders the Hub title and lead description', () => {
+    const title = fixture.nativeElement.querySelector('h1');
+    const lead = fixture.nativeElement.querySelector('.hub-page__lead');
+
+    expect(title?.textContent?.trim()).toBe('Hub');
+    expect(lead?.textContent?.trim()).toBe(
+      'Conheça o ecossistema Medi Canopy, que reúne associações, empresas e parceiros estratégicos envolvidos em cuidado, pesquisa, tecnologia, regulação, jurídico e compliance no universo da cannabis medicinal.'
+    );
+  });
+
   it('renders Hub navigation links for Parceiros and Clientes', () => {
     const links = Array.from(
       fixture.nativeElement.querySelectorAll('.hub-nav__link')

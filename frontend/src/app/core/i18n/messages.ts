@@ -62,6 +62,9 @@ export const ptBR = {
   'blog.back': '← Voltar aos artigos científicos',
   'blog.notFound': 'Post não encontrado.',
   'blog.detailLoading': 'Carregando…',
+  'blog.searchLabel': 'Buscar artigos por título',
+  'blog.searchPlaceholder': 'Buscar por palavra-chave…',
+  'blog.noResults': 'Nenhum artigo encontrado para a busca.',
 
   'courses.title': 'Cursos',
   'courses.lead': 'Formação prática em cultivo profissional e compliance — em desenvolvimento.',
@@ -191,6 +194,9 @@ export const en: Record<MsgKey, string> = {
   'blog.back': '← Back to scientific articles',
   'blog.notFound': 'Post not found.',
   'blog.detailLoading': 'Loading…',
+  'blog.searchLabel': 'Search articles by title',
+  'blog.searchPlaceholder': 'Search by keyword…',
+  'blog.noResults': 'No articles found for your search.',
 
   'courses.title': 'Courses',
   'courses.lead': 'Practical training in professional cultivation and compliance — in development.',

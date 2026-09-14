@@ -1,5 +1,57 @@
 @import '../../../styles/variables';
 
+.page-header.blog-page-header {
+  max-width: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.blog-page-header__intro {
+  flex: 1 1 18rem;
+  max-width: 640px;
+}
+
+.blog-page-header__search {
+  flex: 1 1 14rem;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    flex: 0 1 20rem;
+    width: auto;
+    max-width: 22rem;
+  }
+}
+
+.blog-search {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  font-family: $font-body;
+  font-size: 0.95rem;
+  background: $color-surface;
+  color: $color-text;
+
+  &:focus {
+    outline: 2px solid $color-primary-light;
+    outline-offset: 1px;
+    border-color: $color-primary-mid;
+  }
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+}
+
+.blog-empty {
+  text-align: center;
+  padding: 3rem;
+  color: $color-text-muted;
+}
+
 .news-row .col-tag .tag + .tag {
   margin-left: 0.25rem;
 }

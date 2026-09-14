@@ -50,7 +50,7 @@ import { TranslatePipe } from '../../core/i18n';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent {
-  readonly legalName = '2026 Medi Canopy Biotecnologia, Educação e Consultoria Ltda';
+  readonly legalName = 'Medi Canopy Biotecnologia, Educação e Consultoria Ltda';
   readonly whatsappUrl = 'https://wa.me/5511985648892';
   readonly instagramUrl = 'https://www.instagram.com/medicanopy/';
 }

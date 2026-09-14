@@ -43,5 +43,31 @@ describe('HubPartnersComponent', () => {
     expect(link?.href).toBe('https://greengrowth.group/');
     expect(link?.target).toBe('_blank');
     expect(link?.rel).toContain('noopener');
+    expect(link?.textContent?.trim()).toBe('Visitar site →');
+  });
+
+  it('shows OM as a partner card with Instagram CTA', () => {
+    const om = HUB_PARTNERS.find((p) => p.id === 'om-associacao');
+    expect(om).withContext('OM partner entry').toBeTruthy();
+
+    const cards = fixture.nativeElement.querySelectorAll('.hub-card');
+    const card = cards[1];
+    expect(card.querySelector('.hub-card__name')?.textContent?.trim()).toBe(
+      'OM – Associação Multidisciplinar em Práticas Integrativas',
+    );
+    expect(card.querySelector('.hub-card__area')?.textContent?.trim()).toBe('Práticas Integrativas');
+    expect(card.querySelector('.hub-card__desc')?.textContent?.trim()).toBe(
+      'Cuidado especializado Humano e Animal. Informação e acesso ao tratamento.',
+    );
+
+    const logo = card.querySelector('.hub-card__logo') as HTMLImageElement;
+    expect(logo?.src).toContain('/assets/partners/om-associacao.png');
+    expect(logo?.alt).toBe('Logo OM – Associação Multidisciplinar em Práticas Integrativas');
+
+    const link = card.querySelector('.hub-card__link') as HTMLAnchorElement;
+    expect(link?.href).toBe('https://www.instagram.com/associacaoom/');
+    expect(link?.target).toBe('_blank');
+    expect(link?.rel).toContain('noopener');
+    expect(link?.textContent?.trim()).toBe('Visite o Instagram');
   });
 });

@@ -6,7 +6,7 @@ export const ptBR = {
     'Medi Canopy — informação confiável sobre cannabis: notícias, blog, cursos e consultoria. Foco Brasil, cobertura global.',
 
   'nav.services': 'Serviços',
-  'nav.blog': 'Artigos Científicos',
+  'nav.blog': 'Ciência & Cannabis',
   'nav.news': 'Notícias',
   'nav.hub': 'Hub',
   'nav.courses': 'Cursos',
@@ -34,8 +34,9 @@ export const ptBR = {
   'home.coursesTitle': 'Cursos e formação',
   'home.coursesDesc':
     'Formação em cultivo indoor e compliance — arquitetura pronta, lançamento em breve.',
-  'home.blogTitle': 'Artigos Científicos',
-  'home.blogDesc': 'Pesquisas científicas revisadas com curadoria humana.',
+  'home.blogTitle': 'Ciência & Cannabis',
+  'home.blogDesc':
+    'Pesquisas, estudos e evidências científicas sobre cannabis, selecionados com curadoria humana.',
   'home.newsTitle': 'Notícias',
   'home.newsDesc': 'Mercado, política, medicina e indústria — fontes confiáveis, curadoria diária.',
   'home.headlinesTitle': 'Últimas notícias',
@@ -52,8 +53,9 @@ export const ptBR = {
   'news.loading': 'Carregando notícias…',
   'news.error': 'Não foi possível carregar as notícias. Verifique se o backend está em execução.',
 
-  'blog.title': 'Artigos Científicos',
-  'blog.lead': 'Pesquisas científicas revisadas com curadoria humana.',
+  'blog.title': 'Ciência & Cannabis',
+  'blog.lead':
+    'Pesquisas, estudos e evidências científicas sobre cannabis, selecionados com curadoria humana.',
   'blog.loading': 'Carregando posts…',
   'blog.error': 'Não foi possível carregar os artigos científicos.',
   'blog.researchTag': 'Pesquisa',

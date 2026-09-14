@@ -73,4 +73,45 @@ describe('HubClientsComponent', () => {
       'melhoramento genético de Cannabis',
     );
   });
+
+  it('shows 4Trees Cannabis Building as a client card', () => {
+    const fourTrees = HUB_CLIENTS.find((c) => c.id === '4trees-cannabis-building');
+    expect(fourTrees).withContext('4Trees client entry').toBeTruthy();
+
+    const cards = fixture.nativeElement.querySelectorAll('.hub-card');
+    const card = cards[1];
+    expect(card.classList.contains('hub-card--extended')).toBeTrue();
+    expect(card.querySelector('.hub-card__name')?.textContent?.trim()).toBe('4Trees Cannabis Building');
+    expect(card.querySelector('.hub-card__area')?.textContent?.trim()).toBe('Consultoria e Operações');
+    expect(card.querySelector('.hub-card__desc')?.textContent?.trim()).toBe(fourTrees!.description);
+
+    const logo = card.querySelector('.hub-card__logo') as HTMLImageElement;
+    expect(logo?.src).toContain('/assets/clients/4trees-cannabis-building.webp');
+    expect(logo?.alt).toBe('Logo 4Trees Cannabis Building');
+
+    const link = card.querySelector('.hub-card__link') as HTMLAnchorElement;
+    expect(link?.href).toBe('https://4treesbuilding.ca/projects');
+    expect(link?.target).toBe('_blank');
+    expect(link?.rel).toContain('noopener');
+    expect(link?.textContent?.trim()).toBe('Conheça os projetos da 4Trees →');
+  });
+
+  it('shows Medi Canopy involvement for 4Trees', () => {
+    const fourTrees = HUB_CLIENTS.find((c) => c.id === '4trees-cannabis-building');
+    const highlight = fourTrees!.highlights![0];
+
+    const cards = fixture.nativeElement.querySelectorAll('.hub-card');
+    const card = cards[1];
+    const involvement = card.querySelector('.hub-card__highlight');
+    expect(involvement).withContext('Medi Canopy involvement block').toBeTruthy();
+
+    expect(card.querySelector('.hub-card__highlight-brand')?.textContent?.trim()).toBe('Medi Canopy');
+    expect(card.querySelector('.hub-card__highlight-title')?.textContent?.trim()).toBe(
+      'Atuação da Medi Canopy',
+    );
+    expect(card.querySelector('.hub-card__highlight-role')?.textContent?.trim()).toBe(highlight.role);
+    expect(card.querySelector('.hub-card__highlight-desc')?.textContent?.trim()).toBe(
+      highlight.description,
+    );
+  });
 });

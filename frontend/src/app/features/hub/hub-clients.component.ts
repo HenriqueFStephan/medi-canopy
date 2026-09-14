@@ -53,12 +53,14 @@ import { HUB_CLIENTS, HubClient } from './hub.data';
               *ngFor="let highlight of client.highlights"
               [attr.aria-labelledby]="'hub-client-' + client.id + '-' + highlight.id"
             >
+              <p class="hub-card__highlight-brand" *ngIf="highlight.role">Medi Canopy</p>
               <h4
                 class="hub-card__highlight-title"
                 [id]="'hub-client-' + client.id + '-' + highlight.id"
               >
                 {{ highlight.title }}
               </h4>
+              <p class="hub-card__highlight-role" *ngIf="highlight.role">{{ highlight.role }}</p>
               <p class="hub-card__highlight-desc">{{ highlight.description }}</p>
             </section>
           </div>

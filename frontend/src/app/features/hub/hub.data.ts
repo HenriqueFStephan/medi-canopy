@@ -13,6 +13,8 @@ export interface HubClientHighlight {
   id: string;
   title: string;
   description: string;
+  /** Optional role line shown below the title (e.g. Gerente de Operações). */
+  role?: string;
   /** Visual emphasis for partnership outcomes such as Genesis. */
   variant?: 'default' | 'featured';
 }
@@ -26,7 +28,7 @@ export interface HubClient {
   area?: string;
   website: string;
   /** i18n key for the external link CTA; defaults to hub.visitSite. */
-  linkLabelKey?: 'hub.visitSite' | 'hub.visitPlantManager';
+  linkLabelKey?: 'hub.visitSite' | 'hub.visitPlantManager' | 'hub.visit4TreesProjects';
   /** Optional blocks for Medi Canopy involvement and joint deliverables. */
   highlights?: HubClientHighlight[];
 }
@@ -113,6 +115,25 @@ export const HUB_CLIENTS: HubClient[] = [
         description:
           'O Genesis é um sistema operacional desenvolvido para apoiar programas de melhoramento genético de Cannabis, integrando informações e processos relacionados à genética, desenvolvimento varietal, avaliação de características e gestão de dados. A solução busca transformar dados e conhecimento científico em uma estrutura organizada para apoiar decisões e estratégias de melhoramento.',
         variant: 'featured',
+      },
+    ],
+  },
+  {
+    id: '4trees-cannabis-building',
+    name: '4Trees Cannabis Building',
+    logoUrl: '/assets/clients/4trees-cannabis-building.webp',
+    description:
+      'A 4Trees Cannabis Building é uma empresa canadense especializada em consultoria e suporte para operações de Cannabis, com atuação em planejamento de instalações, suporte operacional, documentação, desenvolvimento de projetos e cultivo indoor em conformidade. A empresa trabalha com soluções práticas voltadas à estruturação e operação de instalações de cultivo, do planejamento à produção.',
+    area: 'Consultoria e Operações',
+    website: 'https://4treesbuilding.ca/projects',
+    linkLabelKey: 'hub.visit4TreesProjects',
+    highlights: [
+      {
+        id: 'medi-canopy-role',
+        title: 'Atuação da Medi Canopy',
+        role: 'Gerente de Operações e Desenvolvimento de Conteúdo Educacional',
+        description:
+          'A Medi Canopy atua junto à 4Trees Cannabis Building como Gerente de Operações e Desenvolvimento de Conteúdo Educacional, contribuindo para a estruturação e gestão de processos operacionais, organização de conhecimento técnico e desenvolvimento de materiais educacionais voltados à formação e capacitação de profissionais do setor de Cannabis.',
       },
     ],
   },

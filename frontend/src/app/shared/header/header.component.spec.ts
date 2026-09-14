@@ -61,7 +61,7 @@ describe('HeaderComponent', () => {
   it('switches navigation labels from the language dropdown', () => {
     const nav = fixture.nativeElement.querySelector('.nav') as HTMLElement;
     expect(nav.textContent).toContain('Serviços');
-    expect(nav.textContent).toContain('Artigos Científicos');
+    expect(nav.textContent).toContain('Ciência & Cannabis');
     expect(nav.textContent).not.toContain('News');
 
     const toggle = fixture.nativeElement.querySelector(

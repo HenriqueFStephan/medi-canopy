@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-14T13:12:43.620502+00:00",
+  "updated_at": "2026-09-21T13:09:40.974363+00:00",
   "notes": "Papers already posted in weekly research digest issues. The weekly paper report skips these DOIs/URLs.",
   "papers": [
     {
@@ -421,6 +421,116 @@
       "published": "2026-08-14",
       "category": "textile",
       "first_seen": "2026-09-14"
+    },
+    {
+      "title": "Dose-Dependent Effects of Cannabis Edibles on Simulated Driving Performance",
+      "url": "https://doi.org/10.1001/jamanetworkopen.2026.31306",
+      "doi": "10.1001/jamanetworkopen.2026.31306",
+      "journal": "JAMA Network Open",
+      "authors": "Bernard Le Foll et al.",
+      "year": 2026,
+      "published": "2026-08-31",
+      "category": "medical",
+      "first_seen": "2026-09-21"
+    },
+    {
+      "title": "Integrated phenotypic and transcriptomic analysis of herbicide stress response in hemp",
+      "url": "https://doi.org/10.1186/s42238-026-00498-6",
+      "doi": "10.1186/s42238-026-00498-6",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Navneet Kaur et al.",
+      "year": 2026,
+      "published": "2026-09-14",
+      "category": "agronomy",
+      "first_seen": "2026-09-21"
+    },
+    {
+      "title": "Warning label compliance of recreationally available cannabis flower and concentrate products in the state of Colorado",
+      "url": "https://doi.org/10.1186/s42238-026-00489-7",
+      "doi": "10.1186/s42238-026-00489-7",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Grace M. MacDonald et al.",
+      "year": 2026,
+      "published": "2026-08-28",
+      "category": "policy",
+      "first_seen": "2026-09-21"
+    },
+    {
+      "title": "Machine Learning-Guided Discovery of Cannabidiolic Acid Ethyl Ester as a Bioactive Anti-Inflammatory Cannabinoid from CBD-Depleted Hemp Extract",
+      "url": "https://doi.org/10.1021/acs.jnatprod.6c00674",
+      "doi": "10.1021/acs.jnatprod.6c00674",
+      "journal": "Journal of Natural Products",
+      "authors": "Inah Gu et al.",
+      "year": 2026,
+      "published": "2026-09-08",
+      "category": "medical",
+      "first_seen": "2026-09-21"
+    },
+    {
+      "title": "Metabolomic investigation of inflorescences from Cannabis sativa L. variety Earlina 8FC cultivated in southern Italy: an NMR and LC-MS/MS integrated approach",
+      "url": "https://doi.org/10.1038/s41598-026-59272-6",
+      "doi": "10.1038/s41598-026-59272-6",
+      "journal": "Scientific Reports",
+      "authors": "Enrico Serni et al.",
+      "year": 2026,
+      "published": "2026-09-18",
+      "category": "agronomy",
+      "first_seen": "2026-09-21"
+    },
+    {
+      "title": "Multiscale mechanisms of water-induced hemp fiber reinforcement",
+      "url": "https://doi.org/10.1007/s10853-026-13577-z",
+      "doi": "10.1007/s10853-026-13577-z",
+      "journal": "Journal of Materials Science",
+      "authors": "Mingrui Lv et al.",
+      "year": 2026,
+      "published": "2026-08-23",
+      "category": "textile",
+      "first_seen": "2026-09-21"
+    },
+    {
+      "title": "Deep eutectic solvent-derived hemp and jute cellulose nanopapers: from nanofibril morphology to nanopaper architecture and polyester microplastic filtration",
+      "url": "https://doi.org/10.1007/s10570-026-07205-x",
+      "doi": "10.1007/s10570-026-07205-x",
+      "journal": "Cellulose",
+      "authors": "Abu Naser Md Ahsanul Haque et al.",
+      "year": 2026,
+      "published": "2026-09-07",
+      "category": "textile",
+      "first_seen": "2026-09-21"
+    },
+    {
+      "title": "Hairy root-derived nanovesicles from Cannabis sativa: Sustainable bioactive nanomaterials with immunomodulatory and anti-tumor potential",
+      "url": "https://doi.org/10.1038/s41538-026-01158-y",
+      "doi": "10.1038/s41538-026-01158-y",
+      "journal": "npj Science of Food",
+      "authors": "Yun Hye Kim et al.",
+      "year": 2026,
+      "published": "2026-09-14",
+      "category": "medical",
+      "first_seen": "2026-09-21"
+    },
+    {
+      "title": "Thermal and Acoustic Properties of Flax and Hemp Epoxy Bio-Composites Fabricated Using Vacuum-Assisted Resin Infusion Moulding",
+      "url": "https://doi.org/10.3390/sci8090261",
+      "doi": "10.3390/sci8090261",
+      "journal": "Sci",
+      "authors": "Madhav Sonkusare et al.",
+      "year": 2026,
+      "published": "2026-09-17",
+      "category": "construction",
+      "first_seen": "2026-09-21"
+    },
+    {
+      "title": "The effect of wheat starch addition on water transport by capillary action in acomposite based on clay and hemp shives",
+      "url": "https://doi.org/10.14311/app.2026.59.0021",
+      "doi": "10.14311/app.2026.59.0021",
+      "journal": "Acta Polytechnica CTU Proceedings",
+      "authors": "Przemysław Brzyski et al.",
+      "year": 2026,
+      "published": "2026-08-27",
+      "category": "construction",
+      "first_seen": "2026-09-21"
     }
   ]
 }

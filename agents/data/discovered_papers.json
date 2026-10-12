@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-05T07:15:51.197292+00:00",
+  "updated_at": "2026-10-12T15:53:11.452237+00:00",
   "notes": "Papers already posted in weekly research digest issues. The weekly paper report skips these DOIs/URLs.",
   "papers": [
     {
@@ -784,6 +784,127 @@
       "published": "2026-09-23",
       "category": "agronomy",
       "first_seen": "2026-10-05"
+    },
+    {
+      "title": "Opioid-sparing effect of a cannabinoid formulation in treating acute radicular pain: a randomized controlled trial",
+      "url": "https://doi.org/10.1186/s42238-026-00494-w",
+      "doi": "10.1186/s42238-026-00494-w",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Raz et al.",
+      "year": 2026,
+      "published": "2026-10-09",
+      "category": "medical",
+      "first_seen": "2026-10-12"
+    },
+    {
+      "title": "Adolescent cannabis use disorder following recreational cannabis legalization in California, USA: A population‐based interrupted time series study",
+      "url": "https://doi.org/10.1111/add.70597",
+      "doi": "10.1111/add.70597",
+      "journal": "Addiction",
+      "authors": "Padon et al.",
+      "year": 2026,
+      "published": "2026-09-11",
+      "category": "policy",
+      "first_seen": "2026-10-12"
+    },
+    {
+      "title": "Cannabidiol treatment of IL-6/eATP activated microglia and cortical neurons",
+      "url": "https://doi.org/10.1038/s41598-026-73317-w",
+      "doi": "10.1038/s41598-026-73317-w",
+      "journal": "Scientific Reports",
+      "authors": "Yeisley et al.",
+      "year": 2026,
+      "published": "2026-10-08",
+      "category": "medical",
+      "first_seen": "2026-10-12"
+    },
+    {
+      "title": "Recent and Cumulative Cannabis Use and Sleep in Middle-Aged Adults",
+      "url": "https://doi.org/10.1001/jamanetworkopen.2026.38303",
+      "doi": "10.1001/jamanetworkopen.2026.38303",
+      "journal": "JAMA Network Open",
+      "authors": "Vu et al.",
+      "year": 2026,
+      "published": "2026-10-09",
+      "category": "medical",
+      "first_seen": "2026-10-12"
+    },
+    {
+      "title": "Associations of recreational cannabis retailer availability, storefront signage and promotions with cannabis-related healthcare encounters in California",
+      "url": "https://doi.org/10.1186/s42238-026-00506-9",
+      "doi": "10.1186/s42238-026-00506-9",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Han et al.",
+      "year": 2026,
+      "published": "2026-09-22",
+      "category": "policy",
+      "first_seen": "2026-10-12"
+    },
+    {
+      "title": "Culture medium and plant growth regulator regimes influence the transcriptome and cannabin accumulation in Cannabis sativa cell suspension cultures",
+      "url": "https://doi.org/10.3389/fpls.2026.1923697",
+      "doi": "10.3389/fpls.2026.1923697",
+      "journal": "Frontiers in Plant Science",
+      "authors": "Thiry et al.",
+      "year": 2026,
+      "published": "2026-10-07",
+      "category": "agronomy",
+      "first_seen": "2026-10-12"
+    },
+    {
+      "title": "Development of Hemp-Containing Denim Fabrics: A Comparative Study of Mechanical and Dimensional Properties",
+      "url": "https://doi.org/10.1080/15440478.2026.2734659",
+      "doi": "10.1080/15440478.2026.2734659",
+      "journal": "Journal of Natural Fibers",
+      "authors": "Okyay et al.",
+      "year": 2026,
+      "published": "2026-09-21",
+      "category": "textile",
+      "first_seen": "2026-10-12"
+    },
+    {
+      "title": "Natural CaCO₃ improves the moisture resistance and mechanical performance of hemp-starch biocomposites: A multi-objective optimization study",
+      "url": "https://doi.org/10.1016/j.cscm.2026.e06574",
+      "doi": "10.1016/j.cscm.2026.e06574",
+      "journal": "Case Studies in Construction Materials",
+      "authors": "Balti et al.",
+      "year": 2026,
+      "published": "2026-09-23",
+      "category": "construction",
+      "first_seen": "2026-10-12"
+    },
+    {
+      "title": "Performance of hempcrete for carbon-negative construction: Density, compressive strength, durability and carbon sequestration",
+      "url": "https://doi.org/10.1016/j.cscm.2026.e06597",
+      "doi": "10.1016/j.cscm.2026.e06597",
+      "journal": "Case Studies in Construction Materials",
+      "authors": "Steyn et al.",
+      "year": 2026,
+      "published": "2026-10-02",
+      "category": "construction",
+      "first_seen": "2026-10-12"
+    },
+    {
+      "title": "Crime levels near federally legal cannabis stores in two Canadian cities",
+      "url": "https://doi.org/10.1016/j.drugpo.2026.105529",
+      "doi": "10.1016/j.drugpo.2026.105529",
+      "journal": "International Journal of Drug Policy",
+      "authors": "Armstrong",
+      "year": 2026,
+      "published": "2026-10-02",
+      "category": "policy",
+      "first_seen": "2026-10-12"
+    },
+    {
+      "title": "Comparison of self-pollination and intercrossing for feminized seed production in Thai Hang Kra Rok cannabis (Cannabis sativa L.) landrace",
+      "url": "https://doi.org/10.34044/j.anres.2026.60.5.12",
+      "doi": "10.34044/j.anres.2026.60.5.12",
+      "journal": "Agriculture and Natural Resources",
+      "authors": "Sreewongchai et al.",
+      "year": 2026,
+      "published": "2026-09-30",
+      "category": "agronomy",
+      "first_seen": "2026-10-12"
     }
   ]
 }

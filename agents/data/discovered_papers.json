@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-12T15:53:11.452237+00:00",
+  "updated_at": "2026-10-19T13:47:13.073975+00:00",
   "notes": "Papers already posted in weekly research digest issues. The weekly paper report skips these DOIs/URLs.",
   "papers": [
     {
@@ -905,6 +905,138 @@
       "published": "2026-09-30",
       "category": "agronomy",
       "first_seen": "2026-10-12"
+    },
+    {
+      "title": "The endocannabinoid system and the ageing brain",
+      "url": "https://doi.org/10.1038/s41583-026-01085-7",
+      "doi": "10.1038/s41583-026-01085-7",
+      "journal": "Nature Reviews Neuroscience",
+      "authors": "Andreas Zimmer",
+      "year": 2026,
+      "published": "2026-10-16",
+      "category": "medical",
+      "first_seen": "2026-10-19"
+    },
+    {
+      "title": "Medical cannabis for the treatment of insomnia",
+      "url": "https://doi.org/10.1002/14651858.cd016216.pub2",
+      "doi": "10.1002/14651858.cd016216.pub2",
+      "journal": "Cochrane Database of Systematic Reviews",
+      "authors": "Lucia Varela et al.",
+      "year": 2026,
+      "published": "2026-10-13",
+      "category": "medical",
+      "first_seen": "2026-10-19"
+    },
+    {
+      "title": "State Cannabis Policy and Public Health Research in the United States: Policy Domains, Evidence, and Research Gaps",
+      "url": "https://doi.org/10.1146/annurev-publhealth-062325-064412",
+      "doi": "10.1146/annurev-publhealth-062325-064412",
+      "journal": "Annual Review of Public Health",
+      "authors": "Gregory Tung et al.",
+      "year": 2026,
+      "published": "2026-10-16",
+      "category": "policy",
+      "first_seen": "2026-10-19"
+    },
+    {
+      "title": "Cannabidiol/cannabigerol exposure and neuropathy-related outcomes after neurotoxic chemotherapy: a real-world cohort study",
+      "url": "https://doi.org/10.3389/fpain.2026.1945720",
+      "doi": "10.3389/fpain.2026.1945720",
+      "journal": "Frontiers in Pain Research",
+      "authors": "Nicholas M. Graziane et al.",
+      "year": 2026,
+      "published": "2026-09-22",
+      "category": "medical",
+      "first_seen": "2026-10-19"
+    },
+    {
+      "title": "Cannabis use disorder and risk of venous thromboembolism: a retrospective cohort study",
+      "url": "https://doi.org/10.1186/s42238-026-00520-x",
+      "doi": "10.1186/s42238-026-00520-x",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Han-Wei Mu et al.",
+      "year": 2026,
+      "published": "2026-10-19",
+      "category": "medical",
+      "first_seen": "2026-10-19"
+    },
+    {
+      "title": "How consumers transition between illicit and legal cannabis markets following the implementation of recreational cannabis retail sales",
+      "url": "https://doi.org/10.1186/s42238-026-00521-w",
+      "doi": "10.1186/s42238-026-00521-w",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Lei Xu et al.",
+      "year": 2026,
+      "published": "2026-10-13",
+      "category": "policy",
+      "first_seen": "2026-10-19"
+    },
+    {
+      "title": "Post-harvest drying determines cannabinoid and volatile composition in pharmaceutical-grade Cannabis sativa inflorescences",
+      "url": "https://doi.org/10.1186/s42238-026-00514-9",
+      "doi": "10.1186/s42238-026-00514-9",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Efstratios Mallis et al.",
+      "year": 2026,
+      "published": "2026-10-14",
+      "category": "agronomy",
+      "first_seen": "2026-10-19"
+    },
+    {
+      "title": "Is there a doctor in the house? Patient experiences regarding information-seeking and clinician advice in New Jersey’s medicinal cannabis program",
+      "url": "https://doi.org/10.1186/s42238-026-00517-6",
+      "doi": "10.1186/s42238-026-00517-6",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Omar Kawam et al.",
+      "year": 2026,
+      "published": "2026-10-09",
+      "category": "policy",
+      "first_seen": "2026-10-19"
+    },
+    {
+      "title": "The viability gambit: an optimized disinfection protocol for industrial hemp (Cannabis sativa L.) seedling establishment",
+      "url": "https://doi.org/10.3389/fpls.2026.1907649",
+      "doi": "10.3389/fpls.2026.1907649",
+      "journal": "Frontiers in Plant Science",
+      "authors": "Rachna Gowlikar et al.",
+      "year": 2026,
+      "published": "2026-10-13",
+      "category": "agronomy",
+      "first_seen": "2026-10-19"
+    },
+    {
+      "title": "Towards 3D Printing of Cob-Based and Hemp-Based Material Mixtures for Home Building Applications",
+      "url": "https://doi.org/10.3390/constrmater6050087",
+      "doi": "10.3390/constrmater6050087",
+      "journal": "Construction Materials",
+      "authors": "Eden Yemesegen et al.",
+      "year": 2026,
+      "published": "2026-10-15",
+      "category": "construction",
+      "first_seen": "2026-10-19"
+    },
+    {
+      "title": "Consumer welfare effects of banning hemp-derived THC beverages",
+      "url": "https://doi.org/10.1017/jwe.2026.10128",
+      "doi": "10.1017/jwe.2026.10128",
+      "journal": "Journal of Wine Economics",
+      "authors": "Aaron Staples et al.",
+      "year": 2026,
+      "published": "2026-10-13",
+      "category": "policy",
+      "first_seen": "2026-10-19"
+    },
+    {
+      "title": "Wax-treated hemp fabrics to reduce water absorption in PLA/PBSA laminated composites",
+      "url": "https://doi.org/10.1177/07316844261496370",
+      "doi": "10.1177/07316844261496370",
+      "journal": "Journal of Reinforced Plastics and Composites",
+      "authors": "Bianca Dal Pont et al.",
+      "year": 2026,
+      "published": "2026-10-09",
+      "category": "textile",
+      "first_seen": "2026-10-19"
     }
   ]
 }

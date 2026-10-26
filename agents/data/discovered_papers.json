@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-19T13:47:13.073975+00:00",
+  "updated_at": "2026-10-26T07:09:03.009713+00:00",
   "notes": "Papers already posted in weekly research digest issues. The weekly paper report skips these DOIs/URLs.",
   "papers": [
     {
@@ -1037,6 +1037,138 @@
       "published": "2026-10-09",
       "category": "textile",
       "first_seen": "2026-10-19"
+    },
+    {
+      "title": "Development and multi-response optimization of sustainable hemp fibre/cassia gum reinforced polyester hybrid composites for structural and insulation applications",
+      "url": "https://doi.org/10.1038/s41598-026-73576-7",
+      "doi": "10.1038/s41598-026-73576-7",
+      "journal": "Scientific Reports",
+      "authors": "Anbalagan et al.",
+      "year": 2026,
+      "published": "2026-10-12",
+      "category": "construction",
+      "first_seen": "2026-10-26"
+    },
+    {
+      "title": "Do consumer-facing “Indica,” “Sativa,” and “Hybrid” labels predict cannabis composition or effects? A systematic review",
+      "url": "https://doi.org/10.1186/s42238-026-00528-3",
+      "doi": "10.1186/s42238-026-00528-3",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Zoobi et al.",
+      "year": 2026,
+      "published": "2026-10-24",
+      "category": "policy",
+      "first_seen": "2026-10-26"
+    },
+    {
+      "title": "An LC-MS/MS method for the quantification of cannabinoids in over-the-counter food supplements and exploratory detection of cannabidiol in human sebum as a potential post-administration matrix",
+      "url": "https://doi.org/10.1186/s42238-026-00519-4",
+      "doi": "10.1186/s42238-026-00519-4",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Quirós-Fallas et al.",
+      "year": 2026,
+      "published": "2026-10-21",
+      "category": "medical",
+      "first_seen": "2026-10-26"
+    },
+    {
+      "title": "Influence of genotype and methyl jasmonate concentration on trichome development and yield traits in Cannabis sativa L.",
+      "url": "https://doi.org/10.1186/s42238-026-00523-8",
+      "doi": "10.1186/s42238-026-00523-8",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Da Cunha Leme Filho et al.",
+      "year": 2026,
+      "published": "2026-10-14",
+      "category": "agronomy",
+      "first_seen": "2026-10-26"
+    },
+    {
+      "title": "Price elasticity of cannabis demand in legal adult‐use cannabis markets: Evidence from retail scanner data in the United States",
+      "url": "https://doi.org/10.1111/add.70664",
+      "doi": "10.1111/add.70664",
+      "journal": "Addiction",
+      "authors": "Cooper et al.",
+      "year": 2026,
+      "published": "2026-10-22",
+      "category": "policy",
+      "first_seen": "2026-10-26"
+    },
+    {
+      "title": "From Wild-Growing Plants to Promising Candidates for Hemp Variety Development: Morphological and Phytochemical Characterization of Macedonian Cannabis sativa L.",
+      "url": "https://doi.org/10.3390/molecules31203723",
+      "doi": "10.3390/molecules31203723",
+      "journal": "Molecules",
+      "authors": "Stoilkovska Gjorgievska et al.",
+      "year": 2026,
+      "published": "2026-10-16",
+      "category": "agronomy",
+      "first_seen": "2026-10-26"
+    },
+    {
+      "title": "Gap-Free Cannabis sativa Assemblies Reveal Post-Polyploid Genome Remodelling and Refine the Evolution of Cannabinoid Synthase Genes",
+      "url": "https://doi.org/10.1111/pbi.70766",
+      "doi": "10.1111/pbi.70766",
+      "journal": "Plant Biotechnology Journal",
+      "authors": "Zhang et al.",
+      "year": 2026,
+      "published": "2026-10-22",
+      "category": "agronomy",
+      "first_seen": "2026-10-26"
+    },
+    {
+      "title": "Mechanisms by which cannabidiol promotes peripheral nerve regeneration",
+      "url": "https://doi.org/10.4103/nrr.nrronline-d-26-00882",
+      "doi": "10.4103/nrr.nrronline-d-26-00882",
+      "journal": "Neural Regeneration Research",
+      "authors": "Li et al.",
+      "year": 2026,
+      "published": "2026-10-20",
+      "category": "medical",
+      "first_seen": "2026-10-26"
+    },
+    {
+      "title": "Multifunctional UV-curable carbon nanofiber coatings on hemp/viscose nonwovens: electrostatic dissipation, thermal stability, and electromagnetic shielding behavior",
+      "url": "https://doi.org/10.1007/s11998-026-01376-9",
+      "doi": "10.1007/s11998-026-01376-9",
+      "journal": "Journal of Coatings Technology and Research",
+      "authors": "Özkan et al.",
+      "year": 2026,
+      "published": "2026-10-15",
+      "category": "textile",
+      "first_seen": "2026-10-26"
+    },
+    {
+      "title": "Biomass Quality Evaluation of New Hemp Genotypes for Bio-Based Applications",
+      "url": "https://doi.org/10.1080/15440478.2026.2750581",
+      "doi": "10.1080/15440478.2026.2750581",
+      "journal": "Journal of Natural Fibers",
+      "authors": "Wawro et al.",
+      "year": 2026,
+      "published": "2026-10-22",
+      "category": "textile",
+      "first_seen": "2026-10-26"
+    },
+    {
+      "title": "A crossover self-controlled placebo trial of adjunct therapy sublingual cannabidiol extract in mild to moderate psoriasis patients",
+      "url": "https://doi.org/10.18549/pharmpract.2026.4.3629",
+      "doi": "10.18549/pharmpract.2026.4.3629",
+      "journal": "Pharmacy Practice",
+      "authors": "Siriwanarangsun et al.",
+      "year": 2026,
+      "published": "2026-10-15",
+      "category": "medical",
+      "first_seen": "2026-10-26"
+    },
+    {
+      "title": "Experimental investigation on external strengthening of fire-damaged columns using ramie fibre and hemp fibre wraps",
+      "url": "https://doi.org/10.1007/s10751-026-02819-w",
+      "doi": "10.1007/s10751-026-02819-w",
+      "journal": "Interactions",
+      "authors": "Raman et al.",
+      "year": 2026,
+      "published": "2026-10-14",
+      "category": "construction",
+      "first_seen": "2026-10-26"
     }
   ]
 }

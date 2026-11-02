@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-26T07:09:03.009713+00:00",
+  "updated_at": "2026-11-02T06:46:20.797164+00:00",
   "notes": "Papers already posted in weekly research digest issues. The weekly paper report skips these DOIs/URLs.",
   "papers": [
     {
@@ -1169,6 +1169,138 @@
       "published": "2026-10-14",
       "category": "construction",
       "first_seen": "2026-10-26"
+    },
+    {
+      "title": "Cannabidiol suppresses M2-like macrophage polarization via TRPV4/RhoA/ROCK signaling to alleviate hepatic fibrosis",
+      "url": "https://doi.org/10.3389/fimmu.2026.1951332",
+      "doi": "10.3389/fimmu.2026.1951332",
+      "journal": "Frontiers in Immunology",
+      "authors": "Zhao et al.",
+      "year": 2026,
+      "published": "2026-10-20",
+      "category": "medical",
+      "first_seen": "2026-11-02"
+    },
+    {
+      "title": "A complex story of trichome types and chemistry in Cannabis vegetative and reproductive organs",
+      "url": "https://doi.org/10.1186/s42238-026-00529-2",
+      "doi": "10.1186/s42238-026-00529-2",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Shtein et al.",
+      "year": 2026,
+      "published": "2026-10-31",
+      "category": "agronomy",
+      "first_seen": "2026-11-02"
+    },
+    {
+      "title": "Cannabidiol Alleviates Aβ1–42-Induced Cognitive Deficits and Neuronal Injury Associated with Modulation of the AEA–FAAH–CB1R Axis and BDNF/TrkB Signaling",
+      "url": "https://doi.org/10.3390/biom16101473",
+      "doi": "10.3390/biom16101473",
+      "journal": "Biomolecules",
+      "authors": "Kong et al.",
+      "year": 2026,
+      "published": "2026-10-10",
+      "category": "medical",
+      "first_seen": "2026-11-02"
+    },
+    {
+      "title": "Fresh and mechanical properties of hemp fiber-reinforced concrete: an experimental dosage study with multi-output artificial neural network modelling of mechanical strength",
+      "url": "https://doi.org/10.1038/s41598-026-78539-6",
+      "doi": "10.1038/s41598-026-78539-6",
+      "journal": "Scientific Reports",
+      "authors": "Rajkumar et al.",
+      "year": 2026,
+      "published": "2026-11-01",
+      "category": "construction",
+      "first_seen": "2026-11-02"
+    },
+    {
+      "title": "HPLC–DAD method for cannabinoid quantification in Brazilian Cannabis oils and extracts",
+      "url": "https://doi.org/10.1186/s42238-026-00526-5",
+      "doi": "10.1186/s42238-026-00526-5",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Bande et al.",
+      "year": 2026,
+      "published": "2026-10-30",
+      "category": "medical",
+      "first_seen": "2026-11-02"
+    },
+    {
+      "title": "Awareness and Use of Delta-8-THC Cannabis Products in the United States: Findings from National Surveys in 2021 and 2022",
+      "url": "https://doi.org/10.1177/25785125261492385",
+      "doi": "10.1177/25785125261492385",
+      "journal": "Cannabis and Cannabinoid Research",
+      "authors": "Schauer et al.",
+      "year": 2026,
+      "published": "2026-10-07",
+      "category": "policy",
+      "first_seen": "2026-11-02"
+    },
+    {
+      "title": "Genetic liability to cannabis use disorder and migraine susceptibility: evidence from Mendelian randomization",
+      "url": "https://doi.org/10.1186/s42238-026-00522-9",
+      "doi": "10.1186/s42238-026-00522-9",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Huang et al.",
+      "year": 2026,
+      "published": "2026-10-17",
+      "category": "medical",
+      "first_seen": "2026-11-02"
+    },
+    {
+      "title": "Formulation-Dependent Physical, Mechanical, and Water-Exposure Behavior of Hemp-Based Mycelium Composites with Polymeric Binders",
+      "url": "https://doi.org/10.3390/ma19204277",
+      "doi": "10.3390/ma19204277",
+      "journal": "Materials",
+      "authors": "Borucinska-Parfieniuk et al.",
+      "year": 2026,
+      "published": "2026-10-10",
+      "category": "construction",
+      "first_seen": "2026-11-02"
+    },
+    {
+      "title": "Multi‐year and multi‐trait evaluation of hemp (Cannabis sativa L.) genotypes using AMMI, GGE, WAASB, and MTI stability parameters",
+      "url": "https://doi.org/10.1002/csc2.70391",
+      "doi": "10.1002/csc2.70391",
+      "journal": "Crop Science",
+      "authors": "Yazici et al.",
+      "year": 2026,
+      "published": "2026-10-28",
+      "category": "agronomy",
+      "first_seen": "2026-11-02"
+    },
+    {
+      "title": "THC Exposure, Not Cannabis Quantity, Predicts Quality of Life Outcomes: An 18-Month Longitudinal Study of Regulated Cannabis Access in Switzerland",
+      "url": "https://doi.org/10.1159/ear/acrag010",
+      "doi": "10.1159/ear/acrag010",
+      "journal": "European Addiction Research",
+      "authors": "Curiger et al.",
+      "year": 2026,
+      "published": "2026-10-16",
+      "category": "policy",
+      "first_seen": "2026-11-02"
+    },
+    {
+      "title": "Accumulation of Trigonelline in the Leaves of Hemp (Cannabis sativa) in Response to Water-Deficit Stress",
+      "url": "https://doi.org/10.2478/johr-2026-0016",
+      "doi": "10.2478/johr-2026-0016",
+      "journal": "Journal of Horticultural Research",
+      "authors": "Ahmed et al.",
+      "year": 2026,
+      "published": "2026-10-31",
+      "category": "agronomy",
+      "first_seen": "2026-11-02"
+    },
+    {
+      "title": "Statistical Modeling of yarn quality in hemp-recycled Fiber blends: A textile waste valorization approach for circular economy",
+      "url": "https://doi.org/10.1016/j.wmb.2026.100387",
+      "doi": "10.1016/j.wmb.2026.100387",
+      "journal": "Waste Management Bulletin",
+      "authors": "Uddin et al.",
+      "year": 2026,
+      "published": "2026-10-08",
+      "category": "textile",
+      "first_seen": "2026-11-02"
     }
   ]
 }

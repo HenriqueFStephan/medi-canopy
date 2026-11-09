@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-02T06:46:20.797164+00:00",
+  "updated_at": "2026-11-09T16:47:24.065149+00:00",
   "notes": "Papers already posted in weekly research digest issues. The weekly paper report skips these DOIs/URLs.",
   "papers": [
     {
@@ -1301,6 +1301,138 @@
       "published": "2026-10-08",
       "category": "textile",
       "first_seen": "2026-11-02"
+    },
+    {
+      "title": "Medical Cannabis for Chronic Pain: Patient Demographics, Perceptions, and Use Patterns in Florida",
+      "url": "https://doi.org/10.26828/cannabis/2026/000380",
+      "doi": "10.26828/cannabis/2026/000380",
+      "journal": "Cannabis",
+      "authors": "Robinson et al.",
+      "year": 2026,
+      "published": "2026-10-30",
+      "category": "medical",
+      "first_seen": "2026-11-09"
+    },
+    {
+      "title": "Predicting reproductive-phase nutrient replenishment in Cannabis sativa L. via a transpiration-driven mass-balance framework",
+      "url": "https://doi.org/10.3389/fpls.2026.1955837",
+      "doi": "10.3389/fpls.2026.1955837",
+      "journal": "Frontiers in Plant Science",
+      "authors": "Powell et al.",
+      "year": 2026,
+      "published": "2026-10-12",
+      "category": "agronomy",
+      "first_seen": "2026-11-09"
+    },
+    {
+      "title": "Self-Report of Cannabis Dispensaries in Neighborhoods and Tobacco and Cannabis Co-Use among US Adults",
+      "url": "https://doi.org/10.15288/jsad.26-00174",
+      "doi": "10.15288/jsad.26-00174",
+      "journal": "Journal of Studies on Alcohol and Drugs",
+      "authors": "de Jesus Navarro Barba et al.",
+      "year": 2026,
+      "published": "2026-10-15",
+      "category": "policy",
+      "first_seen": "2026-11-09"
+    },
+    {
+      "title": "Stress biology of Cannabis sativa regulating cannabinoid and terpene biosynthesis at physiological, molecular and metabolic levels",
+      "url": "https://doi.org/10.1007/s44372-026-00973-7",
+      "doi": "10.1007/s44372-026-00973-7",
+      "journal": "Discover Plants",
+      "authors": "Kumar et al.",
+      "year": 2026,
+      "published": "2026-10-29",
+      "category": "agronomy",
+      "first_seen": "2026-11-09"
+    },
+    {
+      "title": "Terpenes and cannabinoids modulate pain signalling in nociceptive neurons via distinct pathways",
+      "url": "https://doi.org/10.1186/s42238-026-00530-9",
+      "doi": "10.1186/s42238-026-00530-9",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Anand et al.",
+      "year": 2026,
+      "published": "2026-11-04",
+      "category": "medical",
+      "first_seen": "2026-11-09"
+    },
+    {
+      "title": "From Field to Extract: Controlling Post-Harvest and Extraction Variables for Reproducible Recovery of Cannabinoids and Terpenes from Cannabis sativa L. by Sequential Hydrodistillation and Pressurized Liquid Extraction",
+      "url": "https://doi.org/10.3390/molecules31213955",
+      "doi": "10.3390/molecules31213955",
+      "journal": "Molecules",
+      "authors": "Hamann et al.",
+      "year": 2026,
+      "published": "2026-11-02",
+      "category": "agronomy",
+      "first_seen": "2026-11-09"
+    },
+    {
+      "title": "Regulatory awareness and clinical decision-making regarding phytocannabinoid use among veterinarians in Portugal: an analytical cross-sectional survey",
+      "url": "https://doi.org/10.1186/s42238-026-00527-4",
+      "doi": "10.1186/s42238-026-00527-4",
+      "journal": "Journal of Cannabis Research",
+      "authors": "Pinto et al.",
+      "year": 2026,
+      "published": "2026-10-17",
+      "category": "policy",
+      "first_seen": "2026-11-09"
+    },
+    {
+      "title": "Enzymatic Valorisation of Hazelnut Skin and Hemp Shives By-Products",
+      "url": "https://doi.org/10.3390/ma19214589",
+      "doi": "10.3390/ma19214589",
+      "journal": "Materials",
+      "authors": "De Martino et al.",
+      "year": 2026,
+      "published": "2026-10-29",
+      "category": "construction",
+      "first_seen": "2026-11-09"
+    },
+    {
+      "title": "Telomere-to-Telomere Genome Assembly Resources of Cannabis sativa Pathogen Septoria cannabis",
+      "url": "https://doi.org/10.1094/phytofr-07-26-0087-a",
+      "doi": "10.1094/phytofr-07-26-0087-a",
+      "journal": "PhytoFrontiers",
+      "authors": "Schwartz et al.",
+      "year": 2026,
+      "published": "2026-10-29",
+      "category": "agronomy",
+      "first_seen": "2026-11-09"
+    },
+    {
+      "title": "Deconstruction of Hemp Stalks by Hydrated Deep Eutectic Solvents for Lignocellulosic Nanofibrils Preparation",
+      "url": "https://doi.org/10.1021/acs.biomac.6c01400",
+      "doi": "10.1021/acs.biomac.6c01400",
+      "journal": "Biomacromolecules",
+      "authors": "Li et al.",
+      "year": 2026,
+      "published": "2026-10-16",
+      "category": "textile",
+      "first_seen": "2026-11-09"
+    },
+    {
+      "title": "Developmental exposure to cannabidiol vapor has persistent impacts on adult exploratory behavior and learning",
+      "url": "https://doi.org/10.1159/mca/adoag005",
+      "doi": "10.1159/mca/adoag005",
+      "journal": "Medical Cannabis and Cannabinoids",
+      "authors": "McGillis et al.",
+      "year": 2026,
+      "published": "2026-10-13",
+      "category": "medical",
+      "first_seen": "2026-11-09"
+    },
+    {
+      "title": "Chatbots and beyond: transforming cannabis use interventions with innovative AI approaches",
+      "url": "https://doi.org/10.3389/ijph.2026.1609866",
+      "doi": "10.3389/ijph.2026.1609866",
+      "journal": "International Journal of Public Health",
+      "authors": "Yuqi Hu",
+      "year": 2026,
+      "published": "2026-10-26",
+      "category": "policy",
+      "first_seen": "2026-11-09"
     }
   ]
 }
